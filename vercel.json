@@ -38,9 +38,62 @@
       "source": "/contactus",
       "destination": "/contact",
       "permanent": true
+    },
+    {
+      "source": "/salvation-studios.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/concept-index",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/concept-index.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/concept-1-bunker",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/concept-2-bloom",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/concept-3-signal",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/concept-4-void",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "headers": [
+    {
+      "source": "/concept-:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/salvation-studios.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
