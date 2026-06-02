@@ -1746,5 +1746,327 @@ if (gallerySection) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <!-- ScrollTrigger plugin -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Skip all animations if user prefers reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    return;
+  }
+
+  // Supersede existing IntersectionObserver: mark .reveal elements visible now.
+  // GSAP inline styles have higher specificity than the .reveal.visible CSS rule,
+  // so GSAP controls opacity/transform on elements it animates.
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+
+  // ─── LENIS SETUP ───────────────────────────────────────────
+  const isMobile = window.innerWidth < 768;
+  let lenis = null;
+
+  if (!isMobile) {
+    lenis = new Lenis({
+      lerp: 0.08,
+      duration: 1.2,
+      easing: t => t < 0.5
+        ? 4 * t * t * t
+        : 1 - Math.pow(-2 * t + 2, 3) / 2
+    });
+    window.lenisInstance = lenis;
+
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // ─── HERO INITIAL STATES ────────────────────────────────────
+  gsap.set('.nav', { opacity: 0 });
+  gsap.set('.hero-book-btn, .hero-btns', { opacity: 0, y: 28 });
+
+  // Split "Welcome to" text node into its own span so it animates separately from the logo
+  const h1 = document.querySelector('.hero-h1');
+  const firstText = [...h1.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+  const welcomeSpan = document.createElement('span');
+  welcomeSpan.textContent = firstText.textContent;
+  h1.replaceChild(welcomeSpan, firstText);
+
+  // ─── HERO LOAD SEQUENCE ─────────────────────────────────────
+  const heroTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+  heroTl
+    .to('.nav',                   { opacity: 1, duration: 0.6 })
+    .from('.hero-tag',            { y: 28, opacity: 0, duration: 0.8 }, 0.2)
+    .from(welcomeSpan,            { y: 28, opacity: 0, duration: 0.8 }, 0.4)
+    .from('.hero-salvation-wrap', { scale: 0.9, opacity: 0, duration: 1.0, ease: 'power3.out' }, 0.6)
+    .to('.hero-book-btn',         { opacity: 1, y: 0, duration: 0.6 }, 1.0)
+    .to('.hero-btns',             { opacity: 1, y: 0, duration: 0.6 }, 1.1);
+
+  // ─── HERO PARALLAX ──────────────────────────────────────────
+  gsap.to('.hero-img', {
+    y: '40%',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+
+  // Hero content fades out over first 30% of scroll
+  gsap.to('.hero-content', {
+    opacity: 0,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: '30% top',
+      scrub: true
+    }
+  });
+
+  // ─── MOUSE ORB PARALLAX ─────────────────────────────────────
+  const orb1 = document.querySelector('.orb-1');
+  const orb2 = document.querySelector('.orb-2');
+  if (orb1 && orb2) {
+    let tx1 = 0, ty1 = 0, tx2 = 0, ty2 = 0;
+    let mx = 0, my = 0;
+    document.addEventListener('mousemove', e => {
+      mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      my = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+    gsap.ticker.add(() => {
+      tx1 += (mx * 20 - tx1) * 0.05;
+      ty1 += (my * 20 - ty1) * 0.05;
+      tx2 += (-mx * 20 - tx2) * 0.05;
+      ty2 += (-my * 20 - ty2) * 0.05;
+      gsap.set(orb1, { x: tx1, y: ty1 });
+      gsap.set(orb2, { x: tx2, y: ty2 });
+    });
+  }
+
+  // ─── WELCOME SECTION ────────────────────────────────────────
+  function splitIntoWordSpans(el) {
+    const nodes = [...el.childNodes];
+    el.innerHTML = '';
+    nodes.forEach(node => {
+      if (node.nodeType === 3) {
+        node.textContent.split(' ').forEach((word, i, arr) => {
+          if (!word) return;
+          const span = document.createElement('span');
+          span.style.display = 'inline-block';
+          span.textContent = word;
+          el.appendChild(span);
+          if (i < arr.length - 1) el.appendChild(document.createTextNode(' '));
+        });
+      } else if (node.nodeName === 'BR') {
+        el.appendChild(document.createElement('br'));
+      } else {
+        const wrap = document.createElement('span');
+        wrap.style.display = 'inline-block';
+        wrap.appendChild(node.cloneNode(true));
+        el.appendChild(wrap);
+      }
+    });
+    return el.querySelectorAll('span');
+  }
+
+  const welcomeH2 = document.querySelector('.welcome .h2-serif');
+  const h2Words = splitIntoWordSpans(welcomeH2);
+
+  gsap.from(h2Words, {
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.1,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: welcomeH2, start: 'top 80%' }
+  });
+
+  gsap.from('.welcome .body-text p', {
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.welcome .body-text', start: 'top 80%' }
+  });
+
+  // Stats counter from 0
+  const statDefs = [
+    { el: document.querySelectorAll('.stat-n')[0], end: 6,  suffix: ''   },
+    { el: document.querySelectorAll('.stat-n')[1], end: 5,  suffix: 'yr' },
+    { el: document.querySelectorAll('.stat-n')[2], end: 13, suffix: 'm'  }
+  ];
+  statDefs.forEach(({ el, end, suffix }) => {
+    const counter = { val: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      once: true,
+      onEnter() {
+        gsap.to(counter, {
+          val: end,
+          duration: 1.5,
+          ease: 'power2.out',
+          onUpdate() { el.textContent = Math.round(counter.val) + suffix; }
+        });
+      }
+    });
+  });
+
+  // Photo stack curtain wipe
+  ScrollTrigger.create({
+    trigger: '.welcome-photo-stack',
+    start: 'top 75%',
+    once: true,
+    onEnter() {
+      gsap.fromTo('.wp-main',
+        { clipPath: 'inset(0 100% 0 0)' },
+        { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power3.out' }
+      );
+      gsap.fromTo('.wp-accent',
+        { clipPath: 'inset(0 100% 0 0)' },
+        { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power3.out', delay: 0.25 }
+      );
+    }
+  });
+
+  // ─── ROOMS SECTION ──────────────────────────────────────────
+  gsap.from('.rooms-header', {
+    x: -40,
+    opacity: 0,
+    duration: 0.9,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.rooms-header', start: 'top 85%' }
+  });
+
+  gsap.from('.live-room-feature img', {
+    scale: 1.08,
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.live-room-feature', start: 'top 80%' }
+  });
+  gsap.from('.live-room-info', {
+    y: 40,
+    opacity: 0,
+    duration: 0.9,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.live-room-feature', start: 'top 65%' }
+  });
+
+  gsap.from('.room-card', {
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.08,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.rooms-grid', start: 'top 80%' }
+  });
+
+  gsap.from('.writing-card', {
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.08,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.writing-rooms', start: 'top 80%' }
+  });
+
+  // ─── NEVE SECTION ────────────────────────────────────────────
+  ScrollTrigger.create({
+    trigger: '.neve-bg',
+    start: 'top 75%',
+    once: true,
+    onEnter() {
+      gsap.fromTo('.neve-bg > img',
+        { clipPath: 'inset(0 100% 0 0)' },
+        { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'power3.out' }
+      );
+    }
+  });
+
+  gsap.from(['.neve-eyebrow', '.neve-title', '.neve-body', '.neve-facts > div'], {
+    y: 30,
+    opacity: 0,
+    duration: 0.9,
+    stagger: 0.07,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.neve-content', start: 'top 75%' }
+  });
+
+  // ─── IN-ROOM SECTION ─────────────────────────────────────────
+  gsap.from('.in-room > .reveal', {
+    y: 40,
+    opacity: 0,
+    duration: 0.9,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.in-room', start: 'top 80%' }
+  });
+
+  document.querySelectorAll('.in-room-photo img').forEach(img => {
+    gsap.to(img, {
+      y: '20%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: img.closest('.in-room-photo'),
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  });
+
+  gsap.from('.in-room-photo', {
+    y: 40,
+    opacity: 0,
+    duration: 0.9,
+    stagger: 0.12,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.in-room-grid', start: 'top 80%' }
+  });
+
+  // ─── TESTIMONIALS ────────────────────────────────────────────
+  // (marquee cards excluded — ScrollTrigger conflicts with continuous CSS scroll animation)
+  gsap.from('.testi-header', {
+    y: 40,
+    opacity: 0,
+    duration: 0.9,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.testi-header', start: 'top 80%' }
+  });
+
+  // ─── GALLERY ─────────────────────────────────────────────────
+  gsap.from('.gp', {
+    scale: 0.95,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.06,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.gallery-mosaic', start: 'top 80%' }
+  });
+
+  // ─── SERVICES ────────────────────────────────────────────────
+  gsap.from('.svc-card', {
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.08,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.services-grid', start: 'top 80%' }
+  });
+
+  // ─── BOOKING BAND ────────────────────────────────────────────
+  gsap.from('.booking-content', {
+    scale: 0.97,
+    opacity: 0,
+    duration: 1.0,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.booking-band', start: 'top 75%' }
+  });
+
+})();
+</script>
 </body>
 </html>
