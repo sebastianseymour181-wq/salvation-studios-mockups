@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvation Studios — Concept 3: Signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0A0A0A;
+    --white: #F2F2F0;
+    --red: #E8271A;
+    --red-dim: rgba(232, 39, 26, 0.15);
+    --gray: #1E1E1E;
+    --mid: #333;
+    --text-dim: #666;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--black);
+    border-bottom: 1px solid var(--gray);
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+  .nav-logo .slash { color: var(--red); }
+
+  .nav-center {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--gray);
+  }
+  .nav-center a {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 8px 20px;
+    border-right: 1px solid var(--gray);
+    transition: all 0.2s;
+  }
+  .nav-center a:last-child { border-right: none; }
+  .nav-center a:hover { background: var(--red); color: var(--white); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #22C55E;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .nav-book {
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .nav-book:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 64px 0 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    padding: 60px 48px 0;
+    gap: 40px;
+    flex: 1;
+  }
+
+  .hero-main { }
+
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: appear 0.6s 0.2s forwards;
+  }
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 20px;
+    background: var(--red);
+  }
+
+  .hero-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(80px, 16vw, 260px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    opacity: 0;
+    animation: appear 0.6s 0.3s forwards;
+  }
+  .hero-title .red { color: var(--red); }
+  .hero-title .ghost {
+    -webkit-text-stroke: 1.5px var(--gray);
+    color: transparent;
+  }
+
+  .hero-right {
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 32px;
+    opacity: 0;
+    animation: appear 0.6s 0.5s forwards;
+  }
+  .hero-desc {
+    font-size: 12px;
+    line-height: 2;
+    color: var(--text-dim);
+    max-width: 240px;
+    text-align: right;
+    border-right: 1px solid var(--gray);
+    padding-right: 24px;
+  }
+  .hero-cta-group { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+  .btn-red {
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s;
+  }
+  .btn-red:hover { opacity: 0.85; }
+  .btn-outline {
+    border: 1px solid var(--gray);
+    color: var(--text-dim);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--white); color: var(--white); }
+
+  @keyframes appear {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Horizontal rule with data */
+  .data-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--gray);
+    margin-top: 40px;
+  }
+  .data-cell {
+    padding: 24px 48px;
+    border-right: 1px solid var(--gray);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .data-cell:last-child { border-right: none; }
+  .data-value {
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .data-value.red { color: var(--red); }
+  .data-key {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ROOMS */
+  .rooms {
+    border-top: 1px solid var(--gray);
+  }
+  .rooms-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding: 60px 48px 40px;
+    border-bottom: 1px solid var(--gray);
+  }
+  .section-num {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(48px, 7vw, 100px);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+  }
+
+  .rooms-list { }
+  .room-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 200px 160px;
+    align-items: center;
+    padding: 28px 48px;
+    border-bottom: 1px solid var(--gray);
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .room-row:hover { background: var(--gray); }
+  .room-row:hover .room-row-arrow { color: var(--red); opacity: 1; }
+  .room-row:hover .room-num { color: var(--red); }
+
+  .room-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+  .room-name-wrap { }
+  .room-row-name {
+    font-family: 'Anton', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    line-height: 1;
+  }
+  .room-row-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .room-tags-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag-red {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--red);
+    color: var(--red);
+    padding: 4px 10px;
+  }
+  .tag-dim {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--gray);
+    color: var(--text-dim);
+    padding: 4px 10px;
+  }
+  .room-row-arrow {
+    font-size: 24px;
+    color: var(--text-dim);
+    text-align: right;
+    opacity: 0;
+    transition: all 0.2s;
+  }
+
+  /* MANIFESTO */
+  .manifesto {
+    padding: 120px 48px;
+    border-top: 1px solid var(--gray);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .manifesto-left { }
+  .manifesto-quote {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    position: relative;
+  }
+  .manifesto-quote::before {
+    content: '"';
+    font-family: 'Anton', sans-serif;
+    font-size: 200px;
+    color: var(--red-dim);
+    position: absolute;
+    top: -60px;
+    left: -20px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .manifesto-quote .hl { color: var(--red); }
+  .manifesto-right { }
+  .manifesto-body {
+    font-size: 13px;
+    line-height: 2.2;
+    color: var(--text-dim);
+    border-left: 1px solid var(--gray);
+    padding-left: 40px;
+  }
+  .manifesto-body p + p { margin-top: 20px; }
+  .manifesto-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin-top: 48px;
+    background: var(--gray);
+    border: 1px solid var(--gray);
+  }
+  .manifesto-stat {
+    background: var(--black);
+    padding: 28px 32px;
+  }
+  .manifesto-stat-num {
+    font-family: 'Anton', sans-serif;
+    font-size: 52px;
+    color: var(--red);
+    line-height: 1;
+  }
+  .manifesto-stat-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* SERVICES ROW */
+  .services {
+    border-top: 1px solid var(--gray);
+    padding: 80px 48px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--gray);
+    margin-top: 48px;
+  }
+  .service-card {
+    background: var(--black);
+    padding: 40px 32px;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: #111; }
+  .service-icon {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: 'Space Mono', monospace;
+  }
+  .service-name {
+    font-family: 'Anton', sans-serif;
+    font-size: 28px;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .service-desc {
+    font-size: 11px;
+    line-height: 1.9;
+    color: var(--text-dim);
+  }
+  .service-link {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232,39,26,0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .service-link:hover { border-color: var(--red); }
+
+  /* BOOK */
+  .book-cta {
+    border-top: 1px solid var(--gray);
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: stretch;
+    min-height: 400px;
+  }
+  .book-left {
+    padding: 80px 48px;
+    border-right: 1px solid var(--gray);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .book-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(60px, 9vw, 140px);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+  }
+  .book-title .ghost {
+    -webkit-text-stroke: 1px var(--gray);
+    color: transparent;
+  }
+  .book-title .red { color: var(--red); }
+  .book-sub {
+    font-size: 12px;
+    line-height: 2;
+    color: var(--text-dim);
+    max-width: 400px;
+  }
+  .book-right {
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    min-width: 320px;
+  }
+  .book-right-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray);
+    border-top: 1px solid var(--mid);
+    padding: 60px 48px 40px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .footer-logo .slash { color: var(--red); }
+  .footer-tagline { font-size: 11px; line-height: 2; color: var(--text-dim); }
+  .footer-col-head {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    font-family: 'Space Mono', monospace;
+  }
+  .footer-col-links { list-style: none; }
+  .footer-col-links li + li { margin-top: 12px; }
+  .footer-col-links a {
+    font-size: 12px;
+    color: #888;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .footer-col-links a:hover { color: var(--red); }
+  .footer-bottom {
+    border-top: 1px solid var(--mid);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+
+  /* Concept badge */
+  .concept-badge {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    z-index: 200;
+  }
+
+  /* Glitch on hover for hero title */
+  .hero-title:hover .red {
+    animation: glitch 0.3s ease;
+  }
+  @keyframes glitch {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-4px); clip-path: inset(20% 0 60% 0); }
+    40% { transform: translateX(4px); clip-path: inset(60% 0 20% 0); }
+    60% { transform: translateX(-2px); clip-path: inset(40% 0 40% 0); }
+    80% { transform: translateX(2px); clip-path: none; }
+    100% { transform: translateX(0); }
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* Running bar */
+  .running-bar {
+    border-top: 1px solid var(--gray);
+    overflow: hidden;
+    padding: 14px 0;
+    background: var(--black);
+  }
+  .running-inner {
+    display: flex;
+    gap: 80px;
+    animation: run 25s linear infinite;
+    white-space: nowrap;
+  }
+  .running-item {
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+  .running-item .r { color: var(--red); margin: 0 16px; }
+  @keyframes run { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
+</head>
+<body>
+
+<div class="concept-badge">Concept 03 — Signal</div>
+
+<nav>
+  <div class="nav-logo">SALVATION<span class="slash">/</span>STUDIOS</div>
+  <div class="nav-center">
+    <a href="#">Spaces</a>
+    <a href="#">Equipment</a>
+    <a href="#">Services</a>
+    <a href="#">Heritage</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      Brighton, UK
+    </div>
+    <a href="#" class="nav-book">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-main">
+      <div class="hero-label">Recording Studio — Brighton, UK</div>
+      <h1 class="hero-title">
+        <span class="ghost">SAL</span><br>
+        <span class="red">VA</span><span>TION</span><br>
+        STUDI<span class="ghost">OS</span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-desc">
+        Five years of renovation. Six rooms of possibility. One address in Brighton built entirely for sound.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#" class="btn-red">Book a Session</a>
+        <a href="#" class="btn-outline">View All Spaces →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-strip">
+    <div class="data-cell">
+      <div class="data-value red">06</div>
+      <div class="data-key">Recording Rooms</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-value">05</div>
+      <div class="data-key">Years in the Making</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-value">24H</div>
+      <div class="data-key">Session Access</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-value red">BN1</div>
+      <div class="data-key">Brighton, UK</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-value">∞</div>
+      <div class="data-key">Possibilities</div>
+    </div>
+  </div>
+</section>
+
+<!-- RUNNING BAR -->
+<div class="running-bar">
+  <div class="running-inner">
+    <span class="running-item">LIVE ROOM<span class="r">✦</span></span>
+    <span class="running-item">CONTROL ROOM<span class="r">✦</span></span>
+    <span class="running-item">VOCAL BOOTH<span class="r">✦</span></span>
+    <span class="running-item">ISOLATION BOOTHS<span class="r">✦</span></span>
+    <span class="running-item">AMP BOOTH<span class="r">✦</span></span>
+    <span class="running-item">WRITING ROOMS<span class="r">✦</span></span>
+    <span class="running-item">DRY HIRE<span class="r">✦</span></span>
+    <span class="running-item">ENGINEERS AVAILABLE<span class="r">✦</span></span>
+    <span class="running-item">LIVE ROOM<span class="r">✦</span></span>
+    <span class="running-item">CONTROL ROOM<span class="r">✦</span></span>
+    <span class="running-item">VOCAL BOOTH<span class="r">✦</span></span>
+    <span class="running-item">ISOLATION BOOTHS<span class="r">✦</span></span>
+    <span class="running-item">AMP BOOTH<span class="r">✦</span></span>
+    <span class="running-item">WRITING ROOMS<span class="r">✦</span></span>
+    <span class="running-item">DRY HIRE<span class="r">✦</span></span>
+    <span class="running-item">ENGINEERS AVAILABLE<span class="r">✦</span></span>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<section class="rooms">
+  <div class="rooms-header reveal">
+    <div>
+      <div class="section-num">02 / SPACES</div>
+      <h2 class="section-title">THE<br>ROOMS</h2>
+    </div>
+    <a href="#" style="font-size: 11px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em;">All Spaces →</a>
+  </div>
+
+  <div class="rooms-list">
+    <div class="room-row reveal">
+      <div class="room-num">01</div>
+      <div class="room-name-wrap">
+        <div class="room-row-name">LIVE ROOM</div>
+        <div class="room-row-sub">Full band capability — the flagship space</div>
+      </div>
+      <div class="room-tags-row">
+        <span class="tag-red">Full Band</span>
+        <span class="tag-dim">Live Tracking</span>
+      </div>
+      <div class="room-row-arrow">→</div>
+    </div>
+
+    <div class="room-row reveal">
+      <div class="room-num">02</div>
+      <div class="room-name-wrap">
+        <div class="room-row-name">CONTROL ROOM</div>
+        <div class="room-row-sub">World-class monitoring and outboard gear</div>
+      </div>
+      <div class="room-tags-row">
+        <span class="tag-red">Mixing</span>
+        <span class="tag-dim">Outboard</span>
+      </div>
+      <div class="room-row-arrow">→</div>
+    </div>
+
+    <div class="room-row reveal">
+      <div class="room-num">03</div>
+      <div class="room-name-wrap">
+        <div class="room-row-name">VOCAL BOOTH</div>
+        <div class="room-row-sub">Precision isolation for pristine vocal recording</div>
+      </div>
+      <div class="room-tags-row">
+        <span class="tag-red">Vocals</span>
+        <span class="tag-dim">Isolation</span>
+      </div>
+      <div class="room-row-arrow">→</div>
+    </div>
+
+    <div class="room-row reveal">
+      <div class="room-num">04–05</div>
+      <div class="room-name-wrap">
+        <div class="room-row-name">ISO BOOTHS ×2</div>
+        <div class="room-row-sub">Two chambers for simultaneous session work</div>
+      </div>
+      <div class="room-tags-row">
+        <span class="tag-dim">Simultaneous</span>
+        <span class="tag-dim">Acoustic</span>
+      </div>
+      <div class="room-row-arrow">→</div>
+    </div>
+
+    <div class="room-row reveal">
+      <div class="room-num">06</div>
+      <div class="room-name-wrap">
+        <div class="room-row-name">AMP BOOTH</div>
+        <div class="room-row-sub">High-SPL dedicated space for amp tracking</div>
+      </div>
+      <div class="room-tags-row">
+        <span class="tag-red">Guitar</span>
+        <span class="tag-red">Bass</span>
+      </div>
+      <div class="room-row-arrow">→</div>
+    </div>
+
+    <div class="room-row reveal" style="background: var(--red-dim);">
+      <div class="room-num" style="color: var(--red);">WR</div>
+      <div class="room-name-wrap">
+        <div class="room-row-name">WRITING ROOMS</div>
+        <div class="room-row-sub">Subterranean + Mezzanine creative spaces</div>
+      </div>
+      <div class="room-tags-row">
+        <span class="tag-red">Songwriting</span>
+        <span class="tag-red">Production</span>
+      </div>
+      <div class="room-row-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-left reveal">
+    <div class="manifesto-quote">
+      A five-year <span class="hl">labour of love</span> transforming Brighton history into a <span class="hl">state-of-the-art</span> recording facility.
+    </div>
+  </div>
+  <div class="manifesto-right reveal">
+    <div class="manifesto-body">
+      <p>Salvation Studios wasn't built quickly. It was built right. Five years of obsessive renovation, room-by-room acoustic treatment, and hand-picked equipment selections.</p>
+      <p>Every decision was made with a single type of person in mind: the musician who knows what they want and needs a space that can deliver it without compromise.</p>
+      <p>Brighton has always been a city that takes music seriously. We're the space that matches that ambition.</p>
+    </div>
+    <div class="manifesto-stats">
+      <div class="manifesto-stat">
+        <div class="manifesto-stat-num">6</div>
+        <div class="manifesto-stat-label">Recording Rooms</div>
+      </div>
+      <div class="manifesto-stat">
+        <div class="manifesto-stat-num">5</div>
+        <div class="manifesto-stat-label">Years Renovating</div>
+      </div>
+      <div class="manifesto-stat">
+        <div class="manifesto-stat-num">7</div>
+        <div class="manifesto-stat-label">Days per Week</div>
+      </div>
+      <div class="manifesto-stat">
+        <div class="manifesto-stat-num">01</div>
+        <div class="manifesto-stat-label">Brighton Address</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services reveal">
+  <div class="section-num">03 / SERVICES</div>
+  <h2 class="section-title" style="font-size: clamp(40px,6vw,80px); margin-top: 16px;">WHAT WE OFFER</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">// 01</div>
+      <div class="service-name">RECORDING</div>
+      <div class="service-desc">Full-service recording sessions with in-house engineers who know the rooms inside out.</div>
+      <a href="#" class="service-link">Book →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">// 02</div>
+      <div class="service-name">MIXING</div>
+      <div class="service-desc">Professional mixing services in an acoustically calibrated control room with premium monitoring.</div>
+      <a href="#" class="service-link">Learn more →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">// 03</div>
+      <div class="service-name">DRY HIRE</div>
+      <div class="service-desc">Bring your own team. Hire the rooms by the hour with access to all in-house equipment.</div>
+      <a href="#" class="service-link">Enquire →</a>
+    </div>
+    <div class="service-card" style="background: rgba(232,39,26,0.05);">
+      <div class="service-icon" style="color: var(--white);">// 04</div>
+      <div class="service-name">CATERING</div>
+      <div class="service-desc">Long session? We've got you. In-house hospitality so you never have to leave the zone.</div>
+      <a href="#" class="service-link">See options →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK CTA -->
+<section class="book-cta">
+  <div class="book-left reveal">
+    <div>
+      <div class="section-num">04 / BOOKING</div>
+      <h2 class="book-title">
+        <span class="ghost">MAKE</span><br>
+        <span class="red">YOUR</span><br>
+        MOVE
+      </h2>
+    </div>
+    <p class="book-sub">
+      Sessions available seven days a week. Engineers and producers on-site.
+      Dry hire for independent artists. Brighton's most serious studio environment.
+    </p>
+  </div>
+  <div class="book-right">
+    <div class="book-right-label">Contact & Booking</div>
+    <a href="#" class="btn-red" style="text-align:center; font-size: 18px;">Book a Session</a>
+    <a href="#" class="btn-outline" style="text-align:center;">Get in Touch</a>
+    <a href="#" class="btn-outline" style="text-align:center; margin-top: 8px;">View Equipment →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">SALVATION<span class="slash">/</span>STUDIOS</div>
+      <p class="footer-tagline">Brighton's premier recording facility.<br>Built for serious music. Est. 2019.</p>
+    </div>
+    <div>
+      <div class="footer-col-head">Studio</div>
+      <ul class="footer-col-links">
+        <li><a href="#">Live Room</a></li>
+        <li><a href="#">Control Room</a></li>
+        <li><a href="#">Vocal Booth</a></li>
+        <li><a href="#">All Spaces</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Services</div>
+      <ul class="footer-col-links">
+        <li><a href="#">Recording</a></li>
+        <li><a href="#">Mixing</a></li>
+        <li><a href="#">Dry Hire</a></li>
+        <li><a href="#">Writing Rooms</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Info</div>
+      <ul class="footer-col-links">
+        <li><a href="#">Book a Session</a></li>
+        <li><a href="#">Get in Touch</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Brighton, UK</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Salvation Studios</span>
+    <span>SALVATIONSTUDIOS.CO.UK</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

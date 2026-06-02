@@ -1,0 +1,81 @@
+<h2>Animation Design — Section by Section</h2>
+<p class="subtitle">Lenis + GSAP ScrollTrigger. Does this look right before I write the spec?</p>
+
+<div class="section">
+  <h3>📦 Libraries (CDN — no install needed)</h3>
+  <ul>
+    <li><strong>Lenis</strong> — smooth scroll inertia, that "expensive momentum" feeling</li>
+    <li><strong>GSAP + ScrollTrigger</strong> — all animation logic, free tier</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>🎬 Hero</h3>
+  <ul>
+    <li>Background photo parallax — image moves at 60% scroll speed (cinematic depth)</li>
+    <li>On load: "Welcome to" fades up → Salvation logo scales in → Studios + CTA stagger up</li>
+    <li>Mouse parallax on the purple glow orbs (subtle, 20px max movement)</li>
+    <li>Hero content fades out as you scroll away (opacity tied to scroll position)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>✍️ Welcome — "A labour of love"</h3>
+  <ul>
+    <li>Headline words slide up in sequence (100ms stagger)</li>
+    <li>Body paragraphs fade up one by one as they enter viewport</li>
+    <li>Stats (6 rooms, 5yr, 13m) count up from 0 when in view</li>
+    <li>Photo stack: main photo reveals with clip-path wipe, accent photo follows 200ms later</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>🏠 Rooms</h3>
+  <ul>
+    <li>Header slides in from left</li>
+    <li>Live Room hero card: image scales from 1.1→1.0 as it enters (feels like it's arriving)</li>
+    <li>Room cards stagger in left-to-right with 80ms delay each</li>
+    <li>Hover: image scale + subtle card lift (already in CSS, enhanced)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>🎛️ Neve + In-Room + Services</h3>
+  <ul>
+    <li>Images: clip-path wipe reveal (curtain pulls back left-to-right)</li>
+    <li>Text blocks: staggered line-by-line fade up</li>
+    <li>In-room photos: parallax scroll (move at 80% speed for depth)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>💬 Testimonials</h3>
+  <ul>
+    <li>Cards fade up with slight Y offset, staggered 100ms apart</li>
+    <li>Quote marks animate in first, then text</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>🖼️ Gallery</h3>
+  <ul>
+    <li>Images reveal in a wave — top row first, then bottom row, 60ms stagger per image</li>
+    <li>Subtle scale from 0.95→1.0 on reveal</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>📅 Booking Band</h3>
+  <ul>
+    <li>Text and button scale up from 0.97→1.0 with fade — clean, confident</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>⚡ Global</h3>
+  <ul>
+    <li>All animations respect <code>prefers-reduced-motion</code> — they simply don't run</li>
+    <li>Lenis disabled on mobile if needed for performance</li>
+    <li>All animation code in a single <code>&lt;script&gt;</code> block at the bottom of the HTML</li>
+  </ul>
+</div>

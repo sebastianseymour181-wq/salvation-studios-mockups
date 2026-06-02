@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvation Studios — Concept 2: Bloom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F5EFE6;
+    --cream-deep: #EDE4D8;
+    --terracotta: #C1502E;
+    --terracotta-light: #E07050;
+    --teal: #1E3D3A;
+    --teal-light: #2D5752;
+    --sand: #BFB09A;
+    --text: #2A1F1A;
+    --text-mid: #6B5A4E;
+    --text-light: #A8987F;
+    --gold: #B8922A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--teal);
+    letter-spacing: 0.05em;
+  }
+  .nav-logo em { color: var(--terracotta); font-style: italic; }
+
+  .nav-links {
+    display: flex;
+    gap: 48px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-mid);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--terracotta);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--teal);
+    color: var(--cream);
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--terracotta); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 64px 80px;
+    gap: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Blob backgrounds */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    animation: blob-float var(--dur) ease-in-out infinite alternate;
+  }
+  .blob-1 {
+    width: 600px; height: 600px;
+    background: rgba(193, 80, 46, 0.12);
+    top: -100px; right: -100px;
+    --dur: 7s;
+  }
+  .blob-2 {
+    width: 400px; height: 400px;
+    background: rgba(30, 61, 58, 0.08);
+    bottom: -50px; left: -80px;
+    --dur: 9s;
+    animation-delay: 2s;
+  }
+  .blob-3 {
+    width: 300px; height: 300px;
+    background: rgba(184, 146, 42, 0.1);
+    top: 40%; left: 40%;
+    --dur: 11s;
+    animation-delay: 4s;
+  }
+
+  @keyframes blob-float {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(30px, -30px) scale(1.05); }
+  }
+
+  .hero-left { position: relative; z-index: 2; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeIn 0.8s 0.3s forwards;
+  }
+  .eyebrow-pill {
+    background: rgba(193, 80, 46, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(60px, 7vw, 110px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--teal);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeIn 0.8s 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--terracotta);
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-mid);
+    max-width: 380px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeIn 0.8s 0.7s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 0.8s 0.9s forwards;
+  }
+  .btn-filled {
+    background: var(--teal);
+    color: var(--cream);
+    padding: 16px 36px;
+    border-radius: 32px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-filled:hover { background: var(--terracotta); transform: translateY(-2px); }
+
+  .btn-link {
+    font-size: 14px;
+    color: var(--text-mid);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+  }
+  .btn-link:hover { color: var(--terracotta); }
+  .btn-link-arrow {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s;
+  }
+  .btn-link:hover .btn-link-arrow { border-color: var(--terracotta); background: var(--terracotta); color: white; }
+
+  /* Hero right — abstract visual */
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeIn 1s 0.4s forwards;
+  }
+  .visual-card {
+    background: var(--teal);
+    border-radius: 24px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .visual-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 70% 20%, rgba(193, 80, 46, 0.3) 0%, transparent 60%);
+  }
+  .visual-soundwave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 200px;
+  }
+  .wave-bar {
+    width: 4px;
+    background: rgba(245, 239, 230, 0.2);
+    border-radius: 4px;
+    animation: wave var(--dur) ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+  @keyframes wave {
+    from { transform: scaleY(0.15); }
+    to { transform: scaleY(1); }
+  }
+
+  .visual-label {
+    position: relative;
+    z-index: 2;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 230, 0.5);
+    margin-bottom: 8px;
+  }
+  .visual-title {
+    position: relative;
+    z-index: 2;
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .floating-pill {
+    position: absolute;
+    background: var(--cream);
+    border-radius: 32px;
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    z-index: 3;
+    white-space: nowrap;
+  }
+  .pill-1 { top: -16px; right: 32px; animation: float 4s ease-in-out infinite alternate; }
+  .pill-2 { top: 40%; left: -32px; animation: float 5s 1s ease-in-out infinite alternate; }
+  .pill-3 { bottom: 32px; right: -24px; animation: float 3.5s 0.5s ease-in-out infinite alternate; }
+  @keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-12px); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    z-index: 10;
+    animation: fadeIn 1s 1.2s both;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--terracotta), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(0.6); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 120px 64px;
+    background: var(--cream-deep);
+  }
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 80px;
+  }
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 900;
+    color: var(--teal);
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--terracotta); font-weight: 400; }
+  .services-link {
+    color: var(--terracotta);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px;
+  }
+
+  .rooms-flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .room-tile {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  .room-tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(30, 61, 58, 0.12);
+  }
+  .room-tile-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    background: rgba(30, 61, 58, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+  .room-tile.featured { background: var(--teal); }
+  .room-tile.featured .room-tile-icon { background: rgba(245, 239, 230, 0.1); }
+  .room-tile.featured .room-tile-name { color: var(--cream); }
+  .room-tile.featured .room-tile-desc { color: rgba(245, 239, 230, 0.6); }
+
+  .room-tile-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .room-tile-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-mid);
+  }
+  .room-tile-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  .room-tile.featured .room-tile-tag { color: rgba(245, 239, 230, 0.5); }
+
+  .room-tile-large {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .room-tile-large .room-tile-name { font-size: 48px; }
+  .room-visual-box {
+    background: var(--cream-deep);
+    border-radius: 16px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* STORY */
+  .story {
+    padding: 120px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: center;
+  }
+  .story-visual {
+    position: relative;
+  }
+  .story-card-main {
+    background: var(--teal);
+    border-radius: 24px;
+    padding: 64px 48px;
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .story-card-main::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(193, 80, 46, 0.25);
+    filter: blur(60px);
+  }
+  .story-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .story-quote-author {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 230, 0.5);
+    position: relative;
+    z-index: 2;
+  }
+  .story-badge {
+    position: absolute;
+    bottom: -20px;
+    right: 40px;
+    background: var(--terracotta);
+    color: white;
+    border-radius: 50%;
+    width: 100px; height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    box-shadow: 0 8px 32px rgba(193, 80, 46, 0.3);
+  }
+  .story-badge-num {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .story-badge-text {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    font-style: italic;
+    opacity: 0.8;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .story-content { position: relative; z-index: 2; }
+  .story-content .section-title { margin-bottom: 32px; }
+  .story-body {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--text-mid);
+  }
+  .story-body p + p { margin-top: 20px; }
+  .story-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .story-stat {
+    padding: 24px;
+    background: var(--cream-deep);
+    border-radius: 16px;
+  }
+  .story-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--terracotta);
+    line-height: 1;
+  }
+  .story-stat-label {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-top: 4px;
+  }
+
+  /* BOOKING CTA */
+  .booking {
+    background: var(--teal);
+    padding: 120px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .booking::before {
+    content: '';
+    position: absolute;
+    top: -120px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: rgba(193, 80, 46, 0.2);
+    filter: blur(100px);
+  }
+  .booking .section-label { color: rgba(245, 239, 230, 0.5); }
+  .booking .section-title { color: var(--cream); margin-bottom: 20px; }
+  .booking-sub {
+    font-size: 16px;
+    color: rgba(245, 239, 230, 0.6);
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+  .booking-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .btn-cream {
+    background: var(--cream);
+    color: var(--teal);
+    padding: 16px 40px;
+    border-radius: 32px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-cream:hover { background: var(--cream-deep); transform: translateY(-2px); }
+  .btn-outline-cream {
+    border: 1px solid rgba(245, 239, 230, 0.3);
+    color: var(--cream);
+    padding: 16px 40px;
+    border-radius: 32px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-outline-cream:hover { border-color: rgba(245, 239, 230, 0.7); }
+
+  /* FOOTER */
+  footer {
+    background: var(--text);
+    padding: 80px 64px 40px;
+    color: var(--cream);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 60px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .footer-logo em { color: var(--terracotta); font-style: italic; }
+  .footer-tagline { font-size: 14px; color: rgba(245, 239, 230, 0.5); line-height: 1.7; }
+  .footer-col-title {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 230, 0.4);
+    margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li + li { margin-top: 12px; }
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(245, 239, 230, 0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--terracotta); }
+  .footer-bottom {
+    border-top: 1px solid rgba(245, 239, 230, 0.1);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(245, 239, 230, 0.3);
+  }
+
+  /* Concept label */
+  .concept-badge {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    background: var(--terracotta);
+    color: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 20px;
+    z-index: 200;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="concept-badge">Concept 02 — Bloom</div>
+
+<nav>
+  <div class="nav-logo">Salvation <em>Studios</em></div>
+  <ul class="nav-links">
+    <li><a href="#">Spaces</a></li>
+    <li><a href="#">Equipment</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Our Story</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Book a Session</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-pill">Brighton, UK</span>
+      Recording Studio
+    </div>
+
+    <h1 class="hero-title">
+      Where <em>Sound</em><br>
+      Comes<br>
+      Alive
+    </h1>
+
+    <p class="hero-desc">
+      Five years in the making. A space built from the ground up for musicians who care about the craft — rich acoustics, world-class gear, and the freedom to create.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#" class="btn-filled">Book a Session</a>
+      <a href="#" class="btn-link">
+        Explore our rooms
+        <span class="btn-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="visual-card">
+      <div class="visual-soundwave">
+        <div class="wave-bar" style="height:60%;--dur:0.7s;animation-delay:0s"></div>
+        <div class="wave-bar" style="height:80%;--dur:0.9s;animation-delay:0.1s"></div>
+        <div class="wave-bar" style="height:100%;--dur:0.8s;animation-delay:0.05s"></div>
+        <div class="wave-bar" style="height:70%;--dur:1.1s;animation-delay:0.2s"></div>
+        <div class="wave-bar" style="height:90%;--dur:0.75s;animation-delay:0.15s"></div>
+        <div class="wave-bar" style="height:50%;--dur:1.0s;animation-delay:0.3s"></div>
+        <div class="wave-bar" style="height:85%;--dur:0.85s;animation-delay:0.08s"></div>
+        <div class="wave-bar" style="height:65%;--dur:0.95s;animation-delay:0.25s"></div>
+        <div class="wave-bar" style="height:100%;--dur:0.7s;animation-delay:0.18s"></div>
+        <div class="wave-bar" style="height:75%;--dur:1.2s;animation-delay:0.35s"></div>
+        <div class="wave-bar" style="height:55%;--dur:0.8s;animation-delay:0.4s"></div>
+        <div class="wave-bar" style="height:90%;--dur:0.9s;animation-delay:0.12s"></div>
+      </div>
+      <div class="visual-label">Now Recording</div>
+      <div class="visual-title">Live Room A</div>
+    </div>
+    <div class="floating-pill pill-1">🎙️ Vocal Booth Available</div>
+    <div class="floating-pill pill-2">🎸 Amp Booth Ready</div>
+    <div class="floating-pill pill-3">✨ Engineer On-Site</div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="services-header reveal">
+    <div>
+      <p class="section-label">Our Spaces</p>
+      <h2 class="section-title">Every room<br>tells a <em>story</em></h2>
+    </div>
+    <a href="#" class="services-link">View all spaces →</a>
+  </div>
+
+  <div class="rooms-flow">
+    <div class="room-tile room-tile-large reveal">
+      <div>
+        <div class="room-tile-icon">🎵</div>
+        <div class="room-tile-name">The Live Room</div>
+        <div class="room-tile-desc">Our flagship space. Purpose-built acoustics for everything from solo artists to full-band sessions. The soul of Salvation Studios.</div>
+        <span class="room-tile-tag">Full Band Recording</span>
+      </div>
+      <div class="room-visual-box">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="30" stroke="#1E3D3A" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle cx="40" cy="40" r="18" stroke="#C1502E" stroke-width="1.5"/>
+          <circle cx="40" cy="40" r="6" fill="#C1502E"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="room-tile featured reveal">
+      <div class="room-tile-icon">🎛️</div>
+      <div class="room-tile-name">Control Room</div>
+      <div class="room-tile-desc">Immerse yourself in the mix. World-class monitoring and outboard gear at your fingertips.</div>
+      <span class="room-tile-tag">Mixing & Production</span>
+    </div>
+
+    <div class="room-tile reveal">
+      <div class="room-tile-icon">🎤</div>
+      <div class="room-tile-name">Vocal Booth</div>
+      <div class="room-tile-desc">Pristine isolation for the perfect take.</div>
+      <span class="room-tile-tag">Vocals & Overdubs</span>
+    </div>
+
+    <div class="room-tile reveal">
+      <div class="room-tile-icon">🔇</div>
+      <div class="room-tile-name">Iso Booths</div>
+      <div class="room-tile-desc">Two dedicated isolation chambers for simultaneous tracking.</div>
+      <span class="room-tile-tag">Isolation</span>
+    </div>
+
+    <div class="room-tile reveal">
+      <div class="room-tile-icon">🎸</div>
+      <div class="room-tile-name">Amp Booth</div>
+      <div class="room-tile-desc">Crank it without apology. Built for loud, proud guitar and bass tones.</div>
+      <span class="room-tile-tag">Guitar & Bass</span>
+    </div>
+
+    <div class="room-tile reveal" style="background: rgba(193,80,46,0.06); border: 1px dashed rgba(193,80,46,0.3);">
+      <div class="room-tile-icon" style="background: rgba(193,80,46,0.1);">✍️</div>
+      <div class="room-tile-name" style="color: var(--terracotta);">Writing Rooms</div>
+      <div class="room-tile-desc">Separate creative spaces for when inspiration needs its own room.</div>
+      <span class="room-tile-tag">Subterranean &amp; Mezzanine</span>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="story-visual reveal">
+    <div class="story-card-main">
+      <div class="story-quote">"A five-year labour of love transforming a longstanding piece of Brighton history into something truly remarkable."</div>
+      <div class="story-quote-author">— Salvation Studios</div>
+      <div class="story-badge">
+        <div class="story-badge-num">5</div>
+        <div class="story-badge-text">years of<br>craft</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-content reveal">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">Built from<br><em>passion</em></h2>
+    <div class="story-body">
+      <p>Salvation Studios didn't follow a blueprint — it followed a feeling. Every room was designed around a single question: what does an artist actually need to create freely?</p>
+      <p>Rooted in Brighton's rich musical heritage and built with obsessive attention to acoustics and workflow, this is a studio that respects your process.</p>
+    </div>
+    <div class="story-stats">
+      <div class="story-stat">
+        <div class="story-stat-num">6</div>
+        <div class="story-stat-label">Recording Rooms</div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">7</div>
+        <div class="story-stat-label">Days a Week</div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">∞</div>
+        <div class="story-stat-label">Possibilities</div>
+      </div>
+      <div class="story-stat">
+        <div class="story-stat-num">01</div>
+        <div class="story-stat-label">Brighton's Best</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking">
+  <p class="section-label reveal">Ready to Record?</p>
+  <h2 class="section-title reveal">Your best session<br>starts <em>here</em></h2>
+  <p class="booking-sub reveal">Sessions 7 days a week. Engineers, producers, dry hire.<br>Brighton's most dedicated recording environment.</p>
+  <div class="booking-actions reveal">
+    <a href="#" class="btn-cream">Book a Session</a>
+    <a href="#" class="btn-outline-cream">Get in Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Salvation <em>Studios</em></div>
+      <p class="footer-tagline">Brighton's premier recording studio.<br>Built with love, designed for sound.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Studio</div>
+      <ul class="footer-links">
+        <li><a href="#">Spaces</a></li>
+        <li><a href="#">Equipment</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#">Get in Touch</a></li>
+        <li><a href="#">Book a Session</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Brighton, UK</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Salvation Studios</span>
+    <span>Made in Brighton</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

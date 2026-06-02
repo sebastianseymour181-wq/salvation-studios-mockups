@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvation Studios — Design Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0A0A0A; color: #F2F2F0; font-family: 'Space Mono', monospace; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 60px 48px; }
+  h1 { font-family: 'Anton', sans-serif; font-size: 48px; letter-spacing: 0.05em; color: #F2F2F0; margin-bottom: 8px; }
+  .sub { font-size: 11px; letter-spacing: 0.2em; color: #555; text-transform: uppercase; margin-bottom: 64px; }
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .card { background: #141414; padding: 48px 40px; display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: inherit; transition: background 0.2s; }
+  .card:hover { background: #1E1E1E; }
+  .card-num { font-size: 11px; letter-spacing: 0.2em; color: #444; }
+  .card-name { font-family: 'Anton', sans-serif; font-size: 32px; letter-spacing: 0.03em; }
+  .card-1 .card-name { color: #D4882A; }
+  .card-2 .card-name { color: #C1502E; }
+  .card-3 .card-name { color: #E8271A; }
+  .card-4 .card-name { color: #A855F7; }
+  .card-desc { font-size: 12px; line-height: 1.9; color: #666; }
+  .card-vibe { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px; }
+  .card-1 .card-vibe { color: #D4882A; }
+  .card-2 .card-vibe { color: #C1502E; }
+  .card-3 .card-vibe { color: #E8271A; }
+  .card-4 .card-vibe { color: #A855F7; }
+  .card-4 { background: #0D0014; }
+  .card-4:hover { background: #130020; }
+  .new-badge { display: inline-block; background: #7C3AED; color: white; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-left: 10px; vertical-align: middle; }
+  .card-open { margin-top: auto; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #333; border-top: 1px solid #1E1E1E; padding-top: 20px; transition: color 0.2s; }
+  .card:hover .card-open { color: #666; }
+  .footer { margin-top: 48px; font-size: 10px; letter-spacing: 0.1em; color: #333; }
+</style>
+</head>
+<body>
+  <h1>SALVATION STUDIOS</h1>
+  <p class="sub">Design Concepts — 4 Directions</p>
+
+  <div class="cards">
+    <a href="concept-1-bunker.html" class="card card-1">
+      <div class="card-num">01</div>
+      <div class="card-name">THE BUNKER</div>
+      <div class="card-desc">Dark, immersive, analog warmth. Amber VU meters, warm charcoal textures. Feels like being inside a great studio at night. Serious and cinematic.</div>
+      <div class="card-vibe">Dark · Warm · Cinematic</div>
+      <div class="card-open">Open Concept →</div>
+    </a>
+
+    <a href="concept-2-bloom.html" class="card card-2">
+      <div class="card-num">02</div>
+      <div class="card-name">BLOOM</div>
+      <div class="card-desc">Organic, flowing, editorial. Cream and terracotta with deep teal. Feels like an arts magazine meets boutique studio. Welcoming and distinctive.</div>
+      <div class="card-vibe">Light · Organic · Editorial</div>
+      <div class="card-open">Open Concept →</div>
+    </a>
+
+    <a href="concept-3-signal.html" class="card card-3">
+      <div class="card-num">03</div>
+      <div class="card-name">SIGNAL</div>
+      <div class="card-desc">Brutalist, bold, raw energy. Black and white with electric red cuts. High attitude, grid-breaking layouts. Feels like Brighton's indie scene in pixel form.</div>
+      <div class="card-vibe">Raw · Bold · Punk</div>
+      <div class="card-open">Open Concept →</div>
+    </a>
+
+    <a href="salvation-studios.html" class="card card-4">
+      <div class="card-num">04 <span class="new-badge">Selected</span></div>
+      <div class="card-name">VOID</div>
+      <div class="card-desc">Deep purple and black, photo-heavy luxury. Full-bleed images with violet overlays, a massive mosaic gallery, and an immersive scroll experience. Dark, premium, unforgettable.</div>
+      <div class="card-vibe">Purple · Black · Photo-Forward</div>
+      <div class="card-open">Open Full Site →</div>
+    </a>
+  </div>
+
+  <p class="footer">Open each concept in your browser — all are fully interactive.</p>
+</body>
+</html>

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvation Studios — Concept 1: The Bunker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #080706;
+    --deep: #111009;
+    --surface: #1A1815;
+    --amber: #D4882A;
+    --amber-dim: #8A5A1A;
+    --warm-gray: #5C5244;
+    --text: #C8BFB0;
+    --text-dim: #6B6058;
+    --white: #F0EAE0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--amber);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, opacity 0.3s;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 40px; height: 40px;
+    border: 1px solid var(--amber);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s ease, opacity 0.3s;
+    opacity: 0.5;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(8,7,6,0.95) 0%, transparent 100%);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--amber); }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  .nav-cta {
+    background: none;
+    border: 1px solid var(--amber-dim);
+    color: var(--amber);
+    padding: 10px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.3s;
+  }
+  .nav-cta:hover {
+    background: var(--amber);
+    color: var(--black);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(212, 136, 42, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(212, 136, 42, 0.05) 0%, transparent 50%),
+      var(--black);
+  }
+
+  /* VU meter bars */
+  .vu-bars {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    height: 280px;
+  }
+  .vu-bar {
+    width: 6px;
+    background: linear-gradient(to top, var(--amber), #E8A84A, #F0C060, #E05050);
+    border-radius: 2px 2px 0 0;
+    animation: vu-animate var(--dur) ease-in-out infinite alternate;
+    transform-origin: bottom;
+  }
+  @keyframes vu-animate {
+    0% { transform: scaleY(0.1); }
+    100% { transform: scaleY(1); }
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+    vertical-align: middle;
+    margin-right: 16px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 13vw, 200px);
+    line-height: 0.9;
+    color: var(--white);
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .hero-title .accent { color: var(--amber); }
+  .hero-title .outline {
+    -webkit-text-stroke: 1px var(--warm-gray);
+    color: transparent;
+  }
+
+  .hero-sub {
+    margin-top: 32px;
+    max-width: 440px;
+    font-size: 13px;
+    line-height: 2;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 48px;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .btn-primary {
+    background: var(--amber);
+    color: var(--black);
+    padding: 16px 40px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    border: none;
+    cursor: none;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--white); }
+
+  .btn-ghost {
+    background: none;
+    border: 1px solid var(--warm-gray);
+    color: var(--text);
+    padding: 16px 40px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    cursor: none;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* Scroll ticker */
+  .ticker-wrap {
+    position: relative;
+    z-index: 2;
+    margin-top: 60px;
+    overflow: hidden;
+    border-top: 1px solid var(--surface);
+    padding: 16px 0;
+    width: 100vw;
+    margin-left: -48px;
+  }
+  .ticker {
+    display: flex;
+    gap: 60px;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+  .ticker-dot { color: var(--amber); margin: 0 12px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* WAVEFORM DIVIDER */
+  .wave-divider {
+    width: 100%;
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wave-divider svg { width: 100%; height: 100%; }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--surface);
+    padding: 40px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: var(--text-dim);
+  }
+  .stat-item {
+    background: var(--surface);
+    padding: 32px 40px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: var(--amber);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+
+  /* ROOMS SECTION */
+  .section { padding: 100px 48px; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 96px);
+    color: var(--white);
+    line-height: 0.95;
+    margin-bottom: 60px;
+  }
+
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .room-card {
+    background: var(--surface);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    group: true;
+  }
+  .room-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--amber);
+    transition: width 0.4s ease;
+  }
+  .room-card:hover::after { width: 100%; }
+  .room-card:hover { background: #201E1A; }
+
+  .room-number {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+  .room-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+  .room-desc {
+    font-size: 12px;
+    line-height: 2;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+  .room-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    border: 1px solid var(--amber-dim);
+    padding: 4px 12px;
+  }
+
+  .room-card.featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .room-card.featured .room-name { font-size: 72px; }
+
+  /* HERITAGE */
+  .heritage {
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    background: var(--deep);
+  }
+  .heritage-quote {
+    font-family: 'Crimson Pro', serif;
+    font-size: 32px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.5;
+    position: relative;
+    padding-left: 32px;
+  }
+  .heritage-quote::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+  }
+  .heritage-text {
+    font-size: 13px;
+    line-height: 2;
+    color: var(--text-dim);
+  }
+  .heritage-text p + p { margin-top: 20px; }
+
+  /* BOOKING */
+  .booking {
+    padding: 100px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .booking::before {
+    content: 'BOOK';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 400px;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(212,136,42,0.04);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .booking .section-title { margin-bottom: 20px; }
+  .booking-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 48px;
+    line-height: 2;
+  }
+  .booking-actions { display: flex; gap: 20px; justify-content: center; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep);
+    padding: 60px 48px 40px;
+    border-top: 1px solid var(--surface);
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--white);
+    letter-spacing: 0.1em;
+  }
+  .footer-logo span { color: var(--amber); }
+  .footer-address {
+    font-size: 12px;
+    line-height: 2;
+    color: var(--text-dim);
+    text-align: right;
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid var(--surface);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+
+  /* Concept label */
+  .concept-badge {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    background: var(--amber);
+    color: var(--black);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    z-index: 200;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="concept-badge">Concept 01 — The Bunker</div>
+
+<nav>
+  <div class="nav-logo">SALVATION<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Studios</a></li>
+    <li><a href="#">Equipment</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Heritage</a></li>
+  </ul>
+  <button class="nav-cta">Book a Session</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="vu-bars">
+    <div class="vu-bar" style="height:40%;--dur:0.8s;animation-delay:0s"></div>
+    <div class="vu-bar" style="height:70%;--dur:1.1s;animation-delay:0.1s"></div>
+    <div class="vu-bar" style="height:90%;--dur:0.9s;animation-delay:0.2s"></div>
+    <div class="vu-bar" style="height:60%;--dur:1.3s;animation-delay:0.05s"></div>
+    <div class="vu-bar" style="height:100%;--dur:0.7s;animation-delay:0.15s"></div>
+    <div class="vu-bar" style="height:80%;--dur:1.0s;animation-delay:0.3s"></div>
+    <div class="vu-bar" style="height:50%;--dur:1.2s;animation-delay:0.08s"></div>
+    <div class="vu-bar" style="height:75%;--dur:0.85s;animation-delay:0.25s"></div>
+    <div class="vu-bar" style="height:95%;--dur:1.15s;animation-delay:0.18s"></div>
+    <div class="vu-bar" style="height:45%;--dur:0.95s;animation-delay:0.35s"></div>
+  </div>
+
+  <p class="hero-eyebrow">Brighton, UK &nbsp;&mdash;&nbsp; Est. 2019</p>
+
+  <h1 class="hero-title">
+    SALVATION<br>
+    <span class="outline">STU</span><span class="accent">DIOS</span>
+  </h1>
+
+  <p class="hero-sub">
+    A state-of-the-art recording facility carved from five years of craft.<br>
+    Where Brighton's history meets the sound of tomorrow.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#" class="btn-primary">Book Your Session</a>
+    <a href="#" class="btn-ghost">Explore the Rooms</a>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item">Live Room<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Control Room<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Vocal Booth<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Isolation Booths<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Amp Booth<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Writing Rooms<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Dry Hire<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Brighton Heritage<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Live Room<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Control Room<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Vocal Booth<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Isolation Booths<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Amp Booth<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Writing Rooms<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Dry Hire<span class="ticker-dot">◆</span></span>
+      <span class="ticker-item">Brighton Heritage<span class="ticker-dot">◆</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Recording Rooms</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Years in the Making</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24</div>
+    <div class="stat-label">Hour Access Available</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">01</div>
+    <div class="stat-label">Brighton's Best</div>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<section class="section">
+  <p class="section-label">// The Spaces</p>
+  <h2 class="section-title">YOUR SOUND<br>DESERVES<br>THE ROOM</h2>
+
+  <div class="rooms-grid">
+    <div class="room-card featured">
+      <div>
+        <div class="room-number">01 — PRIMARY</div>
+        <div class="room-name">THE LIVE ROOM</div>
+        <p class="room-desc">
+          Our flagship recording space. Acoustically designed to capture everything
+          from intimate acoustic sets to full-band recordings with total clarity and warmth.
+          The heartbeat of Salvation Studios.
+        </p>
+        <div class="room-tags">
+          <span class="tag">Full Band</span>
+          <span class="tag">Acoustic</span>
+          <span class="tag">Live Tracking</span>
+          <span class="tag">Producer Ready</span>
+        </div>
+      </div>
+      <div style="background: linear-gradient(135deg, #1A1815 0%, #2A2420 100%); height: 320px; display:flex; align-items:center; justify-content:center;">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <circle cx="60" cy="60" r="40" stroke="#D4882A" stroke-width="1" opacity="0.4"/>
+          <circle cx="60" cy="60" r="28" stroke="#D4882A" stroke-width="1" opacity="0.6"/>
+          <circle cx="60" cy="60" r="16" stroke="#D4882A" stroke-width="1" opacity="0.8"/>
+          <circle cx="60" cy="60" r="6" fill="#D4882A"/>
+          <line x1="60" y1="0" x2="60" y2="120" stroke="#D4882A" stroke-width="0.5" opacity="0.2"/>
+          <line x1="0" y1="60" x2="120" y2="60" stroke="#D4882A" stroke-width="0.5" opacity="0.2"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-number">02</div>
+      <div class="room-name">CONTROL ROOM</div>
+      <p class="room-desc">Engineer your vision with world-class outboard gear and monitoring.</p>
+      <div class="room-tags">
+        <span class="tag">Mixing</span>
+        <span class="tag">Outboard Gear</span>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-number">03</div>
+      <div class="room-name">VOCAL BOOTH</div>
+      <p class="room-desc">Isolated perfection for lead vocals, overdubs, and spoken word.</p>
+      <div class="room-tags">
+        <span class="tag">Isolation</span>
+        <span class="tag">Vocals</span>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-number">04–05</div>
+      <div class="room-name">ISO BOOTHS</div>
+      <p class="room-desc">Two dedicated isolation booths for simultaneous tracking sessions.</p>
+      <div class="room-tags">
+        <span class="tag">Simultaneous</span>
+        <span class="tag">Acoustic</span>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-number">06</div>
+      <div class="room-name">AMP BOOTH</div>
+      <p class="room-desc">Crank it up. A dedicated space built for guitar and bass amp tracking.</p>
+      <div class="room-tags">
+        <span class="tag">Guitar</span>
+        <span class="tag">Bass</span>
+        <span class="tag">High SPL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERITAGE -->
+<section class="heritage">
+  <div>
+    <p class="section-label">// Our Story</p>
+    <h2 class="section-title" style="font-size: clamp(40px,5vw,72px);">FIVE YEARS.<br>ONE VISION.</h2>
+    <blockquote class="heritage-quote">
+      "A labour of love to transform a longstanding piece of Brighton history into something extraordinary."
+    </blockquote>
+  </div>
+  <div class="heritage-text">
+    <p>Salvation Studios didn't happen overnight. It was built room by room, decision by decision — the obsessive result of five years of renovation, curation, and dedication to the craft of recorded sound.</p>
+    <p>Housed in a building with deep roots in Brighton's cultural history, every corner of this facility was designed with one question in mind: what does a musician actually need to make their best work?</p>
+    <p>The answer is here. Come find it.</p>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking">
+  <p class="section-label">// Ready?</p>
+  <h2 class="section-title">LET'S<br>MAKE NOISE</h2>
+  <p class="booking-sub">Sessions available 7 days a week.<br>Engineers, producers, and dry hire options.</p>
+  <div class="booking-actions">
+    <a href="#" class="btn-primary">Book a Session</a>
+    <a href="#" class="btn-ghost">Get in Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">SALVATION<span>.</span></div>
+    <div class="footer-address">
+      Brighton, UK<br>
+      salvationstudios.co.uk<br>
+      @salvationstudios
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Salvation Studios</span>
+    <span>Built for sound. Built in Brighton.</span>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 20}px, ${ry - 20}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.room-card, .stat-item, .heritage-quote, .heritage-text').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

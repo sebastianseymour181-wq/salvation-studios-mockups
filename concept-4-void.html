@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvation Studios — Concept 4: Void</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Epilogue:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void:    #060010;
+    --deep:    #0E0020;
+    --surface: #160030;
+    --purple:  #7C3AED;
+    --violet:  #A855F7;
+    --lavender:#C084FC;
+    --pale:    #EDE9FE;
+    --white:   #F5F3FF;
+    --dim:     #6D28D9;
+    --text:    #C4B5FD;
+    --muted:   #7C6DAE;
+    --border:  rgba(124, 58, 237, 0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    padding: 0 56px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(6,0,16,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--violet); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--lavender); }
+  .nav-cta {
+    background: var(--purple);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    padding: 11px 28px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  .nav-cta:hover {
+    background: var(--violet);
+    box-shadow: 0 0 32px rgba(168, 85, 247, 0.4);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+  }
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(6,0,16,1) 0%, rgba(6,0,16,0.6) 40%, rgba(6,0,16,0.3) 70%, transparent 100%),
+      linear-gradient(135deg, rgba(124,58,237,0.4) 0%, transparent 60%);
+  }
+
+  /* Purple glow orbs */
+  .hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .glow-1 { width: 600px; height: 600px; background: rgba(124,58,237,0.25); top: -100px; right: 10%; }
+  .glow-2 { width: 400px; height: 400px; background: rgba(168,85,247,0.15); bottom: 20%; left: 5%; }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 56px 80px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(124,58,237,0.3);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 6px 16px 6px 8px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    margin-bottom: 28px;
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    animation: up 0.7s 0.2s forwards;
+  }
+  .badge-dot {
+    width: 20px; height: 20px;
+    background: var(--purple);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(72px, 12vw, 180px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: up 0.8s 0.4s forwards;
+  }
+  .hero-title .purple { color: var(--violet); }
+  .hero-title .outline {
+    -webkit-text-stroke: 1.5px rgba(168,85,247,0.4);
+    color: transparent;
+  }
+
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    opacity: 0;
+    animation: up 0.8s 0.6s forwards;
+  }
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(196,181,253,0.7);
+    max-width: 400px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-shrink: 0; }
+  .btn-purple {
+    background: var(--purple);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-purple:hover {
+    background: var(--violet);
+    box-shadow: 0 0 40px rgba(168,85,247,0.4);
+    transform: translateY(-2px);
+  }
+  .btn-ghost-purple {
+    border: 1px solid var(--border);
+    color: var(--lavender);
+    font-family: 'Syne', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+    backdrop-filter: blur(8px);
+  }
+  .btn-ghost-purple:hover { border-color: var(--violet); color: var(--white); }
+
+  @keyframes up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLL TICKER ── */
+  .ticker-wrap {
+    overflow: hidden;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+  .ticker { display: flex; gap: 0; animation: tick 22s linear infinite; white-space: nowrap; }
+  .ticker-item {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0;
+    padding: 0 40px;
+  }
+  .ticker-item .sep { color: var(--purple); margin: 0 8px; }
+  @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── STATS ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat {
+    padding: 48px 40px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .stat:last-child { border-right: none; }
+  .stat::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--purple);
+    transition: width 0.6s ease;
+  }
+  .stat:hover::before { width: 100%; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 60px;
+    color: var(--violet);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── ROOMS SECTION ── */
+  .rooms { padding: 100px 56px; }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(44px, 6vw, 88px);
+    color: var(--white);
+    line-height: 0.95;
+    margin-bottom: 64px;
+    letter-spacing: -0.02em;
+  }
+  .section-title em { font-style: italic; color: var(--violet); font-family: 'Epilogue', serif; font-weight: 200; }
+
+  /* Photo grid layout */
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 16px;
+  }
+
+  .room-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    group: 1;
+  }
+  .room-card-photo {
+    width: 100%;
+    padding-top: 70%;
+    position: relative;
+    overflow: hidden;
+  }
+  .room-card-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .room-card:hover .room-card-photo img { transform: scale(1.06); }
+  .room-card-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6,0,16,0.95) 0%, rgba(6,0,16,0.3) 50%, transparent 100%);
+    z-index: 1;
+  }
+  .room-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(124,58,237,0.0);
+    transition: background 0.4s;
+    z-index: 1;
+  }
+  .room-card:hover .room-card-overlay { background: rgba(124,58,237,0.15); }
+
+  .room-card-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px 28px 24px;
+    z-index: 2;
+  }
+  .room-card-num {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--violet);
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .room-card-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .room-card-desc {
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(196,181,253,0.7);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .room-card:hover .room-card-desc { max-height: 80px; }
+  .room-card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .rtag {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    border: 1px solid rgba(168,85,247,0.3);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* Featured card — spans 2 cols */
+  .room-card.hero-card {
+    grid-column: span 2;
+  }
+  .room-card.hero-card .room-card-photo { padding-top: 55%; }
+  .room-card.hero-card .room-card-name { font-size: 36px; }
+
+  /* ── ABOUT / STORY ── */
+  .story {
+    padding: 0 56px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .story-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 280px 180px;
+    gap: 12px;
+  }
+  .story-photo {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+  .story-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .story-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(124,58,237,0.2);
+    transition: background 0.3s;
+  }
+  .story-photo:hover::after { background: rgba(124,58,237,0.05); }
+  .story-photo.tall { grid-row: span 2; }
+  .story-photo.accent::after { background: rgba(124,58,237,0.35); }
+
+  .story-content { }
+  .story-content .section-title { margin-bottom: 28px; }
+  .story-body {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--muted);
+  }
+  .story-body p + p { margin-top: 18px; }
+  .story-pull {
+    margin: 32px 0;
+    padding: 28px 32px;
+    border-left: 2px solid var(--purple);
+    background: rgba(124,58,237,0.08);
+    border-radius: 0 8px 8px 0;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 200;
+    color: var(--lavender);
+    line-height: 1.7;
+  }
+
+  /* ── FULL-WIDTH PHOTO BAND ── */
+  .photo-band {
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 0 0;
+  }
+  .photo-band img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: saturate(0.7);
+  }
+  .photo-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,0.6) 0%, rgba(6,0,16,0.7) 100%);
+    z-index: 1;
+  }
+  .photo-band-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 56px;
+  }
+  .photo-band-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 110px);
+    color: var(--white);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .photo-band-sub {
+    font-size: 16px;
+    color: rgba(196,181,253,0.8);
+    max-width: 500px;
+    line-height: 1.8;
+  }
+
+  /* ── EQUIPMENT STRIP ── */
+  .equipment {
+    padding: 100px 56px;
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 64px;
+  }
+  .equipment-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 280px;
+  }
+  .equipment-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .equipment-card:hover img { transform: scale(1.05); }
+  .equipment-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6,0,16,0.92) 0%, rgba(6,0,16,0.2) 60%, transparent 100%);
+  }
+  .equipment-card-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px;
+    z-index: 2;
+  }
+  .equipment-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .equipment-card-sub { font-size: 12px; color: var(--muted); }
+  .equipment-card.wide { grid-column: span 2; height: 360px; }
+  .equipment-card.wide .equipment-card-title { font-size: 36px; }
+
+  /* ── GALLERY MOSAIC ── */
+  .gallery { padding: 100px 56px; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    gap: 12px;
+    margin-top: 64px;
+  }
+  .g-photo {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .g-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .g-photo:hover img { transform: scale(1.08); }
+  .g-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(124,58,237,0.0);
+    transition: background 0.3s;
+  }
+  .g-photo:hover::after { background: rgba(124,58,237,0.2); }
+  .g-photo.tall { grid-row: span 2; }
+  .g-photo.wide { grid-column: span 2; }
+
+  /* ── SERVICES ── */
+  .services { padding: 100px 56px; background: var(--deep); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 64px;
+  }
+  .service-card {
+    background: rgba(124,58,237,0.06);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--purple), var(--violet));
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.4); }
+  .service-icon {
+    width: 48px; height: 48px;
+    background: rgba(124,58,237,0.2);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+  .service-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .service-desc { font-size: 13px; line-height: 1.9; color: var(--muted); }
+
+  /* ── BOOKING ── */
+  .booking {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .booking-photo {
+    position: absolute;
+    inset: 0;
+  }
+  .booking-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .booking-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, rgba(6,0,16,0.97) 0%, rgba(6,0,16,0.7) 50%, rgba(6,0,16,0.3) 100%),
+      linear-gradient(135deg, rgba(124,58,237,0.5) 0%, transparent 60%);
+  }
+  .booking-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 56px;
+    max-width: 600px;
+  }
+  .booking-content .section-label { margin-bottom: 20px; }
+  .booking-content .section-title { font-size: clamp(44px,6vw,80px); margin-bottom: 24px; }
+  .booking-sub {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 48px;
+  }
+  .booking-actions { display: flex; gap: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #040008;
+    border-top: 1px solid var(--border);
+    padding: 80px 56px 40px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--white);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+  .footer-logo span { color: var(--violet); }
+  .footer-tagline { font-size: 13px; line-height: 1.9; color: var(--muted); }
+  .footer-col-head {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(124,58,237,0.6);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li + li { margin-top: 12px; }
+  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--lavender); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(124,58,237,0.4);
+    letter-spacing: 0.08em;
+  }
+
+  /* Concept badge */
+  .concept-badge {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    background: var(--purple);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 20px;
+    z-index: 9999;
+    box-shadow: 0 0 24px rgba(124,58,237,0.4);
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<div class="concept-badge">Concept 04 — Void</div>
+
+<nav>
+  <div class="nav-logo">SALVATION<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Studios</a></li>
+    <li><a href="#">Equipment</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Heritage</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Book a Session</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-glow glow-1"></div>
+  <div class="hero-glow glow-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot">✦</span>
+      Brighton, UK — Est. 2019
+    </div>
+
+    <h1 class="hero-title">
+      SALVA<span class="purple">TION</span><br>
+      <span class="outline">STUDIOS</span>
+    </h1>
+
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        Five years of obsessive craft. Six rooms of pure possibility. Brighton's most immersive recording environment — built from the ground up for musicians who mean it.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn-purple">Book a Session</a>
+        <a href="#" class="btn-ghost-purple">Explore Rooms</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">Live Room<span class="sep">◆</span></span>
+    <span class="ticker-item">Control Room<span class="sep">◆</span></span>
+    <span class="ticker-item">Vocal Booth<span class="sep">◆</span></span>
+    <span class="ticker-item">Iso Booths<span class="sep">◆</span></span>
+    <span class="ticker-item">Amp Booth<span class="sep">◆</span></span>
+    <span class="ticker-item">Writing Rooms<span class="sep">◆</span></span>
+    <span class="ticker-item">Dry Hire<span class="sep">◆</span></span>
+    <span class="ticker-item">Engineers On-Site<span class="sep">◆</span></span>
+    <span class="ticker-item">Live Room<span class="sep">◆</span></span>
+    <span class="ticker-item">Control Room<span class="sep">◆</span></span>
+    <span class="ticker-item">Vocal Booth<span class="sep">◆</span></span>
+    <span class="ticker-item">Iso Booths<span class="sep">◆</span></span>
+    <span class="ticker-item">Amp Booth<span class="sep">◆</span></span>
+    <span class="ticker-item">Writing Rooms<span class="sep">◆</span></span>
+    <span class="ticker-item">Dry Hire<span class="sep">◆</span></span>
+    <span class="ticker-item">Engineers On-Site<span class="sep">◆</span></span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Recording Rooms</div>
+  </div>
+  <div class="stat reveal reveal-delay-1">
+    <div class="stat-num">5yr</div>
+    <div class="stat-label">Years in the Making</div>
+  </div>
+  <div class="stat reveal reveal-delay-2">
+    <div class="stat-num">24H</div>
+    <div class="stat-label">Session Availability</div>
+  </div>
+  <div class="stat reveal reveal-delay-3">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Creative Possibilities</div>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<section class="rooms">
+  <p class="section-label reveal">The Spaces</p>
+  <h2 class="section-title reveal">Every room,<br><em>purpose-built</em></h2>
+
+  <div class="rooms-grid">
+    <!-- Featured: Live Room -->
+    <div class="room-card hero-card reveal">
+      <div class="room-card-photo">
+        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80" alt="Live Room" onerror="this.src='https://picsum.photos/seed/studio-live/1200/600'">
+        <div class="room-card-overlay"></div>
+      </div>
+      <div class="room-card-info">
+        <div class="room-card-num">01 — Primary Space</div>
+        <div class="room-card-name">The Live Room</div>
+        <div class="room-card-desc">Our flagship recording space. Purpose-built acoustics for everything from solo artists to full-band sessions. The soul of Salvation Studios.</div>
+        <div class="room-card-tags">
+          <span class="rtag">Full Band</span>
+          <span class="rtag">Live Tracking</span>
+          <span class="rtag">Acoustic</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Control Room -->
+    <div class="room-card reveal reveal-delay-1">
+      <div class="room-card-photo">
+        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80" alt="Control Room" onerror="this.src='https://picsum.photos/seed/control-room/800/600'">
+        <div class="room-card-overlay"></div>
+      </div>
+      <div class="room-card-info">
+        <div class="room-card-num">02</div>
+        <div class="room-card-name">Control Room</div>
+        <div class="room-card-desc">World-class monitoring, outboard gear, and precision acoustics.</div>
+        <div class="room-card-tags">
+          <span class="rtag">Mixing</span>
+          <span class="rtag">Outboard</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vocal Booth -->
+    <div class="room-card reveal reveal-delay-1">
+      <div class="room-card-photo">
+        <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=800&q=80" alt="Vocal Booth" onerror="this.src='https://picsum.photos/seed/vocal-booth/800/600'">
+        <div class="room-card-overlay"></div>
+      </div>
+      <div class="room-card-info">
+        <div class="room-card-num">03</div>
+        <div class="room-card-name">Vocal Booth</div>
+        <div class="room-card-desc">Precision isolation for pristine takes.</div>
+        <div class="room-card-tags">
+          <span class="rtag">Vocals</span>
+          <span class="rtag">Isolation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Iso Booths -->
+    <div class="room-card reveal reveal-delay-2">
+      <div class="room-card-photo">
+        <img src="https://images.unsplash.com/photo-1487537708506-4c29b4d7f2f0?auto=format&fit=crop&w=800&q=80" alt="Isolation Booths" onerror="this.src='https://picsum.photos/seed/iso-booths/800/600'">
+        <div class="room-card-overlay"></div>
+      </div>
+      <div class="room-card-info">
+        <div class="room-card-num">04–05</div>
+        <div class="room-card-name">Iso Booths ×2</div>
+        <div class="room-card-desc">Two chambers for simultaneous sessions.</div>
+        <div class="room-card-tags">
+          <span class="rtag">Simultaneous</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amp Booth -->
+    <div class="room-card reveal reveal-delay-2">
+      <div class="room-card-photo">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80" alt="Amp Booth" onerror="this.src='https://picsum.photos/seed/amp-booth/800/600'">
+        <div class="room-card-overlay"></div>
+      </div>
+      <div class="room-card-info">
+        <div class="room-card-num">06</div>
+        <div class="room-card-name">Amp Booth</div>
+        <div class="room-card-desc">High-SPL dedicated space. Crank it up.</div>
+        <div class="room-card-tags">
+          <span class="rtag">Guitar</span>
+          <span class="rtag">Bass</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Writing Rooms — spans full width -->
+    <div class="room-card hero-card reveal">
+      <div class="room-card-photo">
+        <img src="https://images.unsplash.com/photo-1524230507669-5ff97f8a6cdd?auto=format&fit=crop&w=1200&q=80" alt="Writing Rooms" onerror="this.src='https://picsum.photos/seed/writing-room/1200/600'">
+        <div class="room-card-overlay"></div>
+      </div>
+      <div class="room-card-info">
+        <div class="room-card-num">WR — Creative Spaces</div>
+        <div class="room-card-name">Writing Rooms</div>
+        <div class="room-card-desc">Subterranean + Mezzanine creative spaces for when inspiration needs its own room.</div>
+        <div class="room-card-tags">
+          <span class="rtag">Songwriting</span>
+          <span class="rtag">Production</span>
+          <span class="rtag">Subterranean</span>
+          <span class="rtag">Mezzanine</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL-WIDTH PHOTO BAND -->
+<div class="photo-band">
+  <img src="https://images.unsplash.com/photo-1598653125014-47fcb30cef5d?auto=format&fit=crop&w=1800&q=80" alt="Studio" onerror="this.src='https://picsum.photos/seed/band-wide/1800/500'">
+  <div class="photo-band-content">
+    <h2 class="photo-band-title">SOUND IS<br>OUR OBSESSION</h2>
+    <p class="photo-band-sub">Every metre of Salvation Studios was built around one question: what does a musician actually need to create their best work?</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="story">
+  <div class="story-photos reveal">
+    <div class="story-photo tall">
+      <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=600&q=80" alt="Studio" onerror="this.src='https://picsum.photos/seed/story-tall/600/900'">
+    </div>
+    <div class="story-photo">
+      <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80" alt="Recording" onerror="this.src='https://picsum.photos/seed/story-sq1/600/400'">
+    </div>
+    <div class="story-photo accent">
+      <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80" alt="Music" onerror="this.src='https://picsum.photos/seed/story-sq2/600/400'">
+    </div>
+  </div>
+
+  <div class="story-content reveal">
+    <p class="section-label">Our Heritage</p>
+    <h2 class="section-title">Five years.<br>One <em>vision.</em></h2>
+    <div class="story-body">
+      <p>Salvation Studios is the result of five obsessive years of renovation — a longstanding piece of Brighton history transformed room by room into a world-class recording facility.</p>
+      <div class="story-pull">"A labour of love that turned a historic Brighton building into something truly extraordinary."</div>
+      <p>Every acoustic decision, every piece of outboard gear, every square foot of this space was chosen with one person in mind: the musician who knows exactly what they need.</p>
+    </div>
+    <div style="margin-top: 40px;">
+      <a href="#" class="btn-purple">Our Full Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section class="equipment">
+  <p class="section-label reveal">World-Class Gear</p>
+  <h2 class="section-title reveal">Equipment &<br><em>Outboard</em></h2>
+
+  <div class="equipment-grid">
+    <div class="equipment-card wide reveal">
+      <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1400&q=80" alt="Mixing Console" onerror="this.src='https://picsum.photos/seed/console/1400/400'">
+      <div class="equipment-card-content">
+        <div class="equipment-card-title">The Console</div>
+        <div class="equipment-card-sub">Precision monitoring and world-class outboard signal chain</div>
+      </div>
+    </div>
+    <div class="equipment-card reveal">
+      <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80" alt="Microphones" onerror="this.src='https://picsum.photos/seed/mics/800/400'">
+      <div class="equipment-card-content">
+        <div class="equipment-card-title">Microphone Collection</div>
+        <div class="equipment-card-sub">Vintage and modern mics for every source</div>
+      </div>
+    </div>
+    <div class="equipment-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Monitoring" onerror="this.src='https://picsum.photos/seed/monitors/800/400'">
+      <div class="equipment-card-content">
+        <div class="equipment-card-title">Studio Monitoring</div>
+        <div class="equipment-card-sub">Reference-grade monitoring environment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY MOSAIC -->
+<section class="gallery">
+  <p class="section-label reveal">The Studio</p>
+  <h2 class="section-title reveal">Inside<br><em>Salvation</em></h2>
+
+  <div class="gallery-grid">
+    <div class="g-photo tall reveal">
+      <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80" alt="" onerror="this.src='https://picsum.photos/seed/g1/600/900'">
+    </div>
+    <div class="g-photo reveal">
+      <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=600&q=80" alt="" onerror="this.src='https://picsum.photos/seed/g2/600/400'">
+    </div>
+    <div class="g-photo wide reveal">
+      <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=1000&q=80" alt="" onerror="this.src='https://picsum.photos/seed/g3/1000/400'">
+    </div>
+    <div class="g-photo reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=600&q=80" alt="" onerror="this.src='https://picsum.photos/seed/g4/600/400'">
+    </div>
+    <div class="g-photo reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=600&q=80" alt="" onerror="this.src='https://picsum.photos/seed/g5/600/400'">
+    </div>
+    <div class="g-photo reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80" alt="" onerror="this.src='https://picsum.photos/seed/g6/600/400'">
+    </div>
+    <div class="g-photo tall reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1487537708506-4c29b4d7f2f0?auto=format&fit=crop&w=600&q=80" alt="" onerror="this.src='https://picsum.photos/seed/g7/600/900'">
+    </div>
+    <div class="g-photo reveal reveal-delay-3">
+      <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80" alt="" onerror="this.src='https://picsum.photos/seed/g8/600/400'">
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <p class="section-label reveal">What We Offer</p>
+  <h2 class="section-title reveal">Full service,<br><em>your way</em></h2>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🎙️</div>
+      <div class="service-name">Recording</div>
+      <div class="service-desc">Full-service recording sessions with experienced engineers who know every inch of these rooms. From first take to final print.</div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">🎛️</div>
+      <div class="service-name">Mixing</div>
+      <div class="service-desc">Professional mixing in an acoustically calibrated environment. Premium outboard, reference monitoring, and engineers with ears you can trust.</div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">🎸</div>
+      <div class="service-name">Dry Hire</div>
+      <div class="service-desc">Bring your own team. Hire by the hour with access to all in-house equipment, gear, and facilities.</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">✍️</div>
+      <div class="service-name">Writing Sessions</div>
+      <div class="service-desc">Dedicated writing rooms for when inspiration needs space. Subterranean and Mezzanine creative suites available.</div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">🎚️</div>
+      <div class="service-name">Production</div>
+      <div class="service-desc">In-house producers and engineers available for collaborative production projects from demo to master.</div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">🍽️</div>
+      <div class="service-name">Catering</div>
+      <div class="service-desc">Long sessions deserve great food. In-house hospitality and catering so you never have to leave the zone.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING CTA with photo -->
+<section class="booking">
+  <div class="booking-photo">
+    <img src="https://images.unsplash.com/photo-1598653125014-47fcb30cef5d?auto=format&fit=crop&w=1800&q=80" alt="Book" onerror="this.src='https://picsum.photos/seed/booking-bg/1800/600'">
+  </div>
+  <div class="booking-content">
+    <p class="section-label">Ready to Record?</p>
+    <h2 class="section-title">Your best<br>session starts<br><em>here.</em></h2>
+    <p class="booking-sub">7 days a week. Engineers, producers, dry hire. Brighton's most dedicated recording environment.</p>
+    <div class="booking-actions">
+      <a href="#" class="btn-purple">Book a Session</a>
+      <a href="#" class="btn-ghost-purple">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">SALVATION<span>.</span></div>
+      <p class="footer-tagline">Brighton's premier recording studio.<br>Five years of craft. Every room built for sound.</p>
+    </div>
+    <div>
+      <div class="footer-col-head">Studio</div>
+      <ul class="footer-links">
+        <li><a href="#">Live Room</a></li>
+        <li><a href="#">Control Room</a></li>
+        <li><a href="#">Vocal Booth</a></li>
+        <li><a href="#">All Spaces</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Recording</a></li>
+        <li><a href="#">Mixing</a></li>
+        <li><a href="#">Dry Hire</a></li>
+        <li><a href="#">Writing Rooms</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#">Book a Session</a></li>
+        <li><a href="#">Get in Touch</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Brighton, UK</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Salvation Studios</span>
+    <span>SALVATIONSTUDIOS.CO.UK</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
