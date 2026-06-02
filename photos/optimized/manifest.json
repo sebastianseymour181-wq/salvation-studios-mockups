@@ -1,0 +1,258 @@
+[
+  {
+    "source": "photos/studio-dan-lex.jpg",
+    "optimized": "photos/optimized/studio-dan-lex.webp",
+    "source_bytes": 8946495,
+    "optimized_bytes": 122038,
+    "source_dimensions": "5861x3907",
+    "optimized_dimensions": "1600x1067"
+  },
+  {
+    "source": "photos/studio-img2297.png",
+    "optimized": "photos/optimized/studio-img2297.webp",
+    "source_bytes": 72843657,
+    "optimized_bytes": 134094,
+    "source_dimensions": "8192x5285",
+    "optimized_dimensions": "1600x1032"
+  },
+  {
+    "source": "photos/studio-img2311.png",
+    "optimized": "photos/optimized/studio-img2311.webp",
+    "source_bytes": 92006531,
+    "optimized_bytes": 144066,
+    "source_dimensions": "8192x5464",
+    "optimized_dimensions": "1600x1067"
+  },
+  {
+    "source": "photos/studio-img2825.png",
+    "optimized": "photos/optimized/studio-img2825.webp",
+    "source_bytes": 50168661,
+    "optimized_bytes": 82246,
+    "source_dimensions": "7926x5269",
+    "optimized_dimensions": "1600x1064"
+  },
+  {
+    "source": "photos/studio-img3084.png",
+    "optimized": "photos/optimized/studio-img3084.webp",
+    "source_bytes": 60014191,
+    "optimized_bytes": 246944,
+    "source_dimensions": "7398x5464",
+    "optimized_dimensions": "2200x1625"
+  },
+  {
+    "source": "photos/studio-img9386.jpg",
+    "optimized": "photos/optimized/studio-img9386.webp",
+    "source_bytes": 30924484,
+    "optimized_bytes": 216140,
+    "source_dimensions": "7789x5195",
+    "optimized_dimensions": "1600x1067"
+  },
+  {
+    "source": "photos/studio-img9396.jpg",
+    "optimized": "photos/optimized/studio-img9396.webp",
+    "source_bytes": 32998474,
+    "optimized_bytes": 168872,
+    "source_dimensions": "8192x5464",
+    "optimized_dimensions": "1600x1067"
+  },
+  {
+    "source": "photos/studio-img9409.jpg",
+    "optimized": "photos/optimized/studio-img9409.webp",
+    "source_bytes": 35087851,
+    "optimized_bytes": 140664,
+    "source_dimensions": "5464x8192",
+    "optimized_dimensions": "1600x2399"
+  },
+  {
+    "source": "photos/studio-s1.jpg",
+    "optimized": "photos/optimized/studio-s1.webp",
+    "source_bytes": 2906253,
+    "optimized_bytes": 184522,
+    "source_dimensions": "3000x1999",
+    "optimized_dimensions": "1600x1066"
+  },
+  {
+    "source": "photos/studio-s11.jpg",
+    "optimized": "photos/optimized/studio-s11.webp",
+    "source_bytes": 2814684,
+    "optimized_bytes": 363378,
+    "source_dimensions": "1998x3000",
+    "optimized_dimensions": "1600x2402"
+  },
+  {
+    "source": "photos/studio-s17.jpg",
+    "optimized": "photos/optimized/studio-s17.webp",
+    "source_bytes": 2497986,
+    "optimized_bytes": 529538,
+    "source_dimensions": "1998x3000",
+    "optimized_dimensions": "1600x2402"
+  },
+  {
+    "source": "photos/studio-s18.jpg",
+    "optimized": "photos/optimized/studio-s18.webp",
+    "source_bytes": 2800843,
+    "optimized_bytes": 284298,
+    "source_dimensions": "3000x1999",
+    "optimized_dimensions": "1600x1066"
+  },
+  {
+    "source": "photos/studio-s22.jpg",
+    "optimized": "photos/optimized/studio-s22.webp",
+    "source_bytes": 2590935,
+    "optimized_bytes": 163420,
+    "source_dimensions": "3000x1999",
+    "optimized_dimensions": "1600x1066"
+  },
+  {
+    "source": "photos/studio-s23.jpg",
+    "optimized": "photos/optimized/studio-s23.webp",
+    "source_bytes": 2079154,
+    "optimized_bytes": 102490,
+    "source_dimensions": "3000x1998",
+    "optimized_dimensions": "1600x1066"
+  },
+  {
+    "source": "photos/studio-s24.jpg",
+    "optimized": "photos/optimized/studio-s24.webp",
+    "source_bytes": 2399723,
+    "optimized_bytes": 133600,
+    "source_dimensions": "3000x1998",
+    "optimized_dimensions": "1600x1066"
+  },
+  {
+    "source": "photos/studio-s25.jpg",
+    "optimized": "photos/optimized/studio-s25.webp",
+    "source_bytes": 2431285,
+    "optimized_bytes": 218170,
+    "source_dimensions": "3000x1999",
+    "optimized_dimensions": "1600x1066"
+  },
+  {
+    "source": "photos/studio-s26.jpg",
+    "optimized": "photos/optimized/studio-s26.webp",
+    "source_bytes": 2398901,
+    "optimized_bytes": 310108,
+    "source_dimensions": "3000x1999",
+    "optimized_dimensions": "1600x1066"
+  },
+  {
+    "source": "photos/studio-s31.jpg",
+    "optimized": "photos/optimized/studio-s31.webp",
+    "source_bytes": 2273665,
+    "optimized_bytes": 149894,
+    "source_dimensions": "3000x1998",
+    "optimized_dimensions": "1600x1066"
+  },
+  {
+    "source": "photos/studio-s5.jpg",
+    "optimized": "photos/optimized/studio-s5.webp",
+    "source_bytes": 2551271,
+    "optimized_bytes": 155596,
+    "source_dimensions": "3000x2000",
+    "optimized_dimensions": "1600x1067"
+  },
+  {
+    "source": "photos/studio-s6.jpg",
+    "optimized": "photos/optimized/studio-s6.webp",
+    "source_bytes": 2240079,
+    "optimized_bytes": 110938,
+    "source_dimensions": "3000x2000",
+    "optimized_dimensions": "1600x1067"
+  },
+  {
+    "source": "photos/studio-s7.jpg",
+    "optimized": "photos/optimized/studio-s7.webp",
+    "source_bytes": 2208007,
+    "optimized_bytes": 647316,
+    "source_dimensions": "1999x3000",
+    "optimized_dimensions": "1600x2401"
+  },
+  {
+    "source": "photos/studio-sfpb.jpg",
+    "optimized": "photos/optimized/studio-sfpb.webp",
+    "source_bytes": 13659804,
+    "optimized_bytes": 382612,
+    "source_dimensions": "6240x4160",
+    "optimized_dimensions": "2200x1467"
+  },
+  {
+    "source": "photos/studio-shame.jpg",
+    "optimized": "photos/optimized/studio-shame.webp",
+    "source_bytes": 11093523,
+    "optimized_bytes": 170280,
+    "source_dimensions": "6240x4160",
+    "optimized_dimensions": "1600x1067"
+  },
+  {
+    "source": "photos/studio-stu.jpg",
+    "optimized": "photos/optimized/studio-stu.webp",
+    "source_bytes": 12893078,
+    "optimized_bytes": 344438,
+    "source_dimensions": "6240x4160",
+    "optimized_dimensions": "2200x1467"
+  },
+  {
+    "source": "photos/studio-u579.jpg",
+    "optimized": "photos/optimized/studio-u579.webp",
+    "source_bytes": 6930560,
+    "optimized_bytes": 156048,
+    "source_dimensions": "3375x2700",
+    "optimized_dimensions": "1600x1280"
+  },
+  {
+    "source": "photos/studio-u585.jpg",
+    "optimized": "photos/optimized/studio-u585.webp",
+    "source_bytes": 17570747,
+    "optimized_bytes": 187976,
+    "source_dimensions": "4800x2700",
+    "optimized_dimensions": "1600x900"
+  },
+  {
+    "source": "photos/studio-u590.jpg",
+    "optimized": "photos/optimized/studio-u590.webp",
+    "source_bytes": 24987244,
+    "optimized_bytes": 265544,
+    "source_dimensions": "4800x2700",
+    "optimized_dimensions": "1600x900"
+  },
+  {
+    "source": "photos/studio-u591.jpg",
+    "optimized": "photos/optimized/studio-u591.webp",
+    "source_bytes": 25279814,
+    "optimized_bytes": 181358,
+    "source_dimensions": "4800x2700",
+    "optimized_dimensions": "1600x900"
+  },
+  {
+    "source": "photos/studio-u592.jpg",
+    "optimized": "photos/optimized/studio-u592.webp",
+    "source_bytes": 26101439,
+    "optimized_bytes": 186000,
+    "source_dimensions": "4800x2700",
+    "optimized_dimensions": "1600x900"
+  },
+  {
+    "source": "photos/studio-u593.jpg",
+    "optimized": "photos/optimized/studio-u593.webp",
+    "source_bytes": 14847305,
+    "optimized_bytes": 170332,
+    "source_dimensions": "4800x2700",
+    "optimized_dimensions": "1600x900"
+  },
+  {
+    "source": "photos/studio-u604.jpg",
+    "optimized": "photos/optimized/studio-u604.webp",
+    "source_bytes": 31861506,
+    "optimized_bytes": 135018,
+    "source_dimensions": "6575x2700",
+    "optimized_dimensions": "1600x657"
+  },
+  {
+    "source": "photos/studio-wc.jpg",
+    "optimized": "photos/optimized/studio-wc.webp",
+    "source_bytes": 11828768,
+    "optimized_bytes": 250462,
+    "source_dimensions": "6240x4160",
+    "optimized_dimensions": "2200x1467"
+  }
+]
