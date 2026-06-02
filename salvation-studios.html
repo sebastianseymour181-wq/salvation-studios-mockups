@@ -920,6 +920,13 @@ footer {
   .testi-card { width: 280px; }
 }
 </style>
+<style>
+/* GSAP motion design — kill conflicting CSS animations */
+html      { scroll-behavior: auto; }
+.hero-img { animation: none; }
+.hero-tag { animation: none; opacity: 0; }
+.hero-h1  { animation: none; opacity: 0; }
+</style>
 </head>
 <body>
 
@@ -1669,7 +1676,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       mobileMenu.classList.remove('open');
       hamburger.classList.remove('open');
       document.body.style.overflow = '';
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.lenisInstance) {
+        window.lenisInstance.scrollTo(target, { offset: 0 });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   });
 });
@@ -1712,17 +1723,6 @@ addTilt('.writing-card', 7);
 addTilt('.in-room-photo', 5);
 addTilt('.live-room-feature', 3);
 
-// ── Subtle parallax on hero image ──
-const heroImg = document.querySelector('.hero-img');
-if (heroImg) {
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    if (y < window.innerHeight) {
-      heroImg.style.transform = `scale(1) translateY(${y * 0.25}px)`;
-    }
-  }, { passive: true });
-}
-
 // ── 3D mouse-tracking depth on gallery ──
 const gallerySection = document.querySelector('.gallery-mosaic');
 if (gallerySection) {
@@ -1740,5 +1740,11 @@ if (gallerySection) {
   });
 }
 </script>
+<!-- Lenis smooth scroll -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<!-- GSAP core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<!-- ScrollTrigger plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </body>
 </html>
