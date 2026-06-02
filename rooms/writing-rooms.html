@@ -33,9 +33,9 @@
     <li><a href="../index.html#testimonials">Artists</a></li>
   </ul>
   <a href="../contact.html" class="nav-cta">Book a Session</a>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site navigation">
   <a href="../index.html#rooms">Studios</a>
   <a href="../equipment.html">Equipment</a>
   <a href="../gallery.html">Gallery</a>
@@ -110,7 +110,7 @@
   <div class="footer-top">
     <div>
       <div class="footer-logo">Salvation<span>.</span></div>
-      <p class="footer-tagline">Brighton's premier recording studio.<br>Built with obsession. Designed for sound.<br>A five-year labour of love.</p>
+      <p class="footer-tagline">World-class recording, mixing and writing rooms in Brighton.<br>Built inside a restored 1910 hall moments from the seafront.</p>
     </div>
     <div>
       <div class="footer-head">Studio</div>
@@ -152,28 +152,55 @@
   </div>
 </footer>
 
-<script>
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-document.querySelectorAll('.mobile-menu a').forEach(a => {
-  a.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-});
-</script>
 
-</body>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  const nav=document.getElementById('nav');
+  if(nav) window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+  const hamburger=document.getElementById('hamburger');
+  const mobileMenu=document.getElementById('mobileMenu');
+  let lastFocus=null;
+  function setMenu(open){
+    if(!hamburger||!mobileMenu) return;
+    if(open) lastFocus=document.activeElement;
+    mobileMenu.classList.toggle('open',open);
+    hamburger.classList.toggle('open',open);
+    hamburger.setAttribute('aria-expanded',open?'true':'false');
+    document.body.style.overflow=open?'hidden':'';
+    if(open){ const first=mobileMenu.querySelector('a'); if(first) first.focus({preventScroll:true}); }
+    else if(lastFocus&&typeof lastFocus.focus==='function') lastFocus.focus({preventScroll:true});
+  }
+  if(hamburger&&mobileMenu){
+    hamburger.addEventListener('click',()=>setMenu(!mobileMenu.classList.contains('open')));
+    mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') setMenu(false); });
+  }
+  const form=document.querySelector('.enquiry-form');
+  if(form){
+    const status=form.querySelector('.form-status');
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const data=new FormData(form);
+      const lines=[
+        'Name: '+(data.get('name')||''),
+        'Artist / company: '+(data.get('artist_company')||''),
+        'Email: '+(data.get('email')||''),
+        'Phone: '+(data.get('phone')||''),
+        'Session type: '+(data.get('session_type')||''),
+        'Preferred dates: '+(data.get('dates')||''),
+        'People / rooms / support: '+(data.get('requirements')||''),
+        '',
+        'Project brief:',
+        data.get('message')||''
+      ];
+      const href='mailto:info@salvationstudios.co.uk?subject='+encodeURIComponent('Studio session enquiry - Salvation Studios')+'&body='+encodeURIComponent(lines.join('\n'));
+      if(status){ status.hidden=false; status.textContent='Opening your email client with the session brief. If it does not open, email info@salvationstudios.co.uk with these details.'; }
+      window.location.href=href;
+    });
+  }
+})();
+</script></body>
 </html>

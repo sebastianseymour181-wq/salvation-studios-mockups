@@ -33,9 +33,9 @@
     <li><a href="../index.html#testimonials">Artists</a></li>
   </ul>
   <a href="../contact.html" class="nav-cta">Book a Session</a>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site navigation">
   <a href="../index.html#rooms">Studios</a>
   <a href="../equipment.html">Equipment</a>
   <a href="../gallery.html">Gallery</a>
@@ -50,7 +50,7 @@
   <div class="page-hero-content">
     <span class="page-eyebrow">01 — Primary Tracking Space</span>
     <h1 class="page-title">The Live <em>Room</em></h1>
-    <p class="page-subtitle">The finest tracking room in the South of England. A 13-metre vaulted ceiling, natural light, and John Flynn acoustics.</p>
+    <p class="page-subtitle">A world-class tracking room with a 13-metre vaulted ceiling, natural light and John Flynn acoustics.</p>
   </div>
 </section>
 
@@ -60,7 +60,7 @@
       <span class="label">The Space</span>
       <h2 class="h2-serif">Built for the <em>ages</em></h2>
       <p class="body-text">Salvation Studios' Live Room is the result of five years of renovation — a former Salvation Army concert hall transformed into a world-class recording facility. World-renowned acoustician and architect John Flynn was given carte blanche to design every element of the space, resulting in a room with extraordinary acoustic character. A 13-metre vaulted ceiling provides natural air and reverb bloom, a fully floated floor system eliminates external vibration, and retractable glass-fronted isolation booths allow for simultaneous tracking.</p>
-      <p class="body-text">Natural light floods the room through the original stained-glass window. There is simply nowhere else like it in the South of England — and very few rooms anywhere in the world that match it for character, size, and acoustic quality.</p>
+      <p class="body-text">Natural light floods the room through the original stained-glass window. Its scale, floated floor, retractable isolation booths and John Flynn acoustic design give artists a distinctive Brighton tracking space with real character.</p>
       <div class="stat-row four-col">
         <div class="stat-cell"><span class="stat-n">9.4m</span><span class="stat-l">Length</span></div>
         <div class="stat-cell"><span class="stat-n">8.2m</span><span class="stat-l">Width</span></div>
@@ -116,7 +116,7 @@
 <section class="content-section bg-void reveal"><span class="label">Source-backed session depth</span><h2 class="h2-serif">Best for bands, drums, strings and filmable live takes.</h2><div class="card-grid"><div class="feature-card"><div class="card-body"><h3 class="card-title">Use cases</h3><p class="card-desc">Full-band tracking, drum sessions, string ensembles, piano/live-vocal sessions, filmed performances and writing-camp centrepiece rooms.</p></div></div><div class="feature-card"><div class="card-body"><h3 class="card-title">Related spaces</h3><p class="card-desc">Two retractable isolation booths and an amp booth make simultaneous tracking practical while keeping visual connection across the room.</p></div></div><div class="feature-card"><div class="card-body"><h3 class="card-title">Relevant gear</h3><p class="card-desc">Pair the room with Salvation’s drum, microphone, backline and outboard inventory, including Sony C-800G, Coles 4038s, U87ais and classic amps.</p></div></div></div></section>
 <section class="cta-band">
   <h2 class="h2-serif">Book the Live Room</h2>
-  <p class="body-text">Sessions available seven days a week. In-house engineers and producers. Get in touch to discuss your session.</p>
+  <p class="body-text">Session availability, producer/engineer support and practical requirements are confirmed by enquiry. Get in touch to discuss your session.</p>
   <div class="btn-row">
     <a href="../contact.html" class="btn-primary">Book a Session</a>
     <a href="../equipment.html" class="btn-outline">Explore Equipment</a>
@@ -127,7 +127,7 @@
   <div class="footer-top">
     <div>
       <div class="footer-logo">Salvation<span>.</span></div>
-      <p class="footer-tagline">Brighton's premier recording studio.<br>Built with obsession. Designed for sound.<br>A five-year labour of love.</p>
+      <p class="footer-tagline">World-class recording, mixing and writing rooms in Brighton.<br>Built inside a restored 1910 hall moments from the seafront.</p>
     </div>
     <div>
       <div class="footer-head">Studio</div>
@@ -169,28 +169,55 @@
   </div>
 </footer>
 
-<script>
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-document.querySelectorAll('.mobile-menu a').forEach(a => {
-  a.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-});
-</script>
 
-</body>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  const nav=document.getElementById('nav');
+  if(nav) window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+  const hamburger=document.getElementById('hamburger');
+  const mobileMenu=document.getElementById('mobileMenu');
+  let lastFocus=null;
+  function setMenu(open){
+    if(!hamburger||!mobileMenu) return;
+    if(open) lastFocus=document.activeElement;
+    mobileMenu.classList.toggle('open',open);
+    hamburger.classList.toggle('open',open);
+    hamburger.setAttribute('aria-expanded',open?'true':'false');
+    document.body.style.overflow=open?'hidden':'';
+    if(open){ const first=mobileMenu.querySelector('a'); if(first) first.focus({preventScroll:true}); }
+    else if(lastFocus&&typeof lastFocus.focus==='function') lastFocus.focus({preventScroll:true});
+  }
+  if(hamburger&&mobileMenu){
+    hamburger.addEventListener('click',()=>setMenu(!mobileMenu.classList.contains('open')));
+    mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') setMenu(false); });
+  }
+  const form=document.querySelector('.enquiry-form');
+  if(form){
+    const status=form.querySelector('.form-status');
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const data=new FormData(form);
+      const lines=[
+        'Name: '+(data.get('name')||''),
+        'Artist / company: '+(data.get('artist_company')||''),
+        'Email: '+(data.get('email')||''),
+        'Phone: '+(data.get('phone')||''),
+        'Session type: '+(data.get('session_type')||''),
+        'Preferred dates: '+(data.get('dates')||''),
+        'People / rooms / support: '+(data.get('requirements')||''),
+        '',
+        'Project brief:',
+        data.get('message')||''
+      ];
+      const href='mailto:info@salvationstudios.co.uk?subject='+encodeURIComponent('Studio session enquiry - Salvation Studios')+'&body='+encodeURIComponent(lines.join('\n'));
+      if(status){ status.hidden=false; status.textContent='Opening your email client with the session brief. If it does not open, email info@salvationstudios.co.uk with these details.'; }
+      window.location.href=href;
+    });
+  }
+})();
+</script></body>
 </html>

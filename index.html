@@ -57,6 +57,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-bottom: 1px solid var(--border);
 }
 .nav-logo { display: flex; align-items: center; }
+.nav-logo a { display: flex; align-items: center; text-decoration: none; }
 .nav-logo img { height: 52px; width: auto; object-fit: contain; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a {
@@ -125,16 +126,18 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   font-size: clamp(50px, 7.5vw, 120px);
   font-weight: 300; line-height: 1.15;
   color: var(--white); letter-spacing: -0.02em;
-  margin-bottom: 36px;
+  margin: 0 auto 28px;
+  max-width: 980px;
   text-align: center;
   opacity: 0; animation: fadeUp 0.9s 0.6s forwards;
 }
 .hero-salvation-wrap {
   display: inline-block;
   overflow: hidden;
-  width: clamp(260px, 42vw, 620px);
-  height: clamp(120px, 19vw, 280px);
-  margin: -4px 0 -60px;
+  width: clamp(180px, 24vw, 360px);
+  height: clamp(82px, 11vw, 160px);
+  margin: 0 auto -18px;
+  opacity: .92;
 }
 .hero-salvation-img {
   width: 100%;
@@ -149,7 +152,10 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .hero-desc {
   font-size: 15px; line-height: 1.85; color: rgba(196,181,253,0.65);
-  max-width: 440px;
+  max-width: 680px;
+  margin: 0 auto 28px;
+  text-align: center;
+  opacity: 0; animation: fadeUp 0.8s 0.75s forwards;
 }
 .hero-desc strong { color: var(--pale); font-weight: 400; }
 .hero-book-btn {
@@ -651,10 +657,11 @@ footer {
 
 /* ─── REVEAL ANIMATIONS ─── */
 .reveal {
-  opacity: 0; transform: translateY(32px);
+  opacity: 1; transform: none;
   transition: opacity 0.75s ease, transform 0.75s ease;
 }
-.reveal.visible { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(32px); }
+.js .reveal.visible { opacity: 1; transform: none; }
 .reveal-d1 { transition-delay: 0.1s; }
 .reveal-d2 { transition-delay: 0.2s; }
 .reveal-d3 { transition-delay: 0.3s; }
@@ -747,6 +754,19 @@ footer {
 }
 .neve-facts > div:hover .neve-fact-val {
   transform: perspective(300px) translateZ(12px) translateY(-4px);
+}
+
+
+/* Accessibility and fail-open polish */
+.nav a:focus-visible, .nav-hamburger:focus-visible, .btn-primary:focus-visible, .btn-outline:focus-visible, .mobile-menu a:focus-visible {
+  outline: 2px solid var(--glow);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.001ms !important; }
+  .ticker, .testi-track { animation: none !important; transform: none !important; }
+  .room-card:hover, .svc-card:hover, .testi-card:hover, .gp:hover, .wp-main, .wp-accent, .stat-cell:hover, .neve-fact-val { transform: none !important; }
 }
 
 /* ─── HAMBURGER / MOBILE NAV ─── */
@@ -947,7 +967,7 @@ html      { scroll-behavior: auto; }
 
 <!-- ─── NAV ─── -->
 <nav class="nav" id="nav">
-  <div class="nav-logo"><img src="logo.png" alt="Salvation Music Studios" / width="928" height="638" decoding="async" loading="eager"></div>
+  <div class="nav-logo"><a href="index.html" aria-label="Salvation Studios home"><img src="logo.png" alt="Salvation Music Studios" width="928" height="638" decoding="async" loading="eager"></a></div>
   <ul class="nav-links">
     <li><a href="#rooms">Studios</a></li>
     <li><a href="equipment.html">Equipment</a></li>
@@ -956,13 +976,13 @@ html      { scroll-behavior: auto; }
     <li><a href="#testimonials">Artists</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Book a Session</a>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <!-- Mobile menu -->
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site navigation">
   <a href="#rooms" class="mobile-link">Studios</a>
   <a href="equipment.html" class="mobile-link">Equipment</a>
   <a href="gallery.html" class="mobile-link">Gallery</a>
@@ -982,10 +1002,9 @@ html      { scroll-behavior: auto; }
 
   <div class="hero-content">
     <div class="hero-tag">Brighton, UK &nbsp;—&nbsp; Est. 2019</div>
-    <h1 class="hero-h1">
-      Welcome to<br>
-      <span class="hero-salvation-wrap"><img src="salvation-script.png" alt="Salvation" class="hero-salvation-img" width="2084" height="2084" decoding="async" loading="eager"></span>
-    </h1>
+    <div class="hero-salvation-wrap" aria-hidden="true"><img src="salvation-script.png" alt="" class="hero-salvation-img" width="2084" height="2084" decoding="async" loading="eager"></div>
+    <h1 class="hero-h1">World-class recording, mixing and writing rooms in Brighton</h1>
+    <p class="hero-desc">A restored 1910 hall with a 13m live room, restored 1973 Neve 8068, ATC monitoring and dedicated writing spaces.</p>
     <a href="contact.html" class="btn-primary hero-book-btn">Book a Session</a>
     <div class="hero-btns">
       <a href="#rooms" class="btn-outline">Explore the Rooms</a>
@@ -1164,7 +1183,7 @@ html      { scroll-behavior: auto; }
       <div class="writing-card-info">
         <div class="room-num">WR — 01</div>
         <div class="writing-card-name">Subterranean Room</div>
-        <p class="writing-card-desc">Packed with vintage synths, keys, and production gear. A creative world unto itself.</p>
+        <p class="writing-card-desc">A dedicated writing space that can be configured for one-room sessions or larger writing-camp workflows, with technical support available during the booking.</p>
       </div>
     </a>
     <a href="rooms/writing-rooms.html" class="writing-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
@@ -1551,7 +1570,7 @@ html      { scroll-behavior: auto; }
       </div>
       <div class="svc-body">
         <div class="svc-name">Recording</div>
-        <p class="svc-desc">Full-service recording sessions with in-house producers and engineers. From first note to final print — in rooms that have been trusted by the world's leading artists.</p>
+        <p class="svc-desc">Recording sessions can be planned around the live room, control room, booths and producer/engineer support you need. Send the team a brief so the right setup can be confirmed.</p>
       </div>
     </a>
     <a href="services/mixing.html" class="svc-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
@@ -1560,7 +1579,7 @@ html      { scroll-behavior: auto; }
       </div>
       <div class="svc-body">
         <div class="svc-name">Mixing</div>
-        <p class="svc-desc">Mix on our fully restored 1973 Neve 8068 in a John Flynn–designed room with ATC soffit-mounted monitors. The finest mixing environment in the South of England.</p>
+        <p class="svc-desc">Mix on the restored 1973 Neve 8068 in a John Flynn–designed control room with ATC soffit-mounted monitoring and a source-backed selection of outboard and effects.</p>
       </div>
     </a>
     <a href="services/dry-hire.html" class="svc-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
@@ -1569,7 +1588,7 @@ html      { scroll-behavior: auto; }
       </div>
       <div class="svc-body">
         <div class="svc-name">Dry Hire</div>
-        <p class="svc-desc">Bring your own team and book our rooms by the hour with full access to all in-house equipment and facilities. Flexible and transparent.</p>
+        <p class="svc-desc">Bring your own team where appropriate and enquire for dry-hire availability. Salvation states that a studio assistant is provided to help sessions run smoothly.</p>
       </div>
     </a>
     <a href="rooms/writing-rooms.html" class="svc-card reveal" style="text-decoration:none;color:inherit;">
@@ -1578,7 +1597,7 @@ html      { scroll-behavior: auto; }
       </div>
       <div class="svc-body">
         <div class="svc-name">Writing Rooms</div>
-        <p class="svc-desc">Two dedicated creative suites — the Subterranean Room and the Mezzanine Room — stocked with vintage synths, keys, and production gear. Perfect for writing camps and sessions.</p>
+        <p class="svc-desc">Writing spaces can be configured from one-room sessions to whole-complex writing camps, with Apollo-interface, MIDI-keyboard and Genelec-monitor setups described on the current site.</p>
       </div>
     </a>
     <a href="services/lighting.html" class="svc-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
@@ -1595,8 +1614,8 @@ html      { scroll-behavior: auto; }
         <img src="photos/optimized/studio-shame.webp" alt="Catering and Hospitality" width="1600" height="1067" decoding="async" loading="lazy">
       </div>
       <div class="svc-body">
-        <div class="svc-name">Catering & Hospitality</div>
-        <p class="svc-desc">Long sessions demand great food. Our in-house catering and hospitality service keeps you fuelled and in the zone from start to finish.</p>
+        <div class="svc-name">Catering</div>
+        <p class="svc-desc">Catering can be arranged project-by-project, with the current site describing locally prepared options from simple, hearty food through to gourmet quality.</p>
       </div>
     </a>
   </div>
@@ -1625,7 +1644,7 @@ html      { scroll-behavior: auto; }
     <h2 class="booking-h">
       Let's make<br>something<br><em>extraordinary</em>
     </h2>
-    <p class="booking-body">Sessions available seven days a week. In-house engineers, producers, mixing services, and dry hire options. Brighton's most serious recording environment.</p>
+    <p class="booking-body">Session availability, producer/engineer support, mixing, dry hire and writing-room options are confirmed by enquiry. Brighton's seafront is waiting.</p>
     <div class="booking-btns">
       <a href="contact.html" class="btn-primary">Get in Touch</a>
       <a href="recording-studio-brighton.html" class="btn-outline">Explore the Studio</a>
@@ -1638,7 +1657,7 @@ html      { scroll-behavior: auto; }
   <div class="footer-top">
     <div>
       <div class="footer-logo">Salvation<span>.</span></div>
-      <p class="footer-tagline">Brighton's premier recording studio.<br>Built with obsession. Designed for sound.<br>A five-year labour of love.</p>
+      <p class="footer-tagline">World-class recording, mixing and writing rooms in Brighton.<br>Built inside a restored 1910 hall moments from the seafront.</p>
     </div>
     <div>
       <div class="footer-head">Studio</div>
@@ -1681,6 +1700,7 @@ html      { scroll-behavior: auto; }
 </footer>
 
 <script>
+document.documentElement.classList.add('js');
 // ── Nav scroll state ──
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -1702,9 +1722,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) {
       e.preventDefault();
       // close mobile menu if open
-      mobileMenu.classList.remove('open');
-      hamburger.classList.remove('open');
-      document.body.style.overflow = '';
+      setMobileMenu(false);
       if (window.lenisInstance) {
         window.lenisInstance.scrollTo(target, { offset: 0 });
       } else {
@@ -1717,11 +1735,26 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ── Hamburger ──
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
+let lastFocusedBeforeMenu = null;
+function setMobileMenu(open) {
+  if (!hamburger || !mobileMenu) return;
+  if (open) lastFocusedBeforeMenu = document.activeElement;
+  mobileMenu.classList.toggle('open', open);
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.style.overflow = open ? 'hidden' : '';
+  if (open) {
+    const firstLink = mobileMenu.querySelector('a');
+    if (firstLink) firstLink.focus({ preventScroll: true });
+  } else if (lastFocusedBeforeMenu && typeof lastFocusedBeforeMenu.focus === 'function') {
+    lastFocusedBeforeMenu.focus({ preventScroll: true });
+  }
+}
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => setMobileMenu(!mobileMenu.classList.contains('open')));
+  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMobileMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMobileMenu(false); });
+}
 
 // ── 3D card tilt on mouse move ──
 const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
@@ -1777,6 +1810,10 @@ if (gallerySection) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function () {
+  if (!window.gsap || !window.ScrollTrigger) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    return;
+  }
   gsap.registerPlugin(ScrollTrigger);
 
   // Skip all animations if user prefers reduced motion
@@ -1812,22 +1849,17 @@ if (gallerySection) {
   // ─── HERO INITIAL STATES ────────────────────────────────────
   gsap.set('.nav', { opacity: 0 });
   gsap.set('.hero-h1', { opacity: 1 });
-  gsap.set('.hero-book-btn, .hero-btns', { opacity: 0, y: 28 });
+  gsap.set('.hero-desc, .hero-book-btn, .hero-btns', { opacity: 0, y: 28 });
 
-  // Split "Welcome to" text node into its own span so it animates separately from the logo
-  const h1 = document.querySelector('.hero-h1');
-  const firstText = [...h1.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
-  const welcomeSpan = document.createElement('span');
-  welcomeSpan.textContent = firstText.textContent;
-  h1.replaceChild(welcomeSpan, firstText);
 
   // ─── HERO LOAD SEQUENCE ─────────────────────────────────────
   const heroTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
   heroTl
     .to('.nav',                   { opacity: 1, duration: 0.6 })
     .from('.hero-tag',            { y: 28, opacity: 0, duration: 0.8 }, 0.2)
-    .from(welcomeSpan,            { y: 28, opacity: 0, duration: 0.8 }, 0.4)
-    .from('.hero-salvation-wrap', { scale: 0.9, opacity: 0, duration: 1.0, ease: 'power3.out' }, 0.6)
+    .from('.hero-salvation-wrap', { y: 18, scale: 0.96, opacity: 0, duration: 0.8, ease: 'power3.out' }, 0.3)
+    .from('.hero-h1',             { y: 28, opacity: 0, duration: 0.8 }, 0.45)
+    .to('.hero-desc',             { opacity: 1, y: 0, duration: 0.6 }, 0.85)
     .to('.hero-book-btn',         { opacity: 1, y: 0, duration: 0.6 }, 1.0)
     .to('.hero-btns',             { opacity: 1, y: 0, duration: 0.6 }, 1.1);
 

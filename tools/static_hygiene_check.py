@@ -88,8 +88,8 @@ def main() -> int:
             failures.append(f"placeholder href remains in {relative}")
         tel_links = re.findall(r"href=[\"'](tel:[^\"']+)[\"']", text)
         for tel in tel_links:
-            if "*" in tel:
-                failures.append(f"masked tel link remains in {relative}: {tel}")
+            if "*" in tel or not re.fullmatch(r"tel:\+?[0-9]+", tel):
+                failures.append(f"invalid or masked tel link remains in {relative}: {tel}")
             elif tel != EXPECTED_TEL:
                 failures.append(f"unexpected tel link in {relative}: {tel}")
         if relative in NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*nofollow[\"']", text, re.I):
