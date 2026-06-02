@@ -1,5 +1,54 @@
 {
   "buildCommand": null,
   "outputDirectory": ".",
-  "framework": null
+  "framework": null,
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/salvation-studios",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/recording-studio",
+      "destination": "/recording-studio-brighton",
+      "permanent": true
+    },
+    {
+      "source": "/live-room",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
+      "source": "/control-room",
+      "destination": "/rooms/control-room",
+      "permanent": true
+    },
+    {
+      "source": "/writing-rooms",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/what-the-clients-say",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/contactus",
+      "destination": "/contact",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    }
+  ]
 }

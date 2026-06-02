@@ -176,3 +176,12 @@ footer { background: #040008; border-top: 1px solid var(--border); padding: 80px
   .gallery-grid { grid-template-columns: 1fr; }
   .stat-row.four-col { grid-template-columns: repeat(2,1fr); }
 }
+
+
+/* SEO migration additions */
+a { color: inherit; }
+.body-text a { color: var(--pale); text-decoration-color: rgba(192,132,252,.45); }
+.nav a:focus-visible, .btn-primary:focus-visible, .btn-outline:focus-visible, .mobile-menu a:focus-visible { outline: 2px solid var(--glow); outline-offset: 4px; }
+.full-inventory { align-items: start; }
+.full-inventory .gear-section { break-inside: avoid; margin-bottom: 40px; }
+@media (max-width: 768px) { .full-inventory { grid-template-columns: 1fr; } }
