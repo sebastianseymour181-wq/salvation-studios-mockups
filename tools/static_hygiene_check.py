@@ -86,8 +86,12 @@ def main() -> int:
         text = path.read_text(errors="ignore")
         if re.search(r"href=[\"']#[\"']", text):
             failures.append(f"placeholder href remains in {relative}")
-        if re.search(r"tel:(?!\+443334445508)", text):
-            failures.append(f"unexpected tel link in {relative}")
+        tel_links = re.findall(r"href=[\"'](tel:[^\"']+)[\"']", text)
+        for tel in tel_links:
+            if "*" in tel:
+                failures.append(f"masked tel link remains in {relative}: {tel}")
+            elif tel != EXPECTED_TEL:
+                failures.append(f"unexpected tel link in {relative}: {tel}")
         if relative in NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*nofollow[\"']", text, re.I):
             failures.append(f"noindex meta missing from non-production page {relative}")
 
@@ -97,7 +101,13 @@ def main() -> int:
         failures.append(f"sitemap mismatch missing={sorted(expected_locs-locs)} extra={sorted(locs-expected_locs)}")
 
     redirect_sources = {r.get("source") for r in load_redirects()}
-    for source in ["/salvation-studios", "/salvation-studios.html", "/concept-index", "/concept-index.html"]:
+    required_redirects = {
+        "/salvation-studios", "/salvation-studios.html", "/concept-index", "/concept-index.html",
+        "/vocal-booth", "/isolation-booth-1", "/isolation-booth-2", "/amp-booth",
+        "/dry-hire", "/lighting", "/catering",
+        "/microphones", "/outboard", "/drums", "/guitars", "/amps", "/basses",
+    }
+    for source in sorted(required_redirects):
         if source not in redirect_sources:
             failures.append(f"missing redirect for {source}")
 

@@ -40,6 +40,71 @@
       "permanent": true
     },
     {
+      "source": "/vocal-booth",
+      "destination": "/rooms/vocal-booth",
+      "permanent": true
+    },
+    {
+      "source": "/isolation-booth-1",
+      "destination": "/rooms/iso-booths",
+      "permanent": true
+    },
+    {
+      "source": "/isolation-booth-2",
+      "destination": "/rooms/iso-booths",
+      "permanent": true
+    },
+    {
+      "source": "/amp-booth",
+      "destination": "/rooms/iso-booths",
+      "permanent": true
+    },
+    {
+      "source": "/dry-hire",
+      "destination": "/services/dry-hire",
+      "permanent": true
+    },
+    {
+      "source": "/lighting",
+      "destination": "/services/lighting",
+      "permanent": true
+    },
+    {
+      "source": "/catering",
+      "destination": "/services/catering",
+      "permanent": true
+    },
+    {
+      "source": "/microphones",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/outboard",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/drums",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/guitars",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/amps",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/basses",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
       "source": "/salvation-studios.html",
       "destination": "/",
       "permanent": false
