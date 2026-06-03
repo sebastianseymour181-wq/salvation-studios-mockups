@@ -60,7 +60,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .nav-logo { display: flex; align-items: center; }
 .nav-logo a { display: flex; align-items: center; text-decoration: none; }
-.nav-logo img { height: 54px; width: auto; object-fit: contain; filter: drop-shadow(0 0 16px rgba(192,132,252,0.35)); }
+.nav-logo img { height: 54px; width: auto; object-fit: contain; background: transparent; filter: drop-shadow(0 0 16px rgba(192,132,252,0.32)); }
 .nav.scrolled .nav-logo img { height: 48px; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a {
@@ -70,16 +70,22 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .nav-links a:hover { color: var(--glow); }
 .nav-cta {
-  background: var(--purple); color: var(--white);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 28%, rgba(0,0,0,0.18) 100%),
+    linear-gradient(135deg, #5b21b6 0%, #7c3aed 48%, #4c168e 100%);
+  color: var(--white);
   font-family: 'Bell MT', 'Bell', Georgia, serif; font-size: 13px; font-weight: 400;
   letter-spacing: 0.05em; padding: 11px 26px; border-radius: 6px;
-  border: none; cursor: pointer; text-decoration: none; display: inline-block;
+  border: 1px solid rgba(216,180,254,0.34); cursor: pointer; text-decoration: none; display: inline-block;
   transition: all 0.3s;
   position: relative; overflow: hidden; isolation: isolate;
+  box-shadow: 0 10px 30px rgba(40, 8, 76, 0.24), inset 0 1px 0 rgba(255,255,255,0.16);
 }
 .nav-cta:hover {
-  background: var(--violet);
-  box-shadow: 0 0 28px rgba(var(--glow-rgb), 0.4);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.08) 0%, transparent 28%, rgba(0,0,0,0.16) 100%),
+    linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #5519a3 100%);
+  box-shadow: 0 12px 34px rgba(var(--glow-rgb), 0.28), inset 0 1px 0 rgba(255,255,255,0.18);
   transform: translateY(-1px);
 }
 
@@ -197,17 +203,22 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .hero-btns { display: flex; gap: 14px; flex-shrink: 0; justify-content: center; }
 .btn-primary {
-  background: var(--purple); color: var(--white);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 30%, rgba(0,0,0,0.2) 100%),
+    linear-gradient(135deg, #5b21b6 0%, #7c3aed 48%, #4c168e 100%);
+  color: var(--white);
   font-family: 'Bell MT', 'Bell', Georgia, serif; font-size: 22px; font-weight: 400;
   letter-spacing: 0.05em; padding: 28px 72px; border-radius: 8px;
-  text-decoration: none; transition: all 0.3s; border: 1px solid var(--purple); cursor: pointer;
+  text-decoration: none; transition: all 0.3s; border: 1px solid rgba(216,180,254,0.36); cursor: pointer;
   display: inline-block; position: relative; overflow: hidden; isolation: isolate;
-  box-shadow: 0 4px 32px rgba(var(--glow-rgb), 0.35);
+  box-shadow: 0 18px 54px rgba(42, 12, 82, 0.42), inset 0 1px 0 rgba(255,255,255,0.18);
 }
 .btn-primary:hover {
-  background: var(--violet);
-  border-color: var(--violet);
-  box-shadow: 0 8px 48px rgba(var(--glow-rgb), 0.6);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.08) 0%, transparent 30%, rgba(0,0,0,0.17) 100%),
+    linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #5519a3 100%);
+  border-color: rgba(233,213,255,0.48);
+  box-shadow: 0 20px 60px rgba(var(--glow-rgb), 0.34), inset 0 1px 0 rgba(255,255,255,0.2);
   transform: translateY(-3px) scale(1.02);
 }
 .btn-outline {
@@ -222,15 +233,24 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .btn-primary::before, .btn-outline::before, .nav-cta::before, .mobile-cta::before {
   content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
   background:
-    radial-gradient(circle at 18% 22%, rgba(255,255,255,0.18) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 76% 64%, rgba(255,255,255,0.12) 0 1px, transparent 1.5px),
-    linear-gradient(135deg, rgba(255,255,255,0.13), transparent 38%, rgba(0,0,0,0.16) 100%);
-  background-size: 14px 14px, 18px 18px, 100% 100%;
-  opacity: .28;
-  mix-blend-mode: screen;
+    repeating-linear-gradient(105deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 9px),
+    radial-gradient(circle at 22% 18%, rgba(255,255,255,0.16), transparent 22%),
+    radial-gradient(circle at 82% 78%, rgba(255,255,255,0.08), transparent 24%),
+    linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%, rgba(0,0,0,0.18) 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  opacity: .34;
+  mix-blend-mode: soft-light;
+}
+.hero-book-btn::after, .nav-cta::after, .mobile-cta::after {
+  content: ''; position: absolute; inset: 1px; border-radius: inherit; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.18), transparent 36%, rgba(0,0,0,0.14) 100%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 5px);
+  opacity: .36;
+  mix-blend-mode: overlay;
 }
 .btn-outline::before { opacity: .2; }
-.btn-primary:hover::before, .btn-outline:hover::before, .nav-cta:hover::before, .mobile-cta:hover::before { opacity: .38; }
+.btn-primary:hover::before, .btn-outline:hover::before, .nav-cta:hover::before, .mobile-cta:hover::before { opacity: .42; }
 
 /* Curved bottom of hero */
 .hero-curve {
@@ -919,12 +939,16 @@ footer {
 .mobile-menu.open a:nth-child(6) { transition-delay: 0.3s; }
 .mobile-menu a:hover { color: var(--glow); }
 .mobile-menu .mobile-cta {
-  background: var(--purple); color: var(--white) !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 30%, rgba(0,0,0,0.2) 100%),
+    linear-gradient(135deg, #5b21b6 0%, #7c3aed 48%, #4c168e 100%);
+  color: var(--white) !important;
   padding: 18px 44px; border-radius: 8px;
   font-family: 'Bell MT', 'Bell', Georgia, serif !important; font-weight: 400 !important;
   font-size: 16px !important; font-weight: 600 !important;
   letter-spacing: 0.06em;
-  box-shadow: 0 4px 32px rgba(var(--glow-rgb),0.35);
+  border: 1px solid rgba(216,180,254,0.36);
+  box-shadow: 0 14px 42px rgba(42,12,82,0.34), inset 0 1px 0 rgba(255,255,255,0.18);
   transition-delay: 0.35s !important;
 }
 
@@ -1093,7 +1117,7 @@ html      { scroll-behavior: auto; }
 
 <!-- ─── NAV ─── -->
 <nav class="nav" id="nav">
-  <div class="nav-logo"><a href="index.html" aria-label="Salvation Studios home"><img src="logo.png" alt="Salvation Music Studios" width="928" height="638" decoding="async" loading="eager"></a></div>
+  <div class="nav-logo"><a href="index.html" aria-label="Salvation Studios home"><img src="logo.png" alt="Salvation Music Studios" width="280" height="134" decoding="async" loading="eager"></a></div>
   <ul class="nav-links">
     <li><a href="#rooms">Studios</a></li>
     <li><a href="equipment.html">Equipment</a></li>
