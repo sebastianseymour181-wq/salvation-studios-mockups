@@ -501,6 +501,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .testi-track.rev { animation: tScrollRev 55s linear infinite; }
 @keyframes tScrollRev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
+/* Client list */
+.client-list-wrap { margin-top: 80px; padding: 0 56px 80px; }
+.client-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid rgba(199,125,255,0.15); border-left: 1px solid rgba(199,125,255,0.15); }
+.client-name { font-family: 'Cormorant Garant', serif; font-size: 19px; font-weight: 300; color: var(--pale); padding: 22px 24px; border-bottom: 1px solid rgba(199,125,255,0.15); border-right: 1px solid rgba(199,125,255,0.15); letter-spacing: 0.02em; transition: color 0.25s, background 0.25s; cursor: default; }
+.client-name:hover { color: var(--glow); background: rgba(199,125,255,0.04); }
+
 /* ─── PHOTO FLOW / GALLERY ─── */
 .gallery { padding: 120px 56px; background: var(--void); }
 .gallery-mosaic {
@@ -880,6 +886,9 @@ footer {
   .testi-header { padding: 0 20px; margin-bottom: 48px; }
   .testi-card { width: 300px; padding: 28px; }
   .testi-quote { font-size: 16px; }
+  .client-list-wrap { padding: 0 20px 60px; }
+  .client-grid { grid-template-columns: repeat(3, 1fr); }
+  .client-name { font-size: 16px; padding: 18px 16px; }
 
   /* Gallery */
   .gallery { padding: 72px 20px; }
@@ -1486,6 +1495,47 @@ html      { scroll-behavior: auto; }
         <div class="testi-name">Mark Dodson</div>
         <div class="testi-credits">Ozzy Osbourne · Judas Priest · Bryan Ferry · Joan Jett · Anthrax</div>
       </div>
+    </div>
+  </div>
+
+  <!-- STATIC CLIENT LIST -->
+  <div class="client-list-wrap reveal">
+    <p class="label" style="text-align:center;margin-bottom:48px;">Artists We've Worked With</p>
+    <div class="client-grid">
+      <span class="client-name">David Gilmour</span>
+      <span class="client-name">Wet Leg</span>
+      <span class="client-name">Myles Smith</span>
+      <span class="client-name">Sam Tompkins</span>
+      <span class="client-name">Reverend And The Makers</span>
+      <span class="client-name">Example</span>
+      <span class="client-name">Skindred</span>
+      <span class="client-name">The Wedding Present</span>
+      <span class="client-name">Tom Meighan</span>
+      <span class="client-name">Badger</span>
+      <span class="client-name">The Cure</span>
+      <span class="client-name">ArrDee</span>
+      <span class="client-name">Shame</span>
+      <span class="client-name">Dizzee Rascal</span>
+      <span class="client-name">JP Cooper</span>
+      <span class="client-name">Declan McKenna</span>
+      <span class="client-name">Orla Gartland</span>
+      <span class="client-name">Jade</span>
+      <span class="client-name">Paris Paloma</span>
+      <span class="client-name">Becky Hill</span>
+      <span class="client-name">Rag 'N' Bone Man</span>
+      <span class="client-name">CQ Wrestling</span>
+      <span class="client-name">Kid Kapichi</span>
+      <span class="client-name">Mouth Culture</span>
+      <span class="client-name">Walt Disco</span>
+      <span class="client-name">Dinosaur Pile-Up</span>
+      <span class="client-name">Karen Dio</span>
+      <span class="client-name">Cassyette</span>
+      <span class="client-name">Lovejoy</span>
+      <span class="client-name">Wargasm</span>
+      <span class="client-name">Hot Wax</span>
+      <span class="client-name">Snayx</span>
+      <span class="client-name">Lewis Fitzgerald</span>
+      <span class="client-name">Bat For Lashes</span>
     </div>
   </div>
 </section>
