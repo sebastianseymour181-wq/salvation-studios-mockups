@@ -8,8 +8,9 @@
   --white: #F5F3FF; --text: #D8B4FE; --muted: #9B7EC8;
   --border: rgba(124,58,237,0.3); --glow-rgb: 157,95,245;
 }
-html { scroll-behavior: smooth; }
-body { background: var(--void); color: var(--text); font-family: 'Nunito', sans-serif; font-weight: 300; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+body { background: var(--void); color: var(--text); font-family: 'Nunito', sans-serif; font-weight: 300; overflow-x: hidden; max-width: 100%; }
+@supports (overflow: clip) { html, body { overflow-x: clip; } }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--void); }
