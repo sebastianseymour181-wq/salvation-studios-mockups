@@ -10,8 +10,38 @@
       "permanent": true
     },
     {
+      "source": "/salvation-studios.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/recording-studio",
       "destination": "/recording-studio-brighton",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/book-online",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/enquiries",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contactus",
+      "destination": "/contact",
       "permanent": true
     },
     {
@@ -22,21 +52,6 @@
     {
       "source": "/control-room",
       "destination": "/rooms/control-room",
-      "permanent": true
-    },
-    {
-      "source": "/writing-rooms",
-      "destination": "/rooms/writing-rooms",
-      "permanent": true
-    },
-    {
-      "source": "/what-the-clients-say",
-      "destination": "/testimonials",
-      "permanent": true
-    },
-    {
-      "source": "/contactus",
-      "destination": "/contact",
       "permanent": true
     },
     {
@@ -60,6 +75,61 @@
       "permanent": true
     },
     {
+      "source": "/writing-rooms",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/live-room-as-a-writing-room",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/control-room-as-a-writing-room",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/subterranean-room",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/mezzanine-room",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/white-rooms",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/general-5-6",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/chillout-zone-kitchen-1",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/chillout-zone-kitchen-2",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/general-5-2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/general-clean",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/dry-hire",
       "destination": "/services/dry-hire",
       "permanent": true
@@ -72,6 +142,11 @@
     {
       "source": "/catering",
       "destination": "/services/catering",
+      "permanent": true
+    },
+    {
+      "source": "/producers-engineers-mixing",
+      "destination": "/services/recording",
       "permanent": true
     },
     {
@@ -105,9 +180,134 @@
       "permanent": true
     },
     {
-      "source": "/salvation-studios.html",
+      "source": "/what-the-clients-say",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/studio-tour",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/salvation-art",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/jobs",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/meet-the-team",
       "destination": "/",
-      "permanent": false
+      "permanent": true
+    },
+    {
+      "source": "/join-our-roster-of-session-musicians",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/competition-1",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/ep-giveaway",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/single-giveaway-2025",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/single-giveaway-2026",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/single-giveaway-2026-tiktok",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/phill-brown-competition",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/salvation-black-friday-sale",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-enquiries-ad-landing-page",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-signature-sessions-nick-brine",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions-gavin-monaghan",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions-matt-glasbey",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions-nick-brine",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions-phill-brown",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/live-video-giveaway",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/live-videos-2025",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/live-videos-ad",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/live-videos-reel",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/video-showreel-email-1",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/video-showreel-email-2",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/test-landing-page-video",
+      "destination": "/gallery",
+      "permanent": true
     },
     {
       "source": "/concept-index",
@@ -138,9 +338,23 @@
       "source": "/concept-4-void",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/(.*)\\.html",
+      "destination": "/$1",
+      "permanent": true
     }
   ],
   "headers": [
+    {
+      "source": "/docs/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
     {
       "source": "/concept-:path*",
       "headers": [
