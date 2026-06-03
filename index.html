@@ -1071,10 +1071,38 @@ footer {
   /* Rooms */
   .rooms { padding: 72px 20px 80px; }
   .rooms-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 48px; }
-  .live-room-feature { height: 420px; }
-  .live-room-info { flex-direction: column; align-items: flex-start; padding: 24px; gap: 16px; }
-  .room-specs { padding-left: 0; flex-direction: row; gap: 20px; }
-  .room-title { font-size: 36px; }
+  .live-room-feature {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    background: rgba(15,0,34,0.72);
+    border: 1px solid rgba(216,180,254,0.16);
+  }
+  .live-room-feature img {
+    position: relative;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 18px 18px 0 0;
+  }
+  .live-room-feature::after { display: none; }
+  .live-room-info {
+    position: relative;
+    padding: 26px 22px 28px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    background: linear-gradient(to bottom, rgba(7,0,15,0.94), rgba(14,0,31,0.98));
+    border-radius: 0 0 18px 18px;
+  }
+  .live-room-text { max-width: 100%; }
+  .room-desc { font-size: 14px; line-height: 1.7; }
+  .room-specs { width: 100%; padding-left: 0; flex-direction: row; justify-content: space-between; gap: 12px; }
+  .spec { text-align: center; }
+  .spec-val { font-size: 38px; }
+  .room-title { font-size: 46px; }
   .rooms-grid { grid-template-columns: 1fr; gap: 16px; }
   .writing-rooms { grid-template-columns: 1fr; gap: 16px; }
   .writing-card { height: 280px; }
