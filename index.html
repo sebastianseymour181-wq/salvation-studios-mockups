@@ -928,10 +928,12 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 10px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  padding: 92px 20px 30px;
+  overflow-y: auto;
 }
 .mobile-menu.open {
   display: flex;
@@ -939,14 +941,22 @@ footer {
   pointer-events: all;
 }
 .mobile-menu a {
-  font-family: 'Cormorant Garant', serif;
-  font-size: 44px; font-weight: 300;
-  color: var(--white); text-decoration: none;
-  letter-spacing: 0.02em;
+  width: min(260px, calc(100vw - 72px));
+  min-height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: rgba(245,243,255,0.88); text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  border: 1px solid rgba(167,139,250,0.22);
+  border-radius: 999px;
+  background: rgba(109,40,217,0.08);
   transition: color 0.3s;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.3s, transform 0.3s, color 0.3s;
+  transition: opacity 0.3s, transform 0.3s, color 0.3s, border-color 0.3s, background 0.3s;
 }
 .mobile-menu.open a {
   opacity: 1; transform: translateY(0);
@@ -957,15 +967,16 @@ footer {
 .mobile-menu.open a:nth-child(4) { transition-delay: 0.2s; }
 .mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
 .mobile-menu.open a:nth-child(6) { transition-delay: 0.3s; }
-.mobile-menu a:hover { color: var(--glow); }
+.mobile-menu a:hover { color: var(--white); border-color: rgba(192,132,252,0.55); background: rgba(109,40,217,0.18); }
 .mobile-menu .mobile-cta {
   background:
     linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 30%, rgba(0,0,0,0.2) 100%),
     linear-gradient(135deg, #5b21b6 0%, #7c3aed 48%, #4c168e 100%);
   color: var(--white) !important;
-  padding: 18px 44px; border-radius: 8px;
-  font-family: 'Bell MT', 'Bell', Georgia, serif !important;
-  font-size: 16px !important; font-weight: 600 !important;
+  min-height: 48px;
+  padding: 0 44px; border-radius: 8px;
+  font-family: 'Montserrat', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 14px !important; font-weight: 800 !important;
   letter-spacing: 0.06em;
   border: 1px solid rgba(216,180,254,0.36);
   box-shadow: 0 14px 42px rgba(42,12,82,0.34), inset 0 1px 0 rgba(255,255,255,0.18);
