@@ -26,11 +26,23 @@
 <nav class="nav" id="nav">
   <div class="nav-logo"><a href="/"><img src="/logo.png" alt="Salvation Music Studios" width="280" height="134" decoding="async" loading="eager"></a></div>
   <ul class="nav-links">
-    <li><a href="/#rooms">Studios</a></li>
-    <li><a href="/equipment/" class="active">Equipment</a></li>
+    <li class="nav-dropdown">
+      <a href="/#rooms" class="nav-dropdown-toggle" aria-haspopup="true">Studios</a>
+      <div class="nav-dropdown-menu" aria-label="Studio rooms">
+        <a href="/rooms/live-room/">Main Studio</a>
+        <a href="/rooms/control-room/">Control Room</a>
+        <a href="/rooms/live-room/">Live Room</a>
+        <a href="/rooms/vocal-booth/">Vocal Booth</a>
+        <a href="/rooms/iso-booths/">Iso / Amp Booths</a>
+        <a href="/rooms/the-bunker/">The Bunker</a>
+        <a href="/rooms/the-bunker/#mezzanine-room">Mezzanine Room</a>
+        <a href="/rooms/the-bunker/#subterranean-room">Subterranean Room</a>
+      </div>
+    </li>
+    <li><a href="/equipment/">Equipment</a></li>
     <li><a href="/gallery/">Gallery</a></li>
     <li><a href="/#services">Services</a></li>
-    <li><a href="/testimonials/">Artists</a></li>
+    <li><a href="/#testimonials">Artists</a></li>
   </ul>
   <a href="/contact/" class="nav-cta">Enquire About Availability</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -213,9 +225,9 @@
 
 <!-- ─── SECTION 5: INSTRUMENTS ─── -->
 <section class="content-section bg-void reveal">
-  <span class="label">In the Writing Rooms</span>
-  <h2 class="h2-serif">Instruments &amp; <em>Production</em></h2>
-  <p class="body-text" style="max-width:680px;margin-bottom:0">The writing-room and backline inventory includes source-listed keys, guitars, amps, drums and production tools. Guest items and exact room setups can be confirmed when dates are booked.</p>
+  <span class="label">Instruments</span>
+  <h2 class="h2-serif">Instruments</h2>
+  <p class="body-text" style="max-width:680px;margin-bottom:0">The writing-room and backline inventory is now grouped for easy browsing: keys, guitars, amps, basses, drums, cymbals and pedals. Exact availability and room setup are confirmed with the session enquiry.</p>
   <div class="card-grid" style="margin-top:48px">
     <div class="feature-card">
       <div class="card-photo"><img src="/photos/optimized/studio-s17.webp" alt="Keyboards and Synths" width="1600" height="2402" decoding="async" loading="lazy"></div>
@@ -230,14 +242,14 @@
       </div>
     </div>
     <div class="feature-card">
-      <div class="card-photo"><img src="/photos/optimized/studio-u591.webp" alt="Production Gear" width="1600" height="900" decoding="async" loading="lazy"></div>
+      <div class="card-photo"><img src="/photos/optimized/studio-u591.webp" alt="Instruments and session setup" width="1600" height="900" decoding="async" loading="lazy"></div>
       <div class="card-body">
-        <div class="card-title">Production Gear</div>
-        <p class="card-desc">Production setups can be planned around Mac Studio/Apollo systems, MIDI controllers and the room requirements confirmed when your session is booked.</p>
+        <div class="card-title">Keys &amp; Session Instruments</div>
+        <p class="card-desc">Session setups can be planned around the available keys, MIDI controllers and room requirements confirmed when your dates are booked.</p>
         <div class="card-tags">
-          <span class="rtag">Mac Studio</span>
-          <span class="rtag">Apollo x16</span>
-          <span class="rtag">MIDI Controllers</span>
+          <span class="rtag">MIDI Keys</span>
+          <span class="rtag">Room Setup</span>
+          <span class="rtag">Writing Rooms</span>
         </div>
       </div>
     </div>

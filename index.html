@@ -69,6 +69,15 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transition: color 0.3s;
 }
 .nav-links a:hover { color: var(--glow); }
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle { display: inline-flex; align-items: center; gap: 6px; }
+.nav-dropdown-toggle::after { content: '⌄'; font-size: 11px; color: var(--glow); transform: translateY(-1px); }
+.nav-dropdown-menu { position: absolute; top: calc(100% + 18px); left: 50%; transform: translateX(-50%) translateY(8px); width: 238px; padding: 12px; border: 1px solid rgba(216,180,254,.18); border-radius: 14px; background: rgba(4,0,8,.96); box-shadow: 0 24px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06); opacity: 0; pointer-events: none; transition: opacity .22s ease, transform .22s ease; display: grid; gap: 2px; }
+.nav-dropdown-menu::before { content: ''; position: absolute; left: 0; right: 0; top: -22px; height: 22px; }
+.nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.nav-dropdown-menu a { display: block; padding: 10px 12px; border-radius: 10px; color: rgba(245,243,255,.82); background: transparent; }
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus { color: var(--white); background: rgba(124,58,237,.16); }
+
 .nav-cta {
   background:
     linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 28%, rgba(0,0,0,0.18) 100%),
@@ -466,6 +475,15 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   margin-bottom: 10px;
 }
 .room-card-desc { font-size: 13px; line-height: 1.8; color: var(--muted); }
+.bunker-feature { margin-top: 34px; border-radius: 22px; overflow: hidden; position: relative; min-height: 520px; display: block; text-decoration: none; color: inherit; border: 1px solid rgba(216,180,254,.16); background: var(--card); }
+.bunker-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.72) saturate(.98); transition: transform .7s ease; }
+.bunker-feature:hover img { transform: scale(1.035); }
+.bunker-feature::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,0,15,.92) 0%, rgba(7,0,15,.58) 45%, rgba(7,0,15,.22) 100%); }
+.bunker-feature-info { position: relative; z-index: 2; min-height: 520px; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(28px, 5vw, 64px); max-width: 780px; }
+.bunker-title { font-family: 'Cormorant Garant', serif; color: var(--white); font-size: clamp(48px, 7vw, 96px); line-height: .95; font-weight: 300; margin: 8px 0 18px; }
+.bunker-desc { color: rgba(245,243,255,.78); font-size: 15px; line-height: 1.9; max-width: 660px; }
+.room-click { display:inline-flex; margin-top:18px; color: var(--glow); font-size: 11px; letter-spacing:.18em; text-transform:uppercase; }
+
 .room-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .rtag {
   font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
@@ -1119,11 +1137,23 @@ html      { scroll-behavior: auto; }
 <nav class="nav" id="nav">
   <div class="nav-logo"><a href="/" aria-label="Salvation Studios home"><img src="/logo.png" alt="Salvation Music Studios" width="280" height="134" decoding="async" loading="eager"></a></div>
   <ul class="nav-links">
-    <li><a href="#rooms">Studios</a></li>
+    <li class="nav-dropdown">
+      <a href="/#rooms" class="nav-dropdown-toggle" aria-haspopup="true">Studios</a>
+      <div class="nav-dropdown-menu" aria-label="Studio rooms">
+        <a href="/rooms/live-room/">Main Studio</a>
+        <a href="/rooms/control-room/">Control Room</a>
+        <a href="/rooms/live-room/">Live Room</a>
+        <a href="/rooms/vocal-booth/">Vocal Booth</a>
+        <a href="/rooms/iso-booths/">Iso / Amp Booths</a>
+        <a href="/rooms/the-bunker/">The Bunker</a>
+        <a href="/rooms/the-bunker/#mezzanine-room">Mezzanine Room</a>
+        <a href="/rooms/the-bunker/#subterranean-room">Subterranean Room</a>
+      </div>
+    </li>
     <li><a href="/equipment/">Equipment</a></li>
     <li><a href="/gallery/">Gallery</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#testimonials">Artists</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#testimonials">Artists</a></li>
   </ul>
   <a href="/contact/" class="nav-cta">Enquire About Availability</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false">
@@ -1131,13 +1161,15 @@ html      { scroll-behavior: auto; }
   </button>
 </nav>
 
-<!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site navigation">
-  <a href="#rooms" class="mobile-link">Studios</a>
-  <a href="/equipment/" class="mobile-link">Equipment</a>
-  <a href="/gallery/" class="mobile-link">Gallery</a>
-  <a href="#services" class="mobile-link">Services</a>
-  <a href="#testimonials" class="mobile-link">Artists</a>
+  <a href="/#rooms">Studios Overview</a>
+  <a href="/rooms/live-room/">Main Studio</a>
+  <a href="/rooms/control-room/">Control Room</a>
+  <a href="/rooms/vocal-booth/">Vocal Booth</a>
+  <a href="/rooms/iso-booths/">Iso / Amp Booths</a>
+  <a href="/rooms/the-bunker/">The Bunker</a>
+  <a href="/equipment/">Equipment</a>
+  <a href="/gallery/">Gallery</a>
   <a href="/contact/" class="mobile-cta">Enquire About Availability</a>
 </div>
 
@@ -1240,34 +1272,26 @@ html      { scroll-behavior: auto; }
 <section class="rooms" id="rooms">
   <div class="rooms-header reveal">
     <div>
-      <p class="label">The Spaces</p>
-      <h2 class="h2-serif" style="margin-bottom:0">Every room,<br><em>purpose-built</em></h2>
+      <p class="label">The Studios</p>
+      <h2 class="h2-serif" style="margin-bottom:0">Every space,<br><em>purpose-built</em></h2>
     </div>
-    <a href="/contact/" class="section-link">Book a room →</a>
+    <a href="/contact/" class="section-link">Enquire about a room →</a>
   </div>
 
-  <!-- LIVE ROOM — hero card -->
+  <!-- MAIN STUDIO — hero card -->
   <a href="/rooms/live-room/" class="live-room-feature reveal" style="text-decoration:none;color:inherit;">
-    <img src="/photos/optimized/studio-sfpb.webp" alt="The Live Room — Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy">
+    <img src="/photos/optimized/studio-sfpb.webp" alt="The Main Studio live room at Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy">
     <div class="live-room-info">
       <div class="live-room-text">
-        <div class="room-num">01 — Primary Tracking Space</div>
-        <div class="room-title">The Live Room</div>
-        <p class="room-desc">World-renowned acoustician John Flynn was given carte blanche to transform the old Salvation Army Concert Hall into a world-class tracking room. A 13-metre vaulted ceiling, natural light, a stained-glass window, a fully floated floor system, and retractable isolation booths — this is somewhere truly special.</p>
+        <div class="room-num">01 — The main studio</div>
+        <div class="room-title">The Main Studio</div>
+        <p class="room-desc">The main Salvation space is the restored 1910 hall: a 13-metre vaulted tracking room designed by John Flynn, with stained glass, natural light, a fully floated floor system and retractable isolation booths around the live floor.</p>
+        <span class="room-click">View detailed studio specs →</span>
       </div>
       <div class="room-specs">
-        <div class="spec">
-          <div class="spec-val">9.4<small style="font-size:20px">m</small></div>
-          <div class="spec-key">Length</div>
-        </div>
-        <div class="spec">
-          <div class="spec-val">8.2<small style="font-size:20px">m</small></div>
-          <div class="spec-key">Width</div>
-        </div>
-        <div class="spec">
-          <div class="spec-val">13<small style="font-size:20px">m</small></div>
-          <div class="spec-key">Ceiling</div>
-        </div>
+        <div class="spec"><div class="spec-val">9.4<small style="font-size:20px">m</small></div><div class="spec-key">Length</div></div>
+        <div class="spec"><div class="spec-val">8.2<small style="font-size:20px">m</small></div><div class="spec-key">Width</div></div>
+        <div class="spec"><div class="spec-val">13<small style="font-size:20px">m</small></div><div class="spec-key">Ceiling</div></div>
       </div>
     </div>
   </a>
@@ -1275,75 +1299,59 @@ html      { scroll-behavior: auto; }
   <!-- THREE ROOM GRID -->
   <div class="rooms-grid">
     <a href="/rooms/control-room/" class="room-card reveal" style="text-decoration:none;color:inherit;">
-      <div class="room-card-img">
-        <img src="/photos/optimized/studio-stu.webp" alt="Control Room" width="2200" height="1467" decoding="async" loading="lazy">
-      </div>
+      <div class="room-card-img"><img src="/photos/optimized/studio-stu.webp" alt="Control Room" width="2200" height="1467" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
-        <div class="room-num">02</div>
-        <div class="room-card-name">Control Room</div>
-        <p class="room-card-desc">6.5 × 5.7m. Designed by John Flynn — the man who built the control rooms at Olympic and Abbey Road. Home to our fully restored 1973 Neve 8068 console and ATC soffit-mounted monitors. Full line of sight to the live room and vocal booth.</p>
-        <div class="room-tags">
-          <span class="rtag">Neve 8068</span>
-          <span class="rtag">ATC Monitors</span>
-          <span class="rtag">John Flynn Design</span>
-        </div>
+        <div class="room-num">02</div><div class="room-card-name">Control Room</div>
+        <p class="room-card-desc">The John Flynn–designed control room with restored 1973 Neve 8068, ATC soffit-mounted monitoring and sightlines into the main studio.</p>
+        <div class="room-tags"><span class="rtag">Neve 8068</span><span class="rtag">ATC Monitors</span><span class="rtag">John Flynn Design</span></div>
+        <span class="room-click">View specs →</span>
       </div>
     </a>
 
-    <a href="/rooms/vocal-booth/" class="room-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
-      <div class="room-card-img">
-        <img src="/photos/optimized/studio-s11.webp" alt="Outboard Gear & Equipment" width="1600" height="2402" decoding="async" loading="lazy">
-      </div>
+    <a href="/rooms/live-room/" class="room-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
+      <div class="room-card-img"><img src="/photos/optimized/studio-s5.webp" alt="Live Room floor and performance space" width="1600" height="1067" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
-        <div class="room-num">03</div>
-        <div class="room-card-name">Vocal Booth</div>
-        <p class="room-card-desc">A dedicated precision isolation space for lead vocals, overdubs, and spoken word — acoustically tuned for transparency and warmth. The booth sits directly in line of sight from the control room.</p>
-        <div class="room-tags">
-          <span class="rtag">Isolation</span>
-          <span class="rtag">Vocals</span>
-          <span class="rtag">Overdubs</span>
-        </div>
+        <div class="room-num">03</div><div class="room-card-name">Live Room</div>
+        <p class="room-card-desc">The main live floor for drums, bands, strings, filmed performances and writing-camp centrepiece sessions inside the vaulted hall.</p>
+        <div class="room-tags"><span class="rtag">Bands</span><span class="rtag">Drums</span><span class="rtag">Live Takes</span></div>
+        <span class="room-click">View specs →</span>
       </div>
     </a>
 
     <a href="/rooms/iso-booths/" class="room-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
-      <div class="room-card-img">
-        <img src="/photos/optimized/studio-s17.webp" alt="Amp Booth" width="1600" height="2402" decoding="async" loading="lazy">
-      </div>
+      <div class="room-card-img"><img src="/photos/optimized/studio-s17.webp" alt="Isolation and amp booth space" width="1600" height="2402" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
-        <div class="room-num">04 – 06</div>
-        <div class="room-card-name">Iso Booths & Amp Booth</div>
-        <p class="room-card-desc">Two fully retractable, independently floated, glass-fronted isolation booths for simultaneous tracking. Plus a dedicated amp booth for guitar and bass — crank it up without compromise.</p>
-        <div class="room-tags">
-          <span class="rtag">Guitar</span>
-          <span class="rtag">Bass</span>
-          <span class="rtag">Simultaneous</span>
-        </div>
+        <div class="room-num">04 – 06</div><div class="room-card-name">Iso / Amp Booths</div>
+        <p class="room-card-desc">Two retractable, independently floated glass-fronted isolation booths plus a soundproof amp booth for simultaneous tracking.</p>
+        <div class="room-tags"><span class="rtag">Isolation</span><span class="rtag">Guitar</span><span class="rtag">Simultaneous</span></div>
+        <span class="room-click">View specs →</span>
       </div>
     </a>
   </div>
 
-  <!-- WRITING ROOMS -->
+  <!-- THE BUNKER -->
+  <a href="/rooms/the-bunker/" class="bunker-feature reveal" aria-label="View detailed specs for The Bunker">
+    <img src="/photos/optimized/studio-u591.webp" alt="The Bunker writing and production room at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
+    <div class="bunker-feature-info">
+      <div class="room-num">07 — Writing / production wing</div>
+      <div class="bunker-title">The Bunker</div>
+      <p class="bunker-desc">A self-contained creative zone for writing, production and longer studio days, anchored by source-listed Bunker gear and supported by the Mezzanine and Subterranean rooms below.</p>
+      <span class="room-click">Open The Bunker studio page →</span>
+    </div>
+  </a>
+
   <div style="margin-top:24px;" class="reveal">
-    <p class="label" style="margin-bottom:16px;">Writing Rooms</p>
-    <h3 style="font-family:'Cormorant Garant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:24px;">Space to <em style="color:var(--glow);font-style:italic">think</em></h3>
+    <p class="label" style="margin-bottom:16px;">Under The Bunker</p>
+    <h3 style="font-family:'Cormorant Garant',serif;font-size:32px;font-weight:300;color:var(--white);margin-bottom:24px;">Two focused rooms for <em style="color:var(--glow);font-style:italic">writing</em></h3>
   </div>
   <div class="writing-rooms">
-    <a href="/rooms/writing-rooms/" class="writing-card reveal" style="text-decoration:none;color:inherit;">
-      <img src="/photos/optimized/studio-u590.webp" alt="Subterranean Writing Room" width="1600" height="900" decoding="async" loading="lazy">
-      <div class="writing-card-info">
-        <div class="room-num">WR — 01</div>
-        <div class="writing-card-name">Subterranean Room</div>
-        <p class="writing-card-desc">A dedicated writing space that can be configured for one-room sessions or larger writing-camp workflows, with technical support available during the booking.</p>
-      </div>
+    <a href="/rooms/the-bunker/#mezzanine-room" class="writing-card reveal" style="text-decoration:none;color:inherit;">
+      <img src="/photos/optimized/studio-u592.webp" alt="Mezzanine Room" width="1600" height="900" decoding="async" loading="lazy">
+      <div class="writing-card-info"><div class="room-num">B — 01</div><div class="writing-card-name">Mezzanine Room</div><p class="writing-card-desc">A light-filled elevated room with views into the main studio and a production setup confirmed by enquiry.</p><span class="room-click">View specs →</span></div>
     </a>
-    <a href="/rooms/writing-rooms/" class="writing-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
-      <img src="/photos/optimized/studio-u592.webp" alt="Mezzanine Writing Room" width="1600" height="900" decoding="async" loading="lazy">
-      <div class="writing-card-info">
-        <div class="room-num">WR — 02</div>
-        <div class="writing-card-name">Mezzanine Room</div>
-        <p class="writing-card-desc">Elevated space for producers and writers who need a room with a view and full creative freedom.</p>
-      </div>
+    <a href="/rooms/the-bunker/#subterranean-room" class="writing-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
+      <img src="/photos/optimized/studio-u590.webp" alt="Subterranean Room" width="1600" height="900" decoding="async" loading="lazy">
+      <div class="writing-card-info"><div class="room-num">B — 02</div><div class="writing-card-name">Subterranean Room</div><p class="writing-card-desc">A comfortable underground writing/chillout room with kitchen, seating, TV/PS5 and configurable creative setup.</p><span class="room-click">View specs →</span></div>
     </a>
   </div>
 </section>
@@ -1788,7 +1796,7 @@ html      { scroll-behavior: auto; }
 
 <!-- ─── BOOKING CTA ─── -->
 <section class="booking-band" id="book">
-  <img src="/photos/optimized/studio-sfpb.webp" alt="Book a session at Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy">
+  <img src="/photos/optimized/studio-sfpb.webp" alt="Enquire about a session at Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy">
   <div class="booking-content">
     <p class="label">Ready to Record?</p>
     <div class="booking-script">Come create with us</div>
@@ -2168,14 +2176,7 @@ if (gallerySection) {
     scrollTrigger: { trigger: '.rooms-grid', start: 'top 80%' }
   });
 
-  gsap.from('.writing-card', {
-    y: 50,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.08,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.writing-rooms', start: 'top 80%' }
-  });
+  // Writing cards are CSS-visible by default; avoid GSAP from() leaving them hidden during section QA.
 
   // ─── NEVE SECTION ────────────────────────────────────────────
   ScrollTrigger.create({

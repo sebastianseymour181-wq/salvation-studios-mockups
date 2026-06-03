@@ -5,6 +5,16 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/bunker",
+      "destination": "/rooms/the-bunker",
+      "permanent": true
+    },
+    {
+      "source": "/the-bunker",
+      "destination": "/rooms/the-bunker",
+      "permanent": true
+    },
+    {
       "source": "/salvation-studios",
       "destination": "/",
       "permanent": true
@@ -91,12 +101,12 @@
     },
     {
       "source": "/subterranean-room",
-      "destination": "/rooms/writing-rooms",
+      "destination": "/rooms/the-bunker",
       "permanent": true
     },
     {
       "source": "/mezzanine-room",
-      "destination": "/rooms/writing-rooms",
+      "destination": "/rooms/the-bunker",
       "permanent": true
     },
     {
@@ -116,7 +126,7 @@
     },
     {
       "source": "/chillout-zone-kitchen-2",
-      "destination": "/rooms/writing-rooms",
+      "destination": "/rooms/the-bunker",
       "permanent": true
     },
     {

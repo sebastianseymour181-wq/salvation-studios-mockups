@@ -24,6 +24,15 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.06em; color: var(--muted); text-decoration: none; transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--glow); }
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle { display: inline-flex; align-items: center; gap: 6px; }
+.nav-dropdown-toggle::after { content: '⌄'; font-size: 11px; color: var(--glow); transform: translateY(-1px); }
+.nav-dropdown-menu { position: absolute; top: calc(100% + 18px); left: 50%; transform: translateX(-50%) translateY(8px); width: 238px; padding: 12px; border: 1px solid rgba(216,180,254,.18); border-radius: 14px; background: rgba(4,0,8,.96); box-shadow: 0 24px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06); opacity: 0; pointer-events: none; transition: opacity .22s ease, transform .22s ease; display: grid; gap: 2px; }
+.nav-dropdown-menu::before { content: ''; position: absolute; left: 0; right: 0; top: -22px; height: 22px; }
+.nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.nav-dropdown-menu a { display: block; padding: 10px 12px; border-radius: 10px; color: rgba(245,243,255,.82); background: transparent; }
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus { color: var(--white); background: rgba(124,58,237,.16); }
+
 .nav-cta { background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 28%, rgba(0,0,0,0.18) 100%), linear-gradient(135deg, #5b21b6 0%, #7c3aed 48%, #4c168e 100%); color: var(--white); font-family: 'Bell MT', 'Bell', Georgia, serif; font-size: 13px; font-weight: 400; letter-spacing: 0.05em; padding: 11px 26px; border-radius: 6px; border: 1px solid rgba(216,180,254,0.34); cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; position: relative; overflow: hidden; isolation: isolate; box-shadow: 0 10px 30px rgba(40,8,76,0.24), inset 0 1px 0 rgba(255,255,255,0.16); }
 .nav-cta:hover { background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, transparent 28%, rgba(0,0,0,0.16) 100%), linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #5519a3 100%); box-shadow: 0 12px 34px rgba(var(--glow-rgb),0.28), inset 0 1px 0 rgba(255,255,255,0.18); transform: translateY(-1px); }
 
@@ -189,9 +198,9 @@ footer { background: #040008; border-top: 1px solid var(--border); padding: 80px
 .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.mobile-menu { display: none; position: fixed; inset: 0; z-index: 400; background: rgba(7,0,15,0.97); backdrop-filter: blur(20px); flex-direction: column; align-items: center; justify-content: center; gap: 40px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.mobile-menu { display: none; position: fixed; inset: 0; z-index: 400; background: rgba(7,0,15,0.97); backdrop-filter: blur(20px); flex-direction: column; align-items: center; justify-content: center; gap: clamp(12px, 2.2vh, 22px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 80px 20px 28px; overflow-y: auto; }
 .mobile-menu.open { display: flex; opacity: 1; pointer-events: all; }
-.mobile-menu a { font-family: 'Cormorant Garant', serif; font-size: 44px; font-weight: 300; color: var(--white); text-decoration: none; transition: color 0.3s; }
+.mobile-menu a { font-family: 'Cormorant Garant', serif; font-size: clamp(27px, 6.2vw, 40px); line-height: 1; font-weight: 300; color: var(--white); text-decoration: none; transition: color 0.3s; }
 .mobile-menu a:hover { color: var(--glow); }
 .mobile-menu .mobile-cta { background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 30%, rgba(0,0,0,0.2) 100%), linear-gradient(135deg, #5b21b6 0%, #7c3aed 48%, #4c168e 100%); color: var(--white) !important; padding: 18px 44px; border-radius: 8px; border: 1px solid rgba(216,180,254,0.36); font-family: 'Bell MT', Georgia, serif !important; font-size: 16px !important; position: relative; overflow: hidden; isolation: isolate; box-shadow: 0 14px 42px rgba(42,12,82,0.34), inset 0 1px 0 rgba(255,255,255,0.18); }
 
