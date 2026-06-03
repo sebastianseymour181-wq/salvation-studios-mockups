@@ -212,9 +212,14 @@ footer { background: #040008; border-top: 1px solid var(--border); padding: 80px
   .gear-cols { grid-template-columns: 1fr; gap: 0; }
 }
 @media (max-width: 768px) {
-  .nav { padding: 0 20px; height: 64px; }
-  .nav-links, .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
+  .nav { padding: 10px 12px 12px; height: 126px; align-items: flex-start; justify-content: center; }
+  .nav.scrolled { height: 118px; }
+  .nav-logo img { height: 42px; }
+  .nav-links { display: flex; position: absolute; left: 50%; right: auto; top: 58px; width: 290px; transform: translateX(-50%); justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .nav-links li { display: flex; }
+  .nav-links a { width: 86px; padding: 7px 7px; border: 1px solid rgba(167,139,250,0.28); border-radius: 999px; background: rgba(7,0,15,0.28); color: rgba(245,243,255,0.82); font-size: 8px; font-weight: 700; letter-spacing: 0.08em; text-align: center; }
+  .nav-dropdown-toggle::after, .nav-dropdown-menu { display: none; }
+  .nav-cta, .nav-hamburger { display: none; }
   .page-hero { height: 52vh; min-height: 380px; }
   .page-hero-content { padding: 0 20px 48px; }
   .content-section { padding: 72px 20px; }
