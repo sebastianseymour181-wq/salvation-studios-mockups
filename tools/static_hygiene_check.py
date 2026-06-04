@@ -32,12 +32,13 @@ INDEXABLE_HTML = {
     "rooms/control-room.html",
     "rooms/writing-rooms.html",
     "rooms/the-bunker.html",
-    "rooms/vocal-booth.html",
-    "rooms/iso-booths.html",
     "services/recording.html",
     "services/mixing.html",
     "services/dry-hire.html",
+    "services/mastering.html",
     "services/lighting.html",
+    "services/live-videos.html",
+    "services/accommodation.html",
     "services/catering.html",
 }
 
@@ -48,6 +49,8 @@ NOINDEX_HTML = {
     "concept-3-signal.html",
     "concept-4-void.html",
     "salvation-studios.html",
+    "rooms/vocal-booth.html",
+    "rooms/iso-booths.html",
 }
 
 OLD_SITE_ROUTES = {
@@ -75,9 +78,9 @@ OLD_SITE_ROUTES = {
 # New public routes should not be redirected to themselves.
 NEW_PUBLIC_ROUTES = {
     "/", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/contact", "/spaces",
-    "/rooms/live-room", "/rooms/control-room", "/rooms/writing-rooms", "/rooms/the-bunker", "/rooms/vocal-booth",
-    "/rooms/iso-booths", "/services/recording", "/services/mixing", "/services/dry-hire",
-    "/services/lighting", "/services/catering",
+    "/rooms/live-room", "/rooms/control-room", "/rooms/writing-rooms", "/rooms/the-bunker",
+    "/services/recording", "/services/mixing", "/services/dry-hire",
+    "/services/mastering", "/services/lighting", "/services/live-videos", "/services/accommodation", "/services/catering",
 }
 
 ASSET_EXTENSIONS = {

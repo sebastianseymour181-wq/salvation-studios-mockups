@@ -251,6 +251,16 @@ a { color: inherit; }
 .full-inventory .gear-section { break-inside: avoid; margin-bottom: 40px; }
 @media (max-width: 768px) { .full-inventory { grid-template-columns: 1fr; } }
 
+
+/* Equipment hover/focus preview */
+.equipment-preview-card { display:grid; grid-template-columns:minmax(260px, 420px) 1fr; gap:28px; align-items:center; margin:0 0 44px; border:1px solid var(--border); border-radius:18px; padding:18px; background:rgba(22,0,40,.78); }
+.equipment-preview-media { min-height:260px; border-radius:14px; overflow:hidden; background:#040008; }
+.equipment-preview-copy h3 { font-family:'Cormorant Garant',serif; font-size:32px; font-weight:300; color:var(--white); margin-bottom:10px; }
+.equipment-preview-copy p { color:var(--muted); font-size:14px; line-height:1.8; }
+.full-inventory .gear-list li[data-preview] { cursor:pointer; border-radius:8px; padding-left:8px; padding-right:8px; transition:background .2s ease, border-color .2s ease; }
+.full-inventory .gear-list li[data-preview]:hover, .full-inventory .gear-list li[data-preview]:focus-visible { background:rgba(124,58,237,.14); outline:1px solid rgba(192,132,252,.45); outline-offset:2px; }
+@media(max-width:768px){ .equipment-preview-card{grid-template-columns:1fr;margin-bottom:34px}.equipment-preview-media{min-height:220px} }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.001ms !important; }

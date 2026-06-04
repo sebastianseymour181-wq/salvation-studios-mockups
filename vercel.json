@@ -5,6 +5,31 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/mastering",
+      "destination": "/services/mastering",
+      "permanent": true
+    },
+    {
+      "source": "/live-videos",
+      "destination": "/services/live-videos",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation",
+      "destination": "/services/accommodation",
+      "permanent": true
+    },
+    {
+      "source": "/rooms/vocal-booth",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
+      "source": "/rooms/iso-booths",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
       "source": "/bunker",
       "destination": "/rooms/the-bunker",
       "permanent": true
@@ -66,22 +91,22 @@
     },
     {
       "source": "/vocal-booth",
-      "destination": "/rooms/vocal-booth",
+      "destination": "/rooms/live-room",
       "permanent": true
     },
     {
       "source": "/isolation-booth-1",
-      "destination": "/rooms/iso-booths",
+      "destination": "/rooms/live-room",
       "permanent": true
     },
     {
       "source": "/isolation-booth-2",
-      "destination": "/rooms/iso-booths",
+      "destination": "/rooms/live-room",
       "permanent": true
     },
     {
       "source": "/amp-booth",
-      "destination": "/rooms/iso-booths",
+      "destination": "/rooms/live-room",
       "permanent": true
     },
     {
@@ -286,37 +311,37 @@
     },
     {
       "source": "/live-video-giveaway",
-      "destination": "/gallery",
+      "destination": "/services/live-videos",
       "permanent": true
     },
     {
       "source": "/live-videos-2025",
-      "destination": "/gallery",
+      "destination": "/services/live-videos",
       "permanent": true
     },
     {
       "source": "/live-videos-ad",
-      "destination": "/gallery",
+      "destination": "/services/live-videos",
       "permanent": true
     },
     {
       "source": "/live-videos-reel",
-      "destination": "/gallery",
+      "destination": "/services/live-videos",
       "permanent": true
     },
     {
       "source": "/video-showreel-email-1",
-      "destination": "/gallery",
+      "destination": "/services/live-videos",
       "permanent": true
     },
     {
       "source": "/video-showreel-email-2",
-      "destination": "/gallery",
+      "destination": "/services/live-videos",
       "permanent": true
     },
     {
       "source": "/test-landing-page-video",
-      "destination": "/gallery",
+      "destination": "/services/live-videos",
       "permanent": true
     },
     {
