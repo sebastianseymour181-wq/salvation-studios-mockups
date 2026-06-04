@@ -224,7 +224,7 @@ def main() -> int:
             failures.append(f"placeholder href remains in {relative}")
         if ".superpowers" in text:
             failures.append(f"hidden .superpowers artifact referenced in {relative}")
-        if re.search(r"\b(Book a Session|Reserve Now)\b", text):
+        if re.search(r"\b(Book a Session|Book A Session|Book Your Session|Book Now|Reserve Now)\b", text):
             failures.append(f"booking-language overpromise remains in {relative}")
         if re.search(r"tel:[^\"']*\*", text):
             failures.append(f"masked tel link/text remains in {relative}")
