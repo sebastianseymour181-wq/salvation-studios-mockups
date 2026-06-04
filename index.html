@@ -747,6 +747,16 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   margin-bottom: 10px; letter-spacing: -0.01em;
 }
 .svc-desc { font-size: 13px; line-height: 1.85; color: var(--muted); }
+.svc-pills { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 48px; }
+.svc-pill {
+  display: inline-block; padding: 14px 28px;
+  border: 1px solid rgba(139,92,246,0.35); border-radius: 100px;
+  color: var(--pale); font-size: 15px; font-family: 'Montserrat', sans-serif;
+  font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+  text-decoration: none; background: rgba(124,58,237,0.07);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.svc-pill:hover { border-color: var(--violet); background: rgba(124,58,237,0.2); color: var(--white); }
 
 /* ─── FULL PHOTO CTA ─── */
 .booking-band {
@@ -1767,61 +1777,14 @@ html      { scroll-behavior: auto; }
     <p class="label">What We Offer</p>
     <h2 class="h2-serif">Full service,<br><em>your way</em></h2>
   </div>
-  <div class="services-grid">
-    <a href="/services/recording/" class="svc-card reveal" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/optimized/studio-sfpb.webp" alt="Recording at Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Recording</div>
-        <p class="svc-desc">Recording sessions can be planned around the live room, control room, booths and producer/engineer support you need. Send the team a brief so the right setup can be confirmed.</p>
-      </div>
-    </a>
-    <a href="/services/mixing/" class="svc-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/optimized/studio-s23.webp" alt="Mixing tools and keyboard detail" width="1600" height="1067" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Mixing</div>
-        <p class="svc-desc">Mix on the restored 1973 Neve 8068 in a John Flynn–designed control room with ATC soffit-mounted monitoring and a source-backed selection of outboard and effects.</p>
-      </div>
-    </a>
-    <a href="/services/dry-hire/" class="svc-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/optimized/studio-img3084.webp" alt="Dry hire live room setup at Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Dry Hire</div>
-        <p class="svc-desc">Bring your own team where appropriate and enquire for dry-hire availability. Salvation states that a studio assistant is provided to help sessions run smoothly.</p>
-      </div>
-    </a>
-    <a href="/rooms/writing-rooms/" class="svc-card reveal" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/optimized/studio-u590.webp" alt="Writing Rooms" width="1600" height="900" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Writing Rooms</div>
-        <p class="svc-desc">Writing spaces can be configured from one-room sessions to whole-complex writing camps, with Apollo-interface, MIDI-keyboard and Genelec-monitor setups described on the current site.</p>
-      </div>
-    </a>
-    <a href="/services/lighting/" class="svc-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/optimized/studio-s11.webp" alt="Lighting and Production" width="1600" height="2402" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Lighting & Production</div>
-        <p class="svc-desc">State-of-the-art lighting throughout, infinitely configurable for any colour and intensity. Create the perfect atmosphere for every session, every time.</p>
-      </div>
-    </a>
-    <a href="/services/catering/" class="svc-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/optimized/studio-img2311.webp" alt="Hospitality and lounge space at Salvation Studios" width="1600" height="1067" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Catering</div>
-        <p class="svc-desc">Catering can be arranged project-by-project, with the current site describing locally prepared options from simple, hearty food through to gourmet quality.</p>
-      </div>
-    </a>
+  <div class="svc-pills reveal">
+    <a href="/services/recording/" class="svc-pill">Recording</a>
+    <a href="/services/mixing/" class="svc-pill">Mixing</a>
+    <a href="/services/mastering/" class="svc-pill">Mastering</a>
+    <a href="/rooms/writing-rooms/" class="svc-pill">Writing</a>
+    <a href="/services/live-videos/" class="svc-pill">Live Videos</a>
+    <a href="/services/accommodation/" class="svc-pill">Accommodation</a>
+    <a href="/services/catering/" class="svc-pill">Catering &amp; Hospitality</a>
   </div>
 </section>
 
