@@ -363,6 +363,47 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border: 1px solid rgba(167,139,250,0.18);
   box-shadow: 0 32px 90px rgba(0,0,0,0.44);
 }
+.enquiry-form {
+  margin-top: 36px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  background: rgba(22,0,40,0.78);
+  display: grid;
+  gap: 18px;
+}
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.form-field { display: grid; gap: 8px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--pale); }
+.form-field input, .form-field select, .form-field textarea {
+  min-height: 46px;
+  border: 1px solid rgba(167,139,250,.28);
+  border-radius: 10px;
+  background: rgba(7,0,15,.72);
+  color: var(--white);
+  padding: 13px 14px;
+  font: inherit;
+  font-size: 14px;
+}
+.form-field textarea { min-height: 130px; resize: vertical; line-height: 1.7; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: 2px solid var(--glow); outline-offset: 2px; }
+.form-note, .form-status { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.form-status[hidden] { display: none; }
+.enquiry-form .btn-primary { justify-self: start; cursor: pointer; }
+.home-enquiry-card {
+  margin-top: clamp(28px, 5vw, 54px);
+  border: 1px solid rgba(167,139,250,0.18);
+  border-radius: 22px;
+  padding: clamp(24px, 4vw, 36px);
+  background:
+    radial-gradient(circle at 82% 12%, rgba(192,132,252,0.12), transparent 32%),
+    linear-gradient(145deg, rgba(18,0,42,0.78), rgba(7,0,15,0.56));
+  box-shadow: 0 28px 80px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.home-enquiry-card .label { display: block; }
+.home-enquiry-card .h3-serif { margin-bottom: 14px; }
+.home-enquiry-card .body-text { max-width: 620px; }
 .welcome-photo-stack {
   position: relative; height: 580px;
 }
@@ -1147,6 +1188,9 @@ footer {
   .seo-spotlight .btn-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .seo-spotlight .btn-primary, .seo-spotlight .btn-outline { width: 100%; text-align: center; padding: 16px 18px; font-size: 14px; }
   .seo-spotlight .photo-frame { min-height: 360px; max-height: 460px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .enquiry-form { padding: 22px; }
+  .enquiry-form .btn-primary { justify-self: stretch; text-align: center; width: 100%; }
 
   /* Booking */
   .booking-band { min-height: auto; padding: 64px 20px; }
@@ -1882,10 +1926,31 @@ html      { scroll-behavior: auto; }
       <h2 class="h2-serif">Built for artists searching for a <em>real studio in Brighton</em>.</h2>
       <p class="body-text">Salvation is a world-class recording, mixing and writing complex in Brighton and Hove: a restored 1910 hall with a 13m live room, restored 1973 Neve 8068 console, ATC monitoring, writing rooms, isolation, vintage outboard and rare backline.</p>
       <p class="body-text">Explore dedicated pages for recording in Brighton, the live room, the control room, writing rooms, equipment, testimonials and enquiries.</p>
-      <div class="btn-row seo-actions"><a href="/contact/" class="btn-primary">Enquire Now</a><a href="/recording-studio-brighton/" class="btn-outline">Recording Studio Brighton</a></div>
+      <div class="btn-row seo-actions"><a href="#homepage-enquiry-form" class="btn-primary">Enquire Now</a><a href="/recording-studio-brighton/" class="btn-outline">Recording Studio Brighton</a></div>
     </div>
     <div class="photo-frame tall"><img src="/photos/optimized/studio-sfpb.webp" alt="Grand piano in the Salvation Studios live room Brighton" width="2200" height="1467" decoding="async" loading="lazy"></div>
   </div>
+  <div class="home-enquiry-card" id="homepage-enquiry-form">
+      <span class="label">Enquiry form</span>
+      <h3 class="h3-serif">Send Salvation a structured session brief.</h3>
+      <p class="body-text">This form opens a pre-filled email to Salvation. A direct backend can be connected later once the final approved destination is chosen; for now it keeps every enquiry transparent and reviewable.</p>
+      <form class="enquiry-form" data-analytics="studio-enquiry-form">
+        <div class="form-grid">
+          <div class="form-field"><label for="home-name">Name</label><input id="home-name" name="name" autocomplete="name" required></div>
+          <div class="form-field"><label for="home-artist-company">Artist / company</label><input id="home-artist-company" name="artist_company" autocomplete="organization"></div>
+          <div class="form-field"><label for="home-email">Email</label><input id="home-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="form-field"><label for="home-phone">Phone</label><input id="home-phone" name="phone" type="tel" autocomplete="tel"></div>
+          <div class="form-field"><label for="home-session-type">Session type</label><select id="home-session-type" name="session_type" required><option value="">Choose one</option><option>Recording / tracking</option><option>Mixing</option><option>Dry hire</option><option>Writing rooms / writing camp</option><option>Producer or engineer support</option><option>Lighting / filming / content</option><option>Other / not sure yet</option></select></div>
+          <div class="form-field"><label for="home-dates">Preferred dates</label><input id="home-dates" name="dates" placeholder="Dates, duration, flexibility"></div>
+          <div class="form-field full"><label for="home-requirements">Rooms, people and support</label><input id="home-requirements" name="requirements" placeholder="Team size, room preference, engineer/producer support, gear/backline needs"></div>
+          <div class="form-field full"><label for="home-visit-details">Visit details</label><input id="home-visit-details" name="visit_details" placeholder="Parking/loading, access, catering, accommodation, filming or lighting needs"></div>
+          <div class="form-field full"><label for="home-message">Project brief</label><textarea id="home-message" name="message" required placeholder="Tell Salvation what you are making, references/links, session goals and any practical logistics."></textarea></div>
+        </div>
+        <p class="form-note">By sending an enquiry you are asking Salvation Studios to reply using the details provided. Do not include sensitive payment information in this form. If your browser does not open an email client, copy the details and email <a href="mailto:info@salvationstudios.co.uk">info@salvationstudios.co.uk</a>.</p>
+        <button class="btn-primary" type="submit" data-analytics="form-submit-click">Open Email Enquiry</button>
+        <p class="form-status" role="status" hidden></p>
+      </form>
+    </div>
 </section>
 
 <!-- ─── FOOTER ─── -->
@@ -1991,6 +2056,41 @@ if (hamburger && mobileMenu) {
   mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMobileMenu(false)));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setMobileMenu(false); });
 }
+
+function track(eventName, detail) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(Object.assign({ event: eventName }, detail || {}));
+}
+document.querySelectorAll('[data-analytics]').forEach(el => {
+  el.addEventListener('click', () => track('salvation_click', { target: el.getAttribute('data-analytics'), href: el.getAttribute('href') || '' }));
+});
+document.querySelectorAll('.enquiry-form').forEach(form => {
+  const status = form.querySelector('.form-status');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const lines = [
+      'Name: ' + (data.get('name') || ''),
+      'Artist / company: ' + (data.get('artist_company') || ''),
+      'Email: ' + (data.get('email') || ''),
+      'Phone: ' + (data.get('phone') || ''),
+      'Session type: ' + (data.get('session_type') || ''),
+      'Preferred dates: ' + (data.get('dates') || ''),
+      'People / rooms / support: ' + (data.get('requirements') || ''),
+      'Visit details: ' + (data.get('visit_details') || ''),
+      '',
+      'Project brief:',
+      data.get('message') || ''
+    ];
+    track('salvation_enquiry_mailto', { session_type: data.get('session_type') || '' });
+    const href = 'mailto:info@salvationstudios.co.uk?subject=' + encodeURIComponent('Studio session enquiry - Salvation Studios') + '&body=' + encodeURIComponent(lines.join('\n'));
+    if (status) {
+      status.hidden = false;
+      status.textContent = 'Opening your email client with the session brief. If it does not open, email info@salvationstudios.co.uk with these details.';
+    }
+    window.location.href = href;
+  });
+});
 
 // ── 3D card tilt on mouse move ──
 const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
