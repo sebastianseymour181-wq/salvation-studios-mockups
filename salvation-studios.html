@@ -630,14 +630,9 @@ footer {
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 60px; margin-bottom: 60px;
 }
-.footer-logo {
-  font-family: 'Pacifico', cursive; font-weight: 400;
-  font-size: 26px; letter-spacing: 0.02em; color: var(--glow);
-  color: #C77DFF;
-  text-shadow: 0 0 4px #fff, 0 0 12px #C77DFF, 0 0 28px #9B30FF, 0 0 60px rgba(155,48,255,0.6), 0 0 100px rgba(155,48,255,0.3);
-  margin-bottom: 16px;
-}
-.footer-logo span { color: var(--violet); }
+.footer-logo { margin-bottom: 16px; }
+.footer-logo a { display: inline-block; }
+.footer-logo img { width: 140px; height: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(192,132,252,0.25)); }
 .footer-tagline { font-size: 13px; line-height: 1.9; color: var(--muted); }
 .footer-head {
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
@@ -1656,7 +1651,7 @@ html      { scroll-behavior: auto; }
 <footer>
   <div class="footer-top">
     <div>
-      <div class="footer-logo">Salvation<span>.</span></div>
+      <div class="footer-logo"><a href="/"><img src="/logo.png" alt="Salvation Studios" width="140" height="67" decoding="async" loading="lazy"></a></div>
       <p class="footer-tagline">Brighton's premier recording studio.<br>Built with obsession. Designed for sound.<br>A five-year labour of love.</p>
     </div>
     <div>
