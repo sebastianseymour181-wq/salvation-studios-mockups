@@ -101,5 +101,5 @@
 <script>
 document.documentElement.classList.add('js');
 (function(){ const nav=document.getElementById('nav'); if(nav) window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true}); document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible')); const hamburger=document.getElementById('hamburger'); const mobileMenu=document.getElementById('mobileMenu'); let lastFocus=null; function setMenu(open){ if(!hamburger||!mobileMenu) return; if(open) lastFocus=document.activeElement; mobileMenu.classList.toggle('open',open); hamburger.classList.toggle('open',open); hamburger.setAttribute('aria-expanded',open?'true':'false'); document.body.style.overflow=open?'hidden':''; if(open){ const first=mobileMenu.querySelector('a'); if(first) first.focus({preventScroll:true}); } else if(lastFocus&&typeof lastFocus.focus==='function') lastFocus.focus({preventScroll:true}); } if(hamburger&&mobileMenu){ hamburger.addEventListener('click',()=>setMenu(!mobileMenu.classList.contains('open'))); mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false))); document.addEventListener('keydown',e=>{ if(e.key==='Escape') setMenu(false); }); } })();
-</script></body>
+</script><script src="/search.js" defer></script></body>
 </html>
