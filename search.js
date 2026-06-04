@@ -274,7 +274,7 @@
   width: 38px; height: 38px; border-radius: 50%;
   background: rgba(124,58,237,0.1); border: 1px solid rgba(139,92,246,0.3);
   color: #D8B4FE; cursor: pointer; transition: background .2s, border-color .2s;
-  flex-shrink: 0; margin-right: 8px;
+  flex-shrink: 0; margin-left: 16px;
 }
 .ss-btn:hover { background: rgba(124,58,237,0.22); border-color: rgba(157,95,245,0.6); color: #F5F3FF; }
 .ss-overlay {
@@ -318,7 +318,7 @@
 .ss-hint {
   font-size: 11px; font-family: 'Montserrat', sans-serif;
   letter-spacing: .09em; text-transform: uppercase;
-  color: #9B7EC8; margin-bottom: 14px;
+  color: #9B7EC8; margin-bottom: 14px; text-align: center;
 }
 .ss-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .ss-chip {
@@ -332,7 +332,7 @@
   font-size: 10px; font-family: 'Montserrat', sans-serif;
   letter-spacing: .1em; text-transform: uppercase; color: #9B7EC8;
   margin: 18px 0 6px; padding-bottom: 6px;
-  border-bottom: 1px solid rgba(139,92,246,0.15);
+  border-bottom: 1px solid rgba(139,92,246,0.15); text-align: center;
 }
 .ss-group-title:first-child { margin-top: 0; }
 .ss-result {
@@ -365,9 +365,9 @@
       btn.id = 'ssBtn';
       btn.setAttribute('aria-label', 'Search the site');
       btn.innerHTML = SEARCH_BTN_SVG;
-      const navCta = nav.querySelector('.nav-cta');
-      if (navCta) nav.insertBefore(btn, navCta);
-      else nav.appendChild(btn);
+      const navLogo = nav.querySelector('.nav-logo');
+      if (navLogo) navLogo.appendChild(btn);
+      else nav.prepend(btn);
     }
 
     // Inject search overlay
