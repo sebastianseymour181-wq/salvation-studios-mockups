@@ -375,5 +375,159 @@
     "box_share": "https://xviimusicgroup.box.com/s/mwo0rfyevgbmzcy99902j6cfpukgkmzc",
     "box_title": "Salvation-2H-29.jpg",
     "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-recording-hero.jpg",
+    "optimized": "photos/optimized/salvation-service-recording-hero.webp",
+    "source_bytes": 1752009,
+    "optimized_bytes": 268292,
+    "source_dimensions": "2700x2160",
+    "optimized_dimensions": "1600x1280",
+    "drive_share": "https://drive.google.com/file/d/1hwd1RhcrmbhAmNIuMZIPdYfXHWBafnk6/view?usp=drive_link",
+    "drive_title": "Copy of Untitled-4258.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-recording-what.jpg",
+    "optimized": "photos/optimized/salvation-service-recording-what.webp",
+    "source_bytes": 459844,
+    "optimized_bytes": 48908,
+    "source_dimensions": "1024x768",
+    "optimized_dimensions": "1024x768",
+    "box_share": "https://xviimusicgroup.box.com/s/fmhcp1iulfkn0sbmdhvtg9xd7he1zj3x",
+    "box_title": "Untitled-185.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-recording-why.jpg",
+    "optimized": "photos/optimized/salvation-service-recording-why.webp",
+    "source_bytes": 529545,
+    "optimized_bytes": 136366,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/9btwopiiv1o8yvqgvm11739dkj8pjut2",
+    "box_title": "Salvation-1H -76.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-mixing-hero.jpg",
+    "optimized": "photos/optimized/salvation-service-mixing-hero.webp",
+    "source_bytes": 397666,
+    "optimized_bytes": 104900,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/gwhzcaselsfmqumzccipo622svenny22",
+    "box_title": "Salvation-1H -32.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-mixing-what.jpg",
+    "optimized": "photos/optimized/salvation-service-mixing-what.webp",
+    "source_bytes": 447020,
+    "optimized_bytes": 101510,
+    "source_dimensions": "1024x625",
+    "optimized_dimensions": "1024x625",
+    "box_share": "https://xviimusicgroup.box.com/s/j4lkbmltn0gsv6jfngvunf8w9vs07ej8",
+    "box_title": "Salvation-1H -71.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-mixing-room.jpg",
+    "optimized": "photos/optimized/salvation-service-mixing-room.webp",
+    "source_bytes": 373022,
+    "optimized_bytes": 108746,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/qcmh3jfn1vjiuizcd1bpo5hi25jlz8tm",
+    "box_title": "Salvation-1H -69.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-mixing-why.jpg",
+    "optimized": "photos/optimized/salvation-service-mixing-why.webp",
+    "source_bytes": 307166,
+    "optimized_bytes": 85682,
+    "source_dimensions": "1024x683",
+    "optimized_dimensions": "1024x683",
+    "box_share": "https://xviimusicgroup.box.com/s/eeqy50jjwosqrkbauwbxh7djmseaq66m",
+    "box_title": "Salvation-2H-140.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-mastering-hero.jpg",
+    "optimized": "photos/optimized/salvation-service-mastering-hero.webp",
+    "source_bytes": 140955,
+    "optimized_bytes": 49864,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/0222i5kt7kwa0wfvkfmmb54imkfu25yb",
+    "box_title": "IMG_3986.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-mastering-what.jpg",
+    "optimized": "photos/optimized/salvation-service-mastering-what.webp",
+    "source_bytes": 172034,
+    "optimized_bytes": 67462,
+    "source_dimensions": "1024x683",
+    "optimized_dimensions": "1024x683",
+    "box_share": "https://xviimusicgroup.box.com/s/kdjtvle3mn6v9ptjvjg7n9ei6ajq5q36",
+    "box_title": "IMG_4168.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-mastering-room.jpg",
+    "optimized": "photos/optimized/salvation-service-mastering-room.webp",
+    "source_bytes": 157535,
+    "optimized_bytes": 59488,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/h7r2qkjl8fufrqjhklzz32whksidhjch",
+    "box_title": "IMG_4054.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-mastering-why.jpg",
+    "optimized": "photos/optimized/salvation-service-mastering-why.webp",
+    "source_bytes": 307166,
+    "optimized_bytes": 85682,
+    "source_dimensions": "1024x683",
+    "optimized_dimensions": "1024x683",
+    "box_share": "https://xviimusicgroup.box.com/s/eeqy50jjwosqrkbauwbxh7djmseaq66m",
+    "box_title": "Salvation-2H-140.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-live-hero.jpg",
+    "optimized": "photos/optimized/salvation-service-live-hero.webp",
+    "source_bytes": 556475,
+    "optimized_bytes": 36350,
+    "source_dimensions": "1024x819",
+    "optimized_dimensions": "1024x819",
+    "box_share": "https://xviimusicgroup.box.com/s/ftwnykbziwe1oj79i40vcmlush1xxme9",
+    "box_title": "Untitled-076 copy.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-live-what.jpg",
+    "optimized": "photos/optimized/salvation-service-live-what.webp",
+    "source_bytes": 7253858,
+    "optimized_bytes": 201188,
+    "source_dimensions": "5959x3973",
+    "optimized_dimensions": "1600x1067",
+    "drive_share": "https://drive.google.com/file/d/1Ldjzcm1OJljtzuPrBgf8jnvfEVDrfxgI/view?usp=drive_link",
+    "drive_title": "Untitled live video sessions image",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
+  },
+  {
+    "source": "photos/client-services-2026-06-05/salvation-service-live-why.jpg",
+    "optimized": "photos/optimized/salvation-service-live-why.webp",
+    "source_bytes": 464252,
+    "optimized_bytes": 53170,
+    "source_dimensions": "1024x819",
+    "optimized_dimensions": "1024x819",
+    "box_share": "https://xviimusicgroup.box.com/s/z9wjqkvuorndnl2svr5j25y9fud20vbg",
+    "box_title": "Untitled-090 copy.jpg",
+    "note": "Service-page client image resolved into durable local asset on 2026-06-05; Box links use preview thumbnail because share URLs are HTML, Drive links use uc export download."
   }
 ]

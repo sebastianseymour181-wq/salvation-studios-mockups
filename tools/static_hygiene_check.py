@@ -28,6 +28,7 @@ INDEXABLE_HTML = {
     "testimonials.html",
     "contact.html",
     "spaces.html",
+    "services.html",
     "rooms/main-studio.html",
     "rooms/live-room.html",
     "rooms/control-room.html",
@@ -78,7 +79,7 @@ OLD_SITE_ROUTES = {
 
 # New public routes should not be redirected to themselves.
 NEW_PUBLIC_ROUTES = {
-    "/", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/contact", "/spaces",
+    "/", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/contact", "/spaces", "/services",
     "/rooms/main-studio", "/rooms/live-room", "/rooms/control-room", "/rooms/writing-rooms", "/rooms/the-bunker",
     "/services/recording", "/services/mixing", "/services/dry-hire",
     "/services/mastering", "/services/lighting", "/services/live-videos", "/services/accommodation", "/services/catering",
