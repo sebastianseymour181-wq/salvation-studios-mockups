@@ -5,6 +5,26 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/services/catering/",
+      "destination": "/services/accommodation-hospitality",
+      "permanent": true
+    },
+    {
+      "source": "/services/accommodation/",
+      "destination": "/services/accommodation-hospitality",
+      "permanent": true
+    },
+    {
+      "source": "/catering/",
+      "destination": "/services/accommodation-hospitality",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/",
+      "destination": "/services/accommodation-hospitality",
+      "permanent": true
+    },
+    {
       "source": "/accommodation",
       "destination": "/services/accommodation-hospitality",
       "permanent": true
