@@ -16,7 +16,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_HOST = "https://www.salvationstudios.co.uk"
-EXCLUDED_DIRS = {".git", ".superpowers", "node_modules"}
+EXCLUDED_DIRS = {".git", ".superpowers", ".vercel", "__pycache__", "node_modules"}
 EXPECTED_TEL = "tel:+443334445508"
 EXPECTED_EMAIL = "info@salvationstudios.co.uk"
 
