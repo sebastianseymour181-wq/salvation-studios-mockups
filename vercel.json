@@ -20,6 +20,11 @@
       "permanent": true
     },
     {
+      "source": "/main-studio",
+      "destination": "/rooms/main-studio",
+      "permanent": true
+    },
+    {
       "source": "/rooms/vocal-booth",
       "destination": "/rooms/live-room",
       "permanent": true
