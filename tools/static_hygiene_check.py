@@ -36,12 +36,11 @@ INDEXABLE_HTML = {
     "rooms/the-bunker.html",
     "services/recording.html",
     "services/mixing.html",
-    "services/dry-hire.html",
     "services/mastering.html",
-    "services/lighting.html",
     "services/live-videos.html",
-    "services/accommodation.html",
-    "services/catering.html",
+    "services/signature-sessions.html",
+    "services/giveaways-offers.html",
+    "services/accommodation-hospitality.html",
 }
 
 NOINDEX_HTML = {
@@ -81,8 +80,8 @@ OLD_SITE_ROUTES = {
 NEW_PUBLIC_ROUTES = {
     "/", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/contact", "/spaces", "/services",
     "/rooms/main-studio", "/rooms/live-room", "/rooms/control-room", "/rooms/writing-rooms", "/rooms/the-bunker",
-    "/services/recording", "/services/mixing", "/services/dry-hire",
-    "/services/mastering", "/services/lighting", "/services/live-videos", "/services/accommodation", "/services/catering",
+    "/services/recording", "/services/mixing",
+    "/services/mastering", "/services/live-videos", "/services/signature-sessions", "/services/giveaways-offers", "/services/accommodation-hospitality",
 }
 
 ASSET_EXTENSIONS = {

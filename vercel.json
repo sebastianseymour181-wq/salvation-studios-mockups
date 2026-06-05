@@ -5,6 +5,36 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/accommodation",
+      "destination": "/services/accommodation-hospitality",
+      "permanent": true
+    },
+    {
+      "source": "/services/accommodation",
+      "destination": "/services/accommodation-hospitality",
+      "permanent": true
+    },
+    {
+      "source": "/catering",
+      "destination": "/services/accommodation-hospitality",
+      "permanent": true
+    },
+    {
+      "source": "/services/catering",
+      "destination": "/services/accommodation-hospitality",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions",
+      "destination": "/services/signature-sessions",
+      "permanent": true
+    },
+    {
+      "source": "/giveaways-offers",
+      "destination": "/services/giveaways-offers",
+      "permanent": true
+    },
+    {
       "source": "/mastering",
       "destination": "/services/mastering",
       "permanent": true
@@ -12,11 +42,6 @@
     {
       "source": "/live-videos",
       "destination": "/services/live-videos",
-      "permanent": true
-    },
-    {
-      "source": "/accommodation",
-      "destination": "/services/accommodation",
       "permanent": true
     },
     {
@@ -171,17 +196,12 @@
     },
     {
       "source": "/dry-hire",
-      "destination": "/services/dry-hire",
+      "destination": "/services",
       "permanent": true
     },
     {
       "source": "/lighting",
-      "destination": "/services/lighting",
-      "permanent": true
-    },
-    {
-      "source": "/catering",
-      "destination": "/services/catering",
+      "destination": "/services",
       "permanent": true
     },
     {

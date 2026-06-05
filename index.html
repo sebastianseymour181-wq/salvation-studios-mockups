@@ -82,6 +82,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
 .nav-dropdown-menu a { display: block; padding: 10px 12px; border-radius: 10px; color: rgba(245,243,255,.82); background: transparent; }
 .nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus { color: var(--white); background: rgba(124,58,237,.16); }
+.nav-dropdown-menu[aria-label="Studio services"] { width: 292px; }
+.nav-dropdown-menu[aria-label="Studio services"] a { padding: 8px 11px; font-size: 11px; }
 
 .nav-cta {
   background:
@@ -1282,10 +1284,21 @@ html      { scroll-behavior: auto; }
     </li>
     <li><a href="/equipment/">Equipment</a></li>
     <li><a href="/gallery/">Gallery</a></li>
-    <li><a href="/services/">Services</a></li>
+    <li class="nav-dropdown">
+      <a href="/services/" class="nav-dropdown-toggle" aria-haspopup="true">Services</a>
+      <div class="nav-dropdown-menu" aria-label="Studio services">
+        <a href="/services/recording/">Recording</a>
+        <a href="/services/mixing/">Mixing</a>
+        <a href="/services/mastering/">Mastering</a>
+        <a href="/services/live-videos/">Live Videos</a>
+        <a href="/services/signature-sessions/">Signature Sessions</a>
+        <a href="/services/giveaways-offers/">Giveaways &amp; Offers</a>
+        <a href="/services/accommodation-hospitality/">Accommodation and Hospitality</a>
+      </div>
+    </li>
     <li><a href="/testimonials/">Testimonials</a></li>
   </ul>
-  <a href="/contact/" class="nav-cta">Enquire about your next session</a>
+  <a href="#home-enquiry" class="nav-cta">Enquire about your next session</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -1299,7 +1312,14 @@ html      { scroll-behavior: auto; }
   <a href="/rooms/the-bunker/">The Bunker</a>
   <a href="/equipment/">Equipment</a>
   <a href="/gallery/">Gallery</a>
-  <a href="/contact/" class="mobile-cta">Enquire about your next session</a>
+  <a href="/services/recording/">Recording</a>
+  <a href="/services/mixing/">Mixing</a>
+  <a href="/services/mastering/">Mastering</a>
+  <a href="/services/live-videos/">Live Videos</a>
+  <a href="/services/signature-sessions/">Signature Sessions</a>
+  <a href="/services/giveaways-offers/">Giveaways &amp; Offers</a>
+  <a href="/services/accommodation-hospitality/">Accommodation and Hospitality</a>
+  <a href="#home-enquiry" class="mobile-cta">Enquire about your next session</a>
 </div>
 
 <!-- ─── HERO ─── -->
@@ -1316,7 +1336,7 @@ html      { scroll-behavior: auto; }
     <h1 class="hero-h1">Brighton’s world-class recording studio and writing complex</h1>
     <p class="hero-desc">Recording, mixing and writing inside a restored 1910 hall with a 13m live room, John Flynn-designed control room and ATC monitoring.</p>
     <div class="hero-proof" aria-label="Studio highlights"><span>13m live room</span><span>John Flynn acoustics</span><span>ATC monitoring</span></div>
-    <a href="/contact/" class="btn-primary hero-book-btn">Enquire about your next session</a>
+    <a href="#home-enquiry" class="btn-primary hero-book-btn">Enquire about your next session</a>
     <div class="hero-btns">
       <a href="#rooms" class="btn-outline">Explore Our Spaces</a>
     </div>
@@ -1437,7 +1457,7 @@ html      { scroll-behavior: auto; }
       <p class="label">Our Spaces</p>
       <h2 class="h2-serif" style="margin-bottom:0">Every space,<br><em>purpose-built</em></h2>
     </div>
-    <a href="/contact/" class="section-link">Enquire about a room →</a>
+    <a href="#home-enquiry" class="section-link">Enquire about a room →</a>
   </div>
 
   <!-- MAIN STUDIO — hero card -->
@@ -1745,58 +1765,19 @@ html      { scroll-behavior: auto; }
     <a href="/services/recording/" class="svc-pill">Recording</a>
     <a href="/services/mixing/" class="svc-pill">Mixing</a>
     <a href="/services/mastering/" class="svc-pill">Mastering</a>
-    <a href="/rooms/writing-rooms/" class="svc-pill">Writing</a>
     <a href="/services/live-videos/" class="svc-pill">Live Videos</a>
-    <a href="/contact/#enquiry-form" class="svc-pill">Signature Sessions</a>
-    <a href="/services/accommodation/" class="svc-pill">Accommodation</a>
-    <a href="/services/catering/" class="svc-pill">Catering &amp; Hospitality</a>
+    <a href="/services/signature-sessions/" class="svc-pill">Signature Sessions</a>
+    <a href="/services/giveaways-offers/" class="svc-pill">Giveaways &amp; Offers</a>
+    <a href="/services/accommodation-hospitality/" class="svc-pill">Accommodation and Hospitality</a>
   </div>
   <div class="services-grid featured-services reveal" aria-label="Featured Salvation services">
-    <a href="/services/recording/" class="svc-card" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/optimized/studio-client-service-recording.webp" alt="Recording at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Recording</div>
-        <p class="svc-desc">Record your music in an acoustically exceptional environment with access to the best microphones, analogue outboard and an extensive collection of vintage instruments.</p>
-      </div>
-    </a>
-    <a href="/services/mixing/" class="svc-card" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/optimized/studio-client-service-mixing.webp" alt="Mixing at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Mixing</div>
-        <p class="svc-desc">Bring clarity, depth and balance to your recordings with professional mixing from our experienced in-house engineers, working in a precision-tuned listening environment.</p>
-      </div>
-    </a>
-    <a href="/services/mastering/" class="svc-card" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/client-notes-2026-06-05/mastering.jpg" data-box-source="https://xviimusicgroup.box.com/s/c5b2qwyw32eqxlcrhomghqazvu7cspw1" alt="Mastering service at Salvation Studios" width="1024" height="576" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Mastering</div>
-        <p class="svc-desc">Give your music the final polish with professional mastering carried out off-site in a dedicated mastering suite, using specialist mastering-grade equipment for the best possible translation.</p>
-      </div>
-    </a>
-    <a href="/services/live-videos/" class="svc-card" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/client-notes-2026-06-05/live-videos.jpg" data-box-source="https://xviimusicgroup.box.com/s/ftwnykbziwe1oj79i40vcmlush1xxme9" alt="Live video sessions at Salvation Studios" width="1024" height="819" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Live Videos</div>
-        <p class="svc-desc">Cut through the noise and capture your performance with high-quality live video sessions recorded in our beautiful studio space, combining exceptional sound with professional cinematography.</p>
-      </div>
-    </a>
-    <a href="/contact/#enquiry-form" class="svc-card" style="text-decoration:none;color:inherit;">
-      <div class="svc-photo">
-        <img src="/photos/client-notes-2026-06-05/signature-sessions.jpg" data-box-source="https://xviimusicgroup.box.com/s/gr9lcj4es7w9mjq0ml2lz1k3q0682f1t" alt="Signature Sessions at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy">
-      </div>
-      <div class="svc-body">
-        <div class="svc-name">Signature Sessions</div>
-        <p class="svc-desc">A unique opportunity to collaborate with elite producers in a world-class studio environment. Signature Sessions brings together artists and top-tier producers to create records at the highest level.</p>
-      </div>
-    </a>
+    <a href="/services/recording/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-client-service-recording.webp" alt="Recording at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Recording</div><p class="svc-desc">Record your music in a purpose-built studio designed for clarity, character and performance, from full band tracking to focused vocal sessions.</p></div></a>
+    <a href="/services/mixing/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-client-service-mixing.webp" alt="Mixing at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Mixing</div><p class="svc-desc">Professional mixing in a precision-tuned environment, using a hybrid analogue and digital workflow to bring your music into focus.</p></div></a>
+    <a href="/services/mastering/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-notes-2026-06-05/mastering.jpg" alt="Mastering service at Salvation Studios" width="1024" height="576" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Mastering</div><p class="svc-desc">Give your music the final polish with professional mastering support, dedicated monitoring and final quality control before release.</p></div></a>
+    <a href="/services/live-videos/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-notes-2026-06-05/live-videos.jpg" alt="Live video sessions at Salvation Studios" width="1024" height="819" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Live Videos</div><p class="svc-desc">High-quality live performance videos combining exceptional studio audio capture with professional videography and tailored atmosphere.</p></div></a>
+    <a href="/services/signature-sessions/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-notes-2026-06-05/signature-sessions.jpg" alt="Signature Sessions at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Signature Sessions</div><p class="svc-desc">A unique opportunity to create alongside respected producers and engineers in a focused, high-level creative environment.</p></div></a>
+    <a href="/services/giveaways-offers/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-sfpb.webp" alt="Salvation Studios artist opportunities" width="2200" height="1467" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Giveaways &amp; Offers</div><p class="svc-desc">Current artist opportunities, studio time giveaways, collaborative sessions and limited offers from Salvation Studios.</p></div></a>
+    <a href="/services/accommodation-hospitality/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-u590.webp" alt="Longer-session support space at Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Accommodation and Hospitality</div><p class="svc-desc">Practical stay and hospitality guidance for artists, producers and teams booking longer recording or writing sessions in Brighton.</p></div></a>
   </div>
 </section>
 
@@ -1807,7 +1788,7 @@ html      { scroll-behavior: auto; }
       <span class="label">Enquiry form</span>
       <h2 class="h2-serif" id="home-enquiry-title">Send Salvation a structured session brief.</h2>
       <p class="body-text">Tell the studio what you are making, when you want to come in, who is involved and what support you need. The form opens a pre-filled email so every enquiry stays transparent and reviewable.</p>
-      <div class="btn-row seo-actions"><a href="/contact/" class="btn-outline">Full contact page</a><a href="mailto:info@salvationstudios.co.uk" class="btn-outline" data-analytics="home-enquiry-email">Email Studio</a></div>
+      <div class="btn-row seo-actions"><a href="/contact/#enquiry-form" class="btn-outline">Full contact page</a><a href="mailto:info@salvationstudios.co.uk" class="btn-outline" data-analytics="home-enquiry-email">Email Studio</a></div>
     </div>
     <form class="enquiry-form" id="enquiry-form" data-analytics="studio-enquiry-form">
       <div class="form-grid">
@@ -1818,7 +1799,7 @@ html      { scroll-behavior: auto; }
         <div class="form-field"><label for="home_session_type">Session type</label><select id="home_session_type" name="session_type" required><option value="">Choose one</option><option>Recording / tracking</option><option>Mixing</option><option>Mastering</option><option>Live Videos</option><option>Signature Sessions</option><option>Dry hire</option><option>Writing rooms / writing camp</option><option>Producer or engineer support</option><option>Other / not sure yet</option></select></div>
         <div class="form-field"><label for="home_dates">Preferred dates</label><input id="home_dates" name="dates" placeholder="Dates, duration, flexibility"></div>
         <div class="form-field full"><label for="home_requirements">Rooms, people and support</label><input id="home_requirements" name="requirements" placeholder="Team size, room preference, engineer/producer support, gear/backline needs"></div>
-        <div class="form-field full"><label for="home_visit_details">Visit details</label><input id="home_visit_details" name="visit_details" placeholder="Parking/loading, access, catering, accommodation or filming needs"></div>
+        <div class="form-field full"><label for="home_visit_details">Visit details</label><input id="home_visit_details" name="visit_details" placeholder="Parking/loading, access, accommodation, hospitality or filming needs"></div>
         <div class="form-field full"><label for="home_message">Project brief</label><textarea id="home_message" name="message" placeholder="Tell Salvation about the artist, project, references, goals and any practical details."></textarea></div>
       </div>
       <p class="form-note">This opens a pre-filled email to info@salvationstudios.co.uk. If your email client does not open, copy the details and send them directly.</p>
@@ -1941,22 +1922,21 @@ html      { scroll-behavior: auto; }
     <div>
       <div class="footer-head">Services</div>
       <ul class="footer-links">
+        <li><a href="/services/">Services Overview</a></li>
         <li><a href="/services/recording/">Recording</a></li>
         <li><a href="/services/mixing/">Mixing</a></li>
         <li><a href="/services/mastering/">Mastering</a></li>
-        <li><a href="/services/dry-hire/">Dry Hire</a></li>
         <li><a href="/services/live-videos/">Live Videos</a></li>
-        <li><a href="/services/accommodation/">Accommodation</a></li>
-        <li><a href="/services/recording/">Producers & Engineers</a></li>
-        <li><a href="/services/catering/">Catering</a></li>
-        <li><a href="/services/lighting/">Lighting</a></li>
+        <li><a href="/services/signature-sessions/">Signature Sessions</a></li>
+        <li><a href="/services/giveaways-offers/">Giveaways &amp; Offers</a></li>
+        <li><a href="/services/accommodation-hospitality/">Accommodation and Hospitality</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-head">Find Us</div>
       <ul class="footer-links">
-        <li><a href="/contact/">Get in Touch</a></li>
-        <li><a href="/contact/">Enquire about your next session</a></li>
+        <li><a href="/contact/#enquiry-form">Get in Touch</a></li>
+        <li><a href="/contact/#enquiry-form">Enquire about your next session</a></li>
         <li><a href="https://www.instagram.com/salvationmusicstudiosbtn/">Instagram</a></li>
         <li><a href="https://www.facebook.com/profile.php?id=100093193308784">Facebook</a></li>
         <li><a href="https://share.google/0pPGxHfIi8WZ4qw2y">Brighton, UK</a></li>
