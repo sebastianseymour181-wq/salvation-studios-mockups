@@ -353,5 +353,27 @@
     "box_share": "https://xviimusicgroup.box.com/s/riir6yp71nngdpcdww90wh36hxek60uf",
     "box_title": "Salvation-1H -54.jpg",
     "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-service-recording.jpg",
+    "optimized": "photos/optimized/studio-client-service-recording.webp",
+    "source_bytes": 307166,
+    "optimized_bytes": 85682,
+    "source_dimensions": "1024x683",
+    "optimized_dimensions": "1024x683",
+    "box_share": "https://xviimusicgroup.box.com/s/eeqy50jjwosqrkbauwbxh7djmseaq66m",
+    "box_title": "Salvation-2H-140.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-service-mixing.jpg",
+    "optimized": "photos/optimized/studio-client-service-mixing.webp",
+    "source_bytes": 366170,
+    "optimized_bytes": 119570,
+    "source_dimensions": "1024x683",
+    "optimized_dimensions": "1024x683",
+    "box_share": "https://xviimusicgroup.box.com/s/mwo0rfyevgbmzcy99902j6cfpukgkmzc",
+    "box_title": "Salvation-2H-29.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
   }
 ]

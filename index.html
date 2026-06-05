@@ -757,6 +757,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
 .svc-pill:hover { border-color: var(--violet); background: rgba(124,58,237,0.2); color: var(--white); }
+.services-grid.featured-services { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 36px; }
 
 /* ─── FULL PHOTO CTA ─── */
 .booking-band {
@@ -1749,6 +1750,26 @@ html      { scroll-behavior: auto; }
     <a href="/services/live-videos/" class="svc-pill">Live Videos</a>
     <a href="/services/accommodation/" class="svc-pill">Accommodation</a>
     <a href="/services/catering/" class="svc-pill">Catering &amp; Hospitality</a>
+  </div>
+  <div class="services-grid featured-services reveal" aria-label="Featured Salvation services">
+    <a href="/services/recording/" class="svc-card" style="text-decoration:none;color:inherit;">
+      <div class="svc-photo">
+        <img src="/photos/optimized/studio-client-service-recording.webp" alt="Recording at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy">
+      </div>
+      <div class="svc-body">
+        <div class="svc-name">Recording</div>
+        <p class="svc-desc">Record your music in an acoustically exceptional environment with access to the best microphones, analogue outboard and an extensive collection of vintage instruments.</p>
+      </div>
+    </a>
+    <a href="/services/mixing/" class="svc-card" style="text-decoration:none;color:inherit;">
+      <div class="svc-photo">
+        <img src="/photos/optimized/studio-client-service-mixing.webp" alt="Mixing at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy">
+      </div>
+      <div class="svc-body">
+        <div class="svc-name">Mixing</div>
+        <p class="svc-desc">Bring clarity, depth and balance to your recordings with professional mixing from our experienced in-house engineers, working in a precision-tuned listening environment</p>
+      </div>
+    </a>
   </div>
 </section>
 
