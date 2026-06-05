@@ -93,16 +93,18 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .rtag { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--glow); border: 1px solid rgba(167,139,250,0.25); padding: 4px 12px; border-radius: 20px; }
 
-/* ─── GEAR LIST ─── */
-.gear-section { margin-bottom: 60px; }
-.gear-section:last-child { margin-bottom: 0; }
-.gear-section-title { font-family: 'Cormorant Garant', serif; font-size: 28px; font-weight: 300; color: var(--white); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); letter-spacing: -0.01em; }
-.gear-list { list-style: none; }
-.gear-list li { padding: 12px 0; border-bottom: 1px solid rgba(124,58,237,0.1); display: flex; align-items: baseline; gap: 14px; }
-.gear-list li::before { content: '—'; color: var(--purple); flex-shrink: 0; font-size: 13px; }
-.gear-name { color: var(--white); font-size: 14px; font-weight: 400; }
-.gear-detail { color: var(--muted); font-size: 12px; margin-left: auto; }
-.gear-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; }
+/* ─── GEAR TABLE ─── */
+.gear-tbl { width: 100%; border-collapse: collapse; }
+.gear-tbl tr { border-bottom: 1px solid rgba(124,58,237,0.1); }
+.gear-tbl tr.gt-item { transition: background .12s; cursor: default; }
+.gear-tbl tr.gt-item:hover { background: rgba(124,58,237,0.1); }
+.gear-tbl tr.gt-item:last-child { border-bottom: none; }
+.gear-tbl td { padding: 18px 16px; vertical-align: middle; }
+.gear-tbl .gt-cat td { padding: 32px 16px 10px; border-bottom: 1px solid rgba(124,58,237,0.25); }
+.gear-tbl .gt-cat-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--violet); font-family: 'Montserrat', sans-serif; font-weight: 600; }
+.gear-tbl .gt-n { color: var(--white); font-size: 14px; font-family: 'Montserrat', sans-serif; font-weight: 400; }
+.gear-tbl .gt-d { color: var(--muted); font-size: 12px; text-align: right; white-space: nowrap; min-width: 180px; font-family: 'Montserrat', sans-serif; }
+@media (max-width: 600px) { .gear-tbl .gt-d { display: none; } }
 
 /* ─── GALLERY ─── */
 .gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-auto-rows: 240px; gap: 14px; }
