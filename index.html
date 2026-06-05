@@ -1097,16 +1097,18 @@ footer {
   }
   .hero, .ticker-wrap, .client-ticker { width: 100%; max-width: 100%; }
   .hero { min-height: 100svh; }
-  .hero-content { position: absolute; left: 50%; right: auto; bottom: 30px; width: calc(100% - 40px); max-width: 430px; margin: 0; padding: 0; transform: translateX(-50%); }
+  .hero-content { position: absolute; left: 50%; right: auto; bottom: 30px; width: calc(100% - 64px); max-width: 326px; margin: 0; padding: 0; transform: translateX(-50%); }
   .hero-tag { display: none; }
   .hero-tag::before, .hero-tag::after { width: 20px; }
   .hero-salvation-wrap { display: none; }
+
   .hero-h1 { font-size: clamp(28px, 7.2vw, 33px); line-height: 1.05; letter-spacing: -0.02em; max-width: 100%; margin-bottom: 14px; overflow-wrap: normal; }
   .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .hero-desc { max-width: 100%; font-size: 12.5px; line-height: 1.55; color: rgba(245,243,255,0.9); margin-bottom: 16px; }
-  .hero-proof { gap: 8px; margin-bottom: 18px; max-width: 100%; justify-content: center; flex-wrap: wrap; }
-  .hero-proof span { padding: 7px 9px; font-size: 8px; letter-spacing: .12em; }
+  .hero-desc { max-width: 300px; font-size: 12px; line-height: 1.55; color: rgba(245,243,255,0.9); margin: 0 auto 16px; text-wrap: balance; }
+  .hero-proof { gap: 6px; margin: 0 auto 18px; max-width: 304px; justify-content: center; flex-wrap: wrap; }
+  .hero-proof span { padding: 7px 8px; font-size: 7.6px; letter-spacing: .1em; }
   .hero-book-btn { font-size: 18px !important; padding: 18px 24px !important; width: 100%; max-width: 100%; text-align: center; }
+
   .hero-btns { flex-direction: column; width: 100%; max-width: 100%; gap: 9px; }
   .hero-btns .btn-outline { text-align: center; width: 100%; padding: 16px 20px; }
   .hero-curve { display: none; }
@@ -1407,6 +1409,7 @@ html      { scroll-behavior: auto; }
     <p class="label">Our Story</p>
     <h2 class="h2-serif">A labour<br>of <em>love</em></h2>
     <div class="body-text">
+      <p>Built inside a restored 1910 Salvation Army hall, Salvation is designed from the ground up for sound. The space combines world-class acoustics, carefully curated vintage equipment and an inspiring and creative atmosphere.</p>
       <p>Salvation Studios is the result of five obsessive years of renovation — a longstanding piece of Brighton history transformed into a world-class recording facility.</p>
       <p>Designed by world-renowned acoustician and architect <strong style="color:var(--pale);font-weight:400">John Flynn</strong> — the man behind the control rooms of both <strong style="color:var(--pale);font-weight:400">Olympic and Abbey Road Studios</strong> — every room was built from the ground up with one purpose: to help musicians capture the sound in their heads.</p>
       <p>The result is a beautifully finished, massive-sounding, and deeply inspiring place to make music.</p>
@@ -1416,10 +1419,10 @@ html      { scroll-behavior: auto; }
 
   <div class="welcome-photo-stack reveal reveal-d2">
     <div class="wp-main">
-      <img src="/photos/optimized/studio-new-labour-large.webp" alt="Sunlit live room inside Salvation Studios" width="2200" height="1466" decoding="async" loading="lazy">
+      <img src="/photos/optimized/studio-client-labour-large.webp" alt="Sunlit live room inside Salvation Studios" width="2200" height="1466" decoding="async" loading="lazy">
     </div>
     <div class="wp-accent">
-      <img src="/photos/optimized/studio-new-labour-small.webp" alt="Studio lounge and writing setup" width="1600" height="1066" decoding="async" loading="lazy">
+      <img src="/photos/optimized/studio-client-labour-small.webp" alt="Studio lounge and writing setup" width="1600" height="1066" decoding="async" loading="lazy">
     </div>
   </div>
 </section>
@@ -1438,13 +1441,13 @@ html      { scroll-behavior: auto; }
   </div>
 
   <!-- MAIN STUDIO — hero card -->
-  <a href="/rooms/live-room/" class="live-room-feature reveal" style="text-decoration:none;color:inherit;">
+  <a href="/rooms/main-studio/" class="live-room-feature reveal" style="text-decoration:none;color:inherit;">
     <img src="/photos/optimized/studio-new-main-studio.webp" alt="The Main Studio live room at Salvation Studios" width="2200" height="1465" decoding="async" loading="lazy">
     <div class="live-room-info">
       <div class="live-room-text">
         <div class="room-num">01 — The main studio</div>
         <div class="room-title">The Main Studio</div>
-        <p class="room-desc">The main Salvation space is the restored 1910 hall: a 13-metre vaulted tracking room designed by John Flynn, with stained glass, natural light, a fully floated floor system and retractable isolation booths around the live floor.</p>
+        <p class="room-desc">The heart of Salvation. A stunning live room with vaulted ceilings and exceptional acoustics, paired with a control room centred around a vintage Neve console, ATC monitoring and an exceptional collection of analogue outboard. Designed for all types of sessions, especially bands, ensembles and large-scale projects.</p>
         <span class="room-click">View detailed studio specs →</span>
       </div>
       <div class="room-specs">
@@ -1458,7 +1461,7 @@ html      { scroll-behavior: auto; }
   <!-- THREE ROOM GRID -->
   <div class="rooms-grid">
     <a href="/rooms/control-room/" class="room-card reveal" style="text-decoration:none;color:inherit;">
-      <div class="room-card-img"><img src="/photos/optimized/studio-new-control.webp" alt="Control room at Salvation Studios" width="1600" height="1065" decoding="async" loading="lazy"></div>
+      <div class="room-card-img"><img src="/photos/optimized/studio-client-control-room.webp" alt="Control room at Salvation Studios" width="1600" height="1065" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
         <div class="room-num">02</div><div class="room-card-name">Control Room</div>
         <p class="room-card-desc">The John Flynn–designed control room with ATC soffit-mounted monitoring, rare outboard and sightlines into the main studio.</p>
@@ -1468,20 +1471,20 @@ html      { scroll-behavior: auto; }
     </a>
 
     <a href="/rooms/live-room/" class="room-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
-      <div class="room-card-img"><img src="/photos/optimized/studio-img3084.webp" alt="Live Room floor and performance space" width="1600" height="1067" decoding="async" loading="lazy"></div>
+      <div class="room-card-img"><img src="/photos/optimized/studio-client-live-room.webp" alt="Live Room floor and performance space" width="1600" height="1067" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
         <div class="room-num">03</div><div class="room-card-name">Live Room</div>
-        <p class="room-card-desc">The main live floor for drums, bands, strings, filmed performances and writing-camp centrepiece sessions inside the vaulted hall.</p>
+        <p class="room-card-desc">Bathed in natural light beneath a striking stained-glass window, the live room combines architectural character with exceptional acoustics, flexible isolation spaces and clear sight-lines.</p>
         <div class="room-tags"><span class="rtag">Bands</span><span class="rtag">Drums</span><span class="rtag">Live Takes</span></div>
         <span class="room-click">View specs →</span>
       </div>
     </a>
 
     <a href="/rooms/live-room/" class="room-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
-      <div class="room-card-img"><img src="/photos/optimized/studio-s17.webp" alt="Isolation and amp booth space" width="1600" height="2402" decoding="async" loading="lazy"></div>
+      <div class="room-card-img"><img src="/photos/optimized/studio-client-iso-amp-booth.webp" alt="Isolation and amp booth space" width="1024" height="682" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
         <div class="room-num">Live Room support</div><div class="room-card-name">Isolation &amp; Amp Booths</div>
-        <p class="room-card-desc">Two retractable, independently floated glass-fronted isolation booths plus a soundproof amp booth for simultaneous tracking.</p>
+        <p class="room-card-desc">The Main Studio features two large isolation booths, a vocal booth and a dedicated amp booth for flexible simultaneous recording with excellent isolation and clarity.</p>
         <div class="room-tags"><span class="rtag">Isolation</span><span class="rtag">Guitar</span><span class="rtag">Simultaneous</span></div>
         <span class="room-click">View specs →</span>
       </div>
@@ -1490,11 +1493,11 @@ html      { scroll-behavior: auto; }
 
   <!-- THE BUNKER -->
   <a href="/rooms/the-bunker/" class="bunker-feature reveal" aria-label="View detailed specs for The Bunker">
-    <img src="/photos/optimized/studio-u591.webp" alt="The Bunker writing and production room at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
+    <img src="/photos/optimized/studio-client-bunker.webp" alt="The Bunker writing and production room at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
     <div class="bunker-feature-info">
       <div class="room-num">07 — Writing / production wing</div>
       <div class="bunker-title">The Bunker</div>
-      <p class="bunker-desc">A self-contained creative zone for writing, production and longer studio days, anchored by source-listed Bunker gear and supported by the Mezzanine and Subterranean rooms below.</p>
+      <p class="bunker-desc">The Bunker is Salvation’s dedicated production, writing and mixing studio, combining a vintage Neve 54-series console, boutique analogue equipment, rare synthesizers, keyboards and an upright piano.</p>
       <span class="room-click">Open The Bunker studio page →</span>
     </div>
   </a>
@@ -1505,40 +1508,15 @@ html      { scroll-behavior: auto; }
   </div>
   <div class="writing-rooms">
     <a href="/rooms/the-bunker/#mezzanine-room" class="writing-card reveal" style="text-decoration:none;color:inherit;">
-      <img src="/photos/optimized/studio-u592.webp" alt="Mezzanine writing room at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
+      <img src="/photos/optimized/studio-client-mezzanine.webp" alt="Mezzanine writing room at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
       <div class="writing-card-info"><div class="room-num">B — 01</div><div class="writing-card-name">Mezzanine Room</div><p class="writing-card-desc">A light-filled elevated room with views into the main studio and a production setup confirmed by enquiry.</p><span class="room-click">View specs →</span></div>
     </a>
     <a href="/rooms/the-bunker/#subterranean-room" class="writing-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
-      <img src="/photos/optimized/studio-u590.webp" alt="Subterranean writing lounge at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
+      <img src="/photos/optimized/studio-client-subterranean.webp" alt="Subterranean writing lounge at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
       <div class="writing-card-info"><div class="room-num">B — 02</div><div class="writing-card-name">Subterranean Room</div><p class="writing-card-desc">A comfortable underground writing/chillout room with kitchen, seating, TV/PS5 and configurable creative setup.</p><span class="room-click">View specs →</span></div>
     </a>
   </div>
 </section>
-
-<!-- ─── IN THE ROOM ─── -->
-<section class="in-room">
-  <div class="reveal">
-    <p class="label">Studio in Session</p>
-    <h2 class="h2-serif">Where artists<br>come to <em>create</em></h2>
-  </div>
-  <div class="in-room-grid">
-    <div class="in-room-photo reveal reveal-d1">
-      <img src="/photos/optimized/studio-img3084.webp" alt="Live room session space at Salvation Studios" width="1600" height="1067" decoding="async" loading="lazy">
-      <div class="in-room-caption">
-        <div class="in-room-caption-name">On the Live Floor</div>
-        <div class="in-room-caption-role">Space for bands, vocals, strings and filmed takes</div>
-      </div>
-    </div>
-    <div class="in-room-photo reveal reveal-d2">
-      <img src="/photos/optimized/studio-sfpb.webp" alt="Grand piano and live room at Salvation Studios" width="1600" height="1067" decoding="async" loading="lazy">
-      <div class="in-room-caption">
-        <div class="in-room-caption-name">In the Main Studio</div>
-        <div class="in-room-caption-role">The 1910 hall at the centre of the complex</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- ─── TESTIMONIALS ─── -->
 <section class="testimonials" id="testimonials">
@@ -1760,7 +1738,8 @@ html      { scroll-behavior: auto; }
 <section class="services" id="services">
   <div class="reveal">
     <p class="label">What We Offer</p>
-    <h2 class="h2-serif">Full service,<br><em>your way</em></h2>
+    <h2 class="h2-serif">What We Do</h2>
+    <p class="body-text services-intro">From tracking live bands to finishing mixes, Salvation offers a full range of professional studio services.</p>
   </div>
   <div class="svc-pills reveal">
     <a href="/services/recording/" class="svc-pill">Recording</a>
@@ -1778,12 +1757,11 @@ html      { scroll-behavior: auto; }
   <div class="two-col top">
     <div class="seo-copy-card">
       <span class="label">Recording Studio Brighton</span>
-      <h2 class="h2-serif">Built for artists searching for a <em>real studio in Brighton</em>.</h2>
-      <p class="body-text">Salvation is a world-class recording, mixing and writing complex in Brighton and Hove: a restored 1910 hall with a 13m live room, John Flynn-designed control room, ATC monitoring, writing rooms, isolation, vintage outboard and rare backline.</p>
-      <p class="body-text">Explore dedicated pages for recording in Brighton, the live room, the control room, writing rooms, equipment, testimonials and enquiries.</p>
+      <h2 class="h2-serif">Brighton’s world-class recording studio and writing complex</h2>
+      <p class="body-text">A purpose-built recording studio in Brighton UK, designed for artists, bands and producers who care about sound.</p>
       <div class="btn-row seo-actions"><a href="/contact/" class="btn-primary">Enquire Now</a><a href="/recording-studio-brighton/" class="btn-outline">Recording Studio Brighton</a></div>
     </div>
-    <div class="photo-frame tall"><img src="/photos/optimized/studio-sfpb.webp" alt="Grand piano in the Salvation Studios live room Brighton" width="2200" height="1467" decoding="async" loading="lazy"></div>
+    <div class="photo-frame tall"><img src="/photos/optimized/studio-client-brighton-intro.webp" alt="Salvation Studios live room in Brighton" width="1024" height="682" decoding="async" loading="lazy"></div>
   </div>
 </section>
 
@@ -1806,12 +1784,12 @@ html      { scroll-behavior: auto; }
       <img src="/photos/optimized/studio-img9386.webp" alt="Studio detail" width="1600" height="1067" decoding="async" loading="lazy">
     </div>
     <div class="gp reveal reveal-d3">
-      <img src="/photos/optimized/studio-img3084.webp" alt="Live room wide detail" width="1600" height="1067" decoding="async" loading="lazy">
+      <img src="/photos/optimized/studio-client-live-room.webp" alt="Live room wide detail" width="1600" height="1067" decoding="async" loading="lazy">
     </div>
 
     <!-- Row 2 -->
     <div class="gp wide reveal reveal-d1">
-      <img src="/photos/optimized/studio-u591.webp" alt="Writing room mixing desk" width="1600" height="900" decoding="async" loading="lazy">
+      <img src="/photos/optimized/studio-client-bunker.webp" alt="Writing room mixing desk" width="1600" height="900" decoding="async" loading="lazy">
     </div>
     <div class="gp reveal reveal-d2">
       <img src="/photos/optimized/studio-img2825.webp" alt="Live room detail" width="1600" height="1067" decoding="async" loading="lazy">
@@ -1822,7 +1800,7 @@ html      { scroll-behavior: auto; }
       <img src="/photos/optimized/studio-s6.webp" alt="Studio" width="1600" height="1067" decoding="async" loading="lazy">
     </div>
     <div class="gp xlarge reveal reveal-d1">
-      <img src="/photos/optimized/studio-img3084.webp" alt="Sunlit live room full view" width="2200" height="1467" decoding="async" loading="lazy">
+      <img src="/photos/optimized/studio-client-live-room.webp" alt="Sunlit live room full view" width="2200" height="1467" decoding="async" loading="lazy">
     </div>
     <div class="gp tall reveal reveal-d2">
       <img src="/photos/optimized/studio-s17.webp" alt="Keyboard collection" width="1600" height="2402" decoding="async" loading="lazy">
@@ -1874,7 +1852,7 @@ html      { scroll-behavior: auto; }
       <img src="/photos/optimized/studio-img2825.webp" alt="Studio" width="1600" height="1064" decoding="async" loading="lazy">
     </div>
     <div class="gp reveal reveal-d1">
-      <img src="/photos/optimized/studio-img3084.webp" alt="Studio" width="2200" height="1625" decoding="async" loading="lazy">
+      <img src="/photos/optimized/studio-client-live-room.webp" alt="Studio" width="2200" height="1625" decoding="async" loading="lazy">
     </div>
     <div class="gp wide reveal reveal-d2">
       <img src="/photos/optimized/studio-s23.webp" alt="Keyboard detail" width="1600" height="900" decoding="async" loading="lazy">

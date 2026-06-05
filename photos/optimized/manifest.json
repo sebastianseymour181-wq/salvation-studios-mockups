@@ -254,5 +254,104 @@
     "optimized_bytes": 250462,
     "source_dimensions": "6240x4160",
     "optimized_dimensions": "2200x1467"
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-brighton-intro.jpg",
+    "optimized": "photos/optimized/studio-client-brighton-intro.webp",
+    "source_bytes": 497196,
+    "optimized_bytes": 128280,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/8si4dycmn1zvmo2kupzn9xjt20wjr9s1",
+    "box_title": "Salvation-1H -87.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-labour-large.jpg",
+    "optimized": "photos/optimized/studio-client-labour-large.webp",
+    "source_bytes": 375141,
+    "optimized_bytes": 96860,
+    "source_dimensions": "1024x683",
+    "optimized_dimensions": "1024x683",
+    "box_share": "https://xviimusicgroup.box.com/s/nbwh8aa1t1nb4f2iphhks5peo3dm650l",
+    "box_title": "Salvation-2H-124.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-labour-small.jpg",
+    "optimized": "photos/optimized/studio-client-labour-small.webp",
+    "source_bytes": 527038,
+    "optimized_bytes": 153096,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/90l159qhed2odpdzdavst28bfapj5ckf",
+    "box_title": "Salvation-1H -67.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-control-room.jpg",
+    "optimized": "photos/optimized/studio-client-control-room.webp",
+    "source_bytes": 494187,
+    "optimized_bytes": 118732,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/zw4eyn3rd6ugkhsv6m212myjtpx2m5zc",
+    "box_title": "Salvation-1H -68.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-live-room.jpg",
+    "optimized": "photos/optimized/studio-client-live-room.webp",
+    "source_bytes": 465033,
+    "optimized_bytes": 108708,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/t37fsotrtzp838utl4eczlwcphrhm6ar",
+    "box_title": "Salvation-1H -61.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-iso-amp-booth.jpg",
+    "optimized": "photos/optimized/studio-client-iso-amp-booth.webp",
+    "source_bytes": 529545,
+    "optimized_bytes": 148184,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/9btwopiiv1o8yvqgvm11739dkj8pjut2",
+    "box_title": "Salvation-1H -76.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-bunker.jpg",
+    "optimized": "photos/optimized/studio-client-bunker.webp",
+    "source_bytes": 405424,
+    "optimized_bytes": 106552,
+    "source_dimensions": "1024x683",
+    "optimized_dimensions": "1024x683",
+    "box_share": "https://xviimusicgroup.box.com/s/kedl5t96yirqe046dnztbl01aedccs50",
+    "box_title": "Salvation-1H -5.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-mezzanine.jpg",
+    "optimized": "photos/optimized/studio-client-mezzanine.webp",
+    "source_bytes": 288210,
+    "optimized_bytes": 49872,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/ax9ja7ka4k000ul3be2t9mow9fjmknas",
+    "box_title": "Salvation-2H-182.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
+  },
+  {
+    "source": "photos/client-supplied-2026-06-05/studio-client-subterranean.jpg",
+    "optimized": "photos/optimized/studio-client-subterranean.webp",
+    "source_bytes": 390383,
+    "optimized_bytes": 130964,
+    "source_dimensions": "1024x682",
+    "optimized_dimensions": "1024x682",
+    "box_share": "https://xviimusicgroup.box.com/s/riir6yp71nngdpcdww90wh36hxek60uf",
+    "box_title": "Salvation-1H -54.jpg",
+    "note": "Client-supplied Box image downloaded via Box preview thumbnail on 2026-06-05 because share URL is not a durable direct image URL."
   }
 ]
