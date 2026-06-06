@@ -137,6 +137,10 @@ class LinkParser(HTMLParser):
         self.attrs: list[tuple[str, str, str]] = []
         self.ids: set[str] = set()
         self.json_ld: list[str] = []
+        self.title_parts: list[str] = []
+        self.meta: list[dict[str, str]] = []
+        self.h1_count = 0
+        self._in_title = False
         self._in_json_ld = False
         self._buf: list[str] = []
 
@@ -144,21 +148,43 @@ class LinkParser(HTMLParser):
         attr_map = {k.lower(): v or "" for k, v in attrs}
         if "id" in attr_map:
             self.ids.add(attr_map["id"])
+        if tag.lower() == "h1":
+            self.h1_count += 1
+        if tag.lower() == "meta":
+            self.meta.append(attr_map)
         for name in ("href", "src"):
             if name in attr_map:
                 self.attrs.append((tag.lower(), name, attr_map[name]))
+        if tag.lower() == "title":
+            self._in_title = True
         if tag.lower() == "script" and attr_map.get("type", "").lower() == "application/ld+json":
             self._in_json_ld = True
             self._buf = []
 
     def handle_endtag(self, tag: str) -> None:
+        if tag.lower() == "title":
+            self._in_title = False
         if tag.lower() == "script" and self._in_json_ld:
             self.json_ld.append("".join(self._buf).strip())
             self._in_json_ld = False
 
     def handle_data(self, data: str) -> None:
+        if self._in_title:
+            self.title_parts.append(data)
         if self._in_json_ld:
             self._buf.append(data)
+
+    @property
+    def title(self) -> str:
+        return " ".join("".join(self.title_parts).split())
+
+    def meta_content(self, *, name: str | None = None, prop: str | None = None) -> str:
+        for item in self.meta:
+            if name and item.get("name", "").lower() == name.lower():
+                return item.get("content", "").strip()
+            if prop and item.get("property", "").lower() == prop.lower():
+                return item.get("content", "").strip()
+        return ""
 
 
 def parse_html(path: Path) -> LinkParser:
@@ -238,6 +264,18 @@ def main() -> int:
             expected = clean_url_for(relative)
             if not canonical or canonical.group(1) != expected:
                 failures.append(f"canonical mismatch in {relative}: expected {expected}")
+            title = parser.title
+            description = parser.meta_content(name="description")
+            og_title = parser.meta_content(prop="og:title")
+            og_description = parser.meta_content(prop="og:description")
+            if not (25 <= len(title) <= 70):
+                failures.append(f"SEO title length out of range in {relative}: {len(title)} chars")
+            if not (80 <= len(description) <= 170):
+                failures.append(f"SEO description length out of range in {relative}: {len(description)} chars")
+            if parser.h1_count != 1:
+                failures.append(f"expected exactly one h1 in {relative}, found {parser.h1_count}")
+            if not og_title or not og_description:
+                failures.append(f"missing Open Graph title/description in {relative}")
         if relative in NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*nofollow[\"']", text, re.I):
             failures.append(f"noindex meta missing from non-production page {relative}")
 
