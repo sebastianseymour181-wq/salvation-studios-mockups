@@ -26,17 +26,19 @@ INDEXABLE = {
     "testimonials.html",
     "contact.html",
     "spaces.html",
+    "services.html",
+    "rooms/main-studio.html",
     "rooms/live-room.html",
     "rooms/control-room.html",
     "rooms/writing-rooms.html",
     "rooms/the-bunker.html",
-    "rooms/vocal-booth.html",
-    "rooms/iso-booths.html",
     "services/recording.html",
     "services/mixing.html",
-    "services/dry-hire.html",
-    "services/lighting.html",
-    "services/catering.html",
+    "services/mastering.html",
+    "services/live-videos.html",
+    "services/signature-sessions.html",
+    "services/giveaways-offers.html",
+    "services/accommodation-hospitality.html",
 }
 
 
@@ -257,8 +259,8 @@ def markdown_report(records: list[PageRecord], generated_at: str) -> str:
     lines.append("1. Home `/` — brand proposition, primary internal links, global LocalBusiness/WebSite schema.")
     lines.append("2. `/recording-studio-brighton/` — main commercial SEO landing page for the #1 Google goal.")
     lines.append("3. `/contact/` — structured enquiry route and GBP/contact details.")
-    lines.append("4. Room pages: live room, control room, writing rooms, Bunker, vocal booth, isolation booths.")
-    lines.append("5. Service pages: recording, mixing, dry hire, lighting, catering.")
+    lines.append("4. Room pages: main studio, live room, control room, writing rooms and the Bunker.")
+    lines.append("5. Service pages: recording, mixing, mastering, live videos, signature sessions, giveaways/offers, accommodation/hospitality.")
     lines.append("6. Equipment, gallery, testimonials and spaces pages.")
     lines.append("")
     lines.append("## Route manifest")
