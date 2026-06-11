@@ -207,8 +207,8 @@
     ['Isolation Booths','Room','Simultaneous tracking · full separation','/rooms/iso-booths/'],
     ['Amp Booth','Room','Full isolation · guitar & bass at real volume','/rooms/live-room/'],
     ['The Bunker','Room','Self-contained writing & production wing','/rooms/the-bunker/'],
-    ['Mezzanine Room','Room','Elevated writing room overlooking main studio','/rooms/the-bunker/#mezzanine-room'],
-    ['Subterranean Room','Room','Underground writing & chill-out space','/rooms/the-bunker/#subterranean-room'],
+    ['Mezzanine Room','Room','Elevated writing room overlooking main studio','/rooms/writing-rooms/#mezzanine-room'],
+    ['Subterranean Room','Room','Underground writing & chill-out space','/rooms/writing-rooms/#subterranean-room'],
     ['Writing Rooms','Room','Bunker writing wing with production setup','/rooms/writing-rooms/'],
     ['Main Studio','Room','The full Salvation complex — hall, control room & booths','/rooms/main-studio/'],
 
