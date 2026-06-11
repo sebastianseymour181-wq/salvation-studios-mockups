@@ -256,7 +256,20 @@ def main() -> int:
     header_sources = {h.get("source") for h in config.get("headers", [])}
     if "/docs/:path*" not in header_sources:
         failures.append("docs directory is publicly deployable without noindex header")
-    if "/concept-:path*" not in header_sources:
+    expected_concept_header_sources = {
+        "/concept-index",
+        "/concept-index/",
+        "/concept-index.html",
+        "/concept-1-bunker",
+        "/concept-1-bunker/",
+        "/concept-2-bloom",
+        "/concept-2-bloom/",
+        "/concept-3-signal",
+        "/concept-3-signal/",
+        "/concept-4-void",
+        "/concept-4-void/",
+    }
+    if not expected_concept_header_sources.issubset(header_sources):
         failures.append("concept pages missing noindex header")
 
     for r in redirects:

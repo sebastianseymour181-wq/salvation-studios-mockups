@@ -28,6 +28,20 @@ function isEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function isAllowedOrigin(origin) {
+  if (!origin) return true;
+
+  try {
+    const { hostname, protocol } = new URL(origin);
+    if (protocol !== 'https:') return false;
+    return hostname === 'www.salvationstudios.co.uk'
+      || hostname === 'salvationstudios.co.uk'
+      || hostname.endsWith('.vercel.app');
+  } catch (_error) {
+    return false;
+  }
+}
+
 function escapeHtml(value) {
   return clean(value, 4000)
     .replace(/&/g, '&amp;')
@@ -91,7 +105,12 @@ async function sendWithResend(enquiry) {
     .split(',')
     .map(email => email.trim())
     .filter(Boolean);
-  const from = process.env.ENQUIRY_FROM_EMAIL || 'Salvation Studios <onboarding@resend.dev>';
+  const from = process.env.ENQUIRY_FROM_EMAIL;
+  if (!from) {
+    const error = new Error('Sender email is not configured');
+    error.statusCode = 503;
+    throw error;
+  }
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -120,6 +139,8 @@ async function sendWithResend(enquiry) {
 
 module.exports = async function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
 
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -129,8 +150,21 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    if (!isAllowedOrigin(req.headers.origin)) {
+      res.statusCode = 403;
+      res.end(JSON.stringify({ ok: false, error: 'Origin not allowed' }));
+      return;
+    }
+
     const rawBody = await readBody(req);
-    const payload = JSON.parse(rawBody || '{}');
+    let payload;
+    try {
+      payload = JSON.parse(rawBody || '{}');
+    } catch (_error) {
+      res.statusCode = 400;
+      res.end(JSON.stringify({ ok: false, error: 'Invalid JSON payload.' }));
+      return;
+    }
 
     if (clean(payload.website, 200)) {
       res.statusCode = 200;

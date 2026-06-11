@@ -80,6 +80,11 @@
       "permanent": true
     },
     {
+      "source": "/rooms/iso-booths/",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
       "source": "/bunker",
       "destination": "/rooms/the-bunker",
       "permanent": true
@@ -91,6 +96,11 @@
     },
     {
       "source": "/salvation-studios",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/salvation-studios/",
       "destination": "/",
       "permanent": true
     },
@@ -390,6 +400,11 @@
       "permanent": false
     },
     {
+      "source": "/concept-index/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/concept-index.html",
       "destination": "/",
       "permanent": false
@@ -400,7 +415,17 @@
       "permanent": false
     },
     {
+      "source": "/concept-1-bunker/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/concept-2-bloom",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/concept-2-bloom/",
       "destination": "/",
       "permanent": false
     },
@@ -410,9 +435,344 @@
       "permanent": false
     },
     {
+      "source": "/concept-3-signal/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/concept-4-void",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/concept-4-void/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/signature-sessions/",
+      "destination": "/services/signature-sessions",
+      "permanent": true
+    },
+    {
+      "source": "/giveaways-offers/",
+      "destination": "/services/giveaways-offers",
+      "permanent": true
+    },
+    {
+      "source": "/mastering/",
+      "destination": "/services/mastering",
+      "permanent": true
+    },
+    {
+      "source": "/live-videos/",
+      "destination": "/services/live-videos",
+      "permanent": true
+    },
+    {
+      "source": "/main-studio/",
+      "destination": "/rooms/main-studio",
+      "permanent": true
+    },
+    {
+      "source": "/rooms/vocal-booth/",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
+      "source": "/bunker/",
+      "destination": "/rooms/the-bunker",
+      "permanent": true
+    },
+    {
+      "source": "/the-bunker/",
+      "destination": "/rooms/the-bunker",
+      "permanent": true
+    },
+    {
+      "source": "/recording-studio/",
+      "destination": "/recording-studio-brighton",
+      "permanent": true
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/book-online/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/enquiries/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contactus/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/live-room/",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
+      "source": "/control-room/",
+      "destination": "/rooms/control-room",
+      "permanent": true
+    },
+    {
+      "source": "/vocal-booth/",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
+      "source": "/isolation-booth-1/",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
+      "source": "/isolation-booth-2/",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
+      "source": "/amp-booth/",
+      "destination": "/rooms/live-room",
+      "permanent": true
+    },
+    {
+      "source": "/writing-rooms/",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/live-room-as-a-writing-room/",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/control-room-as-a-writing-room/",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/subterranean-room/",
+      "destination": "/rooms/the-bunker",
+      "permanent": true
+    },
+    {
+      "source": "/mezzanine-room/",
+      "destination": "/rooms/the-bunker",
+      "permanent": true
+    },
+    {
+      "source": "/white-rooms/",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/general-5-6/",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/chillout-zone-kitchen-1/",
+      "destination": "/rooms/writing-rooms",
+      "permanent": true
+    },
+    {
+      "source": "/chillout-zone-kitchen-2/",
+      "destination": "/rooms/the-bunker",
+      "permanent": true
+    },
+    {
+      "source": "/general-5-2/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/general-clean/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dry-hire/",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/lighting/",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/producers-engineers-mixing/",
+      "destination": "/services/recording",
+      "permanent": true
+    },
+    {
+      "source": "/microphones/",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/outboard/",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/drums/",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/guitars/",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/amps/",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/basses/",
+      "destination": "/equipment",
+      "permanent": true
+    },
+    {
+      "source": "/what-the-clients-say/",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/studio-tour/",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/salvation-art/",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/jobs/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/meet-the-team/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/join-our-roster-of-session-musicians/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/competition-1/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/ep-giveaway/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/single-giveaway-2025/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/single-giveaway-2026/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/single-giveaway-2026-tiktok/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/phill-brown-competition/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/salvation-black-friday-sale/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-enquiries-ad-landing-page/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-signature-sessions-nick-brine/",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions-gavin-monaghan/",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions-matt-glasbey/",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions-nick-brine/",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/signature-sessions-phill-brown/",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/live-video-giveaway/",
+      "destination": "/services/live-videos",
+      "permanent": true
+    },
+    {
+      "source": "/live-videos-2025/",
+      "destination": "/services/live-videos",
+      "permanent": true
+    },
+    {
+      "source": "/live-videos-ad/",
+      "destination": "/services/live-videos",
+      "permanent": true
+    },
+    {
+      "source": "/live-videos-reel/",
+      "destination": "/services/live-videos",
+      "permanent": true
+    },
+    {
+      "source": "/video-showreel-email-1/",
+      "destination": "/services/live-videos",
+      "permanent": true
+    },
+    {
+      "source": "/video-showreel-email-2/",
+      "destination": "/services/live-videos",
+      "permanent": true
+    },
+    {
+      "source": "/test-landing-page-video/",
+      "destination": "/services/live-videos",
+      "permanent": true
     },
     {
       "source": "/(.*)\\.html",
@@ -431,7 +791,97 @@
       ]
     },
     {
-      "source": "/concept-:path*",
+      "source": "/concept-index",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-index/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-index.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-1-bunker",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-1-bunker/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-2-bloom",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-2-bloom/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-3-signal",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-3-signal/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-4-void",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concept-4-void/",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -449,13 +899,132 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/api/:path*",
       "headers": [
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow"
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://www.salvationstudios.co.uk"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about/",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/recording-studio-brighton/",
+      "destination": "/recording-studio-brighton.html"
+    },
+    {
+      "source": "/equipment/",
+      "destination": "/equipment.html"
+    },
+    {
+      "source": "/gallery/",
+      "destination": "/gallery.html"
+    },
+    {
+      "source": "/testimonials/",
+      "destination": "/testimonials.html"
+    },
+    {
+      "source": "/contact/",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/spaces/",
+      "destination": "/spaces.html"
+    },
+    {
+      "source": "/services/",
+      "destination": "/services.html"
+    },
+    {
+      "source": "/rooms/main-studio/",
+      "destination": "/rooms/main-studio.html"
+    },
+    {
+      "source": "/rooms/live-room/",
+      "destination": "/rooms/live-room.html"
+    },
+    {
+      "source": "/rooms/control-room/",
+      "destination": "/rooms/control-room.html"
+    },
+    {
+      "source": "/rooms/writing-rooms/",
+      "destination": "/rooms/writing-rooms.html"
+    },
+    {
+      "source": "/rooms/the-bunker/",
+      "destination": "/rooms/the-bunker.html"
+    },
+    {
+      "source": "/services/recording/",
+      "destination": "/services/recording.html"
+    },
+    {
+      "source": "/services/mixing/",
+      "destination": "/services/mixing.html"
+    },
+    {
+      "source": "/services/mastering/",
+      "destination": "/services/mastering.html"
+    },
+    {
+      "source": "/services/live-videos/",
+      "destination": "/services/live-videos.html"
+    },
+    {
+      "source": "/services/signature-sessions/",
+      "destination": "/services/signature-sessions.html"
+    },
+    {
+      "source": "/services/giveaways-offers/",
+      "destination": "/services/giveaways-offers.html"
+    },
+    {
+      "source": "/services/accommodation-hospitality/",
+      "destination": "/services/accommodation-hospitality.html"
     }
   ]
 }
