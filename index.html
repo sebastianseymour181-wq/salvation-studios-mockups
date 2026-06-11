@@ -302,9 +302,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ─── WELCOME ─── */
 .welcome {
-  padding: 120px 56px;
+  padding: 96px 56px 72px;
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 100px; align-items: center;
+  gap: 72px; align-items: center;
   position: relative;
 }
 .welcome::before {
@@ -467,6 +467,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   overflow: hidden; height: 560px;
   margin-bottom: 24px; cursor: default;
   display: block; width: 100%;
+  background: #120022 url('/photos/optimized/studio-new-main-studio.webp') center / cover no-repeat;
 }
 .live-room-feature img { transition: transform 0.7s ease; }
 .live-room-feature:hover img { transform: scale(1.03); }
@@ -474,8 +475,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   content: '';
   position: absolute; inset: 0;
   background:
-    linear-gradient(to top, rgba(7,0,15,0.97) 0%, rgba(7,0,15,0.88) 30%, rgba(7,0,15,0.65) 55%, rgba(7,0,15,0.2) 80%, transparent 100%),
-    linear-gradient(to right, rgba(109,40,217,0.35) 0%, transparent 55%);
+    linear-gradient(to top, rgba(7,0,15,0.9) 0%, rgba(7,0,15,0.72) 34%, rgba(7,0,15,0.38) 62%, rgba(7,0,15,0.08) 88%, transparent 100%),
+    linear-gradient(to right, rgba(109,40,217,0.18) 0%, transparent 58%);
 }
 .live-room-info {
   position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
@@ -1049,45 +1050,50 @@ footer {
 
 /* ─── RESPONSIVE — TABLET ─── */
 @media (max-width: 1100px) {
-  .nav { padding-left: 24px; padding-right: 24px; gap: 18px; }
+  .nav { padding-left: 24px; padding-right: 24px; gap: 18px; justify-content: center; }
+  .nav-logo { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); }
   .nav-logo img { height: 48px; }
   .nav.scrolled .nav-logo img { height: 42px; }
-  .nav-links { gap: 24px; }
-  .nav-cta { padding: 10px 16px; font-size: 11px; letter-spacing: 0.035em; }
-  .welcome { gap: 60px; }
+  .nav-links { flex: 0 1 auto; margin: 0 auto; justify-content: center; gap: clamp(18px, 2.6vw, 24px); }
+  .nav-cta { display: none; }
+  .welcome { gap: 48px; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
   .rooms-grid { grid-template-columns: 1fr 1fr; }
   .neve-content { width: 65%; }
 }
 
 @media (max-width: 980px) {
-  .nav { justify-content: flex-start; }
-  .nav-links { margin-left: auto; justify-content: flex-end; gap: clamp(16px, 2.4vw, 24px); }
-  .nav-cta { display: none; }
+  .nav { justify-content: center; }
+  .nav-links { margin: 0 auto; justify-content: center; gap: clamp(16px, 2.5vw, 24px); }
 
   .live-room-feature {
-    height: auto;
+    height: clamp(560px, 74vw, 680px);
     min-height: 0;
     overflow: hidden;
-    background: rgba(15,0,34,0.72);
-    border: 1px solid rgba(216,180,254,0.16);
+    background: #120022 url('/photos/optimized/studio-new-main-studio.webp') center / cover no-repeat;
+    border: 0;
   }
   .live-room-feature img {
-    position: relative;
-    height: clamp(320px, 42vw, 390px);
+    height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 18px 18px 0 0;
+    border-radius: 20px;
   }
-  .live-room-feature::after { display: none; }
+  .live-room-feature::after {
+    display: block;
+    background:
+      linear-gradient(to top, rgba(7,0,15,0.92) 0%, rgba(7,0,15,0.76) 36%, rgba(7,0,15,0.42) 66%, rgba(7,0,15,0.08) 100%),
+      linear-gradient(to right, rgba(109,40,217,0.16) 0%, transparent 62%);
+  }
   .live-room-info {
-    position: relative;
-    padding: 32px 30px 34px;
+    position: absolute;
+    padding: 34px 30px 36px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
-    background: linear-gradient(to bottom, rgba(7,0,15,0.94), rgba(14,0,31,0.98));
-    border-radius: 0 0 18px 18px;
+    justify-content: flex-end;
+    gap: 22px;
+    background: transparent;
+    border-radius: 0;
   }
   .live-room-text { max-width: 100%; }
   .room-specs { width: 100%; padding-left: 0; justify-content: flex-start; gap: clamp(18px, 5vw, 40px); }
@@ -1097,6 +1103,7 @@ footer {
 /* ─── RESPONSIVE — MOBILE ─── */
 @media (max-width: 768px) {
   .nav { padding: 10px 12px 12px; height: 108px; align-items: flex-start; justify-content: center; }
+  .nav-logo { position: static; transform: none; }
   .nav-links {
     display: grid;
     grid-template-columns: repeat(3, max-content);
@@ -1159,8 +1166,8 @@ footer {
   .hero-curve { display: none; }
 
   /* Welcome */
-  .welcome { padding: 72px 20px; grid-template-columns: 1fr; gap: 0; }
-  .welcome-photo-stack { height: 320px; margin-top: 48px; }
+  .welcome { padding: 72px 20px 52px; grid-template-columns: 1fr; gap: 0; }
+  .welcome-photo-stack { height: 320px; margin-top: 32px; }
   .wp-main { transform: none; right: 20px; bottom: 20px; }
   .wp-accent { transform: none; }
   .stat-row { grid-template-columns: repeat(3,1fr); }
@@ -1169,33 +1176,38 @@ footer {
   .rooms { padding: 72px 20px 80px; }
   .rooms-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 48px; }
   .live-room-feature {
-    height: auto;
+    height: clamp(590px, 128vw, 740px);
     min-height: 0;
-    display: flex;
-    flex-direction: column;
+    display: block;
     overflow: hidden;
-    background: rgba(15,0,34,0.72);
-    border: 1px solid rgba(216,180,254,0.16);
+    background: #120022 url('/photos/optimized/studio-new-main-studio.webp') center / cover no-repeat;
+    border: 0;
   }
   .live-room-feature img {
     position: relative;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 18px 18px 0 0;
+    border-radius: 18px;
   }
-  .live-room-feature::after { display: none; }
+  .live-room-feature::after {
+    display: block;
+    background:
+      linear-gradient(to top, rgba(7,0,15,0.94) 0%, rgba(7,0,15,0.78) 40%, rgba(7,0,15,0.44) 72%, rgba(7,0,15,0.08) 100%),
+      linear-gradient(to right, rgba(109,40,217,0.14) 0%, transparent 64%);
+  }
   .live-room-info {
-    position: relative;
+    position: absolute;
     padding: 26px 22px 28px;
     flex-direction: column;
     align-items: flex-start;
     gap: 22px;
-    background: linear-gradient(to bottom, rgba(7,0,15,0.94), rgba(14,0,31,0.98));
-    border-radius: 0 0 18px 18px;
+    justify-content: flex-end;
+    background: transparent;
+    border-radius: 0;
   }
   .live-room-text { max-width: 100%; }
-  .room-desc { font-size: 14px; line-height: 1.7; }
+  .room-desc { font-size: 13px; line-height: 1.65; }
   .room-specs { width: 100%; padding-left: 0; flex-direction: row; justify-content: space-between; gap: 12px; }
   .spec { text-align: center; }
   .spec-val { font-size: 38px; }
@@ -1502,14 +1514,14 @@ html      { scroll-behavior: auto; }
     <a href="#home-enquiry" class="section-link">Enquire about a room →</a>
   </div>
 
-  <!-- MAIN STUDIO — hero card -->
+  <!-- MAIN STUDIO — hero image -->
   <a href="/rooms/main-studio/" class="live-room-feature reveal" style="text-decoration:none;color:inherit;">
-    <img src="/photos/optimized/studio-new-main-studio.webp" alt="The Main Studio live room at Salvation Studios" width="2200" height="1465" decoding="async" loading="lazy">
+    <img src="/photos/optimized/studio-new-main-studio.webp" alt="The Main Studio live room at Salvation Studios" width="2200" height="1465" decoding="async" loading="eager">
     <div class="live-room-info">
       <div class="live-room-text">
         <div class="room-num">01 — The main studio</div>
         <div class="room-title">The Main Studio</div>
-        <p class="room-desc">The heart of Salvation. A stunning live room with vaulted ceilings and exceptional acoustics, paired with a control room centred around a vintage Neve console, ATC monitoring and an exceptional collection of analogue outboard. Designed for all types of sessions, especially bands, ensembles and large-scale projects.</p>
+        <p class="room-desc">The main studio is made up of a control room housing our 70s Neve 8068 console and ATC monitoring, as well as a spacious live room surrounded by a vocal booth, two glass-fronted isolation booths and a dedicated amp booth. The main studio is perfect for full-band live tracking, drum recording, overdubs, filmed live sessions and strings recording.</p>
         <span class="room-click">View detailed studio specs →</span>
       </div>
       <div class="room-specs">
@@ -2322,17 +2334,17 @@ if (gallerySection) {
   });
 
   gsap.from('.live-room-feature img', {
-    scale: 1.08,
-    opacity: 0,
+    scale: 1.04,
     duration: 1.2,
     ease: 'power2.out',
+    clearProps: 'transform',
     scrollTrigger: { trigger: '.live-room-feature', start: 'top 80%' }
   });
   gsap.from('.live-room-info', {
     y: 40,
-    opacity: 0,
     duration: 0.9,
     ease: 'power2.out',
+    clearProps: 'transform',
     scrollTrigger: { trigger: '.live-room-feature', start: 'top 65%' }
   });
 
