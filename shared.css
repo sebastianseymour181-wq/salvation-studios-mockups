@@ -230,7 +230,34 @@ footer { background: #040008; border-top: 1px solid var(--border); padding: 80px
   .nav-logo { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); }
   .nav-logo img { height: 48px; }
   .nav-links { flex: 0 1 auto; margin: 0 auto; justify-content: center; gap: clamp(18px, 2.6vw, 24px); }
-  .nav-cta { display: none; }
+  .nav-cta {
+    position: absolute;
+    right: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 86px;
+    min-height: 40px;
+    padding: 0;
+    color: transparent;
+    font-size: 0;
+  }
+  .nav-cta::before {
+    content: 'Enquire';
+    position: static;
+    inset: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    background: none;
+    opacity: 1;
+    mix-blend-mode: normal;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+  .nav-cta::after { display: none; }
   .three-col { grid-template-columns: 1fr 1fr; }
   .card-grid { grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }

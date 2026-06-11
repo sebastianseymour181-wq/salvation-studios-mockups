@@ -106,6 +106,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   box-shadow: 0 12px 34px rgba(var(--glow-rgb), 0.28), inset 0 1px 0 rgba(255,255,255,0.18);
   transform: translateY(-1px);
 }
+.nav-cta-short { display: none; }
 
 /* ─── HERO ─── */
 .hero {
@@ -1050,12 +1051,31 @@ footer {
 
 /* ─── RESPONSIVE — TABLET ─── */
 @media (max-width: 1100px) {
-  .nav { padding-left: 24px; padding-right: 24px; gap: 18px; justify-content: center; }
-  .nav-logo { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); }
-  .nav-logo img { height: 48px; }
-  .nav.scrolled .nav-logo img { height: 42px; }
-  .nav-links { flex: 0 1 auto; margin: 0 auto; justify-content: center; gap: clamp(18px, 2.6vw, 24px); }
-  .nav-cta { display: none; }
+  .nav {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding-left: clamp(14px, 2.3vw, 24px);
+    padding-right: clamp(14px, 2.3vw, 24px);
+    gap: clamp(10px, 1.8vw, 18px);
+    justify-content: normal;
+  }
+  .nav-logo { position: static; transform: none; }
+  .nav-logo img { height: 44px; }
+  .nav.scrolled .nav-logo img { height: 40px; }
+  .nav-links { flex: 0 1 auto; min-width: 0; margin: 0; justify-content: center; gap: clamp(10px, 1.5vw, 18px); }
+  .nav-links a { font-size: 11px; letter-spacing: 0.04em; }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    min-height: 40px;
+    padding: 10px 14px;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+  }
+  .nav-cta-full { display: none; }
+  .nav-cta-short { display: inline; }
   .welcome { gap: 48px; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
   .rooms-grid { grid-template-columns: 1fr 1fr; }
@@ -1063,8 +1083,8 @@ footer {
 }
 
 @media (max-width: 980px) {
-  .nav { justify-content: center; }
-  .nav-links { margin: 0 auto; justify-content: center; gap: clamp(16px, 2.5vw, 24px); }
+  .nav { justify-content: normal; }
+  .nav-links { margin: 0; justify-content: center; gap: clamp(10px, 1.4vw, 16px); }
 
   .live-room-feature {
     height: clamp(560px, 74vw, 680px);
@@ -1132,6 +1152,8 @@ footer {
   }
   .nav-dropdown-toggle::after, .nav-dropdown-menu { display: none; }
   .nav-cta { display: none; }
+  .nav-cta-full { display: inline; }
+  .nav-cta-short { display: none; }
   .nav-hamburger { display: none; }
 
   /* Hero */
@@ -1352,7 +1374,7 @@ html      { scroll-behavior: auto; }
     </li>
     <li><a href="/testimonials/">Testimonials</a></li>
   </ul>
-  <a href="#home-enquiry" class="nav-cta">Enquire about your next session</a>
+  <a href="#home-enquiry" class="nav-cta"><span class="nav-cta-full">Enquire about your next session</span><span class="nav-cta-short">Enquire</span></a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -1831,7 +1853,7 @@ html      { scroll-behavior: auto; }
     <a href="/services/live-videos/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-notes-2026-06-05/live-videos.jpg" alt="Live video sessions at Salvation Studios" width="1024" height="819" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Live Videos</div><p class="svc-desc">High-quality live performance videos combining exceptional studio audio capture with professional videography and tailored atmosphere.</p></div></a>
     <a href="/services/signature-sessions/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-notes-2026-06-05/signature-sessions.jpg" alt="Signature Sessions at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Signature Sessions</div><p class="svc-desc">A unique opportunity to create alongside respected producers and engineers in a focused, high-level creative environment.</p></div></a>
     <a href="/services/giveaways-offers/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-sfpb.webp" alt="Salvation Studios artist opportunities" width="2200" height="1467" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Giveaways &amp; Offers</div><p class="svc-desc">Current artist opportunities, studio time giveaways, collaborative sessions and limited offers from Salvation Studios.</p></div></a>
-    <a href="/services/accommodation-hospitality/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-u590.webp" alt="Longer-session support space at Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Accommodation and Hospitality</div><p class="svc-desc">Practical stay and hospitality guidance for artists, producers and teams booking longer recording or writing sessions in Brighton.</p></div></a>
+    <a href="/services/accommodation-hospitality/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-u590.webp" alt="Catering and accommodation support at Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Catering and accommodation</div><p class="svc-desc">Our team can handle any hospitality or logistical requests, such as accommodation and catering, allowing you more time to focus on the music.</p></div></a>
   </div>
 </section>
 
@@ -1840,8 +1862,8 @@ html      { scroll-behavior: auto; }
   <div class="two-col top">
     <div class="seo-copy-card">
       <span class="label">Enquiry form</span>
-      <h2 class="h2-serif" id="home-enquiry-title">Send Salvation a structured session brief.</h2>
-      <p class="body-text">Tell the studio what you are making, when you want to come in, who is involved and what support you need. The form opens a pre-filled email with the key details already organised for a faster, clearer reply.</p>
+      <h2 class="h2-serif" id="home-enquiry-title">Get in touch to discuss your next project with a member of our team.</h2>
+      <p class="body-text">To enquire about a session with no obligation, please fill out the form with any details about your next project and one of our team will be in touch to discuss things further.</p>
       <div class="btn-row seo-actions"><a href="/contact/#enquiry-form" class="btn-outline">Full contact page</a><a href="mailto:info@salvationstudios.co.uk" class="btn-outline" data-analytics="home-enquiry-email">Email Studio</a></div>
     </div>
     <form class="enquiry-form" id="enquiry-form" data-analytics="studio-enquiry-form">
@@ -1867,7 +1889,7 @@ html      { scroll-behavior: auto; }
 <section class="gallery" id="gallery">
   <div class="reveal">
     <p class="label">Inside Salvation</p>
-    <h2 class="h2-serif">Every corner<br>tells a <em>story</em></h2>
+    <h2 class="h2-serif">Every picture<br>tells a <em>story</em></h2>
   </div>
 
   <div class="gallery-mosaic">
