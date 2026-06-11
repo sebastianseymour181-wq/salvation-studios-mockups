@@ -89,6 +89,18 @@ ASSET_EXTENSIONS = {
     ".xml", ".txt", ".json", ".woff", ".woff2", ".mp4", ".webm",
 }
 
+EXPECTED_SEARCH_URLS = {
+    "Accommodation": "/services/accommodation-hospitality/",
+    "Catering": "/services/accommodation-hospitality/",
+    "Hospitality": "/services/accommodation-hospitality/",
+    "Dry Hire": "/services/recording/",
+    "Lighting": "/services/live-videos/",
+    "Vocal Booth": "/rooms/vocal-booth/",
+    "Iso Booths": "/rooms/iso-booths/",
+    "Isolation Booths": "/rooms/iso-booths/",
+    "Main Studio": "/rooms/main-studio/",
+}
+
 
 def rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
@@ -191,6 +203,20 @@ def parse_html(path: Path) -> LinkParser:
     parser = LinkParser()
     parser.feed(path.read_text(errors="ignore"))
     return parser
+
+
+def search_index_entries() -> list[tuple[str, str]]:
+    search_file = ROOT / "search.js"
+    if not search_file.exists():
+        return []
+    text = search_file.read_text(errors="ignore")
+    return [
+        (match.group(1), match.group(4))
+        for match in re.finditer(
+            r"\[\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\]",
+            text,
+        )
+    ]
 
 
 def is_external(url: str) -> bool:
@@ -342,6 +368,30 @@ def main() -> int:
     expected_locs = {clean_url_for(page) for page in INDEXABLE_HTML}
     if locs != expected_locs:
         failures.append(f"sitemap mismatch missing={sorted(expected_locs-locs)} extra={sorted(locs-expected_locs)}")
+
+    for name, value in search_index_entries():
+        expected = EXPECTED_SEARCH_URLS.get(name)
+        if expected and value != expected:
+            failures.append(f"unexpected search index URL for {name}: {value} expected {expected}")
+        parsed = urlparse(value)
+        if re.search(r"\.html($|[#?])", value):
+            failures.append(f"non-clean search index URL: {value}")
+        if not value.startswith("/"):
+            failures.append(f"non-root-relative search index URL: {value}")
+            continue
+        suffix = Path(parsed.path).suffix.lower()
+        if suffix in ASSET_EXTENSIONS:
+            if not asset_exists(parsed.path):
+                failures.append(f"missing search index asset: {value}")
+            continue
+        target = route_to_file(parsed.path.rstrip("/") + "/")
+        if target is None and parsed.path != "/":
+            failures.append(f"search index route does not resolve: {value}")
+            continue
+        if parsed.fragment and target:
+            target_parser = parse_html(ROOT / target)
+            if parsed.fragment not in target_parser.ids:
+                failures.append(f"search index anchor does not resolve: {value}")
 
     if failures:
         for item in failures:

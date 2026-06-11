@@ -200,15 +200,15 @@
     // Rooms
     ['Live Room','Room','13m vaulted 1910 hall · 9.4×8.2m · John Flynn acoustics','/rooms/live-room/'],
     ['Control Room','Room','Neve 8068 · ATC monitors · John Flynn design','/rooms/control-room/'],
-    ['Vocal Booth','Room','Precision isolation · direct sightlines to control room','/rooms/live-room/'],
-    ['Iso Booths','Room','2× retractable glass-fronted isolation booths','/rooms/live-room/'],
-    ['Isolation Booths','Room','Simultaneous tracking · full separation','/rooms/live-room/'],
+    ['Vocal Booth','Room','Precision isolation · direct sightlines to control room','/rooms/vocal-booth/'],
+    ['Iso Booths','Room','2× retractable glass-fronted isolation booths','/rooms/iso-booths/'],
+    ['Isolation Booths','Room','Simultaneous tracking · full separation','/rooms/iso-booths/'],
     ['Amp Booth','Room','Full isolation · guitar & bass at real volume','/rooms/live-room/'],
     ['The Bunker','Room','Self-contained writing & production wing','/rooms/the-bunker/'],
     ['Mezzanine Room','Room','Elevated writing room overlooking main studio','/rooms/the-bunker/#mezzanine-room'],
     ['Subterranean Room','Room','Underground writing & chill-out space','/rooms/the-bunker/#subterranean-room'],
     ['Writing Rooms','Room','Bunker writing wing with production setup','/rooms/writing-rooms/'],
-    ['Main Studio','Room','The full Salvation complex — hall, control room & booths','/rooms/live-room/'],
+    ['Main Studio','Room','The full Salvation complex — hall, control room & booths','/rooms/main-studio/'],
 
     // Services
     ['Recording','Service','Full studio recording sessions','/services/recording/'],
@@ -216,11 +216,11 @@
     ['Mastering','Service','Mastering services','/services/mastering/'],
     ['Writing','Service','Writing rooms & writing camps','/rooms/writing-rooms/'],
     ['Live Videos','Service','Filmed live sessions','/services/live-videos/'],
-    ['Accommodation','Service','On-site accommodation','/services/accommodation/'],
-    ['Catering','Service','Locally prepared catering & hospitality','/services/catering/'],
-    ['Hospitality','Service','Catering, lounge & session support','/services/catering/'],
-    ['Dry Hire','Service','Bring your own team','/services/dry-hire/'],
-    ['Lighting','Service','Configurable studio lighting for sessions & filming','/services/lighting/'],
+    ['Accommodation','Service','On-site accommodation','/services/accommodation-hospitality/'],
+    ['Catering','Service','Locally prepared catering & hospitality','/services/accommodation-hospitality/'],
+    ['Hospitality','Service','Catering, lounge & session support','/services/accommodation-hospitality/'],
+    ['Dry Hire','Service','Bring your own team','/services/recording/'],
+    ['Lighting','Service','Configurable studio lighting for sessions & filming','/services/live-videos/'],
 
     // Pages
     ['Equipment List','Page','Full gear inventory: console, mics, outboard, amps, drums, keys','/equipment/'],
