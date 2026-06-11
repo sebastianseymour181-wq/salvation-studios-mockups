@@ -4,6 +4,8 @@
   // ─── SEARCH INDEX ────────────────────────────────────────────────────────────
   // [name, category, sub-description, url]
   const RAW = [
+    ['About Salvation Studios','Studio','Restored 1910 Salvation Army hall, acoustic design and specialist build story','/about/'],
+
     // Console & multitrack
     ['Neve 8068','Console','1973 · 32-channel · fully restored','/equipment/'],
     ['Pro Tools HDX','Multitrack','Mac Studio (Apple Silicon)','/equipment/'],

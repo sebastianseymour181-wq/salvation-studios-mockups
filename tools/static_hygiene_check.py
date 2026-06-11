@@ -22,6 +22,7 @@ EXPECTED_EMAIL = "info@salvationstudios.co.uk"
 
 INDEXABLE_HTML = {
     "index.html",
+    "about.html",
     "recording-studio-brighton.html",
     "equipment.html",
     "gallery.html",
@@ -55,7 +56,7 @@ NOINDEX_HTML = {
 }
 
 OLD_SITE_ROUTES = {
-    "/about", "/amp-booth", "/amps", "/basses", "/book-online", "/catering",
+    "/amp-booth", "/amps", "/basses", "/book-online", "/catering",
     "/chillout-zone-kitchen-1", "/chillout-zone-kitchen-2", "/competition-1",
     "/contactus", "/control-room", "/control-room-as-a-writing-room",
     "/copy-of-enquiries-ad-landing-page", "/copy-of-signature-sessions-nick-brine",
@@ -78,7 +79,7 @@ OLD_SITE_ROUTES = {
 
 # New public routes should not be redirected to themselves.
 NEW_PUBLIC_ROUTES = {
-    "/", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/contact", "/spaces", "/services",
+    "/", "/about", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/contact", "/spaces", "/services",
     "/rooms/main-studio", "/rooms/live-room", "/rooms/control-room", "/rooms/writing-rooms", "/rooms/the-bunker",
     "/services/recording", "/services/mixing",
     "/services/mastering", "/services/live-videos", "/services/signature-sessions", "/services/giveaways-offers", "/services/accommodation-hospitality",
@@ -90,6 +91,7 @@ ASSET_EXTENSIONS = {
 }
 
 EXPECTED_SEARCH_URLS = {
+    "About Salvation Studios": "/about/",
     "Accommodation": "/services/accommodation-hospitality/",
     "Catering": "/services/accommodation-hospitality/",
     "Hospitality": "/services/accommodation-hospitality/",

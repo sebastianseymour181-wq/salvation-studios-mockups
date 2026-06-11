@@ -105,11 +105,6 @@
       "permanent": true
     },
     {
-      "source": "/about",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/home",
       "destination": "/",
       "permanent": true
