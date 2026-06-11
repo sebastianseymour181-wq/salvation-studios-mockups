@@ -382,6 +382,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .form-field.full { grid-column: 1 / -1; }
 .form-field label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--pale); }
 .form-field input, .form-field select, .form-field textarea {
+  width: 100%;
+  min-width: 0;
   min-height: 46px;
   border: 1px solid rgba(167,139,250,.28);
   border-radius: 10px;
@@ -396,6 +398,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .form-note, .form-status { color: var(--muted); font-size: 13px; line-height: 1.7; }
 .form-status[hidden] { display: none; }
 .enquiry-form .btn-primary { justify-self: start; cursor: pointer; }
+@media (max-width: 1080px) { .seo-spotlight .enquiry-form .form-grid { grid-template-columns: 1fr; } }
 .home-enquiry-card {
   margin-top: clamp(28px, 5vw, 54px);
   border: 1px solid rgba(167,139,250,0.18);
@@ -1876,12 +1879,10 @@ html      { scroll-behavior: auto; }
         <div class="form-field"><label for="home_phone">Phone</label><input id="home_phone" name="phone" type="tel" autocomplete="tel"></div>
         <div class="form-field"><label for="home_session_type">Session type</label><select id="home_session_type" name="session_type" required><option value="">Choose one</option><option>Recording / tracking</option><option>Mixing</option><option>Mastering</option><option>Live Videos</option><option>Signature Sessions</option><option>Dry hire</option><option>Writing rooms / writing camp</option><option>Producer or engineer support</option><option>Other / not sure yet</option></select></div>
         <div class="form-field"><label for="home_dates">Preferred dates</label><input id="home_dates" name="dates" placeholder="Dates, duration, flexibility"></div>
-        <div class="form-field full"><label for="home_requirements">Rooms, people and support</label><input id="home_requirements" name="requirements" placeholder="Team size, room preference, engineer/producer support, gear/backline needs"></div>
-        <div class="form-field full"><label for="home_visit_details">Visit details</label><input id="home_visit_details" name="visit_details" placeholder="Parking/loading, access, accommodation, hospitality or filming needs"></div>
-        <div class="form-field full"><label for="home_message">Project brief</label><textarea id="home_message" name="message" placeholder="Tell Salvation about the artist, project, references, goals and any practical details."></textarea></div>
+        <div class="form-field full"><label for="home_message">Additional session details</label><textarea id="home_message" name="message" required placeholder="Tell Salvation about the artist, project, references, goals and any practical details."></textarea></div>
+        <div class="form-field full" style="display:none"><label for="home_website">Website</label><input id="home_website" name="website" tabindex="-1" autocomplete="off"></div>
       </div>
-      <p class="form-note">This opens a pre-filled email to info@salvationstudios.co.uk. If your email client does not open, copy the details and send them directly.</p>
-      <button type="submit" class="btn-primary" data-analytics="home-enquiry-submit">Open enquiry email</button>
+      <button type="submit" class="btn-primary" data-analytics="home-enquiry-submit">Send enquiry</button>
       <p class="form-status" hidden aria-live="polite"></p>
     </form>
   </div>
@@ -2092,31 +2093,54 @@ function track(eventName, detail) {
 document.querySelectorAll('[data-analytics]').forEach(el => {
   el.addEventListener('click', () => track('salvation_click', { target: el.getAttribute('data-analytics'), href: el.getAttribute('href') || '' }));
 });
+function enquiryMailto(data) {
+  const lines = [
+    'Name: ' + (data.get('name') || ''),
+    'Artist / company: ' + (data.get('artist_company') || ''),
+    'Email: ' + (data.get('email') || ''),
+    'Phone: ' + (data.get('phone') || ''),
+    'Session type: ' + (data.get('session_type') || ''),
+    'Preferred dates: ' + (data.get('dates') || ''),
+    '',
+    'Additional session details:',
+    data.get('message') || ''
+  ];
+  return 'mailto:info@salvationstudios.co.uk?subject=' + encodeURIComponent('Studio session enquiry - Salvation Studios') + '&body=' + encodeURIComponent(lines.join('\n'));
+}
 document.querySelectorAll('.enquiry-form').forEach(form => {
   const status = form.querySelector('.form-status');
-  form.addEventListener('submit', e => {
+  const submit = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const data = new FormData(form);
-    const lines = [
-      'Name: ' + (data.get('name') || ''),
-      'Artist / company: ' + (data.get('artist_company') || ''),
-      'Email: ' + (data.get('email') || ''),
-      'Phone: ' + (data.get('phone') || ''),
-      'Session type: ' + (data.get('session_type') || ''),
-      'Preferred dates: ' + (data.get('dates') || ''),
-      'People / rooms / support: ' + (data.get('requirements') || ''),
-      'Visit details: ' + (data.get('visit_details') || ''),
-      '',
-      'Project brief:',
-      data.get('message') || ''
-    ];
-    track('salvation_enquiry_mailto', { session_type: data.get('session_type') || '' });
-    const href = 'mailto:info@salvationstudios.co.uk?subject=' + encodeURIComponent('Studio session enquiry - Salvation Studios') + '&body=' + encodeURIComponent(lines.join('\n'));
+    const payload = Object.fromEntries(data.entries());
+    payload.source_page = window.location.pathname || '/';
     if (status) {
       status.hidden = false;
-      status.textContent = 'Opening your email client with the session brief. If it does not open, email info@salvationstudios.co.uk with these details.';
+      status.textContent = 'Sending your enquiry...';
     }
-    window.location.href = href;
+    if (submit) submit.disabled = true;
+    try {
+      const response = await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) throw new Error(result.error || 'The enquiry could not be sent.');
+      track('salvation_enquiry_submit', { session_type: data.get('session_type') || '' });
+      form.reset();
+      if (status) status.textContent = 'Thanks. Your enquiry has been sent to Salvation Studios.';
+    } catch (error) {
+      if (error.message === 'Email delivery is not configured yet.') {
+        if (status) status.textContent = 'Direct delivery is being configured. Opening a fallback email draft.';
+        window.location.href = enquiryMailto(data);
+      } else if (status) {
+        status.textContent = error.message || 'The enquiry could not be sent. Please email info@salvationstudios.co.uk.';
+      }
+    } finally {
+      if (submit) submit.disabled = false;
+    }
   });
 });
 
