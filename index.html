@@ -1128,7 +1128,7 @@ footer {
   .nav {
     display: flex;
     height: calc(66px + env(safe-area-inset-top));
-    padding: max(10px, env(safe-area-inset-top)) 16px 10px;
+    padding: env(safe-area-inset-top) 16px 0;
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(to bottom, rgba(3,0,8,0.94), rgba(3,0,8,0.68));
@@ -1136,9 +1136,9 @@ footer {
     border-bottom: 1px solid rgba(216,180,254,0.12);
   }
   .nav-logo { position: static; transform: none; z-index: 610; }
-  .nav-logo img { height: 40px; }
+  .nav-logo img { height: 46px; }
   .nav.scrolled { height: calc(62px + env(safe-area-inset-top)); background: rgba(4,0,10,0.94); }
-  .nav.scrolled .nav-logo img { height: 38px; }
+  .nav.scrolled .nav-logo img { height: 42px; }
   .nav-links { display: none; }
   .nav-dropdown-toggle::after, .nav-dropdown-menu { display: none; }
   .nav-cta { display: none; }
@@ -1148,7 +1148,8 @@ footer {
     display: flex;
     position: absolute;
     right: 16px;
-    top: calc(max(10px, env(safe-area-inset-top)) + 8px);
+    top: 50%;
+    transform: translateY(-50%);
     width: 42px;
     height: 42px;
     align-items: center;
@@ -1163,7 +1164,8 @@ footer {
   .nav-logo .ss-btn {
     position: absolute;
     right: 66px;
-    top: calc(max(10px, env(safe-area-inset-top)) + 8px);
+    top: 50%;
+    transform: translateY(-50%);
     width: 42px;
     height: 42px;
     margin-left: 0;
@@ -1188,9 +1190,11 @@ footer {
     letter-spacing: 0.08em;
   }
   .mobile-menu .mobile-cta {
+    order: -1;
     justify-content: center;
     min-height: 50px;
-    margin-top: 8px;
+    margin-top: 0;
+    margin-bottom: 8px;
     padding: 0 18px;
   }
 
@@ -1218,8 +1222,8 @@ footer {
   .hero-tag::before, .hero-tag::after { width: 20px; }
   .hero-salvation-wrap {
     display: inline-block;
-    width: clamp(108px, 34vw, 138px);
-    height: clamp(48px, 15vw, 62px);
+    width: clamp(126px, 39vw, 160px);
+    height: clamp(56px, 17vw, 72px);
     margin: 0 auto 12px;
     filter: drop-shadow(0 0 16px rgba(192,132,252,0.62)) drop-shadow(0 10px 24px rgba(0,0,0,0.55));
   }
