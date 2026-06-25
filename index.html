@@ -54,7 +54,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: flex; align-items: center; justify-content: space-between;
   gap: 24px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0.28) 62%, transparent);
-  border-bottom: 1px solid rgba(255,255,255,0.035);
+  border-bottom: 0;
   transition: background 0.35s ease, height 0.35s ease, padding 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease;
 }
 .nav.scrolled {
@@ -62,22 +62,25 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   padding-top: 0; padding-bottom: 0;
   background: rgba(4,0,10,0.88);
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(167,139,250,0.18);
+  border-bottom: 0;
 }
 .nav-logo { display: flex; align-items: center; }
 .nav-logo a { display: flex; align-items: center; text-decoration: none; }
 .nav-logo img { height: 54px; width: auto; object-fit: contain; background: transparent; filter: drop-shadow(0 0 16px rgba(192,132,252,0.32)); }
 .nav.scrolled .nav-logo img { height: 48px; }
-.nav-links { display: flex; gap: 36px; list-style: none; flex: 1 1 auto; justify-content: center; min-width: 0; }
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; flex: 1 1 auto; justify-content: center; min-width: 0; }
+.nav-links > li { display: flex; align-items: center; }
 .nav-links a {
-  font-size: 13px; font-weight: 500; letter-spacing: 0.07em;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 40px; line-height: 1;
+  font-size: 14px; font-weight: 500; letter-spacing: 0.075em;
   color: var(--muted); text-decoration: none;
   transition: color 0.3s;
 }
 .nav-links a:hover { color: var(--glow); }
 .nav-dropdown { position: relative; }
 .nav-dropdown-toggle { display: inline-flex; align-items: center; gap: 6px; }
-.nav-dropdown-toggle::after { content: '⌄'; font-size: 11px; color: var(--glow); transform: translateY(-1px); }
+.nav-dropdown-toggle::after { content: '⌄'; display: inline-block; font-size: 10px; line-height: 1; color: var(--glow); transform: translateY(-1px); }
 .nav-dropdown-menu { position: absolute; top: calc(100% + 18px); left: 50%; transform: translateX(-50%) translateY(8px); width: 238px; padding: 12px; border: 1px solid rgba(216,180,254,.18); border-radius: 14px; background: rgba(4,0,8,.96); box-shadow: 0 24px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06); opacity: 0; pointer-events: none; transition: opacity .22s ease, transform .22s ease; display: grid; gap: 2px; }
 .nav-dropdown-menu::before { content: ''; position: absolute; left: 0; right: 0; top: -22px; height: 22px; }
 .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
@@ -173,8 +176,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .hero-salvation-wrap {
   display: inline-block;
   overflow: hidden;
-  width: clamp(210px, 26vw, 380px);
-  height: clamp(92px, 11.5vw, 166px);
+  width: clamp(250px, 30vw, 440px);
+  height: clamp(110px, 13.5vw, 192px);
   margin: 0 auto 8px;
   opacity: .98;
   filter: drop-shadow(0 0 20px rgba(192,132,252,0.55)) drop-shadow(0 16px 36px rgba(0,0,0,0.55));
@@ -1065,8 +1068,8 @@ footer {
   .nav-logo { position: static; transform: none; }
   .nav-logo img { height: 44px; }
   .nav.scrolled .nav-logo img { height: 40px; }
-  .nav-links { flex: 0 1 auto; min-width: 0; margin: 0; justify-content: center; gap: clamp(10px, 1.5vw, 18px); }
-  .nav-links a { font-size: 12px; letter-spacing: 0.05em; }
+  .nav-links { flex: 0 1 auto; min-width: 0; margin: 0; justify-content: center; gap: clamp(12px, 1.7vw, 20px); }
+  .nav-links a { min-height: 40px; font-size: 13px; letter-spacing: 0.06em; }
   .nav-cta {
     display: inline-flex;
     align-items: center;
@@ -1222,8 +1225,8 @@ footer {
   .hero-tag::before, .hero-tag::after { width: 20px; }
   .hero-salvation-wrap {
     display: inline-block;
-    width: clamp(150px, 44vw, 190px);
-    height: clamp(66px, 19vw, 84px);
+    width: clamp(170px, 50vw, 220px);
+    height: clamp(74px, 22vw, 98px);
     margin: 0 auto 12px;
     filter: drop-shadow(0 0 16px rgba(192,132,252,0.62)) drop-shadow(0 10px 24px rgba(0,0,0,0.55));
   }
