@@ -16,6 +16,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_HOST = "https://www.salvationstudios.co.uk"
+TEST_HOST = "salvation-studios-mockups-three.vercel.app"
 EXCLUDED_DIRS = {".git", ".superpowers", ".vercel", "__pycache__", "node_modules"}
 EXPECTED_TEL = "tel:+443334445508"
 EXPECTED_EMAIL = "info@salvationstudios.co.uk"
@@ -253,7 +254,16 @@ def main() -> int:
     redirects = config.get("redirects", [])
     redirect_sources = {r.get("source") for r in redirects}
 
-    header_sources = {h.get("source") for h in config.get("headers", [])}
+    headers = config.get("headers", [])
+    header_sources = {h.get("source") for h in headers}
+    test_host_rules = [
+        rule for rule in headers
+        if rule.get("source") == "/(.*)"
+        and {"type": "host", "value": TEST_HOST} in rule.get("has", [])
+        and {"key": "X-Robots-Tag", "value": "noindex, nofollow"} in rule.get("headers", [])
+    ]
+    if len(test_host_rules) != 1:
+        failures.append("test hostname must have exactly one host-scoped noindex, nofollow header")
     if "/docs/:path*" not in header_sources:
         failures.append("docs directory is publicly deployable without noindex header")
     expected_concept_header_sources = {
