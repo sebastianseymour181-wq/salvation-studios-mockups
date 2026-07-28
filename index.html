@@ -347,7 +347,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: grid;
   grid-template-columns: minmax(0,0.9fr) minmax(320px,1.1fr);
   gap: clamp(38px, 7vw, 92px);
-  align-items: center;
+  align-items: start;
 }
 .seo-copy-card {
   grid-column: 1;
@@ -361,6 +361,25 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .seo-spotlight .h2-serif { margin-bottom: 24px; }
 .seo-spotlight .body-text { max-width: 560px; }
+#home-enquiry .h2-serif {
+  max-width: 12ch;
+  margin-bottom: 18px;
+  font-size: clamp(38px, 4.4vw, 60px);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+#home-enquiry .body-text { line-height: 1.75; }
+.enquiry-alternative {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.enquiry-alternative a {
+  color: var(--pale);
+  text-decoration-color: rgba(192,132,252,.55);
+  text-underline-offset: 4px;
+}
 .seo-spotlight .btn-row {
   justify-content: flex-start;
   align-items: center;
@@ -376,7 +395,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .enquiry-form {
   grid-column: 2;
   grid-row: 1 / span 2;
-  margin-top: 36px;
+  margin-top: 0;
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 30px;
@@ -2240,19 +2259,19 @@ html      { scroll-behavior: auto; }
   <div class="two-col top">
     <div class="seo-copy-card">
       <span class="label">Enquiry form</span>
-      <h2 class="h2-serif" id="home-enquiry-title">Get in touch to discuss your next project with a member of our team.</h2>
-      <p class="body-text">To enquire about a session with no obligation, please fill out the form with any details about your next project and one of our team will be in touch to discuss things further.</p>
-      <div class="btn-row seo-actions"><a href="mailto:info@salvationstudios.co.uk" class="btn-outline" data-analytics="home-enquiry-email">Email Studio</a></div>
+      <h2 class="h2-serif" id="home-enquiry-title">Tell us about your next project.</h2>
+      <p class="body-text">Share what you are making, the session you need and any dates you have in mind. A member of the team will come back to you to discuss the details, with no obligation.</p>
+      <p class="enquiry-alternative">Prefer email? <a href="mailto:info@salvationstudios.co.uk" data-analytics="home-enquiry-email">Write to the studio</a>.</p>
     </div>
     <form class="enquiry-form" id="enquiry-form" data-analytics="studio-enquiry-form">
       <div class="form-grid">
-        <div class="form-field"><label for="home_name">Name</label><input id="home_name" name="name" autocomplete="name" required></div>
-        <div class="form-field"><label for="home_artist_company">Artist / company</label><input id="home_artist_company" name="artist_company" autocomplete="organization"></div>
-        <div class="form-field"><label for="home_email">Email</label><input id="home_email" name="email" type="email" autocomplete="email" required></div>
-        <div class="form-field"><label for="home_phone">Phone</label><input id="home_phone" name="phone" type="tel" autocomplete="tel"></div>
-        <div class="form-field"><label for="home_session_type">Session type</label><select id="home_session_type" name="session_type" required><option value="">Choose one</option><option>Recording / tracking</option><option>Mixing</option><option>Mastering</option><option>Live Videos</option><option>Signature Sessions</option><option>Dry hire</option><option>Writing rooms / writing camp</option><option>Producer or engineer support</option><option>Other / not sure yet</option></select></div>
-        <div class="form-field"><label for="home_dates">Preferred dates</label><input id="home_dates" name="dates" placeholder="Dates, duration, flexibility"></div>
-        <div class="form-field full"><label for="home_message">Additional session details</label><textarea id="home_message" name="message" required placeholder="Tell Salvation about the artist, project, references, goals and any practical details."></textarea></div>
+        <div class="form-field"><label for="home_name">Name *</label><input id="home_name" name="name" autocomplete="name" required></div>
+        <div class="form-field"><label for="home_email">Email *</label><input id="home_email" name="email" type="email" autocomplete="email" required></div>
+        <div class="form-field"><label for="home_artist_company">Artist / company (optional)</label><input id="home_artist_company" name="artist_company" autocomplete="organization"></div>
+        <div class="form-field"><label for="home_phone">Phone (optional)</label><input id="home_phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="form-field"><label for="home_session_type">Session type *</label><select id="home_session_type" name="session_type" required><option value="">Choose one</option><option>Recording / tracking</option><option>Mixing</option><option>Mastering</option><option>Live Videos</option><option>Signature Sessions</option><option>Dry hire</option><option>Writing rooms / writing camp</option><option>Producer or engineer support</option><option>Other / not sure yet</option></select></div>
+        <div class="form-field"><label for="home_dates">Preferred dates (optional)</label><input id="home_dates" name="dates" placeholder="Dates, duration, flexibility"></div>
+        <div class="form-field full"><label for="home_message">Project details *</label><textarea id="home_message" name="message" required placeholder="Tell us about the artist, project, references, goals and any practical details."></textarea></div>
         <input type="hidden" name="form_started_at" value="">
         <div class="form-field full" style="display:none"><label for="home_website">Website</label><input id="home_website" name="website" tabindex="-1" autocomplete="off"></div>
       </div>
@@ -2266,8 +2285,8 @@ html      { scroll-behavior: auto; }
       <p class="body-text">Recording, mixing, dry hire, producer and engineer support, writing rooms, writing camps, hospitality and room availability can all be discussed through this form.</p>
       <ul class="studio-detail-list">
         <li><span>Address</span><a href="https://share.google/0pPGxHfIi8WZ4qw2y">79 North Street, Brighton and Hove, Brighton BN41 1DH</a></li>
-        <li><span>Phone</span><a href="tel:+443334445508">+44 333 444 5508</a></li>
-        <li><span>Email</span><a href="mailto:info@salvationstudios.co.uk">info@salvationstudios.co.uk</a></li>
+        <li><span>Phone</span><a href="tel:+443334445508" data-analytics="home-enquiry-phone">+44 333 444 5508</a></li>
+        <li><span>Email</span><a href="mailto:info@salvationstudios.co.uk" data-analytics="home-enquiry-email-details">info@salvationstudios.co.uk</a></li>
       </ul>
     </div>
   </div>
@@ -2477,70 +2496,6 @@ if (hamburger && mobileMenu) {
   mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMobileMenu(false)));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setMobileMenu(false); });
 }
-
-function track(eventName, detail) {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(Object.assign({ event: eventName }, detail || {}));
-}
-document.querySelectorAll('[data-analytics]').forEach(el => {
-  el.addEventListener('click', () => track('salvation_click', { target: el.getAttribute('data-analytics'), href: el.getAttribute('href') || '' }));
-});
-function enquiryMailto(data) {
-  const lines = [
-    'Name: ' + (data.get('name') || ''),
-    'Artist / company: ' + (data.get('artist_company') || ''),
-    'Email: ' + (data.get('email') || ''),
-    'Phone: ' + (data.get('phone') || ''),
-    'Session type: ' + (data.get('session_type') || ''),
-    'Preferred dates: ' + (data.get('dates') || ''),
-    '',
-    'Additional session details:',
-    data.get('message') || ''
-  ];
-  return 'mailto:info@salvationstudios.co.uk?subject=' + encodeURIComponent('Studio session enquiry - Salvation Studios') + '&body=' + encodeURIComponent(lines.join('\n'));
-}
-document.querySelectorAll('.enquiry-form').forEach(form => {
-  const status = form.querySelector('.form-status');
-  const submit = form.querySelector('button[type="submit"]');
-  const startedAt = form.querySelector('input[name="form_started_at"]');
-  const markFormStarted = () => {
-    if (startedAt) startedAt.value = String(Date.now());
-  };
-  markFormStarted();
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const payload = Object.fromEntries(data.entries());
-    payload.source_page = window.location.pathname || '/';
-    if (status) {
-      status.hidden = false;
-      status.textContent = 'Sending your enquiry...';
-    }
-    if (submit) submit.disabled = true;
-    try {
-      const response = await fetch('/api/enquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.ok) throw new Error(result.error || 'The enquiry could not be sent.');
-      track('salvation_enquiry_submit', { session_type: data.get('session_type') || '' });
-      form.reset();
-      markFormStarted();
-      if (status) status.textContent = 'Thanks. Your enquiry has been sent to Salvation Studios.';
-    } catch (error) {
-      if (error.message === 'Email delivery is not configured yet.') {
-        if (status) status.textContent = 'Direct delivery is being configured. Opening a fallback email draft.';
-        window.location.href = enquiryMailto(data);
-      } else if (status) {
-        status.textContent = error.message || 'The enquiry could not be sent. Please email info@salvationstudios.co.uk.';
-      }
-    } finally {
-      if (submit) submit.disabled = false;
-    }
-  });
-});
 
 // ── 3D card tilt on mouse move ──
 const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
@@ -2910,5 +2865,6 @@ if (gallerySection) {
 
 })();
 </script>
+<script src="/enquiry.js?v=20260728-charlie"></script>
 <script src="/search.js?v=20260625-mobile-nav-1" defer></script></body>
 </html>
