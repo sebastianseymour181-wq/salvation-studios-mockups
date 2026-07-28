@@ -23,11 +23,11 @@ EXPECTED_EMAIL = "info@salvationstudios.co.uk"
 INDEXABLE_HTML = {
     "index.html",
     "about.html",
+    "privacy.html",
     "recording-studio-brighton.html",
     "equipment.html",
     "gallery.html",
     "testimonials.html",
-    "contact.html",
     "spaces.html",
     "services.html",
     "rooms/main-studio.html",
@@ -58,7 +58,7 @@ NOINDEX_HTML = {
 OLD_SITE_ROUTES = {
     "/amp-booth", "/amps", "/basses", "/book-online", "/catering",
     "/chillout-zone-kitchen-1", "/chillout-zone-kitchen-2", "/competition-1",
-    "/contactus", "/control-room", "/control-room-as-a-writing-room",
+    "/contact", "/contactus", "/control-room", "/control-room-as-a-writing-room",
     "/copy-of-enquiries-ad-landing-page", "/copy-of-signature-sessions-nick-brine",
     "/drums", "/dry-hire", "/enquiries", "/ep-giveaway", "/equipment",
     "/general-5-2", "/general-5-6", "/general-clean", "/guitars", "/home",
@@ -79,7 +79,7 @@ OLD_SITE_ROUTES = {
 
 # New public routes should not be redirected to themselves.
 NEW_PUBLIC_ROUTES = {
-    "/", "/about", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/contact", "/spaces", "/services",
+    "/", "/about", "/privacy", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/spaces", "/services",
     "/rooms/main-studio", "/rooms/live-room", "/rooms/control-room", "/rooms/writing-rooms", "/rooms/the-bunker",
     "/services/recording", "/services/mixing",
     "/services/mastering", "/services/live-videos", "/services/signature-sessions", "/services/giveaways-offers", "/services/accommodation-hospitality",
@@ -97,9 +97,9 @@ EXPECTED_SEARCH_URLS = {
     "Hospitality": "/services/accommodation-hospitality/",
     "Dry Hire": "/services/recording/",
     "Lighting": "/services/live-videos/",
-    "Vocal Booth": "/rooms/vocal-booth/",
-    "Iso Booths": "/rooms/iso-booths/",
-    "Isolation Booths": "/rooms/iso-booths/",
+    "Vocal Booth": "/rooms/live-room/#isolation",
+    "Iso Booths": "/rooms/live-room/#isolation",
+    "Isolation Booths": "/rooms/live-room/#isolation",
     "Main Studio": "/rooms/main-studio/",
 }
 
@@ -282,7 +282,7 @@ def main() -> int:
                 failures.append(f"redirect destination has no public file: {source} -> {dest}")
 
     for route in sorted(OLD_SITE_ROUTES):
-        if route in NEW_PUBLIC_ROUTES or route == "/contact":
+        if route in NEW_PUBLIC_ROUTES:
             continue
         if route not in redirect_sources:
             failures.append(f"missing old-site redirect for {route}")

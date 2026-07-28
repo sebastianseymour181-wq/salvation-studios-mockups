@@ -312,7 +312,6 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: flex; justify-content: space-between; align-items: flex-end;
 }
 .live-room-text { max-width: 560px; }
-.room-num { font-size: 10px; letter-spacing: 0.3em; color: var(--glow); margin-bottom: 10px; text-transform: uppercase; font-weight: 500; }
 .room-title {
   font-family: 'Cormorant Garant', serif;
   font-size: 52px; font-weight: 300; color: var(--white); line-height: 1.05;
@@ -960,7 +959,7 @@ html      { scroll-behavior: auto; }
     <li><a href="/gallery/">Gallery</a></li>
     <li><a href="/equipment/">Equipment</a></li>
   </ul>
-  <a href="/contact/#enquiry-form" class="nav-cta">Enquire about your next session</a>
+  <a href="/#home-enquiry" class="nav-cta">Enquire</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -973,8 +972,10 @@ html      { scroll-behavior: auto; }
   <a href="/testimonials/" class="mobile-link">Testimonials</a>
   <a href="/gallery/" class="mobile-link">Gallery</a>
   <a href="/equipment/" class="mobile-link">Equipment</a>
-  <a href="/contact/#enquiry-form" class="mobile-cta">Enquire about your next session</a>
+  <a href="/#home-enquiry" class="mobile-cta">Enquire</a>
 </div>
+
+<main id="main-content">
 
 <!-- ─── HERO ─── -->
 <section class="hero">
@@ -989,9 +990,9 @@ html      { scroll-behavior: auto; }
     <div class="hero-tag">Brighton, UK &nbsp;—&nbsp; Est. 2019</div>
     <h1 class="hero-h1">
       Welcome to<br>
-      <span class="hero-salvation-wrap"><img src="/salvation-script.png" alt="Salvation" class="hero-salvation-img" width="2084" height="2084" decoding="async" loading="eager"></span>
+      <span class="hero-salvation-wrap"><img src="/salvation-script.png" alt="Salvation" class="hero-salvation-img" width="1042" height="1042" decoding="async" loading="eager"></span>
     </h1>
-    <a href="/contact/" class="btn-primary hero-book-btn">Enquire about your next session</a>
+    <a href="/#home-enquiry" class="btn-primary hero-book-btn">Enquire about your next session</a>
     <div class="hero-btns">
       <a href="#spaces" class="btn-outline">Explore the Rooms</a>
     </div>
@@ -1078,7 +1079,7 @@ html      { scroll-behavior: auto; }
       <p class="label">Our Spaces</p>
       <h2 class="h2-serif" style="margin-bottom:0">The main studio,<br><em>at a glance</em></h2>
     </div>
-    <a href="/contact/" class="section-link">Enquire about your next session →</a>
+    <a href="/#home-enquiry" class="section-link">Enquire about your next session →</a>
   </div>
 
   <!-- LIVE ROOM — hero card -->
@@ -1086,7 +1087,6 @@ html      { scroll-behavior: auto; }
     <img src="/photos/optimized/studio-sfpb.webp" alt="The Live Room — Salvation Studios" width="2200" height="1467" decoding="async" loading="lazy">
     <div class="live-room-info">
       <div class="live-room-text">
-        <div class="room-num">01 — Primary Tracking Space</div>
         <div class="room-title">The Live Room</div>
         <p class="room-desc">World-renowned acoustician John Flynn was given carte blanche to transform the old Salvation Army Concert Hall into a world-class tracking room. A 13-metre vaulted ceiling, natural light, a stained-glass window, a fully floated floor system, and retractable isolation booths — this is somewhere truly special.</p>
       </div>
@@ -1114,7 +1114,6 @@ html      { scroll-behavior: auto; }
         <img src="/photos/optimized/studio-stu.webp" alt="Control Room" width="2200" height="1467" decoding="async" loading="lazy">
       </div>
       <div class="room-card-body">
-        <div class="room-num">02</div>
         <div class="room-card-name">Control Room</div>
         <p class="room-card-desc">6.5 × 5.7m. Designed by John Flynn — the man who built the control rooms at Olympic and Abbey Road. Home to our fully restored 1973 Neve 8068 console and ATC soffit-mounted monitors. Full line of sight to the live room and vocal booth.</p>
         <div class="room-tags">
@@ -1125,12 +1124,11 @@ html      { scroll-behavior: auto; }
       </div>
     </a>
 
-    <a href="/rooms/vocal-booth/" class="room-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
+    <a href="/rooms/live-room/#vocal-booth" class="room-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
       <div class="room-card-img">
         <img src="/photos/optimized/studio-s11.webp" alt="Outboard Gear & Equipment" width="1600" height="2402" decoding="async" loading="lazy">
       </div>
       <div class="room-card-body">
-        <div class="room-num">03</div>
         <div class="room-card-name">Vocal Booth</div>
         <p class="room-card-desc">A dedicated precision isolation space for lead vocals, overdubs, and spoken word — acoustically tuned for transparency and warmth. The booth sits directly in line of sight from the control room.</p>
         <div class="room-tags">
@@ -1141,12 +1139,11 @@ html      { scroll-behavior: auto; }
       </div>
     </a>
 
-    <a href="/rooms/iso-booths/" class="room-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
+    <a href="/rooms/live-room/#isolation" class="room-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
       <div class="room-card-img">
         <img src="/photos/optimized/studio-s17.webp" alt="Amp Booth" width="1600" height="2402" decoding="async" loading="lazy">
       </div>
       <div class="room-card-body">
-        <div class="room-num">04 – 06</div>
         <div class="room-card-name">Iso Booths & Amp Booth</div>
         <p class="room-card-desc">Two fully retractable, independently floated, glass-fronted isolation booths for simultaneous tracking. Plus a dedicated amp booth for guitar and bass — crank it up without compromise.</p>
         <div class="room-tags">
@@ -1208,7 +1205,6 @@ html      { scroll-behavior: auto; }
     <a href="/rooms/writing-rooms/" class="writing-card reveal" style="text-decoration:none;color:inherit;">
       <img src="/photos/optimized/studio-u590.webp" alt="Subterranean Writing Room" width="1600" height="900" decoding="async" loading="lazy">
       <div class="writing-card-info">
-        <div class="room-num">WR — 01</div>
         <div class="writing-card-name">Subterranean Room</div>
         <p class="writing-card-desc">Packed with vintage synths, keys, and production gear. A creative world unto itself.</p>
       </div>
@@ -1216,7 +1212,6 @@ html      { scroll-behavior: auto; }
     <a href="/rooms/writing-rooms/" class="writing-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
       <img src="/photos/optimized/studio-u592.webp" alt="Mezzanine Writing Room" width="1600" height="900" decoding="async" loading="lazy">
       <div class="writing-card-info">
-        <div class="room-num">WR — 02</div>
         <div class="writing-card-name">Mezzanine Room</div>
         <p class="writing-card-desc">Elevated space for producers and writers who need a room with a view and full creative freedom.</p>
       </div>
@@ -1538,7 +1533,7 @@ html      { scroll-behavior: auto; }
 <!-- ─── GALLERY ─── -->
 <section class="gallery" id="gallery">
   <div class="reveal">
-    <p class="label">Inside Salvation</p>
+    <p class="label">Gallery</p>
     <h2 class="h2-serif">Every corner<br>tells a <em>story</em></h2>
   </div>
 
@@ -1641,13 +1636,15 @@ html      { scroll-behavior: auto; }
     </h2>
     <p class="booking-body">Sessions available seven days a week. In-house engineers, producers, and mixing services. Brighton's most serious recording environment.</p>
     <div class="booking-btns">
-      <a href="/contact/#enquiry-form" class="btn-primary">Enquire about your next session</a>
+      <a href="/#home-enquiry" class="btn-primary">Enquire about your next session</a>
       <a href="/recording-studio-brighton/" class="btn-outline">Explore the Studio</a>
     </div>
   </div>
 </section>
 
 <!-- ─── FOOTER ─── -->
+
+</main>
 <footer>
   <div class="footer-top">
     <div>
@@ -1659,9 +1656,9 @@ html      { scroll-behavior: auto; }
       <ul class="footer-links">
         <li><a href="/rooms/live-room/">Live Room</a></li>
         <li><a href="/rooms/control-room/">Control Room</a></li>
-        <li><a href="/rooms/vocal-booth/">Vocal Booth</a></li>
-        <li><a href="/rooms/iso-booths/">Isolation Booths</a></li>
-        <li><a href="/rooms/iso-booths/">Amp Booth</a></li>
+        <li><a href="/rooms/live-room/#vocal-booth">Vocal Booth</a></li>
+        <li><a href="/rooms/live-room/#isolation">Isolation Booths</a></li>
+        <li><a href="/rooms/live-room/#isolation">Amp Booth</a></li>
         <li><a href="/rooms/writing-rooms/">Writing Rooms</a></li>
       </ul>
     </div>
@@ -1681,8 +1678,8 @@ html      { scroll-behavior: auto; }
     <div>
       <div class="footer-head">Find Us</div>
       <ul class="footer-links">
-        <li><a href="/contact/#enquiry-form">Get in Touch</a></li>
-        <li><a href="/contact/#enquiry-form">Enquire about your next session</a></li>
+        <li><a href="/#home-enquiry">Get in Touch</a></li>
+        <li><a href="/#home-enquiry">Enquire about your next session</a></li>
         <li><a href="https://www.instagram.com/salvationmusicstudiosbtn/">Instagram</a></li>
         <li><a href="https://www.facebook.com/profile.php?id=100093193308784">Facebook</a></li>
         <li><a href="https://share.google/0pPGxHfIi8WZ4qw2y">Brighton, UK</a></li>
@@ -2114,5 +2111,5 @@ if (gallerySection) {
 
 })();
 </script>
-<script src="/search.js" defer></script></body>
+<script src="/search.js?v=20260625-mobile-nav-1" defer></script></body>
 </html>

@@ -120,18 +120,33 @@
       "permanent": true
     },
     {
+      "source": "/contact",
+      "destination": "/#home-enquiry",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/#home-enquiry",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/#home-enquiry",
+      "permanent": true
+    },
+    {
       "source": "/book-online",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/enquiries",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/contactus",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
@@ -281,7 +296,7 @@
     },
     {
       "source": "/jobs",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
@@ -291,47 +306,47 @@
     },
     {
       "source": "/join-our-roster-of-session-musicians",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/competition-1",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/ep-giveaway",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/single-giveaway-2025",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/single-giveaway-2026",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/single-giveaway-2026-tiktok",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/phill-brown-competition",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/salvation-black-friday-sale",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/copy-of-enquiries-ad-landing-page",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
@@ -501,17 +516,17 @@
     },
     {
       "source": "/book-online/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/enquiries/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/contactus/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
@@ -661,7 +676,7 @@
     },
     {
       "source": "/jobs/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
@@ -671,47 +686,47 @@
     },
     {
       "source": "/join-our-roster-of-session-musicians/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/competition-1/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/ep-giveaway/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/single-giveaway-2025/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/single-giveaway-2026/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/single-giveaway-2026-tiktok/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/phill-brown-competition/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/salvation-black-friday-sale/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
       "source": "/copy-of-enquiries-ad-landing-page/",
-      "destination": "/contact",
+      "destination": "/#home-enquiry",
       "permanent": true
     },
     {
@@ -912,11 +927,56 @@
       ]
     },
     {
+      "source": "/photos/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/shared.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/search.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/logo.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/salvation-script.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://www.openstreetmap.org; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
         },
         {
           "key": "X-Frame-Options",
@@ -965,10 +1025,6 @@
     {
       "source": "/testimonials/",
       "destination": "/testimonials.html"
-    },
-    {
-      "source": "/contact/",
-      "destination": "/contact.html"
     },
     {
       "source": "/spaces/",

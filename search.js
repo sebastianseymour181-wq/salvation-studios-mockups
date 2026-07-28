@@ -202,9 +202,9 @@
     // Rooms
     ['Live Room','Room','13m vaulted 1910 hall · 9.4×8.2m · John Flynn acoustics','/rooms/live-room/'],
     ['Control Room','Room','Neve 8068 · ATC monitors · John Flynn design','/rooms/control-room/'],
-    ['Vocal Booth','Room','Precision isolation · direct sightlines to control room','/rooms/vocal-booth/'],
-    ['Iso Booths','Room','2× retractable glass-fronted isolation booths','/rooms/iso-booths/'],
-    ['Isolation Booths','Room','Simultaneous tracking · full separation','/rooms/iso-booths/'],
+    ['Vocal Booth','Room','Precision isolation · direct sightlines to control room','/rooms/live-room/#isolation'],
+    ['Iso Booths','Room','2× retractable glass-fronted isolation booths','/rooms/live-room/#isolation'],
+    ['Isolation Booths','Room','Simultaneous tracking · full separation','/rooms/live-room/#isolation'],
     ['Amp Booth','Room','Full isolation · guitar & bass at real volume','/rooms/live-room/'],
     ['The Bunker','Room','Self-contained writing & production wing','/rooms/the-bunker/'],
     ['Mezzanine Room','Room','Elevated writing room overlooking main studio','/rooms/writing-rooms/#mezzanine-room'],
@@ -218,7 +218,7 @@
     ['Mastering','Service','Mastering services','/services/mastering/'],
     ['Writing','Service','Writing rooms & writing camps','/rooms/writing-rooms/'],
     ['Live Videos','Service','Filmed live sessions','/services/live-videos/'],
-    ['Accommodation','Service','On-site accommodation','/services/accommodation-hospitality/'],
+    ['Accommodation','Service','Local accommodation and hospitality support','/services/accommodation-hospitality/'],
     ['Catering','Service','Locally prepared catering & hospitality','/services/accommodation-hospitality/'],
     ['Hospitality','Service','Catering, lounge & session support','/services/accommodation-hospitality/'],
     ['Dry Hire','Service','Bring your own team','/services/recording/'],
@@ -229,7 +229,7 @@
     ['Gallery','Page','Photos from inside Salvation Studios','/gallery/'],
     ['Testimonials','Page','Artists and engineers on recording at Salvation','/testimonials/'],
     ['Spaces Overview','Page','Overview of all studio spaces','/spaces/'],
-    ['Contact','Page','Enquire about your next session','/contact/'],
+    ['Contact','Page','Enquire about your next session','/#home-enquiry'],
   ];
 
   const INDEX = RAW.map(([name, cat, sub, url]) => ({
@@ -352,12 +352,134 @@
   const SEARCH_BTN_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`;
   const CLOSE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>`;
 
+  // ─── MOBILE NAVIGATION ───────────────────────────────────────────────────────
+  const MOBILE_NAV = {
+    top: [
+      ['Home', '/'],
+      ['About', '/about/'],
+      ['Equipment', '/equipment/'],
+      ['Gallery', '/gallery/'],
+      ['Testimonials', '/testimonials/'],
+    ],
+    spaces: [
+      ['Spaces Overview', '/spaces/'],
+      ['Main Studio', '/rooms/main-studio/'],
+      ['Control Room', '/rooms/control-room/'],
+      ['Live Room', '/rooms/live-room/'],
+      ['Vocal Booth', '/rooms/vocal-booth/'],
+      ['Iso Booths', '/rooms/iso-booths/'],
+      ['Writing Rooms', '/rooms/writing-rooms/'],
+      ['The Bunker', '/rooms/the-bunker/'],
+    ],
+    services: [
+      ['Services Overview', '/services/'],
+      ['Recording', '/services/recording/'],
+      ['Mixing', '/services/mixing/'],
+      ['Mastering', '/services/mastering/'],
+      ['Live Videos', '/services/live-videos/'],
+      ['Signature Sessions', '/services/signature-sessions/'],
+      ['Giveaways & Offers', '/services/giveaways-offers/'],
+      ['Accommodation and Hospitality', '/services/accommodation-hospitality/'],
+    ],
+  };
+
+  function pathMatches(path, href) {
+    if (href === '/') return path === '/';
+    return path === href || path.startsWith(href);
+  }
+
+  function createMobileLink(label, href, className) {
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = label;
+    if (className) link.className = className;
+    if (pathMatches(window.location.pathname, href)) link.setAttribute('aria-current', 'page');
+    return link;
+  }
+
+  function createMobileGroup(label, id, items, open, active) {
+    const group = document.createElement('div');
+    group.className = `mobile-nav-group${open ? ' open' : ''}${active ? ' is-active' : ''}`;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'mobile-nav-toggle';
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    button.setAttribute('aria-controls', id);
+    button.innerHTML = `<span>${label}</span><span class="mobile-nav-chevron" aria-hidden="true">⌄</span>`;
+
+    const panel = document.createElement('div');
+    panel.className = 'mobile-nav-panel';
+    panel.id = id;
+    panel.hidden = !open;
+    items.forEach(([itemLabel, href]) => panel.appendChild(createMobileLink(itemLabel, href, 'mobile-nav-sub')));
+
+    button.addEventListener('click', () => {
+      const isOpen = group.classList.toggle('open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      panel.hidden = !isOpen;
+    });
+
+    group.append(button, panel);
+    return group;
+  }
+
+  function closeMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (!mobileMenu || !hamburger) return;
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function enhanceMobileNavigation() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (!mobileMenu || mobileMenu.dataset.enhanced === 'true') return;
+
+    const currentPath = window.location.pathname;
+    const enquireHref = currentPath === '/' ? '#home-enquiry' : '/#home-enquiry';
+    const spacesActive = currentPath === '/spaces/' || currentPath.startsWith('/rooms/');
+    const servicesActive = currentPath === '/services/' || currentPath.startsWith('/services/');
+
+    mobileMenu.dataset.enhanced = 'true';
+    mobileMenu.textContent = '';
+
+    mobileMenu.appendChild(createMobileLink('Home', '/', 'mobile-nav-link'));
+    mobileMenu.appendChild(createMobileLink('About', '/about/', 'mobile-nav-link'));
+    mobileMenu.appendChild(createMobileGroup('Spaces', 'mobileNavSpaces', MOBILE_NAV.spaces, false, spacesActive));
+    mobileMenu.appendChild(createMobileLink('Equipment', '/equipment/', 'mobile-nav-link'));
+    mobileMenu.appendChild(createMobileLink('Gallery', '/gallery/', 'mobile-nav-link'));
+    mobileMenu.appendChild(createMobileGroup('Services', 'mobileNavServices', MOBILE_NAV.services, false, servicesActive));
+    mobileMenu.appendChild(createMobileLink('Testimonials', '/testimonials/', 'mobile-nav-link'));
+    mobileMenu.appendChild(createMobileLink('Enquire', enquireHref, 'mobile-cta mobile-nav-cta'));
+
+    mobileMenu.addEventListener('click', event => {
+      const link = event.target.closest('a');
+      if (!link) return;
+      const url = new URL(link.href, window.location.href);
+      if (url.origin === window.location.origin && url.pathname === window.location.pathname && url.hash) {
+        const target = document.querySelector(url.hash);
+        if (target) {
+          event.preventDefault();
+          closeMobileMenu();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+      }
+      closeMobileMenu();
+    });
+  }
+
   // ─── INIT ─────────────────────────────────────────────────────────────────────
   function init() {
     // Inject CSS
     const styleEl = document.createElement('style');
     styleEl.textContent = CSS;
     document.head.appendChild(styleEl);
+
+    enhanceMobileNavigation();
 
     // Inject search button into nav
     const nav = document.getElementById('nav');
@@ -491,4 +613,66 @@
   } else {
     init();
   }
+})();
+
+// Native, dependency-free lightbox for the homepage and gallery grids.
+(() => {
+  function initGalleryLightbox() {
+    const items = [...document.querySelectorAll('.gallery-grid .gp, .gallery-mosaic .gp')];
+    if (!items.length || typeof HTMLDialogElement === 'undefined') return;
+
+    const dialog = document.createElement('dialog');
+    const close = document.createElement('button');
+    const figure = document.createElement('figure');
+    const image = document.createElement('img');
+    const caption = document.createElement('figcaption');
+    let trigger = null;
+
+    dialog.className = 'gallery-lightbox';
+    dialog.setAttribute('aria-label', 'Enlarged gallery image');
+    close.className = 'gallery-lightbox-close';
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Close enlarged image');
+    close.textContent = '×';
+    figure.append(image, caption);
+    dialog.append(close, figure);
+    document.body.append(dialog);
+
+    function open(item) {
+      const source = item.querySelector('img');
+      if (!source) return;
+      trigger = item;
+      image.src = source.currentSrc || source.src;
+      image.alt = source.alt;
+      caption.textContent = item.querySelector('figcaption')?.textContent.trim() || '';
+      caption.hidden = !caption.textContent;
+      dialog.showModal();
+      close.focus({ preventScroll: true });
+    }
+
+    items.forEach(item => {
+      const source = item.querySelector('img');
+      if (!source) return;
+      const label = item.querySelector('figcaption')?.textContent.trim() || source.alt || 'gallery image';
+      item.tabIndex = 0;
+      item.setAttribute('role', 'button');
+      item.setAttribute('aria-haspopup', 'dialog');
+      item.setAttribute('aria-label', `Enlarge ${label}`);
+      item.addEventListener('click', () => open(item));
+      item.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        open(item);
+      });
+    });
+
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => trigger?.focus({ preventScroll: true }));
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGalleryLightbox);
+  else initGalleryLightbox();
 })();

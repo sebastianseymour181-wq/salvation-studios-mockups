@@ -1,4 +1,6 @@
 const MAX_BODY_BYTES = 12000;
+const MIN_FORM_AGE_MS = 3000;
+const MAX_FORM_AGE_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_TO_EMAIL = 'info@salvationstudios.co.uk';
 
 function readBody(req) {
@@ -29,7 +31,7 @@ function isEmail(value) {
 }
 
 function isAllowedOrigin(origin) {
-  if (!origin) return true;
+  if (!origin) return false;
 
   try {
     const { hostname, protocol } = new URL(origin);
@@ -40,6 +42,17 @@ function isAllowedOrigin(origin) {
   } catch (_error) {
     return false;
   }
+}
+
+function hasHumanFormTiming(value) {
+  const startedAt = Number(value);
+  if (!Number.isFinite(startedAt) || startedAt <= 0) return false;
+
+  const age = Date.now() - startedAt;
+  if (age >= 0 && age < MIN_FORM_AGE_MS) return false;
+  if (age > MAX_FORM_AGE_MS) return false;
+  if (age < -5 * 60 * 1000) return false;
+  return true;
 }
 
 function escapeHtml(value) {
@@ -169,6 +182,12 @@ module.exports = async function handler(req, res) {
     if (clean(payload.website, 200)) {
       res.statusCode = 200;
       res.end(JSON.stringify({ ok: true }));
+      return;
+    }
+
+    if (!hasHumanFormTiming(payload.form_started_at)) {
+      res.statusCode = 400;
+      res.end(JSON.stringify({ ok: false, error: 'Please wait a moment and try again.' }));
       return;
     }
 

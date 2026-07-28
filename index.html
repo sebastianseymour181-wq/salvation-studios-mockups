@@ -49,26 +49,26 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* ─── NAV ─── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  padding: 16px clamp(18px, 4vw, 56px);
-  height: 88px;
-  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px;
+  height: 76px;
+  display: grid;
+  grid-template-columns: minmax(210px, 1fr) auto minmax(210px, 1fr);
+  align-items: center;
   gap: 24px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0.28) 62%, transparent);
   border-bottom: 0;
-  transition: background 0.35s ease, height 0.35s ease, padding 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
 }
 .nav.scrolled {
-  height: 72px;
-  padding-top: 0; padding-bottom: 0;
-  background: rgba(4,0,10,0.88);
-  backdrop-filter: blur(18px);
-  border-bottom: 0;
+  background: #000;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
 }
-.nav-logo { display: flex; align-items: center; }
+.nav-logo { display: flex; align-items: center; justify-self: start; min-width: 0; }
 .nav-logo a { display: flex; align-items: center; text-decoration: none; }
-.nav-logo img { height: 54px; width: auto; object-fit: contain; background: transparent; filter: drop-shadow(0 0 16px rgba(192,132,252,0.32)); }
-.nav.scrolled .nav-logo img { height: 48px; }
-.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; flex: 1 1 auto; justify-content: center; min-width: 0; }
+.nav-logo img { height: 52px; width: auto; object-fit: contain; background: transparent; filter: drop-shadow(0 0 14px rgba(192,132,252,0.28)); }
+.nav-logo .ss-btn { margin-left: 8px; transform: translateX(-22px); }
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; justify-content: center; justify-self: center; min-width: 0; }
 .nav-links > li { display: flex; align-items: center; }
 .nav-links a {
   display: inline-flex; align-items: center; justify-content: center;
@@ -77,7 +77,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   color: var(--muted); text-decoration: none;
   transition: color 0.3s;
 }
-.nav-links a:hover { color: var(--glow); }
+.nav-links a:hover, .nav-links a.active { color: var(--glow); }
 .nav-dropdown { position: relative; }
 .nav-dropdown-toggle { display: inline-flex; align-items: center; gap: 6px; }
 .nav-dropdown-toggle::after { content: '⌄'; display: inline-block; font-size: 10px; line-height: 1; color: var(--glow); transform: translateY(-1px); }
@@ -86,17 +86,17 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
 .nav-dropdown-menu a { display: block; padding: 10px 12px; border-radius: 10px; color: rgba(245,243,255,.82); background: transparent; }
 .nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus { color: var(--white); background: rgba(124,58,237,.16); }
-.nav-dropdown-menu[aria-label="Studio services"] { width: 292px; }
-.nav-dropdown-menu[aria-label="Studio services"] a { padding: 8px 11px; font-size: 11px; }
 
 .nav-cta {
+  justify-self: end;
   background:
     linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 28%, rgba(0,0,0,0.18) 100%),
     linear-gradient(135deg, #5b21b6 0%, #7c3aed 48%, #4c168e 100%);
   color: var(--white);
   font-family: 'Montserrat', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 800;
   letter-spacing: 0.05em; padding: 11px 26px; border-radius: 6px;
-  border: 1px solid rgba(216,180,254,0.34); cursor: pointer; text-decoration: none; display: inline-block;
+  border: 1px solid rgba(216,180,254,0.34); cursor: pointer; text-decoration: none; display: inline-flex;
+  align-items: center; justify-content: center; min-width: 86px; text-align: center;
   transition: all 0.3s;
   flex: 0 0 auto; white-space: nowrap;
   position: relative; overflow: hidden; isolation: isolate;
@@ -109,7 +109,6 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   box-shadow: 0 12px 34px rgba(var(--glow-rgb), 0.28), inset 0 1px 0 rgba(255,255,255,0.18);
   transform: translateY(-1px);
 }
-.nav-cta-short { display: none; }
 
 /* ─── HERO ─── */
 .hero {
@@ -124,13 +123,13 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   animation: heroZoom 14s ease-out forwards;
 }
 @keyframes heroZoom { to { transform: scale(1); } }
-.hero-img img { filter: brightness(0.78) saturate(0.98) contrast(1.04); object-position: center 54%; }
+.hero-img img { filter: brightness(1.12) saturate(0.92) contrast(1); object-position: center 54%; }
 .hero-overlay {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 50% 38%, rgba(7,0,15,0.28) 0%, rgba(7,0,15,0.54) 56%, rgba(7,0,15,0.88) 100%),
-    linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, transparent 20%, rgba(7,0,15,0.28) 52%, rgba(7,0,15,0.96) 100%),
-    linear-gradient(130deg, rgba(109,40,217,0.32) 0%, transparent 42%, rgba(0,0,0,0.2) 100%);
+    radial-gradient(ellipse at 50% 38%, rgba(7,0,15,0.04) 0%, rgba(7,0,15,0.18) 58%, rgba(7,0,15,0.5) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, transparent 28%, rgba(7,0,15,0.1) 56%, rgba(7,0,15,0.72) 100%),
+    linear-gradient(130deg, rgba(109,40,217,0.08) 0%, transparent 48%, rgba(0,0,0,0.04) 100%);
 }
 .hero-overlay::after {
   content: ''; position: absolute; inset: 0; opacity: .18; pointer-events: none;
@@ -142,8 +141,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   position: absolute; border-radius: 50%;
   filter: blur(120px); pointer-events: none;
 }
-.orb-1 { width: 700px; height: 700px; background: rgba(109,40,217,0.2); top: -150px; right: 5%; }
-.orb-2 { width: 400px; height: 400px; background: rgba(139,92,246,0.12); bottom: 10%; left: -5%; }
+.orb-1 { width: 700px; height: 700px; background: rgba(109,40,217,0.08); top: -150px; right: 5%; }
+.orb-2 { width: 400px; height: 400px; background: rgba(139,92,246,0.05); bottom: 10%; left: -5%; }
 
 .hero-content {
   position: relative; z-index: 10;
@@ -350,6 +349,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   align-items: center;
 }
 .seo-copy-card {
+  grid-column: 1;
+  grid-row: 1;
   max-width: 620px;
   padding: clamp(26px, 4vw, 44px);
   border: 1px solid rgba(167,139,250,0.18);
@@ -372,6 +373,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   box-shadow: 0 32px 90px rgba(0,0,0,0.44);
 }
 .enquiry-form {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   margin-top: 36px;
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -415,6 +418,139 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .home-enquiry-card .label { display: block; }
 .home-enquiry-card .h3-serif { margin-bottom: 14px; }
 .home-enquiry-card .body-text { max-width: 620px; }
+.home-studio-card {
+  grid-column: 1;
+  grid-row: 2;
+  max-width: 620px;
+  border: 1px solid rgba(167,139,250,0.18);
+  border-radius: 18px;
+  padding: clamp(22px, 3vw, 30px);
+  background: rgba(12,0,28,0.72);
+  box-shadow: 0 22px 56px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.home-studio-card .h3-serif {
+  margin-bottom: 14px;
+}
+.studio-detail-list {
+  display: grid;
+  gap: 12px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.studio-detail-list li {
+  display: grid;
+  gap: 4px;
+  color: var(--white);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.studio-detail-list span {
+  color: var(--pale);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.studio-detail-list a {
+  color: var(--white);
+  text-decoration: none;
+}
+.studio-detail-list a:hover {
+  color: var(--glow);
+}
+.home-map-card {
+  margin-top: clamp(28px, 5vw, 54px);
+  border: 1px solid rgba(167,139,250,0.18);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(12,0,28,0.72);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.home-map-frame {
+  position: relative;
+  height: clamp(320px, 42vw, 460px);
+  background: #120026;
+}
+.home-map-card iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(0.9) contrast(1.02);
+  z-index: 2;
+}
+.map-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background:
+    linear-gradient(28deg, transparent 0 41%, rgba(255,255,255,0.18) 41.3% 42.6%, transparent 43% 100%),
+    linear-gradient(138deg, transparent 0 36%, rgba(255,255,255,0.12) 36.3% 37.4%, transparent 38% 100%),
+    linear-gradient(88deg, transparent 0 55%, rgba(167,139,250,0.24) 55.3% 56.5%, transparent 57% 100%),
+    linear-gradient(0deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+    radial-gradient(circle at 50% 45%, rgba(139,92,246,0.22), transparent 38%),
+    #14002a;
+  background-size: auto, auto, auto, 58px 58px, 58px 58px, auto, auto;
+}
+.map-fallback::before {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 8%;
+  top: 49%;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(216,180,254,0.16), rgba(255,255,255,0.34), rgba(216,180,254,0.16));
+  transform: rotate(-8deg);
+}
+.map-pin {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--glow);
+  box-shadow: 0 0 0 8px rgba(139,92,246,0.2), 0 0 34px rgba(216,180,254,0.72);
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.map-pin::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--white);
+}
+.map-label {
+  position: absolute;
+  left: 50%;
+  top: calc(43% + 28px);
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 999px;
+  background: rgba(7,0,15,0.72);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.home-map-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: clamp(20px, 3vw, 28px);
+}
+.home-map-content .body-text {
+  margin: 0;
+  max-width: 560px;
+}
 .welcome-photo-stack {
   position: relative; height: 580px;
 }
@@ -491,7 +627,6 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: flex; justify-content: space-between; align-items: flex-end;
 }
 .live-room-text { max-width: 560px; }
-.room-num { font-size: 10px; letter-spacing: 0.3em; color: var(--violet); margin-bottom: 10px; text-transform: uppercase; font-weight: 600; text-shadow: 0 0 16px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,1); }
 .room-title {
   font-family: 'Cormorant Garant', serif;
   font-size: 52px; font-weight: 300; color: var(--white); line-height: 1.05;
@@ -650,7 +785,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* ─── TESTIMONIALS ─── */
 .testimonials { padding: 120px 0; background: var(--deep); overflow: hidden; }
 .testi-header { padding: 0 56px; margin-bottom: 72px; }
-.testi-track-wrap { overflow: hidden; }
+.testi-track-wrap { overflow: hidden; max-width: 100vw; contain: paint; }
+@supports (overflow: clip) { .ticker-wrap, .testi-track-wrap { overflow: clip; } }
 .testi-track {
   display: flex; gap: 24px;
   animation: tScroll 60s linear infinite;
@@ -711,6 +847,19 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transition: background 0.4s;
 }
 .gp:hover::after { background: rgba(109,40,217,0.15); }
+.gallery-mosaic .gp::after { z-index: 1; pointer-events: none; }
+.gallery-mosaic .gp figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: 14px 16px;
+  background: rgba(7,0,15,0.82);
+  color: var(--white);
+  font-family: 'Cormorant Garant', serif;
+  font-size: clamp(16px, 1.35vw, 21px);
+  line-height: 1.18;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+.gallery-mosaic .gp figcaption.caption-long { font-size: clamp(11px, 0.9vw, 14px); line-height: 1.25; }
 .gp.tall { grid-row: span 2; }
 .gp.wide { grid-column: span 2; }
 .gp.xlarge { grid-column: span 2; grid-row: span 2; }
@@ -843,7 +992,7 @@ footer {
 .footer-tagline { font-size: 13px; line-height: 1.9; color: var(--muted); }
 .footer-head {
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(109,40,217,0.55); font-weight: 500; margin-bottom: 20px;
+  color: #C084FC; font-weight: 500; margin-bottom: 20px;
 }
 .footer-links { list-style: none; }
 .footer-links li + li { margin-top: 13px; }
@@ -995,7 +1144,9 @@ footer {
 .mobile-menu {
   display: none;
   position: fixed; inset: 0; z-index: 400;
-  background: rgba(7,0,15,0.97);
+  height: 100dvh;
+  max-height: 100dvh;
+  background: #07000f;
   backdrop-filter: blur(20px);
   flex-direction: column;
   align-items: center;
@@ -1006,6 +1157,8 @@ footer {
   transition: opacity 0.3s ease;
   padding: 92px 20px 30px;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 .mobile-menu.open {
   display: flex;
@@ -1040,6 +1193,44 @@ footer {
 .mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
 .mobile-menu.open a:nth-child(6) { transition-delay: 0.3s; }
 .mobile-menu a:hover { color: var(--white); border-color: rgba(192,132,252,0.55); background: rgba(109,40,217,0.18); }
+.mobile-nav-group { width: min(260px, calc(100vw - 72px)); display: grid; gap: 6px; }
+.mobile-nav-toggle {
+  width: 100%;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 18px;
+  font-family: 'Montserrat', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(245,243,255,0.88);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: left;
+  border: 1px solid rgba(167,139,250,0.22);
+  border-radius: 999px;
+  background: rgba(109,40,217,0.08);
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+.mobile-nav-toggle:hover, .mobile-nav-toggle:focus-visible { color: var(--white); border-color: rgba(192,132,252,0.55); background: rgba(109,40,217,0.18); }
+.mobile-nav-group.is-active .mobile-nav-toggle { color: var(--white); border-color: rgba(192,132,252,0.58); background: rgba(124,58,237,0.18); }
+.mobile-nav-chevron { font-size: 12px; color: var(--glow); transition: transform 0.2s ease; }
+.mobile-nav-group.open .mobile-nav-chevron { transform: rotate(180deg); }
+.mobile-nav-panel { display: grid; gap: 6px; padding: 2px 0 4px; }
+.mobile-nav-panel[hidden] { display: none; }
+.mobile-menu .mobile-nav-sub {
+  min-height: 34px;
+  padding-left: 28px;
+  font-size: 11px;
+  letter-spacing: 0.065em;
+  background: rgba(124,58,237,0.045);
+  border-color: rgba(167,139,250,0.14);
+  color: rgba(245,243,255,0.74);
+}
+.mobile-menu a[aria-current="page"], .mobile-menu .mobile-nav-sub[aria-current="page"] { color: var(--white); border-color: rgba(192,132,252,0.58); background: rgba(124,58,237,0.18); }
 .mobile-menu .mobile-cta {
   background:
     linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 30%, rgba(0,0,0,0.2) 100%),
@@ -1058,30 +1249,27 @@ footer {
 /* ─── RESPONSIVE — TABLET ─── */
 @media (max-width: 1100px) {
   .nav {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    padding-left: clamp(14px, 2.3vw, 24px);
-    padding-right: clamp(14px, 2.3vw, 24px);
-    gap: clamp(10px, 1.8vw, 18px);
-    justify-content: normal;
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 18px;
+    grid-template-columns: minmax(150px, 1fr) auto minmax(86px, 1fr);
   }
   .nav-logo { position: static; transform: none; }
-  .nav-logo img { height: 44px; }
-  .nav.scrolled .nav-logo img { height: 40px; }
-  .nav-links { flex: 0 1 auto; min-width: 0; margin: 0; justify-content: center; gap: clamp(12px, 1.7vw, 20px); }
-  .nav-links a { min-height: 40px; font-size: 13px; letter-spacing: 0.06em; }
+  .nav-logo img { height: 48px; }
+  .nav-links { margin: 0; justify-content: center; gap: clamp(18px, 2.6vw, 24px); }
   .nav-cta {
+    position: relative;
+    right: auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    justify-self: end;
+    width: 86px;
     min-height: 40px;
-    padding: 10px 14px;
+    padding: 0 14px;
+    color: var(--white);
     font-size: 11px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
   }
-  .nav-cta-full { display: none; }
-  .nav-cta-short { display: inline; }
   .welcome { gap: 48px; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
   .rooms-grid { grid-template-columns: 1fr 1fr; }
@@ -1089,8 +1277,8 @@ footer {
 }
 
 @media (max-width: 980px) {
-  .nav { justify-content: normal; }
-  .nav-links { margin: 0; justify-content: center; gap: clamp(10px, 1.4vw, 16px); }
+  .nav { justify-content: center; }
+  .nav-links { margin: 0 auto; justify-content: center; gap: clamp(16px, 2.5vw, 24px); }
 
   .live-room-feature {
     height: clamp(560px, 74vw, 680px);
@@ -1127,26 +1315,24 @@ footer {
 }
 
 /* ─── RESPONSIVE — MOBILE ─── */
-@media (max-width: 768px) {
+@media (min-width: 769px) and (max-width: 899px) {
   .nav {
     display: flex;
     height: calc(66px + env(safe-area-inset-top));
     padding: env(safe-area-inset-top) 16px 0;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(to bottom, rgba(3,0,8,0.94), rgba(3,0,8,0.68));
+    background: linear-gradient(to bottom, rgba(3,0,8,0.72), rgba(3,0,8,0.34) 62%, transparent);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(216,180,254,0.12);
   }
-  .nav-logo { position: static; transform: none; z-index: 610; }
-  .nav-logo img { height: 46px; }
+  .nav-logo { position: static; transform: none; z-index: 610; flex: 0 1 auto; min-width: 0; }
   .nav.scrolled { height: calc(62px + env(safe-area-inset-top)); background: rgba(4,0,10,0.94); }
+  .nav-logo img { height: 46px; }
   .nav.scrolled .nav-logo img { height: 42px; }
   .nav-links { display: none; }
   .nav-dropdown-toggle::after, .nav-dropdown-menu { display: none; }
   .nav-cta { display: none; }
-  .nav-cta-full { display: inline; }
-  .nav-cta-short { display: none; }
   .nav-hamburger {
     display: flex;
     position: absolute;
@@ -1183,6 +1369,7 @@ footer {
     padding: calc(92px + env(safe-area-inset-top)) 22px 28px;
     background: linear-gradient(180deg, rgba(7,0,15,0.98), rgba(13,0,32,0.97));
   }
+  .mobile-nav-group { width: 100%; gap: 6px; }
   .mobile-menu a {
     width: 100%;
     min-height: 42px;
@@ -1192,6 +1379,19 @@ footer {
     font-size: 12px;
     letter-spacing: 0.08em;
   }
+  .mobile-nav-toggle {
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 8px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .mobile-menu .mobile-nav-sub {
+    min-height: 34px;
+    padding-left: 28px;
+    font-size: 11px;
+    letter-spacing: 0.065em;
+  }
   .mobile-menu .mobile-cta {
     order: -1;
     justify-content: center;
@@ -1200,6 +1400,93 @@ footer {
     margin-bottom: 8px;
     padding: 0 18px;
   }
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: flex;
+    height: calc(66px + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) 16px 0;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(3,0,8,0.72), rgba(3,0,8,0.34) 62%, transparent);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(216,180,254,0.12);
+  }
+  .nav-logo { position: static; transform: none; z-index: 610; flex: 0 1 auto; min-width: 0; }
+  .nav-logo img { height: 46px; }
+  .nav.scrolled { height: calc(62px + env(safe-area-inset-top)); background: rgba(4,0,10,0.94); }
+  .nav.scrolled .nav-logo img { height: 42px; }
+  .nav-links { display: none; }
+  .nav-dropdown-toggle::after, .nav-dropdown-menu { display: none; }
+  .nav-cta { display: none; }
+  .nav-hamburger {
+    display: flex;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid rgba(216,180,254,0.22);
+    border-radius: 999px;
+    background: rgba(20,0,48,0.58);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .nav-hamburger span { width: 18px; }
+  .nav-logo .ss-btn {
+    position: absolute;
+    right: 66px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    margin-left: 0;
+    border-color: rgba(216,180,254,0.24);
+    background: rgba(20,0,48,0.58);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .mobile-menu {
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: clamp(5px, 1.25vh, 8px);
+    padding: calc(82px + env(safe-area-inset-top)) 22px max(34px, calc(env(safe-area-inset-bottom) + 34px));
+    background: linear-gradient(180deg, #07000f 0%, #0d0020 100%);
+  }
+  .mobile-nav-group { width: 100%; gap: 6px; }
+  .mobile-menu a {
+    width: 100%;
+    min-height: clamp(34px, 5.2vh, 42px);
+    justify-content: flex-start;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: clamp(10px, 2.85vw, 12px);
+    letter-spacing: 0.075em;
+    line-height: 1.1;
+  }
+  .mobile-nav-toggle {
+    min-height: clamp(34px, 5.2vh, 42px);
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: clamp(10px, 2.85vw, 12px);
+    letter-spacing: 0.075em;
+  }
+  .mobile-menu .mobile-nav-sub {
+    min-height: clamp(30px, 4.6vh, 36px);
+    padding-left: 26px;
+    font-size: clamp(9px, 2.55vw, 11px);
+  }
+  .mobile-menu .mobile-cta {
+    order: -1;
+    justify-content: center;
+    min-height: clamp(40px, 5.8vh, 48px);
+    margin-top: 0;
+    margin-bottom: clamp(4px, 1vh, 8px);
+    padding: 0 16px;
+  }
 
   /* Hero */
   .hero {
@@ -1207,19 +1494,19 @@ footer {
     justify-content: end;
     padding-top: calc(66px + env(safe-area-inset-top));
   }
-  .hero-img img { object-position: center 48%; filter: brightness(0.7) saturate(0.96) contrast(1.06); }
+  .hero-img img { object-position: center 48%; filter: brightness(1.08) saturate(0.92) contrast(1); }
   .hero-overlay {
     background:
-      radial-gradient(ellipse at 50% 34%, rgba(7,0,15,0.02) 0%, rgba(7,0,15,0.32) 42%, rgba(7,0,15,0.86) 100%),
-      linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, transparent 20%, rgba(7,0,15,0.28) 50%, rgba(7,0,15,0.98) 100%),
-      linear-gradient(130deg, rgba(109,40,217,0.28) 0%, transparent 52%);
+      radial-gradient(ellipse at 50% 34%, rgba(7,0,15,0) 0%, rgba(7,0,15,0.1) 44%, rgba(7,0,15,0.52) 100%),
+      linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, transparent 28%, rgba(7,0,15,0.1) 54%, rgba(7,0,15,0.74) 100%),
+      linear-gradient(130deg, rgba(109,40,217,0.07) 0%, transparent 56%);
   }
   .hero, .ticker-wrap, .client-ticker { width: 100%; max-width: 100%; }
   .hero-content {
     position: absolute;
     left: 50%;
     right: auto;
-    bottom: max(44px, calc(env(safe-area-inset-bottom) + 34px));
+    bottom: max(92px, calc(env(safe-area-inset-bottom) + 78px));
     width: calc(100% - 44px);
     max-width: 352px;
     margin: 0;
@@ -1228,7 +1515,7 @@ footer {
   }
   .hero-tag {
     display: inline-flex;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     font-size: 8px;
     letter-spacing: 0.14em;
   }
@@ -1237,28 +1524,28 @@ footer {
     display: inline-block;
     width: clamp(170px, 50vw, 220px);
     height: clamp(74px, 22vw, 98px);
-    margin: 0 auto 22px;
+    margin: 0 auto 28px;
     filter: drop-shadow(0 0 16px rgba(192,132,252,0.62)) drop-shadow(0 10px 24px rgba(0,0,0,0.55));
   }
 
-  .hero-h1 { font-size: clamp(31px, 8.3vw, 38px); line-height: 1.02; letter-spacing: -0.025em; max-width: 100%; margin-bottom: 26px; overflow-wrap: normal; text-wrap: balance; }
+  .hero-h1 { font-size: clamp(31px, 8.3vw, 38px); line-height: 1.02; letter-spacing: -0.025em; max-width: 100%; margin-bottom: 30px; overflow-wrap: normal; text-wrap: balance; }
   .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
   .hero-desc { max-width: 300px; font-size: 12px; line-height: 1.55; color: rgba(245,243,255,0.9); margin: 0 auto 16px; text-wrap: balance; }
   .hero-proof { gap: 6px; margin: 0 auto 18px; max-width: 304px; justify-content: center; flex-wrap: wrap; }
   .hero-proof span { padding: 7px 8px; font-size: 7.6px; letter-spacing: .1em; }
-  .hero-book-btn { font-size: 16px !important; padding: 16px 22px !important; width: 100%; max-width: 100%; text-align: center; margin-top: 0; margin-bottom: 14px; border-radius: 8px !important; }
+  .hero-book-btn { font-size: 16px !important; padding: 16px 22px !important; width: 100%; max-width: 100%; text-align: center; margin-top: 0; margin-bottom: 18px; border-radius: 8px !important; }
 
-  .hero-btns { flex-direction: column; width: 100%; max-width: 100%; gap: 14px; }
+  .hero-btns { flex-direction: column; width: 100%; max-width: 100%; gap: 16px; }
   .hero-btns .btn-outline { text-align: center; width: 100%; padding: 15px 20px; font-size: 15px; border-radius: 8px; background: rgba(7,0,15,0.26); }
   .hero-curve { display: none; }
 
   @media (max-height: 740px) {
-    .hero-content { bottom: max(26px, calc(env(safe-area-inset-bottom) + 18px)); }
-    .hero-tag { margin-bottom: 12px; }
-    .hero-salvation-wrap { width: clamp(150px, 45vw, 190px); height: clamp(66px, 20vw, 84px); margin-bottom: 14px; }
-    .hero-h1 { margin-bottom: 18px; }
-    .hero-book-btn { margin-bottom: 9px; }
-    .hero-btns { gap: 9px; }
+    .hero-content { bottom: max(58px, calc(env(safe-area-inset-bottom) + 46px)); }
+    .hero-tag { margin-bottom: 14px; }
+    .hero-salvation-wrap { width: clamp(150px, 45vw, 190px); height: clamp(66px, 20vw, 84px); margin-bottom: 16px; }
+    .hero-h1 { margin-bottom: 20px; }
+    .hero-book-btn { margin-bottom: 11px; }
+    .hero-btns { gap: 10px; }
   }
 
   /* Welcome */
@@ -1340,24 +1627,34 @@ footer {
     gap: 10px;
   }
   .gp.tall, .gp.wide, .gp.xlarge { grid-column: auto; grid-row: auto; }
+  .gallery-mosaic .gp figcaption { padding: 10px 12px; font-size: 14px; }
+  .gallery-mosaic .gp figcaption.caption-long { font-size: 10px; }
 
   /* Services */
   .services { padding: 72px 20px; }
   .services-grid { grid-template-columns: 1fr; gap: 14px; }
+  .services-grid.featured-services { grid-template-columns: 1fr; gap: 18px; margin-top: 34px; }
+  .svc-card { width: 100%; border-radius: 12px; }
   .svc-photo { height: 180px; }
   .svc-body { padding: 20px 20px 24px; }
+  .svc-name { font-size: 28px; }
+  .svc-desc { font-size: 13px; line-height: 1.75; }
 
   /* SEO spotlight */
   .seo-spotlight { padding: 64px 20px; }
   .seo-spotlight .two-col { grid-template-columns: 1fr; gap: 26px; }
+  .seo-copy-card, .enquiry-form, .home-studio-card { grid-column: 1; grid-row: auto; }
   .seo-copy-card { padding: 24px 20px; border-radius: 18px; }
   .seo-spotlight .h2-serif { font-size: clamp(34px, 10vw, 50px); line-height: 1.08; }
   .seo-spotlight .body-text { line-height: 1.8; }
   .seo-spotlight .btn-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .seo-spotlight .btn-primary, .seo-spotlight .btn-outline { width: 100%; text-align: center; padding: 16px 18px; font-size: 14px; }
   .seo-spotlight .photo-frame { min-height: 360px; max-height: 460px; }
+  .home-map-content { flex-direction: column; align-items: stretch; }
+  .home-map-content .btn-outline { width: 100%; text-align: center; }
+  .home-map-frame { height: 340px; }
   .form-grid { grid-template-columns: 1fr; }
-  .enquiry-form { padding: 22px; }
+  .enquiry-form { margin-top: 0; padding: 22px; }
   .enquiry-form .btn-primary { justify-self: stretch; text-align: center; width: 100%; }
 
   /* Booking */
@@ -1428,9 +1725,10 @@ html      { scroll-behavior: auto; }
         <a href="/rooms/main-studio/">Main Studio</a>
         <a href="/rooms/control-room/">Control Room</a>
         <a href="/rooms/live-room/">Live Room</a>
+        <a href="/rooms/vocal-booth/">Vocal Booth</a>
+        <a href="/rooms/iso-booths/">Iso Booths</a>
+        <a href="/rooms/writing-rooms/">Writing Rooms</a>
         <a href="/rooms/the-bunker/">The Bunker</a>
-        <a href="/rooms/writing-rooms/#mezzanine-room">Mezzanine Room</a>
-        <a href="/rooms/writing-rooms/#subterranean-room">Subterranean Room</a>
       </div>
     </li>
     <li><a href="/equipment/">Equipment</a></li>
@@ -1449,7 +1747,7 @@ html      { scroll-behavior: auto; }
     </li>
     <li><a href="/testimonials/">Testimonials</a></li>
   </ul>
-  <a href="#home-enquiry" class="nav-cta"><span class="nav-cta-full">Enquire about your next session</span><span class="nav-cta-short">Enquire</span></a>
+  <a href="#home-enquiry" class="nav-cta">Enquire</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -1461,6 +1759,10 @@ html      { scroll-behavior: auto; }
   <a href="/spaces/">Spaces Overview</a>
   <a href="/rooms/main-studio/">Main Studio</a>
   <a href="/rooms/control-room/">Control Room</a>
+  <a href="/rooms/live-room/">Live Room</a>
+  <a href="/rooms/vocal-booth/">Vocal Booth</a>
+  <a href="/rooms/iso-booths/">Iso Booths</a>
+  <a href="/rooms/writing-rooms/">Writing Rooms</a>
   <a href="/rooms/the-bunker/">The Bunker</a>
   <a href="/equipment/">Equipment</a>
   <a href="/gallery/">Gallery</a>
@@ -1471,8 +1773,10 @@ html      { scroll-behavior: auto; }
   <a href="/services/signature-sessions/">Signature Sessions</a>
   <a href="/services/giveaways-offers/">Giveaways &amp; Offers</a>
   <a href="/services/accommodation-hospitality/">Accommodation and Hospitality</a>
-  <a href="#home-enquiry" class="mobile-cta">Enquire about your next session</a>
+  <a href="#home-enquiry" class="mobile-cta">Enquire</a>
 </div>
+
+<main id="main-content">
 
 <!-- ─── HERO ─── -->
 <section class="hero">
@@ -1483,8 +1787,7 @@ html      { scroll-behavior: auto; }
   <div class="hero-glow-orb orb-1"></div>
   <div class="hero-glow-orb orb-2"></div>
   <div class="hero-content">
-    <div class="hero-tag">Brighton seafront recording complex</div>
-    <div class="hero-salvation-wrap" aria-hidden="true"><img src="/salvation-script.png" alt="" class="hero-salvation-img" width="2084" height="2084" decoding="async" loading="eager"></div>
+    <div class="hero-salvation-wrap" aria-hidden="true"><img src="/salvation-script.png" alt="" class="hero-salvation-img" width="1042" height="1042" decoding="async" loading="eager"></div>
     <h1 class="hero-h1">Brighton’s world-class recording studio and writing complex</h1>
     <a href="#home-enquiry" class="btn-primary hero-book-btn">Enquire about your next session</a>
     <div class="hero-btns">
@@ -1615,7 +1918,6 @@ html      { scroll-behavior: auto; }
     <img src="/photos/optimized/studio-sfpb.webp" alt="Grand piano in the Salvation Studios live room" width="2200" height="1467" decoding="async" loading="eager">
     <div class="live-room-info">
       <div class="live-room-text">
-        <div class="room-num">01 — The main studio</div>
         <div class="room-title">The Main Studio</div>
         <p class="room-desc">The heart of Salvation. A stunning live room with vaulted ceilings and exceptional acoustics, paired with a control room centred around a vintage Neve console, ATC monitoring and an exceptional collection of analogue outboard. Designed for all types of sessions, especially bands, ensembles and large-scale projects.</p>
         <span class="room-click">View detailed studio specs →</span>
@@ -1633,7 +1935,7 @@ html      { scroll-behavior: auto; }
     <a href="/rooms/control-room/" class="room-card reveal" style="text-decoration:none;color:inherit;">
       <div class="room-card-img"><img src="/photos/optimized/studio-client-control-room.webp" alt="Control room at Salvation Studios" width="1600" height="1065" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
-        <div class="room-num">02</div><div class="room-card-name">Control Room</div>
+        <div class="room-card-name">Control Room</div>
         <p class="room-card-desc">The John Flynn–designed control room with ATC soffit-mounted monitoring, rare outboard and sightlines into the main studio.</p>
         <div class="room-tags"><span class="rtag">ATC Monitors</span><span class="rtag">Outboard</span><span class="rtag">John Flynn Design</span></div>
         <span class="room-click">View specs →</span>
@@ -1643,7 +1945,7 @@ html      { scroll-behavior: auto; }
     <a href="/rooms/live-room/" class="room-card reveal reveal-d1" style="text-decoration:none;color:inherit;">
       <div class="room-card-img"><img src="/photos/optimized/studio-client-live-room.webp" alt="Live Room floor and performance space" width="1600" height="1067" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
-        <div class="room-num">03</div><div class="room-card-name">Live Room</div>
+        <div class="room-card-name">Live Room</div>
         <p class="room-card-desc">Bathed in natural light beneath a striking stained-glass window, the live room combines architectural character with exceptional acoustics. Featuring flexible isolation spaces, clear sight-lines throughout, a gallery level, and programmable lighting, it is designed to support a wide range of recording, performance, and production needs.</p>
         <div class="room-tags"><span class="rtag">Bands</span><span class="rtag">Drums</span><span class="rtag">Live Takes</span></div>
         <span class="room-click">View specs →</span>
@@ -1653,7 +1955,7 @@ html      { scroll-behavior: auto; }
     <a href="/rooms/live-room/" class="room-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
       <div class="room-card-img"><img src="/photos/optimized/studio-client-iso-amp-booth.webp" alt="Isolation and amp booth space" width="1024" height="682" decoding="async" loading="lazy"></div>
       <div class="room-card-body">
-        <div class="room-num">Live Room support</div><div class="room-card-name">Isolation &amp; Amp Booths</div>
+        <div class="room-card-name">Isolation &amp; Amp Booths</div>
         <p class="room-card-desc">The Main Studio features a range of dedicated recording spaces, including two large isolation booths, a vocal booth, and a dedicated amp booth. Designed for flexibility, these spaces enable multiple instruments and performances to be recorded simultaneously while maintaining excellent isolation and clarity.</p>
         <div class="room-tags"><span class="rtag">Isolation</span><span class="rtag">Guitar</span><span class="rtag">Simultaneous</span></div>
         <span class="room-click">View specs →</span>
@@ -1665,7 +1967,6 @@ html      { scroll-behavior: auto; }
   <a href="/rooms/the-bunker/" class="bunker-feature reveal" aria-label="View detailed specs for The Bunker">
     <img src="/photos/optimized/studio-client-bunker-new.webp" alt="The Bunker writing and production room at Salvation Studios" width="1800" height="1013" decoding="async" loading="lazy">
     <div class="bunker-feature-info">
-      <div class="room-num">07 — Writing / production wing</div>
       <div class="bunker-title">The Bunker</div>
       <p class="bunker-desc">The Bunker is Salvation’s dedicated production, writing and mixing studio, combining a vintage Neve 54-series console and boutique analogue equipment. Designed for writing, production, overdubs, and mixing, it offers access to high-end analogue gear within an intimate, creative environment, complemented by a curated collection of rare synthesizers and keyboards as well as an upright piano.</p>
       <span class="room-click">Open The Bunker studio page →</span>
@@ -1679,11 +1980,11 @@ html      { scroll-behavior: auto; }
   <div class="writing-rooms">
     <a href="/rooms/writing-rooms/#mezzanine-room" class="writing-card reveal" style="text-decoration:none;color:inherit;">
       <img src="/photos/optimized/studio-client-mezzanine.webp" alt="Mezzanine writing room at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
-      <div class="writing-card-info"><div class="room-num">B — 01</div><div class="writing-card-name">Mezzanine Room</div><p class="writing-card-desc">A light-filled elevated room with views into the main studio and a production setup confirmed by enquiry.</p><span class="room-click">View specs →</span></div>
+      <div class="writing-card-info"><div class="writing-card-name">Mezzanine Room</div><p class="writing-card-desc">A light-filled elevated room with views into the main studio and a production setup confirmed by enquiry.</p><span class="room-click">View specs →</span></div>
     </a>
     <a href="/rooms/writing-rooms/#subterranean-room" class="writing-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
       <img src="/photos/optimized/studio-client-subterranean.webp" alt="Subterranean writing lounge at Salvation Studios" width="1600" height="900" decoding="async" loading="lazy">
-      <div class="writing-card-info"><div class="room-num">B — 02</div><div class="writing-card-name">Subterranean Room</div><p class="writing-card-desc">A comfortable underground writing/chillout room with kitchen, seating, TV/PS5 and configurable creative setup.</p><span class="room-click">View specs →</span></div>
+      <div class="writing-card-info"><div class="writing-card-name">Subterranean Room</div><p class="writing-card-desc">A comfortable underground writing/chillout room with kitchen, seating, TV/PS5 and configurable creative setup.</p><span class="room-click">View specs →</span></div>
     </a>
   </div>
 </section>
@@ -1907,7 +2208,6 @@ html      { scroll-behavior: auto; }
 <!-- ─── SERVICES ─── -->
 <section class="services" id="services">
   <div class="reveal">
-    <p class="label">What We Offer</p>
     <h2 class="h2-serif">What We Do</h2>
     <p class="body-text services-intro">From tracking live bands to finishing mixes, Salvation offers a full range of professional studio services.</p>
   </div>
@@ -1937,7 +2237,7 @@ html      { scroll-behavior: auto; }
       <span class="label">Enquiry form</span>
       <h2 class="h2-serif" id="home-enquiry-title">Get in touch to discuss your next project with a member of our team.</h2>
       <p class="body-text">To enquire about a session with no obligation, please fill out the form with any details about your next project and one of our team will be in touch to discuss things further.</p>
-      <div class="btn-row seo-actions"><a href="/contact/#enquiry-form" class="btn-outline">Full contact page</a><a href="mailto:info@salvationstudios.co.uk" class="btn-outline" data-analytics="home-enquiry-email">Email Studio</a></div>
+      <div class="btn-row seo-actions"><a href="mailto:info@salvationstudios.co.uk" class="btn-outline" data-analytics="home-enquiry-email">Email Studio</a></div>
     </div>
     <form class="enquiry-form" id="enquiry-form" data-analytics="studio-enquiry-form">
       <div class="form-grid">
@@ -1948,110 +2248,128 @@ html      { scroll-behavior: auto; }
         <div class="form-field"><label for="home_session_type">Session type</label><select id="home_session_type" name="session_type" required><option value="">Choose one</option><option>Recording / tracking</option><option>Mixing</option><option>Mastering</option><option>Live Videos</option><option>Signature Sessions</option><option>Dry hire</option><option>Writing rooms / writing camp</option><option>Producer or engineer support</option><option>Other / not sure yet</option></select></div>
         <div class="form-field"><label for="home_dates">Preferred dates</label><input id="home_dates" name="dates" placeholder="Dates, duration, flexibility"></div>
         <div class="form-field full"><label for="home_message">Additional session details</label><textarea id="home_message" name="message" required placeholder="Tell Salvation about the artist, project, references, goals and any practical details."></textarea></div>
+        <input type="hidden" name="form_started_at" value="">
         <div class="form-field full" style="display:none"><label for="home_website">Website</label><input id="home_website" name="website" tabindex="-1" autocomplete="off"></div>
       </div>
       <button type="submit" class="btn-primary" data-analytics="home-enquiry-submit">Send enquiry</button>
+      <p class="form-note">We use the details you provide only to respond to and manage your enquiry. Read our <a href="/privacy/">Privacy Notice</a>.</p>
       <p class="form-status" hidden aria-live="polite"></p>
     </form>
+    <div class="home-studio-card">
+      <span class="label">Studio details</span>
+      <h3 class="h3-serif">Salvation Studios Brighton</h3>
+      <p class="body-text">Recording, mixing, dry hire, producer and engineer support, writing rooms, writing camps, hospitality and room availability can all be discussed through this form.</p>
+      <ul class="studio-detail-list">
+        <li><span>Address</span><a href="https://share.google/0pPGxHfIi8WZ4qw2y">79 North Street, Brighton and Hove, Brighton BN41 1DH</a></li>
+        <li><span>Phone</span><a href="tel:+443334445508">+44 333 444 5508</a></li>
+        <li><span>Email</span><a href="mailto:info@salvationstudios.co.uk">info@salvationstudios.co.uk</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="home-map-card" aria-label="Salvation Studios map location">
+    <div class="home-map-frame">
+      <div class="map-fallback" aria-hidden="true">
+        <span class="map-pin"></span>
+        <span class="map-label">Salvation Studios</span>
+      </div>
+      <iframe title="Map showing Salvation Studios in Brighton" src="https://www.openstreetmap.org/export/embed.html?bbox=-0.2195%2C50.8280%2C-0.2075%2C50.8340&amp;layer=mapnik&amp;marker=50.831041%2C-0.2134756" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="home-map-content">
+      <p class="body-text">Find Salvation Studios at 79 North Street, Brighton and Hove, Brighton BN41 1DH.</p>
+      <a href="https://share.google/0pPGxHfIi8WZ4qw2y" class="btn-outline">Open Google Profile</a>
+    </div>
   </div>
 </section>
 
 <!-- ─── GALLERY ─── -->
 <section class="gallery" id="gallery">
   <div class="reveal">
-    <p class="label">Inside Salvation</p>
     <h2 class="h2-serif">Every picture<br>tells a <em>story</em></h2>
   </div>
 
   <div class="gallery-mosaic">
-    <!-- Row 1 -->
-    <div class="gp tall reveal">
-      <img src="/photos/optimized/studio-s11.webp" alt="Outboard gear rack" width="1600" height="2402" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d1">
-      <img src="/photos/optimized/studio-u604.webp" alt="Writing room panorama" width="1600" height="657" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d2">
-      <img src="/photos/optimized/studio-img9386.webp" alt="Studio detail" width="1600" height="1067" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d3">
-      <img src="/photos/optimized/studio-client-live-room.webp" alt="Live room wide detail" width="1600" height="1067" decoding="async" loading="lazy">
-    </div>
-
-    <!-- Row 2 -->
-    <div class="gp wide reveal reveal-d1">
-      <img src="/photos/optimized/studio-client-bunker.webp" alt="Writing room mixing desk" width="1600" height="900" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d2">
-      <img src="/photos/optimized/studio-img2825.webp" alt="Live room detail" width="1600" height="1067" decoding="async" loading="lazy">
-    </div>
-
-    <!-- Row 3 -->
-    <div class="gp reveal">
-      <img src="/photos/optimized/studio-s6.webp" alt="Studio" width="1600" height="1067" decoding="async" loading="lazy">
-    </div>
-    <div class="gp xlarge reveal reveal-d1">
-      <img src="/photos/optimized/studio-client-live-room.webp" alt="Sunlit live room full view" width="2200" height="1467" decoding="async" loading="lazy">
-    </div>
-    <div class="gp tall reveal reveal-d2">
-      <img src="/photos/optimized/studio-s17.webp" alt="Keyboard collection" width="1600" height="2402" decoding="async" loading="lazy">
-    </div>
-
-    <!-- Row 4 -->
-    <div class="gp reveal">
-      <img src="/photos/optimized/studio-img9409.webp" alt="Studio detail" width="1600" height="2399" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d1">
-      <img src="/photos/optimized/studio-s22.webp" alt="Studio" width="1600" height="1066" decoding="async" loading="lazy">
-    </div>
-
-    <!-- Row 5 -->
-    <div class="gp wide reveal">
-      <img src="/photos/optimized/studio-u579.webp" alt="Studio space" width="1600" height="1280" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d2">
-      <img src="/photos/optimized/studio-s23.webp" alt="Studio" width="1600" height="1066" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d3">
-      <img src="/photos/optimized/studio-s24.webp" alt="Studio" width="1600" height="1066" decoding="async" loading="lazy">
-    </div>
-
-    <!-- Row 6 -->
-    <div class="gp tall reveal">
-      <img src="/photos/optimized/studio-s22.webp" alt="Keyboard and synthesizer detail" width="1600" height="900" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d1">
-      <img src="/photos/optimized/studio-s25.webp" alt="Studio" width="1600" height="1066" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d2">
-      <img src="/photos/optimized/studio-s26.webp" alt="Studio" width="1600" height="1066" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d3">
-      <img src="/photos/optimized/studio-s18.webp" alt="Keyboard detail" width="1600" height="1066" decoding="async" loading="lazy">
-    </div>
-
-    <!-- Row 7 -->
-    <div class="gp wide reveal reveal-d1">
-      <img src="/photos/optimized/studio-img2297.webp" alt="Studio" width="1600" height="1032" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d2">
-      <img src="/photos/optimized/studio-img2311.webp" alt="Studio" width="1600" height="1067" decoding="async" loading="lazy">
-    </div>
-
-    <!-- Row 8 -->
-    <div class="gp reveal">
-      <img src="/photos/optimized/studio-img2825.webp" alt="Studio" width="1600" height="1064" decoding="async" loading="lazy">
-    </div>
-    <div class="gp reveal reveal-d1">
-      <img src="/photos/optimized/studio-client-live-room.webp" alt="Studio" width="2200" height="1625" decoding="async" loading="lazy">
-    </div>
-    <div class="gp wide reveal reveal-d2">
-      <img src="/photos/optimized/studio-s23.webp" alt="Keyboard detail" width="1600" height="900" decoding="async" loading="lazy">
-    </div>
+    <figure class="gp tall reveal">
+      <img src="/photos/gallery-2026-06-25/09-david-gilmour-with-his-1950s-fender-esquire.webp" alt="David Gilmour with his 1950s Fender Esquire" width="1160" height="1564" decoding="async" loading="lazy">
+      <figcaption>David Gilmour with his 1950s Fender Esquire</figcaption>
+    </figure>
+    <figure class="gp tall reveal reveal-d1">
+      <img src="/photos/gallery-2026-06-25/53-wet-leg-in-the-studio-tracking-their-album-moisturizer-2024.webp" alt="Wet Leg in the studio tracking their album &quot;moisturizer&quot; 2024" width="1350" height="1800" decoding="async" loading="lazy">
+      <figcaption>Wet Leg in the studio tracking their album &quot;moisturizer&quot;</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d2">
+      <img src="/photos/gallery-2026-06-25/77-skindred-recording-their-album-you-got-this-2025.webp" alt="Skindred recording their album &quot;You Got This&quot; 2025" width="1800" height="1440" decoding="async" loading="lazy">
+      <figcaption>Skindred recording their album &quot;You Got This&quot;</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d3">
+      <img src="/photos/gallery-2026-06-25/22-dan-carey-and-alexis-smith-in-the-studio-tracking-wetleg-2024.webp" alt="Dan Carey &amp; Alexis Smith in the studio tracking WetLeg 2024" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption>Dan Carey &amp; Alexis Smith in the studio tracking WetLeg</figcaption>
+    </figure>
+    <figure class="gp tall reveal">
+      <img src="/photos/gallery-2026-06-25/10-dimitri-tikovoi-with-working-with-reverend-and-the-makers-2024.webp" alt="Dimitri Tikovoi with working with Reverend and The Makers 2024" width="1292" height="1632" decoding="async" loading="lazy">
+      <figcaption>Dimitri Tikovoi with working with Reverend and The Makers</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d1">
+      <img src="/photos/gallery-2026-06-25/71-arrdee-in-the-studio-2025.webp" alt="ArrDee in the studio 2025" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption>ArrDee in the studio</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d2">
+      <img src="/photos/gallery-2026-06-25/12-reverend-and-the-makers-wrapping-up-a-strings-session-2024.webp" alt="Reverend and the Makers wrapping up a strings session 2024" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption>Reverend and the Makers wrapping up a strings session</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d3">
+      <img src="/photos/gallery-2026-06-25/home-walt-disco-and-ellie-mason-album-session-2025.webp" alt="Walt Disco and Ellie Mason album session 2025" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption>Walt Disco and Ellie Mason album session</figcaption>
+    </figure>
+    <figure class="gp reveal">
+      <img src="/photos/gallery-2026-06-25/81-wargasm-writing-session-with-charlie-russell-and-kieron-pepper-2025.webp" alt="Wargasm writing session with Charlie Russell and Kieron Pepper 2025" width="1800" height="1440" decoding="async" loading="lazy">
+      <figcaption>Wargasm writing session with Charlie Russell and Kieron Pepper</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d1">
+      <img src="/photos/gallery-2026-06-25/30-jesse-wood-in-with-candar-and-sean-genocky-2024.webp" alt="Jesse Wood in with CANDAR and Sean Genocky 2024" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption>Jesse Wood in with CANDAR and Sean Genocky</figcaption>
+    </figure>
+    <figure class="gp wide reveal reveal-d2">
+      <img src="/photos/gallery-2026-06-25/gear-01-hammond-b3-organ.webp" alt="Hammond B3 organ" width="1800" height="1199" decoding="async" loading="lazy">
+      <figcaption>Hammond B3 organ</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d3">
+      <img src="/photos/gallery-2026-06-25/gear-02-1963-fender-jazzmaster-and-mesa-boogie-mark-v.webp" alt="1963 Fender Jazzmaster and Mesa Boogie Mark V" width="1800" height="1800" decoding="async" loading="lazy">
+      <figcaption>1963 Fender Jazzmaster and Mesa Boogie Mark V</figcaption>
+    </figure>
+    <figure class="gp reveal">
+      <img src="/photos/gallery-2026-06-25/gear-03-c-and-c-custom-kit-and-ludwig-402-snare.webp" alt="C&amp;C Custom Kit and Ludwig 402 snare" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption>C&amp;C Custom Kit and Ludwig 402 snare</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d1">
+      <img src="/photos/gallery-2026-06-25/gear-04-ampeg-gu-12.webp" alt="Ampeg GU-12" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption>Ampeg GU-12</figcaption>
+    </figure>
+    <figure class="gp wide reveal reveal-d2">
+      <img src="/photos/gallery-2026-06-25/gear-05-from-front-to-back-flea-47-soundeluxe-u95-neumann-47-fet-neumann-gefell.webp" alt="From front to back: Flea 47, Soundeluxe U95, Neumann 47 Fet, Neumann-Gefell CMV 563, Austrian Audio OC818, AKG C414, Coles 4038, Soyuz Bomblet, Sony C800G, Neumann M150, Neumann U87" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption class="caption-long">From front to back: Flea 47, Soundeluxe U95, Neumann 47 Fet, Neumann-Gefell CMV 563, Austrian Audio OC818, AKG C414, Coles 4038, Soyuz Bomblet, Sony C800G, Neumann M150, Neumann U87</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d3">
+      <img src="/photos/gallery-2026-06-25/gear-06-c-and-c-custom-kit.webp" alt="C&amp;C Custom Kit" width="1800" height="1200" decoding="async" loading="lazy">
+      <figcaption>C&amp;C Custom Kit</figcaption>
+    </figure>
+    <figure class="gp wide reveal">
+      <img src="/photos/gallery-2026-06-25/gear-07-one-of-our-neumann-m150s.webp" alt="One of our Neumann M150s" width="1800" height="1199" decoding="async" loading="lazy">
+      <figcaption>One of our Neumann M150s</figcaption>
+    </figure>
+    <figure class="gp reveal reveal-d1">
+      <img src="/photos/gallery-2026-06-25/gear-08-epiphone-jack-casady-and-our-ampeg-b-15-n-with-portaflex-cab.webp" alt="Epiphone Jack Casady and our Ampeg B-15-N with Portaflex cab" width="1800" height="1800" decoding="async" loading="lazy">
+      <figcaption>Epiphone Jack Casady and our Ampeg B-15-N with Portaflex cab</figcaption>
+    </figure>
+    <figure class="gp wide reveal reveal-d2">
+      <img src="/photos/gallery-2026-06-25/gear-09-fender-rhodes-mark-1.webp" alt="Fender Rhodes Mark 1" width="1800" height="1199" decoding="async" loading="lazy">
+      <figcaption>Fender Rhodes Mark 1</figcaption>
+    </figure>
   </div>
 </section>
 
 <!-- ─── FOOTER ─── -->
+
+</main>
 <footer>
   <div class="footer-top">
     <div>
@@ -2082,12 +2400,13 @@ html      { scroll-behavior: auto; }
     <div>
       <div class="footer-head">Find Us</div>
       <ul class="footer-links">
-        <li><a href="/contact/#enquiry-form">Get in Touch</a></li>
-        <li><a href="/contact/#enquiry-form">Enquire about your next session</a></li>
+        <li><a href="/#home-enquiry">Get in Touch</a></li>
+        <li><a href="/#home-enquiry">Enquire about your next session</a></li>
         <li><a href="https://www.instagram.com/salvationmusicstudiosbtn/">Instagram</a></li>
         <li><a href="https://www.facebook.com/profile.php?id=100093193308784">Facebook</a></li>
         <li><a href="https://share.google/0pPGxHfIi8WZ4qw2y">Brighton, UK</a></li>
         <li><a href="https://www.salvationstudios.co.uk">salvationstudios.co.uk</a></li>
+        <li><a href="/privacy/">Privacy Notice</a></li>
       </ul>
     </div>
   </div>
@@ -2178,6 +2497,11 @@ function enquiryMailto(data) {
 document.querySelectorAll('.enquiry-form').forEach(form => {
   const status = form.querySelector('.form-status');
   const submit = form.querySelector('button[type="submit"]');
+  const startedAt = form.querySelector('input[name="form_started_at"]');
+  const markFormStarted = () => {
+    if (startedAt) startedAt.value = String(Date.now());
+  };
+  markFormStarted();
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const data = new FormData(form);
@@ -2198,6 +2522,7 @@ document.querySelectorAll('.enquiry-form').forEach(form => {
       if (!response.ok || !result.ok) throw new Error(result.error || 'The enquiry could not be sent.');
       track('salvation_enquiry_submit', { session_type: data.get('session_type') || '' });
       form.reset();
+      markFormStarted();
       if (status) status.textContent = 'Thanks. Your enquiry has been sent to Salvation Studios.';
     } catch (error) {
       if (error.message === 'Email delivery is not configured yet.') {
@@ -2406,7 +2731,7 @@ if (gallerySection) {
     { el: document.querySelectorAll('.stat-n')[1], end: 5,  suffix: 'yr' },
     { el: document.querySelectorAll('.stat-n')[2], end: 13, suffix: 'm'  }
   ];
-  statDefs.forEach(({ el, end, suffix }) => {
+  statDefs.filter(({ el }) => el).forEach(({ el, end, suffix }) => {
     const counter = { val: 0 };
     ScrollTrigger.create({
       trigger: el,
@@ -2479,57 +2804,63 @@ if (gallerySection) {
   // Writing cards are CSS-visible by default; avoid GSAP from() leaving them hidden during section QA.
 
   // ─── NEVE SECTION ────────────────────────────────────────────
-  ScrollTrigger.create({
-    trigger: '.neve-bg',
-    start: 'top 75%',
-    once: true,
-    onEnter() {
-      gsap.fromTo('.neve-bg > img',
-        { clipPath: 'inset(0 100% 0 0)' },
-        { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'power3.out' }
-      );
-    }
-  });
-
-  gsap.from(['.neve-eyebrow', '.neve-title', '.neve-body', '.neve-facts > div'], {
-    y: 30,
-    opacity: 0,
-    duration: 0.9,
-    stagger: 0.07,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.neve-content', start: 'top 75%' }
-  });
-
-  // ─── IN-ROOM SECTION ─────────────────────────────────────────
-  gsap.from('.in-room > .reveal', {
-    y: 40,
-    opacity: 0,
-    duration: 0.9,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.in-room', start: 'top 80%' }
-  });
-
-  document.querySelectorAll('.in-room-photo img').forEach(img => {
-    gsap.to(img, {
-      y: '20%',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: img.closest('.in-room-photo'),
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
+  if (document.querySelector('.neve-bg')) {
+    ScrollTrigger.create({
+      trigger: '.neve-bg',
+      start: 'top 75%',
+      once: true,
+      onEnter() {
+        gsap.fromTo('.neve-bg > img',
+          { clipPath: 'inset(0 100% 0 0)' },
+          { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'power3.out' }
+        );
       }
     });
-  });
+  }
 
-  gsap.from('.in-room-photo', {
-    y: 40,
-    opacity: 0,
-    duration: 0.9,
-    stagger: 0.12,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.in-room-grid', start: 'top 80%' }
-  });
+  if (document.querySelector('.neve-content')) {
+    gsap.from(['.neve-eyebrow', '.neve-title', '.neve-body', '.neve-facts > div'], {
+      y: 30,
+      opacity: 0,
+      duration: 0.9,
+      stagger: 0.07,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.neve-content', start: 'top 75%' }
+    });
+  }
+
+  // ─── IN-ROOM SECTION ─────────────────────────────────────────
+  if (document.querySelector('.in-room')) {
+    gsap.from('.in-room > .reveal', {
+      y: 40,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.in-room', start: 'top 80%' }
+    });
+
+    document.querySelectorAll('.in-room-photo img').forEach(img => {
+      gsap.to(img, {
+        y: '20%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: img.closest('.in-room-photo'),
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    });
+
+    gsap.from('.in-room-photo', {
+      y: 40,
+      opacity: 0,
+      duration: 0.9,
+      stagger: 0.12,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.in-room-grid', start: 'top 80%' }
+    });
+  }
 
   // ─── TESTIMONIALS ────────────────────────────────────────────
   // (marquee cards excluded — ScrollTrigger conflicts with continuous CSS scroll animation)
@@ -2562,15 +2893,17 @@ if (gallerySection) {
   });
 
   // ─── BOOKING BAND ────────────────────────────────────────────
-  gsap.from('.booking-content', {
-    scale: 0.97,
-    opacity: 0,
-    duration: 1.0,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.booking-band', start: 'top 75%' }
-  });
+  if (document.querySelector('.booking-content')) {
+    gsap.from('.booking-content', {
+      scale: 0.97,
+      opacity: 0,
+      duration: 1.0,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.booking-band', start: 'top 75%' }
+    });
+  }
 
 })();
 </script>
-<script src="/search.js" defer></script></body>
+<script src="/search.js?v=20260625-mobile-nav-1" defer></script></body>
 </html>
