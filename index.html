@@ -122,6 +122,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transform: scale(1.04);
   animation: heroZoom 14s ease-out forwards;
 }
+.hero-img picture { display: block; width: 100%; height: 100%; }
 @keyframes heroZoom { to { transform: scale(1); } }
 .hero-img img { filter: brightness(1.12) saturate(0.92) contrast(1); object-position: center 54%; }
 .hero-overlay {
@@ -1714,7 +1715,7 @@ html      { scroll-behavior: auto; }
 
 <!-- ─── NAV ─── -->
 <nav class="nav" id="nav">
-  <div class="nav-logo"><a href="/" aria-label="Salvation Studios home"><img src="/logo.png" alt="Salvation Music Studios" width="600" height="300" decoding="async" loading="eager"></a></div>
+  <div class="nav-logo"><a href="/" aria-label="Salvation Studios home"><img src="/photos/optimized/brand/logo-160.webp" srcset="/photos/optimized/brand/logo-160.webp 160w, /photos/optimized/brand/logo-320.webp 320w" sizes="(max-width: 1100px) 96px, 104px" alt="Salvation Music Studios" width="160" height="80" decoding="async" loading="eager"></a></div>
   <ul class="nav-links">
     <li><a href="/">Home</a></li>
     <li><a href="/about/">About</a></li>
@@ -1781,13 +1782,17 @@ html      { scroll-behavior: auto; }
 <!-- ─── HERO ─── -->
 <section class="hero">
   <div class="hero-img">
-    <img src="/photos/optimized/studio-new-main-studio.webp" alt="The Main Studio live room at Salvation Studios" width="2200" height="1465" decoding="async" fetchpriority="high">
+    <picture>
+      <source type="image/avif" srcset="/photos/optimized/hero/main-studio-640.avif 640w, /photos/optimized/hero/main-studio-960.avif 960w, /photos/optimized/hero/main-studio-1440.avif 1440w, /photos/optimized/hero/main-studio-1920.avif 1920w" sizes="100vw">
+      <source type="image/webp" srcset="/photos/optimized/hero/main-studio-640.webp 640w, /photos/optimized/hero/main-studio-960.webp 960w, /photos/optimized/hero/main-studio-1440.webp 1440w, /photos/optimized/hero/main-studio-1920.webp 1920w" sizes="100vw">
+      <img src="/photos/optimized/hero/main-studio-1920.webp" alt="The Main Studio live room at Salvation Studios" width="2200" height="1465" decoding="async" fetchpriority="high">
+    </picture>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-glow-orb orb-1"></div>
   <div class="hero-glow-orb orb-2"></div>
   <div class="hero-content">
-    <div class="hero-salvation-wrap" aria-hidden="true"><img src="/salvation-script.png" alt="" class="hero-salvation-img" width="1042" height="1042" decoding="async" loading="eager"></div>
+    <div class="hero-salvation-wrap" aria-hidden="true"><img src="/photos/optimized/brand/salvation-script-480.webp" srcset="/photos/optimized/brand/salvation-script-480.webp 480w, /photos/optimized/brand/salvation-script-880.webp 880w" sizes="(max-width: 768px) 50vw, (max-width: 1467px) 30vw, 440px" alt="" class="hero-salvation-img" width="480" height="480" decoding="async" loading="eager"></div>
     <h1 class="hero-h1">Brighton’s world-class recording studio and writing complex</h1>
     <a href="#home-enquiry" class="btn-primary hero-book-btn">Enquire about your next session</a>
     <div class="hero-btns">
@@ -1915,7 +1920,7 @@ html      { scroll-behavior: auto; }
 
   <!-- MAIN STUDIO — hero image -->
   <a href="/rooms/main-studio/" class="live-room-feature reveal" style="text-decoration:none;color:inherit;">
-    <img src="/photos/optimized/studio-sfpb.webp" alt="Grand piano in the Salvation Studios live room" width="2200" height="1467" decoding="async" loading="eager">
+    <img src="/photos/optimized/studio-sfpb.webp" alt="Grand piano in the Salvation Studios live room" width="2200" height="1467" decoding="async" loading="lazy">
     <div class="live-room-info">
       <div class="live-room-text">
         <div class="room-title">The Main Studio</div>
