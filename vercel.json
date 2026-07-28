@@ -821,6 +821,24 @@
       ]
     },
     {
+      "source": "/enquire",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/enquire/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
       "source": "/concept-index",
       "headers": [
         {
@@ -1020,6 +1038,10 @@
     {
       "source": "/",
       "destination": "/index.html"
+    },
+    {
+      "source": "/enquire/",
+      "destination": "/enquire.html"
     },
     {
       "source": "/about/",

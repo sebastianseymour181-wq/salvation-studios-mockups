@@ -56,6 +56,10 @@ NOINDEX_HTML = {
     "rooms/iso-booths.html",
 }
 
+AD_NOINDEX_HTML = {
+    "enquire.html",
+}
+
 OLD_SITE_ROUTES = {
     "/amp-booth", "/amps", "/basses", "/book-online", "/catering",
     "/chillout-zone-kitchen-1", "/chillout-zone-kitchen-2", "/competition-1",
@@ -126,7 +130,7 @@ def route_to_file(path: str) -> str | None:
     if clean.endswith("/"):
         clean = clean[:-1]
     candidate = f"{clean.lstrip('/')}.html"
-    return candidate if candidate in INDEXABLE_HTML or candidate in NOINDEX_HTML else None
+    return candidate if candidate in INDEXABLE_HTML or candidate in NOINDEX_HTML or candidate in AD_NOINDEX_HTML else None
 
 
 def html_files() -> list[Path]:
@@ -246,7 +250,7 @@ def main() -> int:
     failures: list[str] = []
     files = {rel(p): p for p in html_files()}
 
-    unknown = set(files) - INDEXABLE_HTML - NOINDEX_HTML
+    unknown = set(files) - INDEXABLE_HTML - NOINDEX_HTML - AD_NOINDEX_HTML
     if unknown:
         failures.append(f"unclassified html files: {sorted(unknown)}")
 
@@ -264,6 +268,11 @@ def main() -> int:
     ]
     if len(test_host_rules) != 1:
         failures.append("test hostname must have exactly one host-scoped noindex, nofollow header")
+    if not {"/enquire", "/enquire/"}.issubset(header_sources):
+        failures.append("advertising enquiry route is missing its noindex response header")
+    rewrites = {rule.get("source"): rule.get("destination") for rule in config.get("rewrites", [])}
+    if rewrites.get("/enquire/") != "/enquire.html":
+        failures.append("advertising enquiry clean route rewrite is missing")
     if "/docs/:path*" not in header_sources:
         failures.append("docs directory is publicly deployable without noindex header")
     expected_concept_header_sources = {
@@ -331,6 +340,8 @@ def main() -> int:
                 failures.append(f"missing Open Graph title/description in {relative}")
         if relative in NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*nofollow[\"']", text, re.I):
             failures.append(f"noindex meta missing from non-production page {relative}")
+        if relative in AD_NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*follow[\"']", text, re.I):
+            failures.append(f"noindex, follow meta missing from advertising page {relative}")
 
         for tag, attr, value in parser.attrs:
             if not value:
@@ -393,6 +404,36 @@ def main() -> int:
     expected_locs = {clean_url_for(page) for page in INDEXABLE_HTML}
     if locs != expected_locs:
         failures.append(f"sitemap mismatch missing={sorted(expected_locs-locs)} extra={sorted(locs-expected_locs)}")
+
+    homepage = (ROOT / "index.html").read_text(errors="ignore")
+    advert_page = (ROOT / "enquire.html").read_text(errors="ignore")
+    for relative, text in (("index.html", homepage), ("enquire.html", advert_page)):
+        if text.count('src="/enquiry.js?') != 1:
+            failures.append(f"shared enquiry handler must load exactly once in {relative}")
+        if text.count('class="enquiry-form"') != 1:
+            failures.append(f"expected exactly one enquiry form in {relative}")
+        if text.count('name="form_started_at"') != 1:
+            failures.append(f"expected exactly one enquiry timing field in {relative}")
+
+    responsive_assets = {
+        "photos/optimized/hero/main-studio-640.avif",
+        "photos/optimized/hero/main-studio-960.avif",
+        "photos/optimized/hero/main-studio-1440.avif",
+        "photos/optimized/hero/main-studio-1920.avif",
+        "photos/optimized/brand/logo-160.webp",
+        "photos/optimized/brand/logo-320.webp",
+        "photos/optimized/brand/salvation-script-480.webp",
+        "photos/optimized/brand/salvation-script-880.webp",
+    }
+    for asset in sorted(responsive_assets):
+        if not (ROOT / asset).is_file():
+            failures.append(f"missing responsive homepage asset: {asset}")
+        if f"/{asset}" not in homepage:
+            failures.append(f"responsive homepage asset is not referenced: {asset}")
+    if homepage.count('fetchpriority="high"') != 1:
+        failures.append("homepage must have exactly one high-priority image")
+    if not re.search(r'src="/photos/optimized/studio-sfpb\.webp"[^>]*loading="lazy"', homepage):
+        failures.append("below-fold Main Studio image must be lazy-loaded")
 
     for name, value in search_index_entries():
         expected = EXPECTED_SEARCH_URLS.get(name)
