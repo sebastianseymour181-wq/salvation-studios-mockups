@@ -268,6 +268,8 @@ def main() -> int:
     ]
     if len(test_host_rules) != 1:
         failures.append("test hostname must have exactly one host-scoped noindex, nofollow header")
+    elif any(headers.index(test_host_rules[0]) < headers.index(rule) for rule in headers if rule.get("source") in {"/enquire", "/enquire/"}):
+        failures.append("test-host noindex header must override advertising-route follow policy")
     if not {"/enquire", "/enquire/"}.issubset(header_sources):
         failures.append("advertising enquiry route is missing its noindex response header")
     rewrites = {rule.get("source"): rule.get("destination") for rule in config.get("rewrites", [])}
