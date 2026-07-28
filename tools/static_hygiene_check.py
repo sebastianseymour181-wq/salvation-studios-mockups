@@ -422,8 +422,8 @@ def main() -> int:
         "photos/optimized/hero/main-studio-1920.avif",
         "photos/optimized/brand/logo-160.webp",
         "photos/optimized/brand/logo-320.webp",
-        "photos/optimized/brand/salvation-script-480.webp",
-        "photos/optimized/brand/salvation-script-880.webp",
+        "photos/optimized/brand/salvation-script-360.webp",
+        "photos/optimized/brand/salvation-script-705.webp",
     }
     for asset in sorted(responsive_assets):
         if not (ROOT / asset).is_file():
