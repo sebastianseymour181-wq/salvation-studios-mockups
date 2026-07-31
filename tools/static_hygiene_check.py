@@ -106,6 +106,7 @@ EXPECTED_SEARCH_URLS = {
     "Iso Booths": "/rooms/live-room/#isolation",
     "Isolation Booths": "/rooms/live-room/#isolation",
     "Main Studio": "/rooms/main-studio/",
+    "Grassroots": "/services/giveaways-offers/",
 }
 
 
@@ -340,6 +341,14 @@ def main() -> int:
                 failures.append(f"expected exactly one h1 in {relative}, found {parser.h1_count}")
             if not og_title or not og_description:
                 failures.append(f"missing Open Graph title/description in {relative}")
+        if relative == "services/giveaways-offers.html":
+            for term in ("affordable", "unsigned", "emerging", "independent"):
+                if term not in text.lower():
+                    failures.append(f"Grassroots page is missing required message: {term}")
+            if re.search(r"don't have any active offers|don’t have any active offers", text, re.I):
+                failures.append("Grassroots page still contains inactive-offers copy")
+            if re.search(r"£\s*\d", text):
+                failures.append("Grassroots page publishes an unapproved price")
         if relative in NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*nofollow[\"']", text, re.I):
             failures.append(f"noindex meta missing from non-production page {relative}")
         if relative in AD_NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*follow[\"']", text, re.I):
