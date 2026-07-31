@@ -36,7 +36,7 @@ INDEXABLE = {
     "services/mastering.html",
     "services/live-videos.html",
     "services/signature-sessions.html",
-    "services/giveaways-offers.html",
+    "services/grassroots.html",
     "services/accommodation-hospitality.html",
 }
 

@@ -41,7 +41,7 @@ INDEXABLE_HTML = {
     "services/mastering.html",
     "services/live-videos.html",
     "services/signature-sessions.html",
-    "services/giveaways-offers.html",
+    "services/grassroots.html",
     "services/accommodation-hospitality.html",
 }
 
@@ -65,7 +65,7 @@ OLD_SITE_ROUTES = {
     "/chillout-zone-kitchen-1", "/chillout-zone-kitchen-2", "/competition-1",
     "/contact", "/contactus", "/control-room", "/control-room-as-a-writing-room",
     "/copy-of-enquiries-ad-landing-page", "/copy-of-signature-sessions-nick-brine",
-    "/drums", "/dry-hire", "/enquiries", "/ep-giveaway", "/equipment",
+    "/drums", "/dry-hire", "/enquiries", "/ep-giveaway", "/equipment", "/giveaways-offers",
     "/general-5-2", "/general-5-6", "/general-clean", "/guitars", "/home",
     "/isolation-booth-1", "/isolation-booth-2", "/jobs",
     "/join-our-roster-of-session-musicians", "/lighting", "/live-room",
@@ -77,7 +77,7 @@ OLD_SITE_ROUTES = {
     "/signature-sessions-gavin-monaghan", "/signature-sessions-matt-glasbey",
     "/signature-sessions-nick-brine", "/signature-sessions-phill-brown",
     "/single-giveaway-2025", "/single-giveaway-2026", "/single-giveaway-2026-tiktok",
-    "/studio-tour", "/subterranean-room", "/test-landing-page-video",
+    "/services/giveaways-offers", "/studio-tour", "/subterranean-room", "/test-landing-page-video",
     "/video-showreel-email-1", "/video-showreel-email-2", "/vocal-booth",
     "/what-the-clients-say", "/white-rooms", "/writing-rooms",
 }
@@ -87,7 +87,7 @@ NEW_PUBLIC_ROUTES = {
     "/", "/about", "/privacy", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/spaces", "/services",
     "/rooms/main-studio", "/rooms/live-room", "/rooms/control-room", "/rooms/writing-rooms", "/rooms/the-bunker",
     "/services/recording", "/services/mixing",
-    "/services/mastering", "/services/live-videos", "/services/signature-sessions", "/services/giveaways-offers", "/services/accommodation-hospitality",
+    "/services/mastering", "/services/live-videos", "/services/signature-sessions", "/services/grassroots", "/services/accommodation-hospitality",
 }
 
 ASSET_EXTENSIONS = {
@@ -106,7 +106,7 @@ EXPECTED_SEARCH_URLS = {
     "Iso Booths": "/rooms/live-room/#isolation",
     "Isolation Booths": "/rooms/live-room/#isolation",
     "Main Studio": "/rooms/main-studio/",
-    "Grassroots": "/services/giveaways-offers/",
+    "Grassroots": "/services/grassroots/",
 }
 
 
@@ -258,6 +258,10 @@ def main() -> int:
     config = load_config()
     redirects = config.get("redirects", [])
     redirect_sources = {r.get("source") for r in redirects}
+    redirect_destinations = {r.get("source"): r.get("destination") for r in redirects}
+    for old_route in ("/giveaways-offers", "/services/giveaways-offers"):
+        if redirect_destinations.get(old_route) != "/services/grassroots":
+            failures.append(f"Grassroots legacy redirect mismatch for {old_route}")
 
     headers = config.get("headers", [])
     header_sources = {h.get("source") for h in headers}
@@ -341,7 +345,7 @@ def main() -> int:
                 failures.append(f"expected exactly one h1 in {relative}, found {parser.h1_count}")
             if not og_title or not og_description:
                 failures.append(f"missing Open Graph title/description in {relative}")
-        if relative == "services/giveaways-offers.html":
+        if relative == "services/grassroots.html":
             for term in ("affordable", "unsigned", "emerging", "independent"):
                 if term not in text.lower():
                     failures.append(f"Grassroots page is missing required message: {term}")

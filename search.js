@@ -5,7 +5,7 @@
   // [name, category, sub-description, url]
   const RAW = [
     ['About Salvation Studios','Studio','Restored 1910 Salvation Army hall, acoustic design and specialist build story','/about/'],
-    ['Grassroots','Artist rates','Affordable recording rates for unsigned, emerging and independent artists','/services/giveaways-offers/'],
+    ['Grassroots','Artist rates','Affordable recording rates for unsigned, emerging and independent artists','/services/grassroots/'],
 
     // Console & multitrack
     ['Neve 8068','Console','1973 · 32-channel · fully restored','/equipment/'],
@@ -448,7 +448,7 @@
 
     mobileMenu.appendChild(createMobileLink('Home', '/', 'mobile-nav-link'));
     mobileMenu.appendChild(createMobileLink('About', '/about/', 'mobile-nav-link'));
-    mobileMenu.appendChild(createMobileLink('Grassroots', '/services/giveaways-offers/', 'mobile-nav-link'));
+    mobileMenu.appendChild(createMobileLink('Grassroots', '/services/grassroots/', 'mobile-nav-link'));
     mobileMenu.appendChild(createMobileGroup('Spaces', 'mobileNavSpaces', MOBILE_NAV.spaces, false, spacesActive));
     mobileMenu.appendChild(createMobileLink('Equipment', '/equipment/', 'mobile-nav-link'));
     mobileMenu.appendChild(createMobileLink('Gallery', '/gallery/', 'mobile-nav-link'));
@@ -474,7 +474,7 @@
   }
 
   function enhanceGrassrootsNavigation() {
-    const href = '/services/giveaways-offers/';
+    const href = '/services/grassroots/';
     document.querySelectorAll(`a[href="${href}"]`).forEach(link => { link.textContent = 'Grassroots'; });
     document.querySelectorAll(`.nav-dropdown-menu a[href="${href}"]`).forEach(link => link.remove());
     document.querySelectorAll('.nav-links').forEach(nav => {

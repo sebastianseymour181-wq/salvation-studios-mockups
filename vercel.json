@@ -51,7 +51,17 @@
     },
     {
       "source": "/giveaways-offers",
-      "destination": "/services/giveaways-offers",
+      "destination": "/services/grassroots",
+      "permanent": true
+    },
+    {
+      "source": "/services/giveaways-offers",
+      "destination": "/services/grassroots",
+      "permanent": true
+    },
+    {
+      "source": "/services/giveaways-offers/",
+      "destination": "/services/grassroots",
       "permanent": true
     },
     {
@@ -471,7 +481,7 @@
     },
     {
       "source": "/giveaways-offers/",
-      "destination": "/services/giveaways-offers",
+      "destination": "/services/grassroots",
       "permanent": true
     },
     {
@@ -1112,8 +1122,8 @@
       "destination": "/services/signature-sessions.html"
     },
     {
-      "source": "/services/giveaways-offers/",
-      "destination": "/services/giveaways-offers.html"
+      "source": "/services/grassroots/",
+      "destination": "/services/grassroots.html"
     },
     {
       "source": "/services/accommodation-hospitality/",
