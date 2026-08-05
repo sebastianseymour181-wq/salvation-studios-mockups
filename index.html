@@ -631,7 +631,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   overflow: hidden; height: 560px;
   margin-bottom: 24px; cursor: default;
   display: block; width: 100%;
-  background: #120022 url('/photos/optimized/studio-sfpb.webp') center / cover no-repeat;
+  background: #120022;
 }
 .live-room-feature img { transition: transform 0.7s ease; }
 .live-room-feature:hover img { transform: scale(1.03); }
@@ -913,6 +913,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .svc-photo {
   height: 200px; position: relative; overflow: hidden;
 }
+.wp-accent picture, .svc-photo picture { display: block; width: 100%; height: 100%; }
 .svc-photo img {
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.6s ease;
@@ -1027,18 +1028,6 @@ footer {
   display: flex; justify-content: space-between;
   font-size: 11px; color: rgba(109,40,217,0.35); letter-spacing: 0.06em;
 }
-
-/* ─── REVEAL ANIMATIONS ─── */
-.reveal {
-  opacity: 1; transform: none;
-  transition: opacity 0.75s ease, transform 0.75s ease;
-}
-.js .reveal { opacity: 0; transform: translateY(32px); }
-.js .reveal.visible { opacity: 1; transform: none; }
-.reveal-d1 { transition-delay: 0.1s; }
-.reveal-d2 { transition-delay: 0.2s; }
-.reveal-d3 { transition-delay: 0.3s; }
-.reveal-d4 { transition-delay: 0.4s; }
 
 /* ─── PARALLAX ─── */
 .parallax-wrap { overflow: hidden; }
@@ -1305,7 +1294,7 @@ footer {
     height: clamp(560px, 74vw, 680px);
     min-height: 0;
     overflow: hidden;
-    background: #120022 url('/photos/optimized/studio-sfpb.webp') center / cover no-repeat;
+    background: #120022;
     border: 0;
   }
   .live-room-feature img {
@@ -1584,7 +1573,7 @@ footer {
     min-height: 0;
     display: block;
     overflow: hidden;
-    background: #120022 url('/photos/optimized/studio-sfpb.webp') center / cover no-repeat;
+    background: #120022;
     border: 0;
   }
   .live-room-feature img {
@@ -1920,7 +1909,11 @@ html      { scroll-behavior: auto; }
       <img src="/photos/optimized/studio-client-labour-large.webp" alt="Sunlit live room inside Salvation Studios" width="2200" height="1466" decoding="async" loading="lazy">
     </div>
     <div class="wp-accent">
-      <img src="/photos/client-supplied-2026-06-05/studio-client-labour-small-replacement.jpg" alt="Studio lounge and writing setup" width="1024" height="683" decoding="async" loading="lazy">
+      <picture>
+        <source type="image/avif" srcset="/photos/optimized/home-images/welcome-accent-480.avif 480w, /photos/optimized/home-images/welcome-accent-960.avif 960w" sizes="(max-width: 768px) 55vw, 30vw">
+        <source type="image/webp" srcset="/photos/optimized/home-images/welcome-accent-480.webp 480w, /photos/optimized/home-images/welcome-accent-960.webp 960w" sizes="(max-width: 768px) 55vw, 30vw">
+        <img src="/photos/client-supplied-2026-06-05/studio-client-labour-small-replacement.jpg" alt="Studio lounge and writing setup" width="1024" height="683" decoding="async" loading="lazy">
+      </picture>
     </div>
   </div>
 </section>
@@ -2248,8 +2241,8 @@ html      { scroll-behavior: auto; }
   <div class="services-grid featured-services reveal" aria-label="Featured Salvation services">
     <a href="/services/recording/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-client-service-recording.webp" alt="Recording at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Recording</div><p class="svc-desc">Record your music in an acoustically exceptional environment with access to the best microphones, analogue outboard and an extensive collection of vintage instruments.</p></div></a>
     <a href="/services/mixing/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/optimized/studio-client-service-mixing.webp" alt="Mixing at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Mixing</div><p class="svc-desc">Bring clarity, depth and balance to your recordings in our precisely tuned listening environment for professional sounding mixes.</p></div></a>
-    <a href="/services/mastering/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-notes-2026-06-05/mastering.jpg" alt="Mastering service at Salvation Studios" width="1024" height="576" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Mastering</div><p class="svc-desc">Give your music the final polish with professional mastering. Carried out off-site in a dedicated mastering suite, our engineer uses specialist, state-of-the-art mastering equipment for the best possible translation.</p></div></a>
-    <a href="/services/live-videos/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-notes-2026-06-05/live-videos.jpg" alt="Live video sessions at Salvation Studios" width="1024" height="819" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Live Videos</div><p class="svc-desc">Cut through the noise and capture your performance with high-quality live video sessions recorded in our beautiful studio space, combining exceptional sound with professional videography.</p></div></a>
+    <a href="/services/mastering/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><picture><source type="image/avif" srcset="/photos/optimized/home-images/service-mastering-480.avif 480w, /photos/optimized/home-images/service-mastering-960.avif 960w" sizes="(max-width: 768px) calc(100vw - 40px), calc((100vw - 152px) / 3)"><source type="image/webp" srcset="/photos/optimized/home-images/service-mastering-480.webp 480w, /photos/optimized/home-images/service-mastering-960.webp 960w" sizes="(max-width: 768px) calc(100vw - 40px), calc((100vw - 152px) / 3)"><img src="/photos/client-notes-2026-06-05/mastering.jpg" alt="Mastering service at Salvation Studios" width="1024" height="576" decoding="async" loading="lazy"></picture></div><div class="svc-body"><div class="svc-name">Mastering</div><p class="svc-desc">Give your music the final polish with professional mastering. Carried out off-site in a dedicated mastering suite, our engineer uses specialist, state-of-the-art mastering equipment for the best possible translation.</p></div></a>
+    <a href="/services/live-videos/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><picture><source type="image/avif" srcset="/photos/optimized/home-images/service-live-videos-480.avif 480w, /photos/optimized/home-images/service-live-videos-960.avif 960w" sizes="(max-width: 768px) calc(100vw - 40px), calc((100vw - 152px) / 3)"><source type="image/webp" srcset="/photos/optimized/home-images/service-live-videos-480.webp 480w, /photos/optimized/home-images/service-live-videos-960.webp 960w" sizes="(max-width: 768px) calc(100vw - 40px), calc((100vw - 152px) / 3)"><img src="/photos/client-notes-2026-06-05/live-videos.jpg" alt="Live video sessions at Salvation Studios" width="1024" height="819" decoding="async" loading="lazy"></picture></div><div class="svc-body"><div class="svc-name">Live Videos</div><p class="svc-desc">Cut through the noise and capture your performance with high-quality live video sessions recorded in our beautiful studio space, combining exceptional sound with professional videography.</p></div></a>
     <a href="/services/signature-sessions/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-notes-2026-06-05/signature-sessions.jpg" alt="Signature Sessions at Salvation Studios" width="1024" height="683" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Signature Sessions</div><p class="svc-desc">A unique opportunity to collaborate with elite producers in a world-class studio environment. Signature Sessions brings together artists and top-tier producers to create records at the highest level.</p></div></a>
     <a href="/services/accommodation-hospitality/" class="svc-card" style="text-decoration:none;color:inherit;"><div class="svc-photo"><img src="/photos/client-2026-06-11/accommodation-hospitality-local-businesses-1.webp" alt="Catering and accommodation support at Salvation Studios" width="1600" height="1067" decoding="async" loading="lazy"></div><div class="svc-body"><div class="svc-name">Catering and accommodation</div><p class="svc-desc">Our team can handle any hospitality or logistical requests, such as accommodation and catering, allowing you more time to focus on the music.</p></div></a>
   </div>
@@ -2314,79 +2307,79 @@ html      { scroll-behavior: auto; }
 
   <div class="gallery-mosaic">
     <figure class="gp tall reveal">
-      <img src="/photos/gallery-2026-06-25/09-david-gilmour-with-his-1950s-fender-esquire.webp" alt="David Gilmour with his 1950s Fender Esquire" width="1160" height="1564" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/09-david-gilmour-with-his-1950s-fender-esquire.webp" srcset="/photos/optimized/home-gallery/09-david-gilmour-with-his-1950s-fender-esquire-480.webp 480w, /photos/optimized/home-gallery/09-david-gilmour-with-his-1950s-fender-esquire-640.webp 640w, /photos/optimized/home-gallery/09-david-gilmour-with-his-1950s-fender-esquire-960.webp 960w, /photos/gallery-2026-06-25/09-david-gilmour-with-his-1950s-fender-esquire.webp 1160w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="David Gilmour with his 1950s Fender Esquire" width="1160" height="1564" decoding="async" loading="lazy">
       <figcaption>David Gilmour with his 1950s Fender Esquire</figcaption>
     </figure>
     <figure class="gp tall reveal reveal-d1">
-      <img src="/photos/gallery-2026-06-25/53-wet-leg-in-the-studio-tracking-their-album-moisturizer-2024.webp" alt="Wet Leg in the studio tracking their album &quot;moisturizer&quot; 2024" width="1350" height="1800" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/53-wet-leg-in-the-studio-tracking-their-album-moisturizer-2024.webp" srcset="/photos/optimized/home-gallery/53-wet-leg-in-the-studio-tracking-their-album-moisturizer-2024-480.webp 480w, /photos/optimized/home-gallery/53-wet-leg-in-the-studio-tracking-their-album-moisturizer-2024-640.webp 640w, /photos/optimized/home-gallery/53-wet-leg-in-the-studio-tracking-their-album-moisturizer-2024-960.webp 960w, /photos/gallery-2026-06-25/53-wet-leg-in-the-studio-tracking-their-album-moisturizer-2024.webp 1350w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Wet Leg in the studio tracking their album &quot;moisturizer&quot; 2024" width="1350" height="1800" decoding="async" loading="lazy">
       <figcaption>Wet Leg in the studio tracking their album &quot;moisturizer&quot;</figcaption>
     </figure>
     <figure class="gp reveal reveal-d2">
-      <img src="/photos/gallery-2026-06-25/77-skindred-recording-their-album-you-got-this-2025.webp" alt="Skindred recording their album &quot;You Got This&quot; 2025" width="1800" height="1440" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/77-skindred-recording-their-album-you-got-this-2025.webp" srcset="/photos/optimized/home-gallery/77-skindred-recording-their-album-you-got-this-2025-480.webp 480w, /photos/optimized/home-gallery/77-skindred-recording-their-album-you-got-this-2025-640.webp 640w, /photos/optimized/home-gallery/77-skindred-recording-their-album-you-got-this-2025-960.webp 960w, /photos/gallery-2026-06-25/77-skindred-recording-their-album-you-got-this-2025.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Skindred recording their album &quot;You Got This&quot; 2025" width="1800" height="1440" decoding="async" loading="lazy">
       <figcaption>Skindred recording their album &quot;You Got This&quot;</figcaption>
     </figure>
     <figure class="gp reveal reveal-d3">
-      <img src="/photos/gallery-2026-06-25/22-dan-carey-and-alexis-smith-in-the-studio-tracking-wetleg-2024.webp" alt="Dan Carey &amp; Alexis Smith in the studio tracking WetLeg 2024" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/22-dan-carey-and-alexis-smith-in-the-studio-tracking-wetleg-2024.webp" srcset="/photos/optimized/home-gallery/22-dan-carey-and-alexis-smith-in-the-studio-tracking-wetleg-2024-480.webp 480w, /photos/optimized/home-gallery/22-dan-carey-and-alexis-smith-in-the-studio-tracking-wetleg-2024-640.webp 640w, /photos/optimized/home-gallery/22-dan-carey-and-alexis-smith-in-the-studio-tracking-wetleg-2024-960.webp 960w, /photos/gallery-2026-06-25/22-dan-carey-and-alexis-smith-in-the-studio-tracking-wetleg-2024.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Dan Carey &amp; Alexis Smith in the studio tracking WetLeg 2024" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption>Dan Carey &amp; Alexis Smith in the studio tracking WetLeg</figcaption>
     </figure>
     <figure class="gp tall reveal">
-      <img src="/photos/gallery-2026-06-25/10-dimitri-tikovoi-with-working-with-reverend-and-the-makers-2024.webp" alt="Dimitri Tikovoi with working with Reverend and The Makers 2024" width="1292" height="1632" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/10-dimitri-tikovoi-with-working-with-reverend-and-the-makers-2024.webp" srcset="/photos/optimized/home-gallery/10-dimitri-tikovoi-with-working-with-reverend-and-the-makers-2024-480.webp 480w, /photos/optimized/home-gallery/10-dimitri-tikovoi-with-working-with-reverend-and-the-makers-2024-640.webp 640w, /photos/optimized/home-gallery/10-dimitri-tikovoi-with-working-with-reverend-and-the-makers-2024-960.webp 960w, /photos/gallery-2026-06-25/10-dimitri-tikovoi-with-working-with-reverend-and-the-makers-2024.webp 1292w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Dimitri Tikovoi with working with Reverend and The Makers 2024" width="1292" height="1632" decoding="async" loading="lazy">
       <figcaption>Dimitri Tikovoi with working with Reverend and The Makers</figcaption>
     </figure>
     <figure class="gp reveal reveal-d1">
-      <img src="/photos/gallery-2026-06-25/71-arrdee-in-the-studio-2025.webp" alt="ArrDee in the studio 2025" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/71-arrdee-in-the-studio-2025.webp" srcset="/photos/optimized/home-gallery/71-arrdee-in-the-studio-2025-480.webp 480w, /photos/optimized/home-gallery/71-arrdee-in-the-studio-2025-640.webp 640w, /photos/optimized/home-gallery/71-arrdee-in-the-studio-2025-960.webp 960w, /photos/gallery-2026-06-25/71-arrdee-in-the-studio-2025.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="ArrDee in the studio 2025" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption>ArrDee in the studio</figcaption>
     </figure>
     <figure class="gp reveal reveal-d2">
-      <img src="/photos/gallery-2026-06-25/12-reverend-and-the-makers-wrapping-up-a-strings-session-2024.webp" alt="Reverend and the Makers wrapping up a strings session 2024" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/12-reverend-and-the-makers-wrapping-up-a-strings-session-2024.webp" srcset="/photos/optimized/home-gallery/12-reverend-and-the-makers-wrapping-up-a-strings-session-2024-480.webp 480w, /photos/optimized/home-gallery/12-reverend-and-the-makers-wrapping-up-a-strings-session-2024-640.webp 640w, /photos/optimized/home-gallery/12-reverend-and-the-makers-wrapping-up-a-strings-session-2024-960.webp 960w, /photos/gallery-2026-06-25/12-reverend-and-the-makers-wrapping-up-a-strings-session-2024.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Reverend and the Makers wrapping up a strings session 2024" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption>Reverend and the Makers wrapping up a strings session</figcaption>
     </figure>
     <figure class="gp reveal reveal-d3">
-      <img src="/photos/gallery-2026-06-25/home-walt-disco-and-ellie-mason-album-session-2025.webp" alt="Walt Disco and Ellie Mason album session 2025" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/home-walt-disco-and-ellie-mason-album-session-2025.webp" srcset="/photos/optimized/home-gallery/home-walt-disco-and-ellie-mason-album-session-2025-480.webp 480w, /photos/optimized/home-gallery/home-walt-disco-and-ellie-mason-album-session-2025-640.webp 640w, /photos/optimized/home-gallery/home-walt-disco-and-ellie-mason-album-session-2025-960.webp 960w, /photos/gallery-2026-06-25/home-walt-disco-and-ellie-mason-album-session-2025.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Walt Disco and Ellie Mason album session 2025" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption>Walt Disco and Ellie Mason album session</figcaption>
     </figure>
     <figure class="gp reveal">
-      <img src="/photos/gallery-2026-06-25/81-wargasm-writing-session-with-charlie-russell-and-kieron-pepper-2025.webp" alt="Wargasm writing session with Charlie Russell and Kieron Pepper 2025" width="1800" height="1440" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/81-wargasm-writing-session-with-charlie-russell-and-kieron-pepper-2025.webp" srcset="/photos/optimized/home-gallery/81-wargasm-writing-session-with-charlie-russell-and-kieron-pepper-2025-480.webp 480w, /photos/optimized/home-gallery/81-wargasm-writing-session-with-charlie-russell-and-kieron-pepper-2025-640.webp 640w, /photos/optimized/home-gallery/81-wargasm-writing-session-with-charlie-russell-and-kieron-pepper-2025-960.webp 960w, /photos/gallery-2026-06-25/81-wargasm-writing-session-with-charlie-russell-and-kieron-pepper-2025.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Wargasm writing session with Charlie Russell and Kieron Pepper 2025" width="1800" height="1440" decoding="async" loading="lazy">
       <figcaption>Wargasm writing session with Charlie Russell and Kieron Pepper</figcaption>
     </figure>
     <figure class="gp reveal reveal-d1">
-      <img src="/photos/gallery-2026-06-25/30-jesse-wood-in-with-candar-and-sean-genocky-2024.webp" alt="Jesse Wood in with CANDAR and Sean Genocky 2024" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/30-jesse-wood-in-with-candar-and-sean-genocky-2024.webp" srcset="/photos/optimized/home-gallery/30-jesse-wood-in-with-candar-and-sean-genocky-2024-480.webp 480w, /photos/optimized/home-gallery/30-jesse-wood-in-with-candar-and-sean-genocky-2024-640.webp 640w, /photos/optimized/home-gallery/30-jesse-wood-in-with-candar-and-sean-genocky-2024-960.webp 960w, /photos/gallery-2026-06-25/30-jesse-wood-in-with-candar-and-sean-genocky-2024.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Jesse Wood in with CANDAR and Sean Genocky 2024" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption>Jesse Wood in with CANDAR and Sean Genocky</figcaption>
     </figure>
     <figure class="gp wide reveal reveal-d2">
-      <img src="/photos/gallery-2026-06-25/gear-01-hammond-b3-organ.webp" alt="Hammond B3 organ" width="1800" height="1199" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-01-hammond-b3-organ.webp" srcset="/photos/optimized/home-gallery/gear-01-hammond-b3-organ-480.webp 480w, /photos/optimized/home-gallery/gear-01-hammond-b3-organ-640.webp 640w, /photos/optimized/home-gallery/gear-01-hammond-b3-organ-960.webp 960w, /photos/gallery-2026-06-25/gear-01-hammond-b3-organ.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 126px) / 2)" alt="Hammond B3 organ" width="1800" height="1199" decoding="async" loading="lazy">
       <figcaption>Hammond B3 organ</figcaption>
     </figure>
     <figure class="gp reveal reveal-d3">
-      <img src="/photos/gallery-2026-06-25/gear-02-1963-fender-jazzmaster-and-mesa-boogie-mark-v.webp" alt="1963 Fender Jazzmaster and Mesa Boogie Mark V" width="1800" height="1800" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-02-1963-fender-jazzmaster-and-mesa-boogie-mark-v.webp" srcset="/photos/optimized/home-gallery/gear-02-1963-fender-jazzmaster-and-mesa-boogie-mark-v-480.webp 480w, /photos/optimized/home-gallery/gear-02-1963-fender-jazzmaster-and-mesa-boogie-mark-v-640.webp 640w, /photos/optimized/home-gallery/gear-02-1963-fender-jazzmaster-and-mesa-boogie-mark-v-960.webp 960w, /photos/gallery-2026-06-25/gear-02-1963-fender-jazzmaster-and-mesa-boogie-mark-v.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="1963 Fender Jazzmaster and Mesa Boogie Mark V" width="1800" height="1800" decoding="async" loading="lazy">
       <figcaption>1963 Fender Jazzmaster and Mesa Boogie Mark V</figcaption>
     </figure>
     <figure class="gp reveal">
-      <img src="/photos/gallery-2026-06-25/gear-03-c-and-c-custom-kit-and-ludwig-402-snare.webp" alt="C&amp;C Custom Kit and Ludwig 402 snare" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-03-c-and-c-custom-kit-and-ludwig-402-snare.webp" srcset="/photos/optimized/home-gallery/gear-03-c-and-c-custom-kit-and-ludwig-402-snare-480.webp 480w, /photos/optimized/home-gallery/gear-03-c-and-c-custom-kit-and-ludwig-402-snare-640.webp 640w, /photos/optimized/home-gallery/gear-03-c-and-c-custom-kit-and-ludwig-402-snare-960.webp 960w, /photos/gallery-2026-06-25/gear-03-c-and-c-custom-kit-and-ludwig-402-snare.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="C&amp;C Custom Kit and Ludwig 402 snare" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption>C&amp;C Custom Kit and Ludwig 402 snare</figcaption>
     </figure>
     <figure class="gp reveal reveal-d1">
-      <img src="/photos/gallery-2026-06-25/gear-04-ampeg-gu-12.webp" alt="Ampeg GU-12" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-04-ampeg-gu-12.webp" srcset="/photos/optimized/home-gallery/gear-04-ampeg-gu-12-480.webp 480w, /photos/optimized/home-gallery/gear-04-ampeg-gu-12-640.webp 640w, /photos/optimized/home-gallery/gear-04-ampeg-gu-12-960.webp 960w, /photos/gallery-2026-06-25/gear-04-ampeg-gu-12.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Ampeg GU-12" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption>Ampeg GU-12</figcaption>
     </figure>
     <figure class="gp wide reveal reveal-d2">
-      <img src="/photos/gallery-2026-06-25/gear-05-from-front-to-back-flea-47-soundeluxe-u95-neumann-47-fet-neumann-gefell.webp" alt="From front to back: Flea 47, Soundeluxe U95, Neumann 47 Fet, Neumann-Gefell CMV 563, Austrian Audio OC818, AKG C414, Coles 4038, Soyuz Bomblet, Sony C800G, Neumann M150, Neumann U87" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-05-from-front-to-back-flea-47-soundeluxe-u95-neumann-47-fet-neumann-gefell.webp" srcset="/photos/optimized/home-gallery/gear-05-from-front-to-back-flea-47-soundeluxe-u95-neumann-47-fet-neumann-gefell-480.webp 480w, /photos/optimized/home-gallery/gear-05-from-front-to-back-flea-47-soundeluxe-u95-neumann-47-fet-neumann-gefell-640.webp 640w, /photos/optimized/home-gallery/gear-05-from-front-to-back-flea-47-soundeluxe-u95-neumann-47-fet-neumann-gefell-960.webp 960w, /photos/gallery-2026-06-25/gear-05-from-front-to-back-flea-47-soundeluxe-u95-neumann-47-fet-neumann-gefell.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 126px) / 2)" alt="From front to back: Flea 47, Soundeluxe U95, Neumann 47 Fet, Neumann-Gefell CMV 563, Austrian Audio OC818, AKG C414, Coles 4038, Soyuz Bomblet, Sony C800G, Neumann M150, Neumann U87" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption class="caption-long">From front to back: Flea 47, Soundeluxe U95, Neumann 47 Fet, Neumann-Gefell CMV 563, Austrian Audio OC818, AKG C414, Coles 4038, Soyuz Bomblet, Sony C800G, Neumann M150, Neumann U87</figcaption>
     </figure>
     <figure class="gp reveal reveal-d3">
-      <img src="/photos/gallery-2026-06-25/gear-06-c-and-c-custom-kit.webp" alt="C&amp;C Custom Kit" width="1800" height="1200" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-06-c-and-c-custom-kit.webp" srcset="/photos/optimized/home-gallery/gear-06-c-and-c-custom-kit-480.webp 480w, /photos/optimized/home-gallery/gear-06-c-and-c-custom-kit-640.webp 640w, /photos/optimized/home-gallery/gear-06-c-and-c-custom-kit-960.webp 960w, /photos/gallery-2026-06-25/gear-06-c-and-c-custom-kit.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="C&amp;C Custom Kit" width="1800" height="1200" decoding="async" loading="lazy">
       <figcaption>C&amp;C Custom Kit</figcaption>
     </figure>
     <figure class="gp wide reveal">
-      <img src="/photos/gallery-2026-06-25/gear-07-one-of-our-neumann-m150s.webp" alt="One of our Neumann M150s" width="1800" height="1199" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-07-one-of-our-neumann-m150s.webp" srcset="/photos/optimized/home-gallery/gear-07-one-of-our-neumann-m150s-480.webp 480w, /photos/optimized/home-gallery/gear-07-one-of-our-neumann-m150s-640.webp 640w, /photos/optimized/home-gallery/gear-07-one-of-our-neumann-m150s-960.webp 960w, /photos/gallery-2026-06-25/gear-07-one-of-our-neumann-m150s.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 126px) / 2)" alt="One of our Neumann M150s" width="1800" height="1199" decoding="async" loading="lazy">
       <figcaption>One of our Neumann M150s</figcaption>
     </figure>
     <figure class="gp reveal reveal-d1">
-      <img src="/photos/gallery-2026-06-25/gear-08-epiphone-jack-casady-and-our-ampeg-b-15-n-with-portaflex-cab.webp" alt="Epiphone Jack Casady and our Ampeg B-15-N with Portaflex cab" width="1800" height="1800" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-08-epiphone-jack-casady-and-our-ampeg-b-15-n-with-portaflex-cab.webp" srcset="/photos/optimized/home-gallery/gear-08-epiphone-jack-casady-and-our-ampeg-b-15-n-with-portaflex-cab-480.webp 480w, /photos/optimized/home-gallery/gear-08-epiphone-jack-casady-and-our-ampeg-b-15-n-with-portaflex-cab-640.webp 640w, /photos/optimized/home-gallery/gear-08-epiphone-jack-casady-and-our-ampeg-b-15-n-with-portaflex-cab-960.webp 960w, /photos/gallery-2026-06-25/gear-08-epiphone-jack-casady-and-our-ampeg-b-15-n-with-portaflex-cab.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 154px) / 4)" alt="Epiphone Jack Casady and our Ampeg B-15-N with Portaflex cab" width="1800" height="1800" decoding="async" loading="lazy">
       <figcaption>Epiphone Jack Casady and our Ampeg B-15-N with Portaflex cab</figcaption>
     </figure>
     <figure class="gp wide reveal reveal-d2">
-      <img src="/photos/gallery-2026-06-25/gear-09-fender-rhodes-mark-1.webp" alt="Fender Rhodes Mark 1" width="1800" height="1199" decoding="async" loading="lazy">
+      <img src="/photos/gallery-2026-06-25/gear-09-fender-rhodes-mark-1.webp" srcset="/photos/optimized/home-gallery/gear-09-fender-rhodes-mark-1-480.webp 480w, /photos/optimized/home-gallery/gear-09-fender-rhodes-mark-1-640.webp 640w, /photos/optimized/home-gallery/gear-09-fender-rhodes-mark-1-960.webp 960w, /photos/gallery-2026-06-25/gear-09-fender-rhodes-mark-1.webp 1800w" sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) calc((100vw - 50px) / 2), calc((100vw - 126px) / 2)" alt="Fender Rhodes Mark 1" width="1800" height="1199" decoding="async" loading="lazy">
       <figcaption>Fender Rhodes Mark 1</figcaption>
     </figure>
   </div>
@@ -2442,18 +2435,11 @@ html      { scroll-behavior: auto; }
 </footer>
 
 <script>
-document.documentElement.classList.add('js');
 // ── Nav scroll state ──
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
-
-// ── Scroll reveal ──
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── Smooth anchor scroll ──
 document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -2544,328 +2530,6 @@ if (gallerySection) {
   });
 }
 </script>
-<!-- Lenis smooth scroll -->
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<!-- GSAP core -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<!-- ScrollTrigger plugin -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-(function () {
-  if (!window.gsap || !window.ScrollTrigger) {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-    return;
-  }
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Skip all animations if user prefers reduced motion
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-    return;
-  }
-
-  // Supersede existing IntersectionObserver: mark .reveal elements visible now.
-  // GSAP inline styles have higher specificity than the .reveal.visible CSS rule,
-  // so GSAP controls opacity/transform on elements it animates.
-  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-
-  // ─── LENIS SETUP ───────────────────────────────────────────
-  const isMobile = window.innerWidth < 768;
-  let lenis = null;
-
-  if (!isMobile) {
-    lenis = new Lenis({
-      lerp: 0.08,
-      duration: 1.2,
-      easing: t => t < 0.5
-        ? 4 * t * t * t
-        : 1 - Math.pow(-2 * t + 2, 3) / 2
-    });
-    window.lenisInstance = lenis;
-
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(time => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
-
-  // ─── HERO INITIAL STATES ────────────────────────────────────
-  gsap.set('.nav', { opacity: 1 });
-
-
-  // ─── HERO LOAD SEQUENCE ─────────────────────────────────────
-  // Hero content is visible by default for reliable mobile first paint.
-
-  // ─── HERO PARALLAX ──────────────────────────────────────────
-  gsap.to('.hero-img', {
-    y: '40%',
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
-  });
-
-  // Hero content fades out over first 30% of scroll
-  gsap.to('.hero-content', {
-    opacity: 0,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: '30% top',
-      scrub: true
-    }
-  });
-
-  // ─── MOUSE ORB PARALLAX ─────────────────────────────────────
-  const orb1 = document.querySelector('.orb-1');
-  const orb2 = document.querySelector('.orb-2');
-  if (orb1 && orb2) {
-    let tx1 = 0, ty1 = 0, tx2 = 0, ty2 = 0;
-    let mx = 0, my = 0;
-    document.addEventListener('mousemove', e => {
-      mx = (e.clientX / window.innerWidth  - 0.5) * 2;
-      my = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
-    gsap.ticker.add(() => {
-      tx1 += (mx * 20 - tx1) * 0.05;
-      ty1 += (my * 20 - ty1) * 0.05;
-      tx2 += (-mx * 20 - tx2) * 0.05;
-      ty2 += (-my * 20 - ty2) * 0.05;
-      gsap.set(orb1, { x: tx1, y: ty1 });
-      gsap.set(orb2, { x: tx2, y: ty2 });
-    });
-  }
-
-  // ─── WELCOME SECTION ────────────────────────────────────────
-  function splitIntoWordSpans(el) {
-    const nodes = [...el.childNodes];
-    el.innerHTML = '';
-    nodes.forEach(node => {
-      if (node.nodeType === 3) {
-        node.textContent.split(' ').forEach((word, i, arr) => {
-          if (!word) return;
-          const span = document.createElement('span');
-          span.style.display = 'inline-block';
-          span.textContent = word;
-          el.appendChild(span);
-          if (i < arr.length - 1) el.appendChild(document.createTextNode(' '));
-        });
-      } else if (node.nodeName === 'BR') {
-        el.appendChild(document.createElement('br'));
-      } else {
-        const wrap = document.createElement('span');
-        wrap.style.display = 'inline-block';
-        wrap.appendChild(node.cloneNode(true));
-        el.appendChild(wrap);
-      }
-    });
-    return el.querySelectorAll('span');
-  }
-
-  const welcomeH2 = document.querySelector('.welcome .h2-serif');
-  const h2Words = splitIntoWordSpans(welcomeH2);
-
-  gsap.from(h2Words, {
-    y: 40,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.1,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: welcomeH2, start: 'top 80%' }
-  });
-
-  gsap.from('.welcome .body-text p', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.welcome .body-text', start: 'top 80%' }
-  });
-
-  // Stats counter from 0
-  const statDefs = [
-    { el: document.querySelectorAll('.stat-n')[0], end: 6,  suffix: ''   },
-    { el: document.querySelectorAll('.stat-n')[1], end: 5,  suffix: 'yr' },
-    { el: document.querySelectorAll('.stat-n')[2], end: 13, suffix: 'm'  }
-  ];
-  statDefs.filter(({ el }) => el).forEach(({ el, end, suffix }) => {
-    const counter = { val: 0 };
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 85%',
-      once: true,
-      onEnter() {
-        gsap.to(counter, {
-          val: end,
-          duration: 1.5,
-          ease: 'power2.out',
-          onUpdate() { el.textContent = Math.round(counter.val) + suffix; }
-        });
-      }
-    });
-  });
-
-  // Photo stack curtain wipe
-  ScrollTrigger.create({
-    trigger: '.welcome-photo-stack',
-    start: 'top 75%',
-    once: true,
-    onEnter() {
-      gsap.fromTo('.wp-main',
-        { clipPath: 'inset(0 100% 0 0)' },
-        { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power3.out' }
-      );
-      gsap.fromTo('.wp-accent',
-        { clipPath: 'inset(0 100% 0 0)' },
-        { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power3.out', delay: 0.25 }
-      );
-    }
-  });
-
-  // ─── ROOMS SECTION ──────────────────────────────────────────
-  gsap.from('.rooms-header', {
-    x: -40,
-    opacity: 0,
-    duration: 0.9,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.rooms-header', start: 'top 85%' }
-  });
-
-  gsap.from('.live-room-feature img', {
-    scale: 1.04,
-    duration: 1.2,
-    ease: 'power2.out',
-    clearProps: 'transform',
-    scrollTrigger: { trigger: '.live-room-feature', start: 'top 80%' }
-  });
-  gsap.from('.live-room-info', {
-    y: 40,
-    duration: 0.9,
-    ease: 'power2.out',
-    clearProps: 'transform',
-    scrollTrigger: { trigger: '.live-room-feature', start: 'top 65%' }
-  });
-
-  gsap.fromTo('.room-card',
-    { opacity: 0 },
-    {
-      opacity: 1,
-      duration: 0.65,
-      stagger: 0.08,
-      ease: 'power2.out',
-      clearProps: 'opacity,transform',
-      scrollTrigger: { trigger: '.rooms-grid', start: 'top 80%' }
-    }
-  );
-
-  // Writing cards are CSS-visible by default; avoid GSAP from() leaving them hidden during section QA.
-
-  // ─── NEVE SECTION ────────────────────────────────────────────
-  if (document.querySelector('.neve-bg')) {
-    ScrollTrigger.create({
-      trigger: '.neve-bg',
-      start: 'top 75%',
-      once: true,
-      onEnter() {
-        gsap.fromTo('.neve-bg > img',
-          { clipPath: 'inset(0 100% 0 0)' },
-          { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'power3.out' }
-        );
-      }
-    });
-  }
-
-  if (document.querySelector('.neve-content')) {
-    gsap.from(['.neve-eyebrow', '.neve-title', '.neve-body', '.neve-facts > div'], {
-      y: 30,
-      opacity: 0,
-      duration: 0.9,
-      stagger: 0.07,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: '.neve-content', start: 'top 75%' }
-    });
-  }
-
-  // ─── IN-ROOM SECTION ─────────────────────────────────────────
-  if (document.querySelector('.in-room')) {
-    gsap.from('.in-room > .reveal', {
-      y: 40,
-      opacity: 0,
-      duration: 0.9,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: '.in-room', start: 'top 80%' }
-    });
-
-    document.querySelectorAll('.in-room-photo img').forEach(img => {
-      gsap.to(img, {
-        y: '20%',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: img.closest('.in-room-photo'),
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true
-        }
-      });
-    });
-
-    gsap.from('.in-room-photo', {
-      y: 40,
-      opacity: 0,
-      duration: 0.9,
-      stagger: 0.12,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: '.in-room-grid', start: 'top 80%' }
-    });
-  }
-
-  // ─── TESTIMONIALS ────────────────────────────────────────────
-  // (marquee cards excluded — ScrollTrigger conflicts with continuous CSS scroll animation)
-  gsap.from('.testi-header', {
-    y: 40,
-    opacity: 0,
-    duration: 0.9,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.testi-header', start: 'top 80%' }
-  });
-
-  // ─── GALLERY ─────────────────────────────────────────────────
-  gsap.from('.gp', {
-    scale: 0.95,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.06,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.gallery-mosaic', start: 'top 80%' }
-  });
-
-  // ─── SERVICES ────────────────────────────────────────────────
-  gsap.from('.svc-card', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.08,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.services-grid', start: 'top 80%' }
-  });
-
-  // ─── BOOKING BAND ────────────────────────────────────────────
-  if (document.querySelector('.booking-content')) {
-    gsap.from('.booking-content', {
-      scale: 0.97,
-      opacity: 0,
-      duration: 1.0,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: '.booking-band', start: 'top 75%' }
-    });
-  }
-
-})();
-</script>
-<script src="/enquiry.js?v=20260728-charlie"></script>
+ <script src="/enquiry.js?v=20260728-charlie"></script>
 <script src="/search.js?v=20260625-mobile-nav-1" defer></script></body>
 </html>
