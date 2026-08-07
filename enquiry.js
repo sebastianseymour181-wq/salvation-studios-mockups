@@ -77,7 +77,7 @@
         });
         form.reset();
         markFormStarted();
-        if (status) status.textContent = 'Thanks. Your enquiry has been sent to Salvation Studios.';
+        if (status) status.textContent = form.dataset.successMessage || 'Thanks. Your enquiry has been sent to Salvation Studios.';
       } catch (error) {
         track('salvation_enquiry_error', { source_page: sourcePage });
         if (error.message === 'Email delivery is not configured yet.') {

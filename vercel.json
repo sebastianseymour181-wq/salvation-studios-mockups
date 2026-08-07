@@ -834,6 +834,24 @@
       ]
     },
     {
+      "source": "/live-video-sessions",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/live-video-sessions/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/concept-index",
       "headers": [
         {
@@ -1052,6 +1070,10 @@
     {
       "source": "/enquire/",
       "destination": "/enquire.html"
+    },
+    {
+      "source": "/live-video-sessions/",
+      "destination": "/live-video-sessions.html"
     },
     {
       "source": "/about/",

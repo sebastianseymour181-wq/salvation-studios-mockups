@@ -54,6 +54,7 @@ NOINDEX_HTML = {
     "salvation-studios.html",
     "rooms/vocal-booth.html",
     "rooms/iso-booths.html",
+    "live-video-sessions.html",
 }
 
 AD_NOINDEX_HTML = {
@@ -277,9 +278,13 @@ def main() -> int:
         failures.append("test-host noindex header must override advertising-route follow policy")
     if not {"/enquire", "/enquire/"}.issubset(header_sources):
         failures.append("advertising enquiry route is missing its noindex response header")
+    if not {"/live-video-sessions", "/live-video-sessions/"}.issubset(header_sources):
+        failures.append("live video campaign route is missing its noindex response header")
     rewrites = {rule.get("source"): rule.get("destination") for rule in config.get("rewrites", [])}
     if rewrites.get("/enquire/") != "/enquire.html":
         failures.append("advertising enquiry clean route rewrite is missing")
+    if rewrites.get("/live-video-sessions/") != "/live-video-sessions.html":
+        failures.append("live video campaign clean route rewrite is missing")
     if "/docs/:path*" not in header_sources:
         failures.append("docs directory is publicly deployable without noindex header")
     expected_concept_header_sources = {
@@ -316,6 +321,12 @@ def main() -> int:
     for relative, path in files.items():
         text = path.read_text(errors="ignore")
         parser = parse_html(path)
+
+        if relative != "live-video-sessions.html" and any(
+            attr == "href" and urlparse(value).path.rstrip("/") == "/live-video-sessions"
+            for _, attr, value in parser.attrs
+        ):
+            failures.append(f"unlisted live video campaign is linked from {relative}")
 
         if re.search(r"href=[\"']#[\"']", text):
             failures.append(f"placeholder href remains in {relative}")
@@ -422,7 +433,8 @@ def main() -> int:
 
     homepage = (ROOT / "index.html").read_text(errors="ignore")
     advert_page = (ROOT / "enquire.html").read_text(errors="ignore")
-    for relative, text in (("index.html", homepage), ("enquire.html", advert_page)):
+    campaign_page = (ROOT / "live-video-sessions.html").read_text(errors="ignore")
+    for relative, text in (("index.html", homepage), ("enquire.html", advert_page), ("live-video-sessions.html", campaign_page)):
         if text.count('src="/enquiry.js?') != 1:
             failures.append(f"shared enquiry handler must load exactly once in {relative}")
         if text.count('class="enquiry-form"') != 1:
@@ -460,6 +472,8 @@ def main() -> int:
         if not value.startswith("/"):
             failures.append(f"non-root-relative search index URL: {value}")
             continue
+        if parsed.path.rstrip("/") == "/live-video-sessions":
+            failures.append("unlisted live video campaign appears in site search")
         suffix = Path(parsed.path).suffix.lower()
         if suffix in ASSET_EXTENSIONS:
             if not asset_exists(parsed.path):
