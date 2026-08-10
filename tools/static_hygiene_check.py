@@ -438,6 +438,8 @@ def main() -> int:
         failures.append("live video campaign still promises 10 hours of studio time")
     if "Tell us about your session with no obligation" not in campaign_page:
         failures.append("live video campaign call to action is missing")
+    if "Create live videos that look as good as they sound." not in campaign_page:
+        failures.append("live video campaign tagline is missing")
     for relative, text in (("index.html", homepage), ("enquire.html", advert_page), ("live-video-sessions.html", campaign_page)):
         if text.count('src="/enquiry.js?') != 1:
             failures.append(f"shared enquiry handler must load exactly once in {relative}")
