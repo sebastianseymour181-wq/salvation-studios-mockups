@@ -434,6 +434,10 @@ def main() -> int:
     homepage = (ROOT / "index.html").read_text(errors="ignore")
     advert_page = (ROOT / "enquire.html").read_text(errors="ignore")
     campaign_page = (ROOT / "live-video-sessions.html").read_text(errors="ignore")
+    if "10 hours of studio time" in campaign_page:
+        failures.append("live video campaign still promises 10 hours of studio time")
+    if "Tell us about your session with no obligation" not in campaign_page:
+        failures.append("live video campaign call to action is missing")
     for relative, text in (("index.html", homepage), ("enquire.html", advert_page), ("live-video-sessions.html", campaign_page)):
         if text.count('src="/enquiry.js?') != 1:
             failures.append(f"shared enquiry handler must load exactly once in {relative}")
