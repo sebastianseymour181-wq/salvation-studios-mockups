@@ -24,6 +24,7 @@ EXPECTED_EMAIL = "info@salvationstudios.co.uk"
 INDEXABLE_HTML = {
     "index.html",
     "about.html",
+    "our-engineers.html",
     "privacy.html",
     "recording-studio-brighton.html",
     "equipment.html",
@@ -85,7 +86,7 @@ OLD_SITE_ROUTES = {
 
 # New public routes should not be redirected to themselves.
 NEW_PUBLIC_ROUTES = {
-    "/", "/about", "/privacy", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/spaces", "/services",
+    "/", "/about", "/our-engineers", "/privacy", "/recording-studio-brighton", "/equipment", "/gallery", "/testimonials", "/spaces", "/services",
     "/rooms/main-studio", "/rooms/live-room", "/rooms/control-room", "/rooms/writing-rooms", "/rooms/the-bunker",
     "/services/recording", "/services/mixing",
     "/services/mastering", "/services/live-videos", "/services/signature-sessions", "/services/grassroots", "/services/accommodation-hospitality",
@@ -98,6 +99,7 @@ ASSET_EXTENSIONS = {
 
 EXPECTED_SEARCH_URLS = {
     "About Salvation Studios": "/about/",
+    "Our Engineers": "/our-engineers/",
     "Accommodation": "/services/accommodation-hospitality/",
     "Catering": "/services/accommodation-hospitality/",
     "Hospitality": "/services/accommodation-hospitality/",
@@ -285,6 +287,8 @@ def main() -> int:
         failures.append("advertising enquiry clean route rewrite is missing")
     if rewrites.get("/live-video-sessions/") != "/live-video-sessions.html":
         failures.append("live video campaign clean route rewrite is missing")
+    if rewrites.get("/our-engineers/") != "/our-engineers.html":
+        failures.append("Our Engineers clean route rewrite is missing")
     if "/docs/:path*" not in header_sources:
         failures.append("docs directory is publicly deployable without noindex header")
     expected_concept_header_sources = {
@@ -356,6 +360,9 @@ def main() -> int:
                 failures.append(f"expected exactly one h1 in {relative}, found {parser.h1_count}")
             if not og_title or not og_description:
                 failures.append(f"missing Open Graph title/description in {relative}")
+            desktop_nav = re.search(r'<ul class="nav-links">(.*?)</ul>', text, re.S)
+            if not desktop_nav or 'href="/our-engineers/"' not in desktop_nav.group(1):
+                failures.append(f"Our Engineers top navigation is missing from {relative}")
         if relative == "services/grassroots.html":
             for term in ("affordable", "unsigned", "emerging", "independent"):
                 if term not in text.lower():
@@ -364,6 +371,10 @@ def main() -> int:
                 failures.append("Grassroots page still contains inactive-offers copy")
             if re.search(r"£\s*\d", text):
                 failures.append("Grassroots page publishes an unapproved price")
+            if len(re.findall(r'class=["\']grassroots-audience-item["\']', text)) != 2:
+                failures.append("Grassroots page must list exactly Unsigned and Emerging")
+            if re.search(r"<h3>\s*Independent\s*</h3>", text, re.I):
+                failures.append("Grassroots page still lists Independent as an audience category")
         if relative in NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*nofollow[\"']", text, re.I):
             failures.append(f"noindex meta missing from non-production page {relative}")
         if relative in AD_NOINDEX_HTML and not re.search(r"<meta\s+name=[\"']robots[\"']\s+content=[\"']noindex,\s*follow[\"']", text, re.I):

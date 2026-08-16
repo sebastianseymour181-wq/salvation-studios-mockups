@@ -5,7 +5,8 @@
   // [name, category, sub-description, url]
   const RAW = [
     ['About Salvation Studios','Studio','Restored 1910 Salvation Army hall, acoustic design and specialist build story','/about/'],
-    ['Grassroots','Artist rates','Affordable recording rates for unsigned, emerging and independent artists','/services/grassroots/'],
+    ['Our Engineers','Studio team','Recording, mixing and mastering engineers included with every session','/our-engineers/'],
+    ['Grassroots','Artist rates','Affordable recording rates for unsigned and emerging artists','/services/grassroots/'],
 
     // Console & multitrack
     ['Neve 8068','Console','1973 · 32-channel · fully restored','/equipment/'],
@@ -448,6 +449,7 @@
 
     mobileMenu.appendChild(createMobileLink('Home', '/', 'mobile-nav-link'));
     mobileMenu.appendChild(createMobileLink('About', '/about/', 'mobile-nav-link'));
+    mobileMenu.appendChild(createMobileLink('Our Engineers', '/our-engineers/', 'mobile-nav-link'));
     mobileMenu.appendChild(createMobileLink('Grassroots', '/services/grassroots/', 'mobile-nav-link'));
     mobileMenu.appendChild(createMobileGroup('Spaces', 'mobileNavSpaces', MOBILE_NAV.spaces, false, spacesActive));
     mobileMenu.appendChild(createMobileLink('Equipment', '/equipment/', 'mobile-nav-link'));
