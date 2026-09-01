@@ -852,6 +852,24 @@
       ]
     },
     {
+      "source": "/full-package-competition",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/full-package-competition/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/concept-index",
       "headers": [
         {
@@ -1074,6 +1092,10 @@
     {
       "source": "/live-video-sessions/",
       "destination": "/live-video-sessions.html"
+    },
+    {
+      "source": "/full-package-competition/",
+      "destination": "/full-package-competition.html"
     },
     {
       "source": "/about/",
