@@ -1,3 +1,5 @@
+const { buildSheetPayload, postToSheet } = require('./enquiry-sheets');
+
 const MAX_BODY_BYTES = 12000;
 const MIN_FORM_AGE_MS = 3000;
 const MAX_FORM_AGE_MS = 24 * 60 * 60 * 1000;
@@ -215,6 +217,12 @@ module.exports = async function handler(req, res) {
     }
 
     await sendWithResend(enquiry);
+    try {
+      await postToSheet(buildSheetPayload(enquiry));
+    } catch (error) {
+      // Email remains the delivery fallback if the optional sheet sync is unavailable.
+      console.error('Google Sheets enquiry sync failed:', error.message);
+    }
     res.statusCode = 200;
     res.end(JSON.stringify({ ok: true }));
   } catch (error) {
