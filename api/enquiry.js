@@ -229,7 +229,11 @@ module.exports = async function handler(req, res) {
 
     await sendWithResend(enquiry);
     try {
-      await postToSheet(buildSheetPayload(enquiry));
+      await postToSheet(buildSheetPayload({
+        ...enquiry,
+        artist_company: [enquiry.artist_company, enquiry.instagram && `Instagram: ${enquiry.instagram}`].filter(Boolean).join('\n'),
+        phone: enquiry.phone && `'${enquiry.phone}`,
+      }));
     } catch (error) {
       // Email remains the delivery fallback if the optional sheet sync is unavailable.
       console.error('Google Sheets enquiry sync failed:', error.message);

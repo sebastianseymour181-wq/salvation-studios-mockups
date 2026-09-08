@@ -30,12 +30,17 @@ test('competition entries require phone and artist name but allow no demo link',
   const originalSheetUrl = process.env.ENQUIRY_SHEETS_WEBHOOK_URL;
   const originalSheetSecret = process.env.ENQUIRY_SHEETS_SECRET;
   let sentEmail;
+  let sentSheetEntry;
 
   process.env.RESEND_API_KEY = 'test-key';
   process.env.ENQUIRY_FROM_EMAIL = 'website@example.com';
-  delete process.env.ENQUIRY_SHEETS_WEBHOOK_URL;
-  delete process.env.ENQUIRY_SHEETS_SECRET;
-  global.fetch = async (_url, options) => {
+  process.env.ENQUIRY_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/test/exec';
+  process.env.ENQUIRY_SHEETS_SECRET = 'test-secret';
+  global.fetch = async (url, options) => {
+    if (url.startsWith('https://script.google.com/')) {
+      sentSheetEntry = JSON.parse(options.body).enquiry;
+      return { ok: true, json: async () => ({ ok: true }) };
+    }
     sentEmail = JSON.parse(options.body);
     return { ok: true };
   };
@@ -65,6 +70,8 @@ test('competition entries require phone and artist name but allow no demo link',
     assert.equal(valid.statusCode, 200);
     assert.deepEqual(valid.body, { ok: true });
     assert.match(sentEmail.text, /Instagram: @thetests/);
+    assert.equal(sentSheetEntry.phone, "'07123 456789");
+    assert.equal(sentSheetEntry.artist_company, 'The Tests\nInstagram: @thetests');
   } finally {
     global.fetch = originalFetch;
     if (originalKey === undefined) delete process.env.RESEND_API_KEY;
