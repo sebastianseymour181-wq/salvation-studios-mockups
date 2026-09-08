@@ -73,6 +73,7 @@ function textBlock(enquiry) {
     '',
     `Name: ${enquiry.name}`,
     `Artist / company: ${enquiry.artist_company || '-'}`,
+    `Instagram: ${enquiry.instagram || '-'}`,
     `Email: ${enquiry.email}`,
     `Phone: ${enquiry.phone || '-'}`,
     `Session type: ${enquiry.session_type}`,
@@ -88,6 +89,7 @@ function htmlBlock(enquiry) {
   const rows = [
     ['Name', enquiry.name],
     ['Artist / company', enquiry.artist_company || '-'],
+    ['Instagram', enquiry.instagram || '-'],
     ['Email', enquiry.email],
     ['Phone', enquiry.phone || '-'],
     ['Session type', enquiry.session_type],
@@ -196,6 +198,7 @@ module.exports = async function handler(req, res) {
     const enquiry = {
       name: clean(payload.name, 120),
       artist_company: clean(payload.artist_company, 160),
+      instagram: clean(payload.instagram, 120),
       email: clean(payload.email, 180),
       phone: clean(payload.phone, 80),
       session_type: clean(payload.session_type, 120),
@@ -204,9 +207,17 @@ module.exports = async function handler(req, res) {
       source_page: clean(payload.source_page, 300),
     };
 
-    if (!enquiry.name || !enquiry.email || !enquiry.session_type || !enquiry.message) {
+    const isCompetition = enquiry.session_type === 'Full Package Competition';
+    const missingRequiredField = !enquiry.name || !enquiry.email || !enquiry.session_type
+      || (isCompetition ? !enquiry.phone || !enquiry.artist_company : !enquiry.message);
+    if (missingRequiredField) {
       res.statusCode = 400;
-      res.end(JSON.stringify({ ok: false, error: 'Please fill in name, email, session type and additional session details.' }));
+      res.end(JSON.stringify({
+        ok: false,
+        error: isCompetition
+          ? 'Please fill in name, email, phone number and artist or band name.'
+          : 'Please fill in name, email, session type and additional session details.',
+      }));
       return;
     }
 

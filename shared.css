@@ -642,6 +642,7 @@ a { color: inherit; }
 .competition-prize-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1px; list-style: none; background: rgba(216,180,254,.14); border: 1px solid rgba(216,180,254,.14); }
 .competition-prize-list li { min-height: 150px; padding: clamp(24px,3vw,38px); display: flex; flex-direction: column; justify-content: flex-end; gap: 7px; background: var(--void); }
 .competition-prize-list .competition-prize-lead { grid-row: span 2; min-height: 301px; background: radial-gradient(circle at 20% 12%, rgba(124,58,237,.28), transparent 46%), var(--surface); }
+.competition-prize-list .competition-prize-wide { grid-column: 1 / -1; }
 .competition-prize-list strong { color: var(--white); font-family: 'Cormorant Garant', serif; font-size: clamp(26px,3vw,42px); font-weight: 300; line-height: 1.05; }
 .competition-prize-list span { color: var(--muted); font-size: 13px; }
 .competition-how { background: var(--void); }

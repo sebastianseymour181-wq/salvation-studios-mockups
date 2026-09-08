@@ -19,6 +19,7 @@
     const lines = [
       'Name: ' + (data.get('name') || ''),
       'Artist / company: ' + (data.get('artist_company') || ''),
+      'Instagram: ' + (data.get('instagram') || ''),
       'Email: ' + (data.get('email') || ''),
       'Phone: ' + (data.get('phone') || ''),
       'Session type: ' + (data.get('session_type') || ''),
