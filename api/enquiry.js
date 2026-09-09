@@ -233,6 +233,7 @@ module.exports = async function handler(req, res) {
         ...enquiry,
         artist_company: [enquiry.artist_company, enquiry.instagram && `Instagram: ${enquiry.instagram}`].filter(Boolean).join('\n'),
         phone: enquiry.phone && `'${enquiry.phone}`,
+        message: enquiry.message || '-',
       }));
     } catch (error) {
       // Email remains the delivery fallback if the optional sheet sync is unavailable.

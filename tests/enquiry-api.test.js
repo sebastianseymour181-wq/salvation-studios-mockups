@@ -72,6 +72,7 @@ test('competition entries require phone and artist name but allow no demo link',
     assert.match(sentEmail.text, /Instagram: @thetests/);
     assert.equal(sentSheetEntry.phone, "'07123 456789");
     assert.equal(sentSheetEntry.artist_company, 'The Tests\nInstagram: @thetests');
+    assert.equal(sentSheetEntry.message, '-');
   } finally {
     global.fetch = originalFetch;
     if (originalKey === undefined) delete process.env.RESEND_API_KEY;
