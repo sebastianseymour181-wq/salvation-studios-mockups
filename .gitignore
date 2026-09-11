@@ -2,5 +2,7 @@
 node_modules/
 *.log
 .vercel
+.qa/
 __pycache__/
 *.pyc
+.env*

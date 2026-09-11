@@ -57,6 +57,7 @@ NOINDEX_HTML = {
     "rooms/iso-booths.html",
     "live-video-sessions.html",
     "full-package-competition.html",
+    "signature-sessions-phill-brown.html",
 }
 
 AD_NOINDEX_HTML = {
@@ -78,7 +79,7 @@ OLD_SITE_ROUTES = {
     "/producers-engineers-mixing", "/recording-studio", "/salvation-art",
     "/salvation-black-friday-sale", "/salvation-studios", "/salvation-studios.html",
     "/signature-sessions-gavin-monaghan", "/signature-sessions-matt-glasbey",
-    "/signature-sessions-nick-brine", "/signature-sessions-phill-brown",
+    "/signature-sessions-nick-brine",
     "/single-giveaway-2025", "/single-giveaway-2026", "/single-giveaway-2026-tiktok",
     "/services/giveaways-offers", "/studio-tour", "/subterranean-room", "/test-landing-page-video",
     "/video-showreel-email-1", "/video-showreel-email-2", "/vocal-booth",
@@ -281,7 +282,7 @@ def main() -> int:
         failures.append("test-host noindex header must override advertising-route follow policy")
     if not {"/enquire", "/enquire/"}.issubset(header_sources):
         failures.append("advertising enquiry route is missing its noindex response header")
-    for route in ("/live-video-sessions", "/full-package-competition"):
+    for route in ("/live-video-sessions", "/full-package-competition", "/signature-sessions-phill-brown"):
         if not {route, f"{route}/"}.issubset(header_sources):
             failures.append(f"campaign route is missing its noindex response header: {route}")
     rewrites = {rule.get("source"): rule.get("destination") for rule in config.get("rewrites", [])}
@@ -291,6 +292,8 @@ def main() -> int:
         failures.append("live video campaign clean route rewrite is missing")
     if rewrites.get("/full-package-competition/") != "/full-package-competition.html":
         failures.append("full package competition clean route rewrite is missing")
+    if rewrites.get("/signature-sessions-phill-brown/") != "/signature-sessions-phill-brown.html":
+        failures.append("Phill Brown campaign clean route rewrite is missing")
     if rewrites.get("/our-engineers/") != "/our-engineers.html":
         failures.append("Our Engineers clean route rewrite is missing")
     if "/docs/:path*" not in header_sources:
@@ -330,11 +333,18 @@ def main() -> int:
         text = path.read_text(errors="ignore")
         parser = parse_html(path)
 
-        if relative != "live-video-sessions.html" and any(
-            attr == "href" and urlparse(value).path.rstrip("/") == "/live-video-sessions"
+        campaign_routes = {
+            "/live-video-sessions": "live-video-sessions.html",
+            "/signature-sessions-phill-brown": "signature-sessions-phill-brown.html",
+        }
+        if any(
+            relative != campaign_file
+            and attr == "href"
+            and urlparse(value).path.rstrip("/") == route
+            for route, campaign_file in campaign_routes.items()
             for _, attr, value in parser.attrs
         ):
-            failures.append(f"unlisted live video campaign is linked from {relative}")
+            failures.append(f"unlisted campaign is linked from {relative}")
 
         if re.search(r"href=[\"']#[\"']", text):
             failures.append(f"placeholder href remains in {relative}")
@@ -450,16 +460,17 @@ def main() -> int:
     advert_page = (ROOT / "enquire.html").read_text(errors="ignore")
     campaign_page = (ROOT / "live-video-sessions.html").read_text(errors="ignore")
     competition_page = (ROOT / "full-package-competition.html").read_text(errors="ignore")
+    phill_campaign_page = (ROOT / "signature-sessions-phill-brown.html").read_text(errors="ignore")
     if "10 hours of studio time" in campaign_page:
         failures.append("live video campaign still promises 10 hours of studio time")
     if "Tell us about your session with no obligation" not in campaign_page:
         failures.append("live video campaign call to action is missing")
     if "Create live videos that look as good as they sound." not in campaign_page:
         failures.append("live video campaign tagline is missing")
-    for relative, text in (("index.html", homepage), ("enquire.html", advert_page), ("live-video-sessions.html", campaign_page), ("full-package-competition.html", competition_page)):
+    for relative, text in (("index.html", homepage), ("enquire.html", advert_page), ("live-video-sessions.html", campaign_page), ("full-package-competition.html", competition_page), ("signature-sessions-phill-brown.html", phill_campaign_page)):
         if text.count('src="/enquiry.js?') != 1:
             failures.append(f"shared enquiry handler must load exactly once in {relative}")
-        if text.count('class="enquiry-form"') != 1:
+        if len(re.findall(r'class=["\'][^"\']*\benquiry-form\b[^"\']*["\']', text, re.I)) != 1:
             failures.append(f"expected exactly one enquiry form in {relative}")
         if text.count('name="form_started_at"') != 1:
             failures.append(f"expected exactly one enquiry timing field in {relative}")
@@ -494,7 +505,7 @@ def main() -> int:
         if not value.startswith("/"):
             failures.append(f"non-root-relative search index URL: {value}")
             continue
-        if parsed.path.rstrip("/") in {"/live-video-sessions", "/full-package-competition"}:
+        if parsed.path.rstrip("/") in {"/live-video-sessions", "/full-package-competition", "/signature-sessions-phill-brown"}:
             failures.append("unlisted campaign appears in site search")
         suffix = Path(parsed.path).suffix.lower()
         if suffix in ASSET_EXTENSIONS:

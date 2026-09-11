@@ -380,11 +380,6 @@
       "permanent": true
     },
     {
-      "source": "/signature-sessions-phill-brown",
-      "destination": "/testimonials",
-      "permanent": true
-    },
-    {
       "source": "/live-video-giveaway",
       "destination": "/services/live-videos",
       "permanent": true
@@ -760,11 +755,6 @@
       "permanent": true
     },
     {
-      "source": "/signature-sessions-phill-brown/",
-      "destination": "/testimonials",
-      "permanent": true
-    },
-    {
       "source": "/live-video-giveaway/",
       "destination": "/services/live-videos",
       "permanent": true
@@ -862,6 +852,24 @@
     },
     {
       "source": "/full-package-competition/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/signature-sessions-phill-brown",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/signature-sessions-phill-brown/",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -1096,6 +1104,10 @@
     {
       "source": "/full-package-competition/",
       "destination": "/full-package-competition.html"
+    },
+    {
+      "source": "/signature-sessions-phill-brown/",
+      "destination": "/signature-sessions-phill-brown.html"
     },
     {
       "source": "/about/",
