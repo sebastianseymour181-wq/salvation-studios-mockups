@@ -688,12 +688,14 @@ a { color: inherit; }
 .phill-campaign-page {
   --phill-ink: #030303;
   --phill-panel: rgba(3,3,3,.88);
-  --phill-cream: #eee3cc;
-  --phill-soft: #cfc4ae;
-  --phill-muted: #9d9587;
-  --phill-line: rgba(238,227,204,.22);
+  --phill-cream: #fff5e2;
+  --phill-soft: #eee2cc;
+  --phill-muted: #cec2ac;
+  --phill-line: rgba(255,245,226,.3);
   background-color: var(--phill-ink);
-  background-image: url('/photos/campaign-phill-brown-2026/halftone-grunge-texture.webp');
+  background-image:
+    linear-gradient(rgba(3,3,3,.72),rgba(3,3,3,.72)),
+    url('/photos/campaign-phill-brown-2026/halftone-grunge-texture.webp');
   background-repeat: repeat-y;
   background-position: top center;
   background-size: max(1180px,100vw) auto;
@@ -761,6 +763,31 @@ a { color: inherit; }
   font-weight: 300;
   line-height: 1.08;
 }
+.phill-availability {
+  max-width: 540px;
+  margin-top: 28px;
+  padding: 16px 18px;
+  border: 1px solid var(--phill-line);
+  border-left: 3px solid var(--phill-cream);
+  background: rgba(0,0,0,.88);
+}
+.phill-availability strong,
+.phill-availability span { display: block; }
+.phill-availability strong {
+  color: var(--phill-cream);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.phill-availability span {
+  margin-top: 6px;
+  color: var(--phill-soft);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.phill-availability + .phill-button { margin-top: 20px; }
 .phill-button {
   min-height: 50px;
   margin-top: 34px;
