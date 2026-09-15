@@ -1083,6 +1083,7 @@ a { color: inherit; }
   .phill-series { font-size: clamp(36px,13vw,52px); }
   .phill-hero h1 { max-width: 7ch; font-size: clamp(70px,22vw,100px); line-height: .78; }
   .phill-lead { font-size: 28px; }
+  .phill-availability-badge { bottom: 66px; }
   .phill-button { width: 100%; text-align: center; }
   .phill-hero-photo { aspect-ratio: 4 / 5; }
   .phill-credits { grid-template-columns: 1fr; gap: 13px; }
