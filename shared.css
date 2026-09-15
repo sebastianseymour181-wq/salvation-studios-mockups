@@ -728,7 +728,14 @@ a { color: inherit; }
   gap: clamp(40px,7vw,108px);
   align-items: center;
 }
-.phill-hero-copy { position: relative; z-index: 1; }
+.phill-hero-copy {
+  position: relative;
+  z-index: 1;
+  padding: clamp(22px,3vw,42px);
+  border: 1px solid rgba(238,227,204,.16);
+  background: rgba(0,0,0,.72);
+  box-shadow: 0 20px 60px rgba(0,0,0,.24);
+}
 .phill-series {
   display: block;
   max-width: 8ch;
@@ -761,6 +768,34 @@ a { color: inherit; }
   font-weight: 300;
   line-height: 1.08;
 }
+.phill-availability {
+  max-width: 31ch;
+  margin-top: 24px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 4px;
+  border-left: 2px solid var(--phill-cream);
+  background: rgba(0,0,0,.56);
+  color: var(--phill-soft);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.phill-availability strong {
+  color: var(--phill-cream);
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.phill-availability-badge {
+  position: absolute;
+  z-index: 1;
+  left: 18px;
+  bottom: 16px;
+  max-width: 33ch;
+  margin: 0;
+  background: rgba(0,0,0,.84);
+}
+.phill-availability-badge strong { font-size: 12px; }
 .phill-button {
   min-height: 50px;
   margin-top: 34px;
