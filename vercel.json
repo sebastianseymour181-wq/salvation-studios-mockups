@@ -1086,6 +1086,24 @@
           "value": "https://www.salvationstudios.co.uk"
         }
       ]
+    },
+    {
+      "source": "/signature-sessions-sean-genockey",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/signature-sessions-sean-genockey/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "rewrites": [
@@ -1188,6 +1206,10 @@
     {
       "source": "/services/accommodation-hospitality/",
       "destination": "/services/accommodation-hospitality.html"
+    },
+    {
+      "source": "/signature-sessions-sean-genockey/",
+      "destination": "/signature-sessions-sean-genockey.html"
     }
   ]
 }

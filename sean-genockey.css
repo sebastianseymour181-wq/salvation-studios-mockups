@@ -1,0 +1,9 @@
+/* Sean Genockey campaign: shared Signature Sessions layout, scoped additions. */
+.sean-campaign-page .phill-hero h1 { font-size: clamp(64px, 7.8vw, 116px); line-height: .86; overflow-wrap: normal; }
+.sean-biography { margin-top: 28px; border-block: 1px solid var(--phill-line); }
+.sean-biography summary { padding: 18px 0; cursor: pointer; color: var(--phill-cream); font-size: 14px; font-weight: 700; }
+.sean-biography summary span { float: right; margin-right: 8px; }
+.sean-biography[open] { padding-bottom: 24px; }
+.sean-biography[open] summary span { transform: rotate(45deg); }
+.sean-biography summary:focus-visible { outline: 2px solid var(--phill-cream); outline-offset: 4px; }
+@media (max-width: 600px) { .sean-campaign-page .phill-hero h1 { font-size: clamp(54px, 15.5vw, 90px); } }
