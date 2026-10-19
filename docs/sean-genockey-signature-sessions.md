@@ -3,9 +3,9 @@
 ## Review build
 
 - Test page: https://salvation-studios-mockups-three.vercel.app/signature-sessions-sean-genockey/
-- Deployment: `dpl_3Ucr7XH3EPysyRRaZAqipnRE6MUr` (staging, READY).
+- Deployment: `dpl_42HvNetvPrdkWrPCS4m9E6coDhqj` (staging, READY).
 - Source branch: `feature/sean-genockey-signature-sessions-2026`.
-- Source commit: `3a62c9d9a3376f594953b1d958fc1e681ba03bdb`.
+- Source commit: `cde45da2e151abdc14c74a1aeb863221d85743e8`.
 - Live baseline retained: `dpl_GkEs219MWCKPXc6xmevYYSHSGHvR` on both `www.salvationstudios.co.uk` and `salvationstudios.co.uk`.
 
 ## Page and packages
@@ -29,6 +29,7 @@ New tab: `Sean Genockey Signature Sessions` (`sheetId=1026202601`). It follows t
 - Test page returns HTTP 200 with `X-Robots-Tag: noindex, nofollow`.
 - Deployed page SHA-256 matches the local HTML.
 - Both stylesheets return HTTP 200.
+- Photo update: all 12 WebP assets (six originals resized for the web, plus six 800px variants) return HTTP 200 and match the local bytes. The updated HTML and crop stylesheet also match local source.
 - A deliberately invalid-timing request through the test-host enquiry route returns the existing handler’s expected HTTP 400 validation response; no email or lead was sent.
 - New Sheet formula and all 12 displayed column headers read back successfully.
 - Both live aliases checked after test assignment: retain the original baseline.
