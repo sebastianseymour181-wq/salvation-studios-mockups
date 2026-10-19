@@ -7,3 +7,12 @@
 .sean-biography[open] summary span { transform: rotate(45deg); }
 .sean-biography summary:focus-visible { outline: 2px solid var(--phill-cream); outline-offset: 4px; }
 @media (max-width: 600px) { .sean-campaign-page .phill-hero h1 { font-size: clamp(54px, 15.5vw, 90px); } }
+
+/* Supplied Sean photography: preserve faces and instruments in each frame. */
+.sean-campaign-page .phill-hero-photo img { object-position: 50% 35%; }
+.sean-campaign-page .sean-guitar-photo { object-position: 68% center; }
+.sean-campaign-page .sean-gallery-banner { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
+.sean-campaign-page .sean-gallery-banner img { object-position: center 30%; }
+@media (max-width: 700px) {
+  .sean-campaign-page .sean-gallery-banner { aspect-ratio: 4 / 3; }
+}

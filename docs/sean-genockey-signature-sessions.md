@@ -34,15 +34,12 @@ New tab: `Sean Genockey Signature Sessions` (`sheetId=1026202601`). It follows t
 - Both live aliases checked after test assignment: retain the original baseline.
 - Browser visual QA unavailable: the computer-use tool reported no browsers. No full successful enquiry was submitted.
 
-## Pending supplied photos
+## Supplied photos added — 19 October 2026
 
-All six supplied Drive image IDs are inaccessible to the connected account (Drive metadata returns 404; public view requires sign-in). Genuine studio photography is used temporarily and is labelled as studio photography. Replace it with the supplied Sean images once access is granted, then review the crops on desktop and mobile:
+Access to all six Drive files is now working. All six supplied photos replace the temporary studio photographs across the hero, biography and four-image gallery. Source mappings are recorded in `photos/campaign-sean-genockey-2026/sources.json`.
 
-- `1vnpN3A7ucel71j2Kiezo6_xZfXkHV03X`
-- `1qVGVTeNOix-hEMUMSA7Qacffs4CSq4Cs`
-- `1VrpCeNmjGQqYW9THgL8xJx0qtoTrjB6g`
-- `172gUoulhZ1NqAAJKzmNIu6YQ6ETSxcgc`
-- `1X1TEwPQgxkYhhPe-nv7PQOAn-4M5lwy3`
-- `1o43A_z7r1stfdBO5-Hg22E2dbil_VJjD`
+Images retain their original composition and have been resized to WebP, with 800px responsive alternatives. The hero shows Sean playing acoustic guitar; the biography shows him at the Neve console. Gallery images show electric-guitar recording, acoustic-guitar development, amplifier adjustment and a further guitar session. CSS focal positions keep Sean within the portrait and tall gallery frames. The social preview uses Sean’s acoustic live-room image on the test host; update that host when promoting to production.
+
+Browser visual QA remains unavailable because no browsers are exposed by the computer-use tool. The package inclusions, biography, enquiry form and Sheets connection are unchanged by this photo update.
 
 Only the test hostname was assigned. Publish to the official live domains after the user approves the completed review page. Before promotion, use production configuration so ordinary enquiries have the existing production email and Sheets variables.
