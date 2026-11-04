@@ -17,7 +17,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_HOST = "https://www.salvationstudios.co.uk"
 TEST_HOST = "salvation-studios-mockups-three.vercel.app"
-EXCLUDED_DIRS = {".git", ".superpowers", ".vercel", "__pycache__", "node_modules"}
+EXCLUDED_DIRS = {".git", ".qa", ".superpowers", ".vercel", "__pycache__", "node_modules"}
 EXPECTED_TEL = "tel:+443334445508"
 EXPECTED_EMAIL = "info@salvationstudios.co.uk"
 
@@ -334,6 +334,14 @@ def main() -> int:
     for relative, path in files.items():
         text = path.read_text(errors="ignore")
         parser = parse_html(path)
+
+        if text.count('data-gtm-container="GTM-TKKWMVXR"') != 1:
+            failures.append(f"missing or duplicate sitewide consent/GTM entrypoint in {relative}")
+        first_script = re.search(r"<script\b[^>]*>", text, re.I)
+        if not first_script or "/site-consent.js" not in first_script.group(0):
+            failures.append(f"consent defaults do not precede other scripts in {relative}")
+        if re.search(r'<iframe[^>]+\ssrc=["\']https://www\.googletagmanager\.com/ns', text, re.I):
+            failures.append(f"unconsented no-JavaScript GTM iframe in {relative}")
 
         campaign_routes = {
             "/live-video-sessions": "live-video-sessions.html",

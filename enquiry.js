@@ -1,7 +1,6 @@
 (() => {
   function track(eventName, detail) {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push(Object.assign({ event: eventName }, detail || {}));
+    if (window.SalvationConsent) window.SalvationConsent.track(eventName, detail);
   }
 
   document.querySelectorAll('[data-analytics]').forEach(element => {
@@ -56,6 +55,18 @@
       const data = new FormData(form);
       const payload = Object.fromEntries(data.entries());
       payload.source_page = sourcePage;
+      const extra = [];
+      [['preferred_room', 'Preferred room'], ['engineering_support', 'Engineer or support required'], ['duration', 'Approximate duration']].forEach(([key, label]) => {
+        const value = String(data.get(key) || '').trim().slice(0, 160);
+        if (value) extra.push(label + ': ' + value);
+      });
+      const attribution = window.SalvationConsent ? window.SalvationConsent.getAttribution() : {};
+      const campaignLines = Object.entries(attribution).map(([key, value]) => key + ': ' + value);
+      if (campaignLines.length) extra.push('Campaign attribution (consented):\n' + campaignLines.join('\n'));
+      if (extra.length) {
+        const suffix = '\n\n' + extra.join('\n');
+        payload.message = String(payload.message || '').slice(0, Math.max(0, 4000 - suffix.length)) + suffix;
+      }
       if (status) {
         status.hidden = false;
         status.textContent = 'Sending your enquiry...';
@@ -72,10 +83,14 @@
         if (!response.ok || !result.ok) {
           throw new Error(result.error || 'The enquiry could not be sent.');
         }
-        track('salvation_enquiry_submit', {
-          source_page: sourcePage,
-          session_type: data.get('session_type') || '',
-        });
+        if (!payload.website && result.received !== false) {
+          track('salvation_enquiry_submit', {
+            source_page: sourcePage,
+            form_id: form.id || 'studio-enquiry-form',
+            session_type: data.get('session_type') || '',
+            event_id: result.submission_id || (window.crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
+          });
+        }
         form.reset();
         markFormStarted();
         if (status) status.textContent = form.dataset.successMessage || 'Thanks. Your enquiry has been sent to Salvation Studios.';
