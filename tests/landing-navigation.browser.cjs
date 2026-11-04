@@ -31,8 +31,20 @@ const out = '.qa/firefox-scroll-2026-11-04';fs.mkdirSync(out,{recursive:true});
     const links=[['.ss-landing-hero .btn-primary','enquiry'],['.ss-landing-hero .ss-landing-text-link','studio'],['.ss-landing-header .nav-cta','enquiry'],['.ss-landing-closing .btn-primary','enquiry']];
     if(width===1440)links.push(['.ss-landing-header a[href="#services"]','services'],['.ss-landing-header a[href="#studio"]','studio']);
     for(const [selector,id] of links){
+     // Finish the test driver's scroll-to-control before starting a native
+     // anchor scroll, especially when revisiting the same hash from the footer.
+     await page.locator(selector).scrollIntoViewIfNeeded();
+     await page.waitForTimeout(500);
      await page.locator(selector).click();
-     await page.waitForFunction(id=>{const r=document.getElementById(id).getBoundingClientRect();return location.hash==='#'+id&&r.height>0&&Math.abs(r.top-parseFloat(getComputedStyle(document.getElementById(id)).scrollMarginTop))<3&&r.bottom>80},id);
+     try {
+      await page.waitForFunction(id=>{
+       const element=document.getElementById(id),rect=element.getBoundingClientRect();
+       return location.hash==='#'+id&&rect.height>0&&Math.abs(rect.top-parseFloat(getComputedStyle(element).scrollMarginTop))<3&&rect.bottom>80;
+      },id,{timeout:6000});
+     } catch(error) {
+      const state=await page.evaluate(id=>({hash:location.hash,y:scrollY,top:document.getElementById(id).getBoundingClientRect().top,margin:getComputedStyle(document.getElementById(id)).scrollMarginTop}),id);
+      throw new Error(JSON.stringify({engine,width,filtered,selector,id,state}),{cause:error});
+     }
      assert.ok(await page.evaluate(()=>scrollY)>100);
     }
     await page.locator('.ss-landing-header .nav-cta').click();
