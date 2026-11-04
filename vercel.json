@@ -1104,6 +1104,33 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/google-ads",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/google-ads/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/google-ads.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "rewrites": [
@@ -1220,6 +1247,10 @@
     {
       "source": "/signature-sessions-sean-genockey/",
       "destination": "/signature-sessions-sean-genockey.html"
+    },
+    {
+      "source": "/google-ads/",
+      "destination": "/google-ads.html"
     }
   ]
 }

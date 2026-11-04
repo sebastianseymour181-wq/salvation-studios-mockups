@@ -58,6 +58,8 @@ NOINDEX_HTML = {
     "live-video-sessions.html",
     "full-package-competition.html",
     "signature-sessions-phill-brown.html",
+    "signature-sessions-sean-genockey.html",
+    "google-ads.html",
 }
 
 AD_NOINDEX_HTML = {
