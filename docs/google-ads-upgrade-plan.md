@@ -34,3 +34,11 @@ Website implementation is complete on the test alias: https://salvation-studios-
 ### Final review / production gate
 
 Review the landing page, cookie choices on the main site, and Sean Genockey Signature Sessions. The website event contract and remaining account-side trigger setup are in `docs/google-ads-measurement-handoff.md`. Ollie must configure/confirm the successful-enquiry conversion in GA4/Ads; a real coordinated enquiry receipt in email/Sheets and account reporting has not been tested. After this final review, promote the complete reviewed bundle using production configuration so the existing enquiry service retains its production credentials. No production promotion or message to Ollie has occurred in this task.
+
+## Firefox content visibility correction
+
+The reported missing content and dead anchors were reproduced in Firefox using the actual EasyList cosmetic selectors `.ads-header` and `.ads-section` (source: https://github.com/easylist/easylist/blob/master/easylist/easylist_general_hide.txt). Those names were mistakenly used for the page’s header and all six main content sections. With the selectors applied, Firefox reported zero visible sections and a document no taller than its viewport; the enquiry anchor changed the fragment but could not reveal a hidden target. A clean Firefox session did not exhibit that failure.
+
+The page’s layout classes and internal field IDs now use the specific `ss-landing-` namespace. Public fragment targets, the `google-ads-enquiry-form` measurement ID and existing analytics action values remain stable. The stylesheet URL has a new version to refresh cached styling. Tracking and consent behaviour are unchanged.
+
+`tests/landing-navigation.browser.cjs` exercises Firefox and Chromium at desktop/mobile widths, both with and without the matching EasyList rules, including wheel scrolling, visible content, settled anchor destinations and the privacy-page link. It tests the matching cosmetic rules directly; it does not inspect or modify the user’s Firefox profile or extensions.

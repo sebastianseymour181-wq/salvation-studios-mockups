@@ -18,7 +18,7 @@ const out = '.qa/firefox-scroll-2026-11-04';fs.mkdirSync(out,{recursive:true});
     const context=await browser.newContext({viewport:{width,height:1000}});
     if(base.startsWith('http://127.0.0.1')) await context.route('**/privacy/',r=>r.fulfill({status:200,contentType:'text/html',body:fs.readFileSync('privacy.html','utf8')}));
     const page=await context.newPage();await page.goto(base+target);
-    await page.getByRole('button',{name:'Reject optional',exact:true}).first().click();
+    await page.getByRole('button',{name:'Reject optional',exact:true}).first().click();await page.evaluate(()=>document.fonts.ready);
     if(filtered)await page.addStyleTag({content:'.ads-header, .ads-section {display:none!important;}'});
     assert.equal(await page.locator('.ss-landing-section:visible').count(),6);
     assert.equal(await page.locator('#enquiry').isVisible(),true);
@@ -32,14 +32,15 @@ const out = '.qa/firefox-scroll-2026-11-04';fs.mkdirSync(out,{recursive:true});
     if(width===1440)links.push(['.ss-landing-header a[href="#services"]','services'],['.ss-landing-header a[href="#studio"]','studio']);
     for(const [selector,id] of links){
      await page.locator(selector).click();
-     await page.waitForFunction(id=>{const r=document.getElementById(id).getBoundingClientRect();return location.hash==='#'+id&&r.height>0&&r.top<innerHeight&&r.bottom>80},id);
+     await page.waitForFunction(id=>{const r=document.getElementById(id).getBoundingClientRect();return location.hash==='#'+id&&r.height>0&&Math.abs(r.top-parseFloat(getComputedStyle(document.getElementById(id)).scrollMarginTop))<3&&r.bottom>80},id);
      assert.ok(await page.evaluate(()=>scrollY)>100);
     }
     await page.locator('.ss-landing-header .nav-cta').click();
-    await page.waitForFunction(()=>location.hash==='#enquiry'&&document.getElementById('enquiry').getBoundingClientRect().top<200);
+    await page.waitForFunction(()=>location.hash==='#enquiry'&&Math.abs(document.getElementById('enquiry').getBoundingClientRect().top-parseFloat(getComputedStyle(document.getElementById('enquiry')).scrollMarginTop))<3);
     if(engine==='firefox'&&filtered){
      await page.screenshot({path:out+'/after-firefox-'+width+'-enquiry.png'});
      await page.locator('.ss-landing-header a[href="#services"]').isVisible().then(async visible=>{if(visible)await page.locator('.ss-landing-header a[href="#services"]').click();else await page.evaluate(()=>document.getElementById('services').scrollIntoView())});
+     await page.waitForFunction(()=>Math.abs(document.getElementById('services').getBoundingClientRect().top-parseFloat(getComputedStyle(document.getElementById('services')).scrollMarginTop))<3);
      await page.locator('#services img').evaluateAll(es=>Promise.all(es.map(e=>e.decode().catch(()=>null))));
      await page.screenshot({path:out+'/after-firefox-'+width+'-services.png'});
     }
