@@ -17,3 +17,20 @@ Implement and review on the existing test alias first. Preserve Eliza’s suppli
 Use Google’s basic Consent Mode to block optional tracking before consent. Defaults are denied for analytics_storage, ad_storage, ad_user_data and ad_personalization, before the container can run. Ollie owns GA4/Ads IDs, tags and account-side conversion configuration. Website events identify enquiries, not confirmed bookings. The test-host API forwards to the established live enquiry handler; optional fields and attribution therefore travel in the existing message field for backward-compatible email/Sheets delivery.
 
 References: https://developers.google.com/tag-platform/security/concepts/consent-mode ; https://developers.google.com/tag-platform/security/guides/consent ; https://developers.google.com/tag-platform/security/guides/csp ; https://ico.org.uk/media2/about-the-ico/documents/4032419/cookie-letters-project-phase-2-template-letter.pdf
+
+## Executed and verified
+
+Website implementation is complete on the test alias: https://salvation-studios-mockups-three.vercel.app/google-ads/
+
+- Deployed source: `4435187ce57ca1f690ff29458321b4c4135d3576`.
+- Deployment: `dpl_Fs2PEpTDvRmtWZHKeTmo2D5hjFzp` (staging, READY).
+- Sitewide installation verified in Chromium on all 36 pages, with no pre-consent tracking requests. Static hygiene, gallery integrity and the four existing Node tests pass.
+- Fresh, reject, granular, remembered and withdrawn consent states pass browser checks. With real tags, Analytics-only creates `_ga` cookies without `_gcl_` advertising cookies. With full permission, GTM and GA4 scripts return HTTP 200; GA4 measurement endpoints return HTTP 204/200. The deployed security policy produces no blocked-resource events during this test.
+- All seven enquiry forms (landing page plus six existing forms/campaigns) pass intercepted-response tests: validation, error recovery, successful response, one canonical event, correct campaign package, and no form personal data in dataLayer. No real email/Sheet lead was sent.
+- Desktop/mobile widths 320, 375, 390, 768, 1024 and 1440 pass reflow/action checks. A native touch-input sequence scrolls the page. Cookie preferences close using Escape. The main enquiry now starts around 2,090px down at 1440px and 3,678px at 390px; the earlier draft was around 5,088px / 7,622px.
+- Eliza’s supplied paragraphs are retained. New planning and consent copy was supplied/reviewed by Terra on high reasoning. Genuine Phill Brown sound-focused excerpts appear early and in the testimonial section.
+- Both official domains were read back after the test deployment and retain `dpl_GkEs219MWCKPXc6xmevYYSHSGHvR`.
+
+### Final review / production gate
+
+Review the landing page, cookie choices on the main site, and Sean Genockey Signature Sessions. The website event contract and remaining account-side trigger setup are in `docs/google-ads-measurement-handoff.md`. Ollie must configure/confirm the successful-enquiry conversion in GA4/Ads; a real coordinated enquiry receipt in email/Sheets and account reporting has not been tested. After this final review, promote the complete reviewed bundle using production configuration so the existing enquiry service retains its production credentials. No production promotion or message to Ollie has occurred in this task.
