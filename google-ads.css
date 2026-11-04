@@ -16,7 +16,7 @@ html.ads-document body.ads-page { overflow: visible; height: auto; min-height: 1
 .ads-logo img { object-fit: contain; }
 .ads-header nav { display: flex; gap: 32px; align-items: center; }
 .ads-header nav a { text-decoration: none; font-size: 13px; }
-.ads-header .nav-cta { gap: 18px; color: #fff; min-height: 46px; }
+.ads-header .nav-cta { display: inline-flex; width: auto; gap: 18px; color: #fff; min-height: 46px; }
 .ads-header-link:hover { color: var(--glow); }
 .ads-hero { position: relative; min-height: 760px; display: grid; align-items: center; isolation: isolate; padding: 80px max(5vw, 24px) 96px; }
 .ads-hero-image { position: absolute; inset: 0; z-index: -2; pointer-events: none; }
