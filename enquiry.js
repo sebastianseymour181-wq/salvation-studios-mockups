@@ -64,8 +64,12 @@
       const campaignLines = Object.entries(attribution).map(([key, value]) => key + ': ' + value);
       if (campaignLines.length) extra.push('Campaign attribution (consented):\n' + campaignLines.join('\n'));
       if (extra.length) {
-        const suffix = '\n\n' + extra.join('\n');
-        payload.message = String(payload.message || '').slice(0, Math.max(0, 4000 - suffix.length)) + suffix;
+        // Preserve the visitor's message; add complete context blocks only when
+        // they fit the established email/Sheets limit, never cut their text.
+        payload.message = String(payload.message || '');
+        extra.forEach(block => {
+          if (payload.message.length + block.length + 2 <= 4000) payload.message += '\n\n' + block;
+        });
       }
       if (status) {
         status.hidden = false;

@@ -51,7 +51,7 @@ The site’s dataLayer allowlist excludes names, email addresses, phone numbers,
 
 Whitelisted `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content` are retained across pages only with Analytics permission. `gclid`, `gbraid`, `wbraid` are retained only with Advertising permission. They are held for the browsing session, with the landing pathname. No raw query string or referrer is copied to dataLayer.
 
-Consented attribution and optional room/support/duration answers are appended to the existing enquiry message. This is compatible with the existing email service, Sheets webhook and campaign tabs; no workbook schema change is required. No advertising identifiers are retained in our session storage or added to the enquiry when Advertising is off.
+Consented attribution and optional room/support/duration answers are appended as complete blocks to the existing enquiry message when they fit its established 4,000-character limit. The landing-page project field is limited to 3,000 characters to leave room for this context; unusually long existing-page messages are preserved rather than cut to make room for attribution. This is compatible with the existing email service, Sheets webhook and campaign tabs; no workbook schema change is required. No advertising identifiers are retained in our session storage or added to the enquiry when Advertising is off.
 
 ## Ollie’s account-side checks
 
