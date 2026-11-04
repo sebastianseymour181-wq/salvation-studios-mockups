@@ -1,4 +1,7 @@
 /* Google Ads draft: extends Salvation's shared palette, typography and buttons. */
+/* Keep one native document scroller; override shared root/body clipping. */
+html.ads-document { overflow-x: hidden; overflow-y: auto; height: auto; min-height: 100%; }
+html.ads-document body.ads-page { overflow: visible; height: auto; min-height: 100%; touch-action: auto; }
 .ads-page { color: #d4c4e5; font-size: 16px; line-height: 1.85; }
 .ads-page h1, .ads-page h2, .ads-page h3, .ads-quote blockquote { font-family: 'Cormorant Garamond', Georgia, serif; color: var(--white); font-weight: 400; }
 .ads-page h1 { font-size: clamp(64px, 6.7vw, 106px); line-height: .98; letter-spacing: -.035em; margin: 18px 0 28px; }
@@ -16,9 +19,9 @@
 .ads-header .nav-cta { gap: 18px; color: #fff; min-height: 46px; }
 .ads-header-link:hover { color: var(--glow); }
 .ads-hero { position: relative; min-height: 760px; display: grid; align-items: center; isolation: isolate; padding: 80px max(5vw, 24px) 96px; }
-.ads-hero-image { position: absolute; inset: 0; z-index: -2; }
+.ads-hero-image { position: absolute; inset: 0; z-index: -2; pointer-events: none; }
 .ads-hero-image img { object-position: 62% center; }
-.ads-hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(7,0,15,.95), rgba(7,0,15,.82) 36%, rgba(7,0,15,.14) 100%), linear-gradient(0deg, #07000f, transparent 30%); }
+.ads-hero::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, rgba(7,0,15,.95), rgba(7,0,15,.82) 36%, rgba(7,0,15,.14) 100%), linear-gradient(0deg, #07000f, transparent 30%); }
 .ads-hero-copy { max-width: 740px; }
 .ads-hero-copy > p { max-width: 590px; }
 .ads-lead { font-size: 21px; line-height: 1.6; color: #f0e5fc; }
