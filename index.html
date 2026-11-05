@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Sitewide Google Tag Manager GTM-TKKWMVXR: consent defaults run before the container. -->
-<script src="/site-consent.js?v=20261104" data-gtm-container="GTM-TKKWMVXR"></script>
+<script src="/site-consent.js?v=20261105-enquiry-context-v2" data-gtm-container="GTM-TKKWMVXR"></script>
 <link rel="stylesheet" href="/site-consent.css?v=20261104">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2268,13 +2268,13 @@ html      { scroll-behavior: auto; }
     </div>
     <form class="enquiry-form" id="enquiry-form" data-analytics="studio-enquiry-form">
       <div class="form-grid">
-        <div class="form-field"><label for="home_name">Name *</label><input id="home_name" name="name" autocomplete="name" required></div>
-        <div class="form-field"><label for="home_email">Email *</label><input id="home_email" name="email" type="email" autocomplete="email" required></div>
-        <div class="form-field"><label for="home_artist_company">Artist / company (optional)</label><input id="home_artist_company" name="artist_company" autocomplete="organization"></div>
-        <div class="form-field"><label for="home_phone">Phone (optional)</label><input id="home_phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="form-field"><label for="home_name">Name *</label><input id="home_name" name="name" autocomplete="name" required maxlength="120"></div>
+        <div class="form-field"><label for="home_email">Email *</label><input id="home_email" name="email" type="email" autocomplete="email" required maxlength="180"></div>
+        <div class="form-field"><label for="home_artist_company">Artist / company (optional)</label><input id="home_artist_company" name="artist_company" autocomplete="organization" maxlength="160"></div>
+        <div class="form-field"><label for="home_phone">Phone (optional)</label><input id="home_phone" name="phone" type="tel" autocomplete="tel" maxlength="80"></div>
         <div class="form-field"><label for="home_session_type">Session type *</label><select id="home_session_type" name="session_type" required><option value="">Choose one</option><option>Grassroots / emerging artist enquiry</option><option>Recording / tracking</option><option>Mixing</option><option>Mastering</option><option>Live Videos</option><option>Signature Sessions</option><option>Dry hire</option><option>Writing rooms / writing camp</option><option>Producer or engineer support</option><option>Other / not sure yet</option></select></div>
-        <div class="form-field"><label for="home_dates">Preferred dates (optional)</label><input id="home_dates" name="dates" placeholder="Dates, duration, flexibility"></div>
-        <div class="form-field full"><label for="home_message">Project details *</label><textarea id="home_message" name="message" required placeholder="Tell us about the artist, project, references, goals and any practical details."></textarea></div>
+        <div class="form-field"><label for="home_dates">Preferred dates (optional)</label><input id="home_dates" name="dates" placeholder="Dates, duration, flexibility" maxlength="180"></div>
+        <div class="form-field full"><label for="home_message">Project details *</label><textarea id="home_message" name="message" required placeholder="Tell us about the artist, project, references, goals and any practical details." maxlength="4000"></textarea></div>
         <input type="hidden" name="form_started_at" value="">
         <div class="form-field full" style="display:none"><label for="home_website">Website</label><input id="home_website" name="website" tabindex="-1" autocomplete="off"></div>
       </div>
@@ -2539,6 +2539,6 @@ if (gallerySection) {
   });
 }
 </script>
- <script src="/enquiry.js?v=20261104-measurement"></script>
+ <script src="/enquiry.js?v=20261105-enquiry-context-v2"></script>
 <script src="/search.js?v=20260625-mobile-nav-1" defer></script></body>
 </html>

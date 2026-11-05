@@ -1,6 +1,7 @@
 const { buildSheetPayload, postToSheet } = require('./enquiry-sheets');
+const { contextText } = require('./enquiry-context');
 
-const MAX_BODY_BYTES = 12000;
+const MAX_BODY_BYTES = 32768;
 const MIN_FORM_AGE_MS = 3000;
 const MAX_FORM_AGE_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_TO_EMAIL = 'info@salvationstudios.co.uk';
@@ -8,7 +9,7 @@ const DEFAULT_TO_EMAIL = 'info@salvationstudios.co.uk';
 function readBody(req) {
   return new Promise((resolve, reject) => {
     let total = 0;
-    let body = '';
+    const chunks = [];
 
     req.on('data', chunk => {
       total += chunk.length;
@@ -17,9 +18,9 @@ function readBody(req) {
         req.destroy();
         return;
       }
-      body += chunk.toString('utf8');
+      chunks.push(Buffer.from(chunk));
     });
-    req.on('end', () => resolve(body));
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
     req.on('error', reject);
   });
 }
@@ -58,7 +59,7 @@ function hasHumanFormTiming(value) {
 }
 
 function escapeHtml(value) {
-  return clean(value, 4000)
+  return clean(value, 8000)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -183,6 +184,12 @@ module.exports = async function handler(req, res) {
       return;
     }
 
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+      res.statusCode = 400;
+      res.end(JSON.stringify({ ok: false, error: 'Invalid enquiry payload.' }));
+      return;
+    }
+
     if (clean(payload.website, 200)) {
       res.statusCode = 200;
       res.end(JSON.stringify({ ok: true }));
@@ -192,6 +199,14 @@ module.exports = async function handler(req, res) {
     if (!hasHumanFormTiming(payload.form_started_at)) {
       res.statusCode = 400;
       res.end(JSON.stringify({ ok: false, error: 'Please wait a moment and try again.' }));
+      return;
+    }
+
+    const limits = { name: 120, artist_company: 160, instagram: 120, email: 180, phone: 80, session_type: 120, dates: 180, message: 4000, source_page: 300, preferred_room: 160, engineering_support: 160, duration: 160 };
+    const oversized = Object.entries(limits).find(([key, max]) => String(payload[key] || '').replace(/\r/g, '').trim().length > max);
+    if (oversized) {
+      res.statusCode = 400;
+      res.end(JSON.stringify({ ok: false, error: 'Please shorten ' + oversized[0].replace(/_/g, ' ') + ' to ' + oversized[1] + ' characters or fewer.' }));
       return;
     }
 
@@ -227,6 +242,8 @@ module.exports = async function handler(req, res) {
       return;
     }
 
+    const context = payload.context_version === 2 ? contextText(payload) : '';
+    if (context) enquiry.message = [enquiry.message, context].filter(Boolean).join('\n\n');
     await sendWithResend(enquiry);
     try {
       await postToSheet(buildSheetPayload({

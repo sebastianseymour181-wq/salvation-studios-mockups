@@ -36,10 +36,14 @@
   let campaign = read(sessionStorage, ATTR) || {};
   function updateCampaign() {
     const permitted = [...(state.analytics ? campaignKeys : []), ...(state.advertising ? adKeys : [])];
+    // Last tagged arrival wins as one record. Never pair a new campaign with
+    // an old click ID (or an old landing page). Untagged navigation retains it.
+    const taggedArrival = Object.keys(incoming).length > 0;
+    const source = taggedArrival ? incoming : campaign;
     const next = {};
-    permitted.forEach(key => { const value = clean(incoming[key] || campaign[key], adKeys.includes(key)); if (value) next[key] = value; });
+    permitted.forEach(key => { const value = clean(source[key], adKeys.includes(key)); if (value) next[key] = value; });
     if (Object.keys(next).length) {
-      next.landing_page = campaign.landing_page || location.pathname;
+      next.landing_page = taggedArrival ? location.pathname : (campaign.landing_page || location.pathname);
       campaign = next;
       write(sessionStorage, ATTR, next);
     } else { campaign = {}; remove(sessionStorage, ATTR); }
@@ -93,12 +97,13 @@
     getAttribution: () => ({ ...campaign }),
     openPreferences: () => { if (dialog) openPreferences(); },
     track: (event, fields = {}) => {
-      if (!state.analytics && !state.advertising) return;
+      if (!state.analytics && !state.advertising) return false;
       // Only controlled, non-personal fields may cross into GTM.
       const allowed = ['source_page', 'form_id', 'session_type', 'event_id', 'target'];
       const detail = {};
       allowed.forEach(key => { if (typeof fields[key] === 'string') detail[key] = fields[key].slice(0, 300); });
       window.dataLayer.push({ event, ...detail, site_environment: environment });
+      return true;
     },
   };
   updateCampaign();

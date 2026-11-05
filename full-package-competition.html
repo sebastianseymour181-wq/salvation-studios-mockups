@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Sitewide Google Tag Manager GTM-TKKWMVXR: consent defaults run before the container. -->
-<script src="/site-consent.js?v=20261104" data-gtm-container="GTM-TKKWMVXR"></script>
+<script src="/site-consent.js?v=20261105-enquiry-context-v2" data-gtm-container="GTM-TKKWMVXR"></script>
 <link rel="stylesheet" href="/site-consent.css?v=20261104">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,12 +94,12 @@
     </div>
     <form class="enquiry-form" id="competition-entry-form" data-analytics="competition-entry-form" data-success-message="Thanks. Your competition entry has been received.">
       <div class="form-grid">
-        <div class="form-field"><label for="competition_name">Name *</label><input id="competition_name" name="name" autocomplete="name" required></div>
-        <div class="form-field"><label for="competition_email">Email *</label><input id="competition_email" name="email" type="email" autocomplete="email" required></div>
-        <div class="form-field"><label for="competition_phone">Phone number *</label><input id="competition_phone" name="phone" type="tel" autocomplete="tel" required></div>
-        <div class="form-field"><label for="competition_instagram">Instagram @</label><input id="competition_instagram" name="instagram" autocomplete="username"></div>
-        <div class="form-field full"><label for="competition_artist">Artist or band name *</label><input id="competition_artist" name="artist_company" autocomplete="organization" required></div>
-        <div class="form-field full"><label for="competition_song">link to previous releases/demos</label><textarea id="competition_song" name="message"></textarea></div>
+        <div class="form-field"><label for="competition_name">Name *</label><input id="competition_name" name="name" autocomplete="name" required maxlength="120"></div>
+        <div class="form-field"><label for="competition_email">Email *</label><input id="competition_email" name="email" type="email" autocomplete="email" required maxlength="180"></div>
+        <div class="form-field"><label for="competition_phone">Phone number *</label><input id="competition_phone" name="phone" type="tel" autocomplete="tel" required maxlength="80"></div>
+        <div class="form-field"><label for="competition_instagram">Instagram @</label><input id="competition_instagram" name="instagram" autocomplete="username" maxlength="120"></div>
+        <div class="form-field full"><label for="competition_artist">Artist or band name *</label><input id="competition_artist" name="artist_company" autocomplete="organization" required maxlength="160"></div>
+        <div class="form-field full"><label for="competition_song">link to previous releases/demos</label><textarea id="competition_song" name="message" maxlength="4000"></textarea></div>
         <input type="hidden" name="session_type" value="Full Package Competition">
         <input type="hidden" name="form_started_at" value="">
         <div class="form-field full" hidden><label for="competition_website">Website</label><input id="competition_website" name="website" tabindex="-1" autocomplete="off"></div>
@@ -123,6 +123,6 @@
   </div>
 </footer>
 
-<script src="/enquiry.js?v=20261104-measurement"></script>
+<script src="/enquiry.js?v=20261105-enquiry-context-v2"></script>
 </body>
 </html>

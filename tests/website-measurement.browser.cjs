@@ -38,7 +38,7 @@ const results = [];
   await p.goto(base+'/about.html');assert.equal(await p.locator('.ss-cookie-banner').isVisible(),false);assert.equal((await p.evaluate(()=>SalvationConsent.getAttribution())).utm_campaign,'QA_november');
   await c.close(); results.push('Fresh/reject/granular/persistence: PASS');
 
-  // Full acceptance, backward-compatible lead metadata, canonical success event, no PII.
+  // Full acceptance, structured lead metadata, canonical success event, no PII.
   ({c,p,requests}=await context());
   await p.goto(base+'/google-ads.html?utm_source=google&utm_campaign=QA_november&gclid=QA_123');
   await p.getByRole('button',{name:'Accept all',exact:true}).click();
@@ -52,7 +52,7 @@ const results = [];
   await p.unroute('**/api/enquiry');await p.route('**/api/enquiry',route=>route.fulfill({status:200,contentType:'application/json',body:'{"ok":true}'}));
   await p.locator('button[type=submit]').click();await p.locator('.form-status').filter({hasText:'Thanks.'}).waitFor();
   let lead=(await events(p)).filter(x=>x.event==='salvation_enquiry_submit');assert.equal(lead.length,1);assert.equal(lead[0].site_environment,'test');assert.equal(lead[0].form_id,'google-ads-enquiry-form');assert.ok(lead[0].event_id);
-  assert.match(payload.message,/Preferred room: Main studio/);assert.match(payload.message,/Approximate duration: Two days/);assert.match(payload.message,/utm_campaign: QA_november/);assert.match(payload.message,/gclid: QA_123/);
+  assert.equal(payload.message,'QA project text must never enter dataLayer.');assert.equal(payload.context_version,2);assert.equal(payload.preferred_room,'Main studio');assert.equal(payload.duration,'Two days');assert.equal(payload.attribution.utm_campaign,'QA_november');assert.equal(payload.attribution.gclid,'QA_123');
   const layer=await p.evaluate(()=>JSON.stringify(dataLayer));for(const value of ['QA Person Not Sent','qa-person@example.invalid','QA project text'])assert.equal(layer.includes(value),false);
   await p.screenshot({path:out+'/02-enquiry-success-mocked.png'});
   // Withdrawal is persisted before a reload, clears accessible first-party cookies and stops new GTM loads.
@@ -79,7 +79,7 @@ const results = [];
    ({c,p}=await context({viewport:{width,height:844},isMobile:width<760,hasTouch:width<760}));await p.goto(base+'/google-ads.html');await p.evaluate(()=>document.fonts.ready);
    if(width===390)await p.screenshot({path:out+'/03-mobile-cookie-banner.png'});
    await p.getByRole('button',{name:'Reject optional',exact:true}).first().click();
-   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth),width);assert.equal(await p.locator('.ss-landing-header .nav-cta').isVisible(),true);
+   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth),width);assert.equal(await p.locator('.ss-landing-header .nav-cta').isVisible(),true);assert.equal(await p.locator('.ss-landing-contact a[href^="mailto:"]').isVisible(),true);assert.equal(await p.locator('.ss-landing-contact a[href^="tel:"]').isVisible(),true);
    if(width===390){const cd=await c.newCDPSession(p);await cd.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:190,y:700}]});for(let y=680;y>=220;y-=20){await cd.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:190,y}]});await p.waitForTimeout(16)}await cd.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(300);assert.ok(await p.evaluate(()=>scrollY)>0);}
    await p.locator('.ss-landing-header .nav-cta').click();await p.waitForTimeout(500);assert.equal(await p.evaluate(()=>location.hash),'#enquiry');
    if(width===390){await p.evaluate(()=>scrollTo(0,0));await p.waitForTimeout(500);await p.locator('.ss-landing-hero-image img').evaluate(e=>e.decode());await p.screenshot({path:out+'/04-mobile-hero.png'});await p.getByRole('button',{name:'Cookie settings',exact:true}).click();await p.screenshot({path:out+'/05-mobile-preferences.png'});}

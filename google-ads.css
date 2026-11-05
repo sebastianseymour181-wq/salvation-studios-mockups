@@ -103,6 +103,28 @@ html.ss-landing-document body.ss-landing-page { overflow: visible; height: auto;
 .ss-landing-testimonials .ss-landing-section-heading{margin-bottom:28px}.ss-landing-quote{padding-top:20px}.ss-landing-quote blockquote{font-size:27px;line-height:1.4}
 .ss-landing-enquiry .ss-landing-contact{margin-top:20px}.ss-landing-enquiry .ss-landing-lead{font-size:19px}
 @media(max-width:980px){.ss-landing-service{grid-template-columns:1fr}.ss-landing-service>img{height:180px;min-height:0}.ss-landing-intro-photo{height:430px}.ss-landing-planning-grid{gap:20px}}
-@media(max-width:760px){.ss-landing-header{padding:8px 20px}.ss-landing-hero{padding:100px 24px 40px;min-height:auto}.ss-landing-hero-image{height:330px}.ss-landing-hero-image img{object-position:center 67%}.ss-landing-hero::before{background:linear-gradient(0deg,#07000f 0%,#07000f 45%,rgba(7,0,15,.8) 68%,rgba(7,0,15,.3) 100%)}.ss-landing-page h1{font-size:clamp(44px,11.5vw,62px);margin-top:12px;margin-bottom:22px}.ss-landing-hero-copy>.label{margin-bottom:10px}.ss-landing-hero-copy>p{line-height:1.7}.ss-landing-actions{margin-top:24px;gap:5px}.ss-landing-early-proof{margin-top:24px}.ss-landing-early-proof blockquote{font-size:21px}.ss-landing-section{padding:44px 24px;scroll-margin-top:88px}.ss-landing-page h2{font-size:40px;margin-bottom:22px}.ss-landing-intro-grid,.ss-landing-spaces-grid{gap:24px}.ss-landing-intro-photo{height:260px}.ss-landing-pillars{margin-top:28px;gap:22px}.ss-landing-pillars h3{font-size:25px;margin-bottom:8px}.ss-landing-planning-grid{grid-template-columns:1fr;gap:18px}.ss-landing-planning{padding:22px 0;margin:24px 0}.ss-landing-planning h3{font-size:29px}.ss-landing-service{grid-template-columns:1fr}.ss-landing-service>img{height:170px}.ss-landing-service>div{padding:20px}.ss-landing-service-grid{gap:18px}.ss-landing-service h3{font-size:27px}.ss-landing-space-photos img:first-child{height:240px}.ss-landing-space-photos img:last-child{height:170px;margin-top:-55px}.ss-landing-quotes{gap:20px}.ss-landing-quote blockquote{font-size:25px}.ss-landing-enquiry-copy .ss-landing-contact{display:none}.ss-landing-enquiry-grid{gap:24px}.ss-landing-enquiry .enquiry-form{padding:20px}.ss-landing-enquiry .ss-landing-lead{font-size:18px}.ss-landing-closing .label{margin-bottom:16px}}
+@media(max-width:760px){.ss-landing-header{padding:8px 20px}.ss-landing-hero{padding:100px 24px 40px;min-height:auto}.ss-landing-hero-image{height:330px}.ss-landing-hero-image img{object-position:center 67%}.ss-landing-hero::before{background:linear-gradient(0deg,#07000f 0%,#07000f 45%,rgba(7,0,15,.8) 68%,rgba(7,0,15,.3) 100%)}.ss-landing-page h1{font-size:clamp(44px,11.5vw,62px);margin-top:12px;margin-bottom:22px}.ss-landing-hero-copy>.label{margin-bottom:10px}.ss-landing-hero-copy>p{line-height:1.7}.ss-landing-actions{margin-top:24px;gap:5px}.ss-landing-early-proof{margin-top:24px}.ss-landing-early-proof blockquote{font-size:21px}.ss-landing-section{padding:44px 24px;scroll-margin-top:88px}.ss-landing-page h2{font-size:40px;margin-bottom:22px}.ss-landing-intro-grid,.ss-landing-spaces-grid{gap:24px}.ss-landing-intro-photo{height:260px}.ss-landing-pillars{margin-top:28px;gap:22px}.ss-landing-pillars h3{font-size:25px;margin-bottom:8px}.ss-landing-planning-grid{grid-template-columns:1fr;gap:18px}.ss-landing-planning{padding:22px 0;margin:24px 0}.ss-landing-planning h3{font-size:29px}.ss-landing-service{grid-template-columns:1fr}.ss-landing-service>img{height:170px}.ss-landing-service>div{padding:20px}.ss-landing-service-grid{gap:18px}.ss-landing-service h3{font-size:27px}.ss-landing-space-photos img:first-child{height:240px}.ss-landing-space-photos img:last-child{height:170px;margin-top:-55px}.ss-landing-quotes{gap:20px}.ss-landing-quote blockquote{font-size:25px}.ss-landing-enquiry-copy .ss-landing-contact{display:grid}.ss-landing-enquiry-grid{gap:24px}.ss-landing-enquiry .enquiry-form{padding:20px}.ss-landing-enquiry .ss-landing-lead{font-size:18px}.ss-landing-closing .label{margin-bottom:16px}}
 
 @media(max-width:760px){.ss-landing-hero-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#07000f 100%);pointer-events:none}}
+
+/* Enquiry clarity: visible contacts, distinct fields and authentic studio photography. */
+.ss-landing-enquiry .form-field input,
+.ss-landing-enquiry .form-field select,
+.ss-landing-enquiry .form-field textarea {
+  border-color: #9174aa;
+  background: #0b0314;
+}
+.ss-landing-enquiry .form-field input::placeholder,
+.ss-landing-enquiry .form-field textarea::placeholder { color: #baa7ca; opacity: 1; }
+.ss-landing-enquiry .form-field small { line-height: 1.6; }
+.ss-landing-contact a { display: inline-flex; align-items: center; min-height: 44px; width: fit-content; }
+.ss-landing-noscript { padding: 18px 0; color: #f0e5fc; }
+.ss-landing-noscript a { text-underline-offset: 4px; }
+@media (max-width: 760px) {
+  .ss-landing-hero { padding: 0 0 40px; }
+  .ss-landing-hero-image { position: relative; inset: auto; z-index: 0; display: block; height: clamp(210px, 60vw, 340px); }
+  .ss-landing-hero-image img { object-position: center 56%; }
+  .ss-landing-hero::before { display: none; }
+  .ss-landing-hero-image::after { background: linear-gradient(180deg, transparent 65%, #07000f 100%); }
+  .ss-landing-hero-copy { padding: 12px 24px 0; }
+}

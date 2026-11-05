@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Sitewide Google Tag Manager GTM-TKKWMVXR: consent defaults run before the container. -->
-<script src="/site-consent.js?v=20261104" data-gtm-container="GTM-TKKWMVXR"></script>
+<script src="/site-consent.js?v=20261105-enquiry-context-v2" data-gtm-container="GTM-TKKWMVXR"></script>
 <link rel="stylesheet" href="/site-consent.css?v=20261104">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -146,10 +146,10 @@
       <div class="form-grid">
         <div class="form-field"><label for="sean_first_name">First name *</label><input id="sean_first_name" name="first_name" autocomplete="given-name" required></div>
         <div class="form-field"><label for="sean_last_name">Last name *</label><input id="sean_last_name" name="last_name" autocomplete="family-name" required></div>
-        <div class="form-field"><label for="sean_email">Email *</label><input id="sean_email" name="email" type="email" autocomplete="email" required></div>
-        <div class="form-field"><label for="sean_phone">Phone *</label><input id="sean_phone" name="phone" type="tel" autocomplete="tel" required></div>
-        <div class="form-field"><label for="sean_instagram">Instagram handle *</label><input id="sean_instagram" name="instagram" autocomplete="username" required></div>
-        <div class="form-field"><label for="sean_artist">Artist or band name *</label><input id="sean_artist" name="artist_company" autocomplete="organization" required></div>
+        <div class="form-field"><label for="sean_email">Email *</label><input id="sean_email" name="email" type="email" autocomplete="email" required maxlength="180"></div>
+        <div class="form-field"><label for="sean_phone">Phone *</label><input id="sean_phone" name="phone" type="tel" autocomplete="tel" required maxlength="80"></div>
+        <div class="form-field"><label for="sean_instagram">Instagram handle *</label><input id="sean_instagram" name="instagram" autocomplete="username" required maxlength="120"></div>
+        <div class="form-field"><label for="sean_artist">Artist or band name *</label><input id="sean_artist" name="artist_company" autocomplete="organization" required maxlength="160"></div>
         <fieldset class="phill-package-choice form-field full">
           <legend>What package are you interested in? *</legend>
           <label><input type="radio" name="package_interest" value="Single package" required><span>Single package</span></label>
@@ -208,6 +208,6 @@
   });
 })();
 </script>
-<script src="/enquiry.js?v=20261104-measurement"></script>
+<script src="/enquiry.js?v=20261105-enquiry-context-v2"></script>
 </body>
 </html>

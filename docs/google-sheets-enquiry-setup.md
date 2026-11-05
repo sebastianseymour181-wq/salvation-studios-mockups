@@ -17,7 +17,7 @@ Charlie should do these steps from the Google account that owns the sheet:
    - `ENQUIRY_SHEETS_WEBHOOK_URL` — the Apps Script `/exec` URL
    - `ENQUIRY_SHEETS_SECRET` — the Script property value
 
-6. Redeploy the site and submit one labelled test enquiry. Confirm the email and one new row. Submitting the same request twice is idempotent by `Submission ID`.
+6. Redeploy the site and submit one labelled test enquiry. Confirm the email and one new row. Webhook retries with the same `Submission ID` are deduplicated. A second browser submission currently receives a new ID and can create another email and row; do not automatically retry an uncertain response.
 
 The web app must execute as the sheet owner so the script can append rows without
 giving the website or visitors direct access to the workbook. Apps Script web apps

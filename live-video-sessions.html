@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Sitewide Google Tag Manager GTM-TKKWMVXR: consent defaults run before the container. -->
-<script src="/site-consent.js?v=20261104" data-gtm-container="GTM-TKKWMVXR"></script>
+<script src="/site-consent.js?v=20261105-enquiry-context-v2" data-gtm-container="GTM-TKKWMVXR"></script>
 <link rel="stylesheet" href="/site-consent.css?v=20261104">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,11 +64,11 @@
     </div>
     <form class="enquiry-form" id="live-video-enquiry-form" data-analytics="live-video-enquiry-form" data-success-message="We'll be in touch soon!">
       <div class="form-grid">
-        <div class="form-field"><label for="live_name">Name *</label><input id="live_name" name="name" autocomplete="name" required></div>
-        <div class="form-field"><label for="live_email">Email *</label><input id="live_email" name="email" type="email" autocomplete="email" required></div>
-        <div class="form-field"><label for="live_phone">Phone number</label><input id="live_phone" name="phone" type="tel" autocomplete="tel"></div>
-        <div class="form-field"><label for="live_artist">Band / artist name</label><input id="live_artist" name="artist_company" autocomplete="organization"></div>
-        <div class="form-field full"><label for="live_tracks">How many tracks would you like to capture? *</label><input id="live_tracks" name="message" inputmode="numeric" required></div>
+        <div class="form-field"><label for="live_name">Name *</label><input id="live_name" name="name" autocomplete="name" required maxlength="120"></div>
+        <div class="form-field"><label for="live_email">Email *</label><input id="live_email" name="email" type="email" autocomplete="email" required maxlength="180"></div>
+        <div class="form-field"><label for="live_phone">Phone number</label><input id="live_phone" name="phone" type="tel" autocomplete="tel" maxlength="80"></div>
+        <div class="form-field"><label for="live_artist">Band / artist name</label><input id="live_artist" name="artist_company" autocomplete="organization" maxlength="160"></div>
+        <div class="form-field full"><label for="live_tracks">How many tracks would you like to capture? *</label><input id="live_tracks" name="message" inputmode="numeric" required maxlength="4000"></div>
         <input type="hidden" name="session_type" value="Live Video Sessions">
         <input type="hidden" name="form_started_at" value="">
         <div class="form-field full" hidden><label for="live_website">Website</label><input id="live_website" name="website" tabindex="-1" autocomplete="off"></div>
@@ -92,6 +92,6 @@
   </div>
 </footer>
 
-<script src="/enquiry.js?v=20261104-measurement"></script>
+<script src="/enquiry.js?v=20261105-enquiry-context-v2"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 # Google Ads / GTM website handoff for Ollie
 
+> **Unreleased 5 November update:** new structured enquiry context requires the matching API and updated Apps Script before publishing the frontend. See [implementation and release gate](enquiry-improvements-2026-11-05.md). Earlier deployed-message-budget notes below describe the previous release.
+
 ## Installation
 
 Container: **GTM-TKKWMVXR**. The synchronous `/site-consent.js` entrypoint is the first script on all 36 static HTML pages, including the homepage, service/room pages, Google Ads landing page and Sean/Phill Signature Sessions pages. `tools/install_site_tracking.py` makes installation repeatable; the site hygiene check prevents untagged new pages.
