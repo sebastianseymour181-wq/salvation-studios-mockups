@@ -1,6 +1,6 @@
 # Google Ads / GTM website handoff for Ollie
 
-> **Unreleased 5 November update:** new structured enquiry context requires the matching API and updated Apps Script before publishing the frontend. See [implementation and release gate](enquiry-improvements-2026-11-05.md). Earlier deployed-message-budget notes below describe the previous release.
+> **5 November implementation update:** the revised frontend keeps complete message/context within the unchanged API/Sheet limits and stops oversized enquiries before sending. See [implementation and release status](enquiry-improvements-2026-11-05.md). Earlier deployed-message-budget notes below describe the previous release.
 
 ## Installation
 

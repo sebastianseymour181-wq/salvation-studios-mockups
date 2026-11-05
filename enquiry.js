@@ -14,6 +14,14 @@
     });
   });
 
+  function enquiryContext(payload) {
+    const blocks = [];
+    bookingFields.forEach(([key, label]) => { if (payload[key]) blocks.push(label + ': ' + payload[key]); });
+    const campaign = Object.entries(payload.attribution || {}).map(([key, value]) => key + ': ' + value);
+    if (campaign.length) blocks.push('Campaign attribution (consented):\n' + campaign.join('\n'));
+    return blocks;
+  }
+
   function enquiryText(payload) {
     const lines = [
       'Name: ' + (payload.name || ''),
@@ -26,9 +34,7 @@
       'Source page: ' + (payload.source_page || ''),
       '', 'Additional session details:', payload.message || '',
     ];
-    bookingFields.forEach(([key, label]) => { if (payload[key]) lines.push('', label + ': ' + payload[key]); });
-    const campaign = Object.entries(payload.attribution || {}).map(([key, value]) => key + ': ' + value);
-    if (campaign.length) lines.push('', 'Campaign attribution (consented):', ...campaign);
+    enquiryContext(payload).forEach(block => lines.push('', block));
     return lines.join('\n');
   }
 
@@ -89,11 +95,30 @@
         if (field && field.focus) field.focus();
         return;
       }
-      // Keep the project message intact. Context is validated separately by the
-      // matching server version, and is also used by the manual email fallback.
+      // The deployed API and Sheet accept 4,000 characters in total. Preserve
+      // every detail or reject before sending; never silently omit context.
       payload.attribution = window.SalvationConsent ? window.SalvationConsent.getAttribution() : {};
       payload.attribution_consent = window.SalvationConsent ? window.SalvationConsent.getState() : { analytics: false, advertising: false };
-      payload.context_version = 2;
+      const fallbackPayload = { ...payload };
+      const combinedMessage = [String(payload.message || '').replace(/\r/g, '').trim(), ...enquiryContext(payload)].filter(Boolean).join('\n\n');
+      if (combinedMessage.length > 4000) {
+        if (status) { status.hidden = false; status.textContent = 'To include all your session and campaign details, please shorten your project or optional session details by ' + (combinedMessage.length - 4000) + ' characters. Nothing has been sent and your details have been kept.'; }
+        showFallback(fallbackPayload);
+        const messageField = form.elements.namedItem('message');
+        if (messageField && messageField.focus) messageField.focus();
+        return;
+      }
+      payload.message = combinedMessage;
+      // Send only fields understood by the established endpoint. This avoids
+      // duplicating private details/context and respects its 12,000-byte cap.
+      const wirePayload = {};
+      ['name', 'artist_company', 'instagram', 'email', 'phone', 'session_type', 'dates', 'message', 'source_page', 'form_started_at', 'website'].forEach(key => { if (payload[key] !== undefined) wirePayload[key] = payload[key]; });
+      const body = JSON.stringify(wirePayload);
+      if (new TextEncoder().encode(body).length > 12000) {
+        if (status) { status.hidden = false; status.textContent = 'This enquiry exceeds the delivery size limit. Please shorten your project or optional session details. Nothing has been sent and your details have been kept.'; }
+        showFallback(fallbackPayload);
+        return;
+      }
       if (status) { status.hidden = false; status.textContent = 'Sending your enquiry...'; }
       pending = true;
       if (submit) submit.disabled = true;
@@ -103,7 +128,7 @@
       try {
         const response = await fetch('/api/enquiry', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload), signal: controller.signal,
+          body, signal: controller.signal,
         });
         const result = await response.json().catch(error => { if (timedOut) throw error; return {}; });
         if (!response.ok || !result.ok) throw new Error(result.error || 'We could not confirm delivery. Please check with the studio before resending.');
@@ -128,7 +153,7 @@
                 ? 'Direct delivery is unavailable. Your details have been kept. You can open an email draft below.'
                 : error.message || 'We could not confirm delivery. Please check with the studio before resending.';
         }
-        showFallback(payload);
+        showFallback(fallbackPayload);
       } finally {
         clearTimeout(timeout);
         pending = false;

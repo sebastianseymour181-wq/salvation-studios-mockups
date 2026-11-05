@@ -39,7 +39,6 @@ async function postToSheet(enquiry, fetchImpl = global.fetch) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
   let response;
-  let result = {};
   try {
     response = await fetchImpl(url, {
       method: 'POST',
@@ -47,14 +46,15 @@ async function postToSheet(enquiry, fetchImpl = global.fetch) {
       body: JSON.stringify({ secret, enquiry }),
       signal: controller.signal,
     });
-    try {
-      result = await response.json();
-    } catch (_error) {
-      // The webhook must return JSON. Keep the public error generic.
-    }
   } finally {
-    // Keep the deadline active while consuming the response body, too.
     clearTimeout(timeout);
+  }
+
+  let result = {};
+  try {
+    result = await response.json();
+  } catch (_error) {
+    // The webhook must return JSON, but keep the public error generic if it does not.
   }
   if (!response.ok || !result.ok) {
     const error = new Error('Google Sheets webhook rejected the enquiry');

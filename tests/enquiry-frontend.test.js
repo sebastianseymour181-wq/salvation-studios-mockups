@@ -42,7 +42,7 @@ function harness(options = {}) {
   const window = { location, addEventListener() {}, crypto: { randomUUID: () => 'safe-event-id' } };
   const calls = [], timers = new Map(), controllers = [];
   const context = {
-    window, document, location, URLSearchParams, Date, crypto: window.crypto,
+    window, document, location, URLSearchParams, Date, TextEncoder, crypto: window.crypto,
     localStorage: storage(options.consent === false ? {} : { salvation_cookie_preferences_v1: JSON.stringify({ version: 1, analytics: true, advertising: true, updatedAt: Date.now() }) }), sessionStorage: storage(),
     FormData: class { entries() { return Object.entries({ ...values, form_started_at: startedAt.value }); } get(key) { return values[key]; } },
     AbortController: class { constructor() { this.signal = { aborted: false }; controllers.push(this); } abort() { this.signal.aborted = true; this.signal.onabort?.(); } },
@@ -87,22 +87,52 @@ for (const [name, options] of [
   assert.equal(h.events('salvation_enquiry_submit').length, 0);
 });
 
-test('full 4000-character message stays intact alongside structured optional context and attribution', async () => {
+test('4000-character message without optional context or attribution is accepted intact', async () => {
   const message = 'x'.repeat(3998) + '\nZ';
+  const h = harness({ consent: false, values: { message } });
+  await h.submit();
+  assert.equal(h.calls.length, 1);
+  assert.equal(h.calls[0].payload.message, message);
+  assert.equal(h.calls[0].payload.context_version, undefined);
+  assert.equal(h.values.message, message);
+});
+
+test('legacy message includes full optional context and consented attribution exactly once within limit', async () => {
+  const message = 'Project line one\nProject line two';
   const h = harness({ values: { message, preferred_room: 'Studio One', engineering_support: 'Engineer needed', duration: 'Two days' } });
   await h.submit();
   assert.equal(h.calls.length, 1);
   const payload = h.calls[0].payload;
-  assert.equal(payload.message, message);
-  for (const key of ['preferred_room', 'engineering_support', 'duration']) assert.equal(payload[key], h.values[key]);
-  assert.deepEqual(payload.attribution, { utm_source: 'google', utm_campaign: 'studio', gclid: 'CLICK', landing_page: '/google-ads/' });
-  assert.deepEqual(payload.attribution_consent, { analytics: true, advertising: true });
-  assert.equal(payload.context_version, 2);
+  assert.ok(payload.message.length <= 4000);
+  for (const value of [message, 'Preferred room: Studio One', 'Engineer or support required: Engineer needed', 'Approximate duration: Two days', 'utm_source: google', 'utm_campaign: studio', 'gclid: CLICK', 'landing_page: /google-ads/']) assert.equal(payload.message.split(value).length - 1, 1, value);
+  assert.deepEqual(Object.keys(payload).sort(), ['name', 'artist_company', 'instagram', 'email', 'phone', 'session_type', 'dates', 'message', 'source_page', 'form_started_at', 'website'].sort());
+  assert.equal(payload.context_version, undefined);
   assert.equal(payload.source_page, '/google-ads/');
+  assert.equal(h.values.message, message, 'form input must remain untouched');
+});
+
+test('combined message overflow requests the exact reduction, preserves every field and sends nothing', async () => {
+  const context = { preferred_room: 'Studio One', engineering_support: 'Engineer needed', duration: 'Two days' };
+  const short = harness({ values: { ...context, message: 'X' } });
+  await short.submit();
+  const overhead = short.calls[0].payload.message.length - 1;
+  assert.ok(overhead > 0);
+  const message = 'x'.repeat(4000);
+  const h = harness({ values: { ...context, message } });
+  const before = { ...h.values };
+  await h.submit();
+  assert.equal(h.calls.length, 0);
+  assert.deepEqual(h.values, before);
+  assert.equal(h.form.resetCount, 0);
+  assert.equal(h.timers.size, 0);
+  assert.match(h.status.textContent, /shorten/i);
+  assert.match(h.status.textContent, new RegExp('\\b' + overhead + '\\b'));
+  assert.equal(h.fields.message.focused, true);
+  assert.equal(h.events('salvation_enquiry_submit').length, 0);
 });
 
 test('failure offers explicit email draft and complete copyable context without navigation or losing values', async () => {
-  const h = harness({ httpOk: false, result: { ok: false, error: 'Email delivery is not configured yet.' }, values: { preferred_room: 'Studio One', engineering_support: 'Engineer needed', duration: 'Two days', message: 'x'.repeat(4000) } });
+  const h = harness({ httpOk: false, result: { ok: false, error: 'Email delivery is not configured yet.' }, values: { preferred_room: 'Studio One', engineering_support: 'Engineer needed', duration: 'Two days', message: 'x'.repeat(3000) } });
   const before = h.window.location.href;
   await h.submit();
   assert.equal(h.window.location.href, before);
@@ -115,6 +145,7 @@ test('failure offers explicit email draft and complete copyable context without 
   const emailBody = new URL(link.href).searchParams.get('body');
   assert.equal(emailBody, copy.value);
   for (const value of [h.values.message, 'Studio One', 'Engineer needed', 'Two days', 'CLICK', 'studio', '/google-ads/']) assert.ok(copy.value.includes(value));
+  for (const value of [h.values.message, 'Preferred room: Studio One', 'Engineer or support required: Engineer needed', 'Approximate duration: Two days', 'utm_source: google', 'utm_campaign: studio', 'gclid: CLICK', 'landing_page: /google-ads/']) assert.equal(copy.value.split(value).length - 1, 1, value);
   assert.equal(copy.readOnly, true);
   assert.equal(h.events('salvation_enquiry_error').length, 1);
 });
@@ -189,4 +220,21 @@ test('successful pending request produces only one conversion and clears its tim
   assert.equal(h.events('salvation_enquiry_submit')[0].event_id, 'accepted-once');
   assert.equal(h.button.disabled, false);
   assert.equal(h.timers.size, 0);
+});
+
+
+test('4000 CJK characters exceeding the legacy UTF8 byte cap are retained and never sent', async () => {
+  const message = '界'.repeat(4000);
+  assert.equal(message.length, 4000);
+  const h = harness({ consent: false, values: { message } });
+  const before = { ...h.values };
+  await h.submit();
+  assert.equal(h.calls.length, 0);
+  assert.deepEqual(h.values, before);
+  assert.equal(h.form.resetCount, 0);
+  assert.equal(h.timers.size, 0);
+  assert.match(h.status.textContent, /delivery size limit/i);
+  assert.match(h.status.textContent, /nothing has been sent/i);
+  assert.match(h.status.textContent, /details have been kept/i);
+  assert.equal(h.events('salvation_enquiry_submit').length, 0);
 });

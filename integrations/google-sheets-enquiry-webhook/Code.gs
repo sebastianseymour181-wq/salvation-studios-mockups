@@ -41,7 +41,7 @@ function doPost(event) {
         cell(enquiry.artist_company, 160),
         cell(enquiry.session_type, 120),
         cell(enquiry.dates, 180),
-        cell(enquiry.message, 8000),
+        cell(enquiry.message, 4000),
         cell(enquiry.source_page, 300),
         'New',
         '',

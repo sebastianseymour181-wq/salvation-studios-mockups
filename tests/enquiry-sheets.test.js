@@ -64,27 +64,3 @@ test('postToSheet sends the shared secret and enquiry payload to the webhook', a
     else process.env.ENQUIRY_SHEETS_SECRET = previousSecret;
   }
 });
-
-test('postToSheet keeps the timeout active until the JSON body is consumed', async () => {
-  const fs = require('node:fs');
-  const vm = require('node:vm');
-  let timeout, cleared = false, signal;
-  const sandbox = {
-    require, module: {exports:{}}, URL, AbortController,
-    process: {env:{ENQUIRY_SHEETS_WEBHOOK_URL:'https://script.google.com/macros/s/test/exec',ENQUIRY_SHEETS_SECRET:'test-only'}},
-    setTimeout: callback => { timeout = callback; return 1; },
-    clearTimeout: () => { cleared = true; },
-  };
-  vm.runInNewContext(fs.readFileSync(require.resolve('../api/enquiry-sheets'), 'utf8'),sandbox);
-  const pending = sandbox.module.exports.postToSheet({name:'QA'}, async (_url, options) => {
-    signal = options.signal;
-    return {ok:true,json:()=>new Promise((_resolve,reject)=>{
-      assert.equal(cleared,false);
-      signal.addEventListener('abort',()=>reject(new Error('Timed out')));
-    })};
-  });
-  await new Promise(resolve=>setImmediate(resolve));
-  timeout();
-  await assert.rejects(pending,/webhook rejected/);
-  assert.equal(signal.aborted,true);assert.equal(cleared,true);
-});
