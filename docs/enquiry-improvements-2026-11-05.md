@@ -2,9 +2,9 @@
 
 ## Current release scope
 
-The revised implementation is frontend-only, based on `e45069ded89b1505a2900f457f22a8543a0a2ed3` on `feature/google-ads-landing-2026-11-04`. The API, Sheet helper, Apps Script and Vercel configuration are unchanged from that baseline. An earlier, undeployed structured-context patch was prepared, but it is not the implementation selected for this release.
+The revised implementation is frontend-only, based on `e45069ded89b1505a2900f457f22a8543a0a2ed3` on `feature/google-ads-landing-2026-11-04`. The API, Sheet helper and Apps Script are unchanged from that baseline. Vercel has one test-host-only forwarding route; production routing is unchanged. An earlier, undeployed structured-context patch was prepared, but it is not the implementation selected for this release.
 
-The test alias routes enquiries to the established live API. The revised frontend uses that API's supported message field and respects both its 4,000-character combined-message limit and its 12,000-byte whole-request limit. There is no API/Apps Script rollout dependency for this version and no production code/configuration change.
+The test alias uses `/test-enquiry-delivery` to forward enquiries to the established live API. This distinct path avoids the local `/api/enquiry` function taking precedence over an identically named rewrite. Other hostnames still use their own `/api/enquiry`. No credentials are copied into previews. The revised frontend uses that API's supported message field and respects both its 4,000-character combined-message limit and its 12,000-byte whole-request limit. There is no API/Apps Script rollout dependency for this version and no production code/configuration change.
 
 **Important limit:** the project text, optional session answers and consented campaign context share the 4,000-character transport budget. A 4,000-character project can only be accepted if no additional context is required and the whole request fits the byte limit. If either limit is exceeded, validation explains that the visitor needs to shorten the details, keeps every field and offers a complete manual email fallback. Nothing is silently cut or omitted and no request is sent.
 
@@ -37,9 +37,9 @@ Regression uses mocked delivery only. It covers multi-campaign attribution, cate
 
 The Playwright measurement suite now checks complete bounded context and mobile contact visibility. Chromium could not launch in this environment because process-singleton sockets were denied, including the escalated launch attempt. New rendered layout, touch/reflow, no-JS behavior and Firefox navigation therefore require verification in an authorized browser-capable environment. Do not label source/unit tests a browser pass.
 
-Publication has not yet occurred. Vercel metadata identifies the test project as `prj_irEokg6rEuf4PEHyAIsYWO3Rn5pp` in `team_uhiiLvDavq3mfahrblbHjjT3` (`lpd22664s-projects`). An explicit scoped read returned 403 requiring the user to approve team access. No credentials, permissions or access restrictions were bypassed.
+The frontend was published to the test alias as `8d82a2f` and verified against deployment `dpl_GS7xUeRG71MK9ofh46qVjepvRmdh`. Both official domains remained on their original production deployment. The first approved labelled browser enquiry returned the explicit “Email delivery is not configured yet” error, rather than a timeout. No matching Sheet row was found. Production-only delivery variables and Vercel's documented filesystem precedence identified the shadowed test rewrite. The non-colliding forwarding route is the correction being verified in this revision.
 
-The user approved one clearly labelled real enquiry to the normal studio enquiry inbox and connected Sheet. It must wait until the reviewed test deployment is ready, use a unique test marker, and not be repeated if the result is uncertain. Verify actual receipt separately from HTTP success. No real submission has been sent during implementation.
+No second real submission is allowed until explicit retry approval. A successful API response must still be checked against actual Sheet/inbox receipt. No production settings or credentials were changed.
 
 ## Other findings, unchanged
 

@@ -3,6 +3,7 @@ const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const enquiryRoute = /\/(?:api\/enquiry|test-enquiry-delivery)(?:\?|$)/;
 const base = process.env.SALVATION_QA_BASE_URL || 'http://127.0.0.1:8774';
 const out = path.resolve('.qa/ads-upgrade-2026-11-04'); fs.mkdirSync(out, { recursive: true });
 const tracking = /(?:googletagmanager\.com|google-analytics\.com|googleadservices\.com|doubleclick\.net|googlesyndication\.com)/;
@@ -18,6 +19,8 @@ const results = [];
    if (tracking.test(route.request().url())) { requests.push(route.request().url()); return route.fulfill({status:200,contentType:'application/javascript',body:'/* QA: Google tracking intercepted. */'}); }
    return route.continue();
   });
+  // Never let a regression test create a live enquiry if a mock is missing.
+  await c.route(enquiryRoute, route => route.abort('blockedbyclient'));
   return {c, requests, p:await c.newPage()};
  }
  try {
@@ -43,13 +46,13 @@ const results = [];
   await p.goto(base+'/google-ads.html?utm_source=google&utm_campaign=QA_november&gclid=QA_123');
   await p.getByRole('button',{name:'Accept all',exact:true}).click();
   let payload;
-  await p.route('**/api/enquiry',async route=>{payload=route.request().postDataJSON();await route.fulfill({status:503,contentType:'application/json',body:'{"ok":false,"error":"QA delivery failure"}'});});
+  await p.route(enquiryRoute,async route=>{payload=route.request().postDataJSON();await route.fulfill({status:503,contentType:'application/json',body:'{"ok":false,"error":"QA delivery failure"}'});});
   await p.locator('.ss-landing-hero .btn-primary').click();
   await p.locator('#ss-landing-name').fill('QA Person Not Sent');await p.locator('#ss-landing-email').fill('qa-person@example.invalid');await p.locator('#ss-landing-message').fill('QA project text must never enter dataLayer.');
   await p.locator('.ss-landing-extra summary').click();await p.locator('#ss-landing-room').selectOption('Main studio');await p.locator('#ss-landing-support').selectOption('Dry hire');await p.locator('#ss-landing-duration').fill('Two days');
   await p.locator('button[type=submit]').click();await p.locator('.form-status').filter({hasText:'QA delivery failure'}).waitFor();
   assert.equal((await events(p)).filter(x=>x.event==='salvation_enquiry_submit').length,0);assert.equal(await p.locator('#ss-landing-name').inputValue(),'QA Person Not Sent');
-  await p.unroute('**/api/enquiry');await p.route('**/api/enquiry',route=>route.fulfill({status:200,contentType:'application/json',body:'{"ok":true}'}));
+  await p.unroute(enquiryRoute);await p.route(enquiryRoute,route=>route.fulfill({status:200,contentType:'application/json',body:'{"ok":true}'}));
   await p.locator('button[type=submit]').click();await p.locator('.form-status').filter({hasText:'Thanks.'}).waitFor();
   let lead=(await events(p)).filter(x=>x.event==='salvation_enquiry_submit');assert.equal(lead.length,1);assert.equal(lead[0].site_environment,'test');assert.equal(lead[0].form_id,'google-ads-enquiry-form');assert.ok(lead[0].event_id);
   assert.match(payload.message,/QA project text must never enter dataLayer./);assert.match(payload.message,/Preferred room: Main studio/);assert.match(payload.message,/Approximate duration: Two days/);assert.match(payload.message,/utm_campaign: QA_november/);assert.match(payload.message,/gclid: QA_123/);assert.ok(payload.message.length<=4000);
@@ -65,7 +68,7 @@ const results = [];
   await c.close();results.push('Accepted enquiry, attribution, recovery, no PII, withdrawal: PASS (intercepted responses; no real leads sent)');
 
   // A real successful response without optional consent never queues a measurement event.
-  ({c,p}=await context());await p.goto(base+'/google-ads.html');await p.getByRole('button',{name:'Reject optional',exact:true}).first().click();await p.route('**/api/enquiry',route=>route.fulfill({status:200,contentType:'application/json',body:'{"ok":true}'}));
+  ({c,p}=await context());await p.goto(base+'/google-ads.html');await p.getByRole('button',{name:'Reject optional',exact:true}).first().click();await p.route(enquiryRoute,route=>route.fulfill({status:200,contentType:'application/json',body:'{"ok":true}'}));
   await p.locator('#ss-landing-name').fill('No tracking QA');await p.locator('#ss-landing-email').fill('qa@example.invalid');await p.locator('#ss-landing-message').fill('No tracking');await p.locator('button[type=submit]').click();await p.locator('.form-status').filter({hasText:'Thanks.'}).waitFor();assert.equal((await events(p)).some(e=>e.event==='salvation_enquiry_submit'),false);await c.close();results.push('Enquiry without tracking consent: PASS');
 
   // Verify installation/usable preferences on every shipped HTML page, including campaigns.

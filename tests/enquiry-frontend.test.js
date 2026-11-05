@@ -238,3 +238,29 @@ test('4000 CJK characters exceeding the legacy UTF8 byte cap are retained and ne
   assert.match(h.status.textContent, /details have been kept/i);
   assert.equal(h.events('salvation_enquiry_submit').length, 0);
 });
+
+test('only the approved test alias uses the non-colliding delivery proxy', async () => {
+  for (const [host, expected] of [
+    ['salvation-studios-mockups-three.vercel.app', '/test-enquiry-delivery'],
+    ['www.salvationstudios.co.uk', '/api/enquiry'],
+    ['salvationstudios.co.uk', '/api/enquiry'],
+    ['unrelated.vercel.app', '/api/enquiry'],
+    ['salvation-studios-mockups-three.vercel.app.example.com', '/api/enquiry'],
+  ]) {
+    const h = harness({url:'https://' + host + '/google-ads/'});
+    await h.submit();
+    assert.equal(h.calls.length, 1);
+    assert.equal(h.calls[0].url, expected, host);
+  }
+});
+
+test('test proxy rewrite is exact-host-only and cannot collide with a filesystem function', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(__dirname, '../vercel.json'), 'utf8'));
+  const route = config.rewrites.find(item => item.source === '/test-enquiry-delivery');
+  assert.ok(route);
+  assert.equal(route.destination, 'https://www.salvationstudios.co.uk/api/enquiry');
+  assert.deepEqual(route.has, [{type:'host', value:'salvation-studios-mockups-three.vercel.app'}]);
+  assert.equal(fs.existsSync(path.join(__dirname, '../test-enquiry-delivery.js')), false);
+  assert.equal(fs.existsSync(path.join(__dirname, '../test-enquiry-delivery.html')), false);
+  assert.ok(config.headers.some(item => item.source === '/test-enquiry-delivery' && item.headers.some(header => header.key === 'Cache-Control' && header.value === 'no-store')));
+});

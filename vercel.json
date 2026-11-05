@@ -797,6 +797,19 @@
   ],
   "headers": [
     {
+      "source": "/test-enquiry-delivery",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
       "source": "/docs/:path*",
       "headers": [
         {
@@ -1135,7 +1148,7 @@
   ],
   "rewrites": [
     {
-      "source": "/api/enquiry",
+      "source": "/test-enquiry-delivery",
       "has": [
         {
           "type": "host",

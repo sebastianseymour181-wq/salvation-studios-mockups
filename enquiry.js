@@ -1,5 +1,11 @@
 (() => {
   const REQUEST_TIMEOUT_MS = 20000;
+  // Vercel filesystem functions take precedence over rewrites. Use a distinct
+  // same-origin proxy path on the approved test alias; all other hosts retain
+  // their own API. Production credentials never enter this deployment.
+  const enquiryEndpoint = window.location.hostname === 'salvation-studios-mockups-three.vercel.app'
+    ? '/test-enquiry-delivery'
+    : '/api/enquiry';
   const FIELD_LIMITS = { name: 120, artist_company: 160, instagram: 120, email: 180, phone: 80, session_type: 120, dates: 180, message: 4000, preferred_room: 160, engineering_support: 160, duration: 160 };
   const bookingFields = [['preferred_room', 'Preferred room'], ['engineering_support', 'Engineer or support required'], ['duration', 'Approximate duration']];
   function track(eventName, detail) {
@@ -126,7 +132,7 @@
       let timedOut = false;
       const timeout = setTimeout(() => { timedOut = true; controller.abort(); }, REQUEST_TIMEOUT_MS);
       try {
-        const response = await fetch('/api/enquiry', {
+        const response = await fetch(enquiryEndpoint, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body, signal: controller.signal,
         });
