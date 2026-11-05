@@ -114,6 +114,14 @@ html.ss-landing-document body.ss-landing-page { overflow: visible; height: auto;
   border-color: #9174aa;
   background: #0b0314;
 }
+/* Keep helper text from stretching the label and control in a neighbouring field. */
+.ss-landing-enquiry .form-field { align-content: start; }
+.ss-landing-enquiry .form-field input,
+.ss-landing-enquiry .form-field select {
+  height: calc(1.5em + 28px);
+  min-height: 52px;
+  line-height: 1.5;
+}
 .ss-landing-enquiry .form-field input::placeholder,
 .ss-landing-enquiry .form-field textarea::placeholder { color: #baa7ca; opacity: 1; }
 .ss-landing-enquiry .form-field small { line-height: 1.6; }
