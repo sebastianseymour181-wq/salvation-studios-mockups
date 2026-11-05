@@ -35,7 +35,6 @@ html.ss-landing-document body.ss-landing-page { overflow: visible; height: auto;
 .ss-landing-intro-photo img { border-radius: 8px; object-position: 55% center; }
 .ss-landing-intro-photo figcaption { position: absolute; bottom: 18px; left: 18px; padding: 5px 12px; background: #07000fca; color: #f5eaff; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
 .ss-landing-pillars { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 40px; margin: 72px auto 0; max-width: 1320px; border-top: 1px solid var(--border); padding-top: 35px; }
-.ss-landing-pillars > div > span { color: #b287d5; font-size: 12px; display: block; margin-bottom: 18px; }
 .ss-landing-pillars h3 { font-size: 27px; }
 .ss-landing-pillars p { font-size: 15px; }
 .ss-landing-services, .ss-landing-testimonials { background: var(--deep); }
