@@ -136,3 +136,69 @@ html.ss-landing-document body.ss-landing-page { overflow: visible; height: auto;
   .ss-landing-hero-image::after { background: linear-gradient(180deg, transparent 65%, #07000f 100%); }
   .ss-landing-hero-copy { padding: 12px 24px 0; }
 }
+
+
+/* Eliza's November revision: compact services and one studio story. */
+.ss-landing-hero-copy { max-width: 800px; }
+.ss-landing-page h1 { font-size: clamp(52px, 5.4vw, 82px); }
+.ss-landing-hero-copy .ss-landing-lead { font-size: 18px; line-height: 1.75; }
+.ss-landing-artist-proof { color: #e5c6ff; font-size: 15px; }
+.ss-landing-explore-link { display: inline-flex; align-items: center; gap: 20px; max-width: 100%; margin-top: 30px; padding: 15px 18px; border: 1px solid #8a4dbb; border-radius: 5px; font-size: 14px; line-height: 1.6; text-underline-offset: 4px; }
+.ss-landing-explore-link span { flex-shrink: 0; }
+.ss-landing-services .ss-landing-section-heading { margin-bottom: 28px; }
+.ss-landing-service-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin: 0 auto; }
+.ss-landing-service { display: flex; flex-direction: column; }
+.ss-landing-service > img { width: 100%; height: 140px; min-height: 0; aspect-ratio: auto; }
+.ss-landing-service > div { padding: 20px 18px; }
+.ss-landing-service h3 { font-size: 25px; margin: 0; padding: 0; }
+.ss-landing-number { position: static; display: block; margin-bottom: 10px; font-size: 10px; }
+.ss-landing-payment { max-width: 1320px; margin: 28px auto 0; padding: 22px 26px; border-left: 2px solid #c999f7; background: #1b0a2a; }
+.ss-landing-payment h3 { font-size: 28px; margin-bottom: 8px; }
+.ss-landing-payment p { font-size: 15px; max-width: 900px; }
+.ss-landing-accommodation { margin-top: 28px; padding-top: 24px; border-top: 1px solid #6b4088; }
+.ss-landing-accommodation h3 { font-size: 29px; margin-top: 12px; }
+.ss-landing-accommodation p { font-size: 15px; }
+.ss-landing-intro-photo { height: 560px; }
+
+/* Static and fully readable without JS; only animate when a pause control works. */
+.ss-landing-credits { margin: 32px 0 38px; min-width: 0; }
+.ss-landing-credits-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+.ss-landing-credits-heading h3 { font: 600 13px/1.6 'Nunito', sans-serif; color: #cbb6db; margin: 0; }
+.ss-landing-credits-toggle { border: 1px solid #9174aa; border-radius: 4px; padding: 9px 13px; min-height: 44px; background: transparent; color: #eddaff; font: 600 13px/1.6 'Nunito', sans-serif; cursor: pointer; }
+.ss-landing-credits-toggle[hidden] { display: none; }
+.ss-landing-credits-window { overflow: hidden; padding: 22px 0; border-block: 1px solid #6b4088; }
+.ss-landing-artist-list { list-style: none; display: flex; flex-wrap: wrap; gap: 14px 30px; margin: 0; padding: 0; }
+.ss-landing-artist-list li { color: #f1e3ff; font: 400 30px/1.3 'Cormorant Garamond', Georgia, serif; }
+.ss-landing-artist-list-copy { display: none; }
+.ss-landing-credits.is-animated .ss-landing-credits-track { display: flex; width: max-content; animation: ss-artist-roll 160s linear infinite; }
+.ss-landing-credits.is-animated .ss-landing-artist-list { flex-wrap: nowrap; flex-shrink: 0; gap: 36px; padding-right: 36px; }
+.ss-landing-credits.is-animated .ss-landing-artist-list li { white-space: nowrap; }
+.ss-landing-credits.is-animated .ss-landing-artist-list-copy { display: flex; }
+.ss-landing-credits.is-paused .ss-landing-credits-track,
+.ss-landing-credits-window:hover .ss-landing-credits-track { animation-play-state: paused; }
+@keyframes ss-artist-roll { to { transform: translateX(-50%); } }
+@media (max-width: 1100px) { .ss-landing-service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .ss-landing-page h1 { font-size: clamp(42px, 10.5vw, 62px); }
+  .ss-landing-hero-copy .ss-landing-lead { font-size: 16px; }
+  .ss-landing-explore-link { margin-top: 22px; }
+  .ss-landing-service-grid { gap: 14px; }
+  .ss-landing-service > img { height: 110px; }
+  .ss-landing-service > div { padding: 16px; }
+  .ss-landing-service h3 { font-size: 24px; }
+  .ss-landing-payment { padding: 18px; }
+  .ss-landing-payment h3 { font-size: 26px; }
+  .ss-landing-intro-photo { height: 320px; }
+  .ss-landing-artist-list li { font-size: 26px; }
+}
+@media (max-width: 359px) {
+  .ss-landing-service-grid { grid-template-columns: 1fr; }
+  .ss-landing-service { display: grid; grid-template-columns: 30% minmax(0, 1fr); align-items: stretch; }
+  .ss-landing-service > img { height: 100%; min-height: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ss-landing-credits.is-animated .ss-landing-credits-track { display: block; width: auto; animation: none; transform: none; }
+  .ss-landing-credits.is-animated .ss-landing-artist-list { flex-wrap: wrap; gap: 14px 30px; padding: 0; }
+  .ss-landing-credits.is-animated .ss-landing-artist-list li { white-space: normal; }
+  .ss-landing-credits.is-animated .ss-landing-artist-list-copy, .ss-landing-credits-toggle { display: none; }
+}

@@ -16,11 +16,12 @@ const out = '.qa/firefox-scroll-2026-11-04';fs.mkdirSync(out,{recursive:true});
   try{
    for(const width of [1440,390])for(const filtered of [false,true]){
     const context=await browser.newContext({viewport:{width,height:1000}});
+    await context.route('**/*', route => ['GET', 'HEAD'].includes(route.request().method()) ? route.continue() : route.abort());
     if(base.startsWith('http://127.0.0.1')) await context.route('**/privacy/',r=>r.fulfill({status:200,contentType:'text/html',body:fs.readFileSync('privacy.html','utf8')}));
     const page=await context.newPage();await page.goto(base+target);
     await page.getByRole('button',{name:'Reject optional',exact:true}).first().click();await page.evaluate(()=>document.fonts.ready);
     if(filtered)await page.addStyleTag({content:'.ads-header, .ads-section {display:none!important;}'});
-    assert.equal(await page.locator('.ss-landing-section:visible').count(),6);
+    assert.equal(await page.locator('.ss-landing-section:visible').count(),5);
     assert.equal(await page.locator('#enquiry').isVisible(),true);
     assert.equal(await page.locator('.ss-landing-header .nav-cta').isVisible(),true);
     const initial=await page.evaluate(()=>({height:innerHeight,scrollHeight:document.documentElement.scrollHeight}));
@@ -28,7 +29,7 @@ const out = '.qa/firefox-scroll-2026-11-04';fs.mkdirSync(out,{recursive:true});
     await page.mouse.move(width/2,500);await page.mouse.wheel(0,650);
     await page.waitForFunction(()=>scrollY>100);
     const wheel=await page.evaluate(()=>scrollY);
-    const links=[['.ss-landing-hero .btn-primary','enquiry'],['.ss-landing-hero .ss-landing-text-link','studio'],['.ss-landing-header .nav-cta','enquiry'],['.ss-landing-closing .btn-primary','enquiry']];
+    const links=[['.ss-landing-hero .btn-primary','enquiry'],['.ss-landing-hero .ss-landing-text-link','studio'],['.ss-landing-header .nav-cta','enquiry'],['.ss-landing-closing .btn-primary','enquiry'],['.ss-landing-explore-link','services']];
     if(width===1440)links.push(['.ss-landing-header a[href="#services"]','services'],['.ss-landing-header a[href="#studio"]','studio']);
     for(const [selector,id] of links){
      // Finish the test driver's scroll-to-control before starting a native
@@ -59,7 +60,7 @@ const out = '.qa/firefox-scroll-2026-11-04';fs.mkdirSync(out,{recursive:true});
     await page.locator('.ss-landing-footer a[href="/privacy/"]').click();
     await page.waitForURL(/\/privacy(?:\/|\.html)?$/);
     assert.ok(await page.getByRole('heading',{name:'Your cookie choices',exact:true}).isVisible()||await page.locator('#privacy-cookies').count());
-    results.push({engine,width,easylistRulesApplied:filtered,visibleSections:6,wheelScroll:wheel,anchorLinksChecked:links.length,privacyLink:true});
+    results.push({engine,width,easylistRulesApplied:filtered,visibleSections:5,wheelScroll:wheel,anchorLinksChecked:links.length,privacyLink:true});
     await context.close();
    }
   }finally{await browser.close()}
