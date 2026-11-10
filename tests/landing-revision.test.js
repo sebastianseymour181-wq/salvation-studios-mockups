@@ -78,3 +78,12 @@ test('reduced motion and unsupported/no-credits pages stay safely static', () =>
   assert.equal(harness(false, { noMatchMedia: true }).classes.size, 0);
   assert.doesNotThrow(() => harness(false, { noCredits: true }));
 });
+
+test('phone number is required, visible without expanding optional details and uses existing payload name', () => {
+  const form = html.split('<form id="google-ads-enquiry-form"')[1].split('</form>')[0];
+  const mainFields = form.split('<details class="ss-landing-extra">')[0];
+  assert.match(mainFields, /<label for="ss-landing-phone">Phone number \*<\/label>/);
+  assert.match(mainFields, /<input id="ss-landing-phone" name="phone" type="tel" autocomplete="tel" maxlength="80" pattern="\.\*\\S\.\*" title="Please enter your phone number\." required>/);
+  assert.equal((form.match(/name="phone"/g) || []).length, 1);
+  assert.doesNotMatch(form.split('<details class="ss-landing-extra">')[1], /name="phone"/);
+});
